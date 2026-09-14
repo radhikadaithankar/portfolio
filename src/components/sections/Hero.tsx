@@ -3,7 +3,6 @@
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
 import { identity, portraits } from "@/data/site";
 import { EASE, useCalmMotion } from "@/lib/motion";
-import { Lines } from "../Reveal";
 import { Portrait } from "../Portrait";
 
 export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
@@ -55,14 +54,18 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
           Issue 01 &mdash; A digital portrait
         </motion.p>
 
-        <Lines
-          as="h1"
-          lines={identity.statement}
-          animateOnMount
-          delay={3}
-          className="display text-[13.5vw] text-ink sm:text-[13vw] md:text-[12.5vw] lg:text-[11vw]"
-          lineClassName={(i) => (i === 1 ? "display-italic pl-[0.35em] text-terracotta" : i === 2 ? "pl-[0.12em]" : "")}
-        />
+        <h1 className="display text-[13.5vw] text-ink sm:text-[13vw] md:text-[12.5vw] lg:text-[11vw]">
+          {identity.statement.map((line, i) => (
+            <span key={line} className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
+              <span
+                className={`hero-line block origin-left ${i === 1 ? "display-italic pl-[0.35em] text-terracotta" : i === 2 ? "pl-[0.12em]" : ""}`}
+                style={{ animationDelay: `${0.12 + i * 0.12}s` }}
+              >
+                {line}
+              </span>
+            </span>
+          ))}
+        </h1>
 
         <div className="mt-[8vh] grid grid-cols-1 gap-8 md:mt-[10vh] md:grid-cols-12 md:items-end">
           <motion.div
