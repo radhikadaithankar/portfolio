@@ -18,7 +18,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: `${identity.fullName} — AI engineer and technology leader`,
+  title: `${identity.fullName} — ${identity.headline}`,
   description: identity.headline,
   openGraph: {
     title: `${identity.fullName}`,

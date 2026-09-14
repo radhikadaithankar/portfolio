@@ -4,35 +4,21 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { toolbox } from "@/data/site";
 import { EASE, useCalmMotion } from "@/lib/motion";
-import { Lines, Reveal } from "../Reveal";
+import { Lines } from "../Reveal";
 import { SectionMark } from "../SectionMark";
 
-/** Section 03. Five categories; select one and its tools are laid out on the right. */
 export function Skills() {
   const [open, setOpen] = useState(0);
   const { touch } = useCalmMotion();
   const current = toolbox[open];
-  const total = toolbox.reduce((n, c) => n + c.items.length, 0);
 
   return (
     <section id="skills" className="relative bg-cream">
-      <div className="px-5 pt-32 sm:px-8 md:px-12 md:pt-44">
+      <div className="px-5 pt-28 sm:px-8 md:px-12 md:pt-36">
         <SectionMark number="03" title="Skills" />
-        <div className="mt-10 grid gap-10 md:grid-cols-12 md:items-end">
-          <Lines
-            as="h2"
-            lines={["WHAT I", "WORK WITH."]}
-            className="display text-[15vw] text-ink sm:text-[12vw] md:col-span-7 md:text-[8vw]"
-            lineClassName={(i) => (i === 1 ? "display-italic text-brown" : "")}
-          />
-          <Reveal className="md:col-span-4 md:col-start-9" delay={0.2}>
-            <p className="measure font-serif text-xl leading-relaxed text-brown">
-              {total} tools and skills across {toolbox.length} areas, grouped by how I use them. Select an area to see what is in it.
-            </p>
-          </Reveal>
-        </div>
+        <Lines as="h2" lines={["SKILLS."]} className="display mt-8 text-[16vw] text-ink sm:text-[12vw] md:text-[8vw]" />
 
-        <div className="mt-20 grid gap-10 pb-32 md:grid-cols-12 md:pb-40">
+        <div className="mt-16 grid gap-10 pb-28 md:grid-cols-12 md:pb-36">
           <ul className="flex flex-col md:col-span-5" role="tablist" aria-label="Skill categories">
             {toolbox.map((cat, i) => {
               const on = i === open;
@@ -44,13 +30,13 @@ export function Skills() {
                     aria-controls={`drawer-${i}`}
                     onClick={() => setOpen(i)}
                     onMouseEnter={() => !touch && setOpen(i)}
-                    className="group flex w-full flex-col items-start gap-1 py-5 text-left sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+                    className="group flex w-full items-baseline justify-between gap-6 py-5 text-left"
                     data-cursor="Open"
                   >
                     <span className={`display text-[10vw] transition-colors duration-500 sm:text-[6vw] md:text-[3.2vw] ${on ? "text-terracotta" : "text-ink/45 group-hover:text-ink"}`}>
                       {cat.name}
                     </span>
-                    <span className={`eyebrow transition-colors duration-500 sm:shrink-0 sm:text-right ${on ? "text-ink" : "text-ink/40"}`}>{cat.hint}</span>
+                    <span className={`eyebrow ${on ? "text-ink" : "text-ink/40"}`}>{cat.items.length}</span>
                   </button>
                   <AnimatePresence initial={false}>
                     {on && (
@@ -74,16 +60,12 @@ export function Skills() {
             })}
           </ul>
 
-          <div className="relative hidden min-h-[440px] md:col-span-6 md:col-start-7 md:block" id={`drawer-${open}`} role="tabpanel">
+          <div className="relative hidden min-h-[400px] md:col-span-6 md:col-start-7 md:block" id={`drawer-${open}`} role="tabpanel">
             <div className="absolute inset-0 rounded-sm bg-sand/50" aria-hidden />
-            <div className="absolute inset-x-8 top-8 flex items-baseline justify-between">
-              <span className="eyebrow text-brown/70">{current.name}</span>
-              <span className="font-serif text-sm text-brown/70">{current.items.length} items</span>
-            </div>
             <AnimatePresence mode="wait">
               <motion.ul
                 key={current.name}
-                className="absolute inset-x-8 bottom-8 top-24 flex flex-wrap content-start gap-x-4 gap-y-5"
+                className="absolute inset-8 flex flex-wrap content-start gap-x-4 gap-y-5"
                 initial="hidden"
                 animate="show"
                 exit="hidden"
