@@ -48,7 +48,7 @@ The page checks whether each file exists when it renders, so no code change is n
 src/
   app/            layout (fonts, metadata), page (section order), global styles
   data/site.ts    all content
-  components/     Intro, Nav, Cursor, SmoothScroll, Portrait, motion primitives
+  components/     Nav, Cursor, SmoothScroll, Portrait, motion primitives
   components/sections/
                   Hero, Work (+ ProductDemo, Motifs), Experience, Skills,
                   Evaradh, About, Contact
@@ -56,7 +56,7 @@ src/
 
 ## Interaction
 
-- Opening name sequence (about two seconds; click, key, wheel or touch skips it), then a masked type reveal in the hero.
+- The first screen is the hero: name, role, a short bio and a fact strip. Nothing is hidden behind an opening overlay.
 - Interactive walkthrough of the three attendance features in the platform case study (QR refresh, campus radius, parent notification).
 - Skill categories open on hover/tap and lay their tools out on the right.
 - Custom cursor, magnetic nav and smooth scroll on desktop only; touch devices and `prefers-reduced-motion` get simpler, non-pinned versions.

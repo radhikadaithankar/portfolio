@@ -1,51 +1,29 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { EASE } from "@/lib/motion";
-
 type PortraitProps = {
   src: string;
   available: boolean;
   alt: string;
   className?: string;
-  /** Delay before the masked reveal begins, in seconds. */
-  delay?: number;
   variant?: "hero" | "founder";
-  priority?: boolean;
 };
 
 /**
  * Editorial portrait slot. Renders the real photograph when it exists in /public,
  * otherwise a warm sunlit-paper composition that reads as an intentional image.
  */
-export function Portrait({ src, available, alt, className, delay = 0, variant = "hero" }: PortraitProps) {
-  // The in-view observer sits on an unclipped wrapper: Chrome's IntersectionObserver
-  // honours clip-path, so a fully clipped element would never count as visible.
+export function Portrait({ src, available, alt, className, variant = "hero" }: PortraitProps) {
   return (
-    <motion.div className={className} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }}>
-      <motion.div
-        className="grain relative h-full w-full overflow-hidden"
-        variants={{
-          hidden: { clipPath: "inset(100% 0 0 0)" },
-          show: { clipPath: "inset(0% 0 0 0)", transition: { duration: 1.6, ease: EASE, delay } },
-        }}
-      >
-        <motion.div
-          className="absolute inset-0"
-          variants={{
-            hidden: { scale: 1.18 },
-            show: { scale: 1, transition: { duration: 2.2, ease: EASE, delay } },
-          }}
-        >
+    <div className={className}>
+      <div className="grain relative h-full w-full overflow-hidden">
+        <div className="absolute inset-0">
           {available ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={src} alt={alt} className="h-full w-full object-cover" />
           ) : (
             <Placeholder variant={variant} />
           )}
-        </motion.div>
-      </motion.div>
-    </motion.div>
+        </div>
+      </div>
+    </div>
   );
 }
 

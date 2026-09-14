@@ -2,7 +2,6 @@ import fs from "node:fs";
 import path from "node:path";
 import { portraits } from "@/data/site";
 import { Cursor } from "@/components/Cursor";
-import { Intro } from "@/components/Intro";
 import { Nav } from "@/components/Nav";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Hero } from "@/components/sections/Hero";
@@ -24,11 +23,10 @@ export default function Home() {
 
   return (
     <SmoothScroll>
-      <Intro />
       <Cursor />
       <div className="page-grain grain" aria-hidden />
       <Nav />
-      <main>
+      <main className="relative z-10">
         <Hero hasPortrait={heroPortrait} />
         <Work />
         <Experience />
