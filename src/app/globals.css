@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #f7f2ea;
+  --color-cream: #f0e6d7;
+  --color-sand: #e5d6c0;
+  --color-beige: #d4c0a4;
+  --color-peach: #e6bea3;
+  --color-rose: #bf8a86;
+  --color-terracotta: #b2624a;
+  --color-brown: #6e4d3c;
+  --color-burgundy: #6a393c;
+  --color-chocolate: #3a2a24;
+  --color-ink: #2a1e1a;
+  --color-gold: #bfa06a;
+
+  --font-serif: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  overflow-x: clip;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-terracotta);
+  color: var(--color-ivory);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+}
+
+/* Editorial display type: tight, tall, slightly soft. */
+.display {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 0;
+}
+.display-italic {
+  font-style: italic;
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.measure {
+  max-width: 34rem;
+}
+
+/* Film grain overlay */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 160px 160px;
+  opacity: 0.28;
+  mix-blend-mode: multiply;
+}
+
+.page-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.55;
+  overflow: hidden;
+}
+
+/* Hairline rules */
+.rule {
+  height: 1px;
+  background: color-mix(in oklab, var(--color-ink) 18%, transparent);
+}
+
+/* Sunlit paper placeholder for portrait slots */
+.paper-light {
+  background:
+    radial-gradient(120% 80% at 20% 10%, rgba(255, 244, 228, 0.95) 0%, rgba(255, 244, 228, 0) 55%),
+    radial-gradient(90% 70% at 85% 30%, rgba(230, 190, 163, 0.9) 0%, rgba(230, 190, 163, 0) 60%),
+    radial-gradient(80% 90% at 60% 100%, rgba(178, 98, 74, 0.75) 0%, rgba(178, 98, 74, 0) 65%),
+    linear-gradient(160deg, #efe3d2 0%, #dcc4aa 45%, #b98a74 100%);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .has-custom-cursor,
+  .has-custom-cursor a,
+  .has-custom-cursor button {
+    cursor: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
