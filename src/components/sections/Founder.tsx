@@ -26,7 +26,7 @@ export function Founder({ hasPortrait }: { hasPortrait: boolean }) {
             <Portrait src={portraits.founder} available={hasPortrait} alt={`${identity.fullName}, editorial portrait`} className="h-full w-full" variant="founder" />
             <div className="absolute -bottom-6 -right-4 hidden h-40 w-32 bg-sand/80 md:block" aria-hidden />
           </div>
-          <p className="eyebrow mt-6 pl-5 text-brown/70 sm:pl-8 md:pl-0">{identity.fullName} · {identity.currentRole}</p>
+          <p className="eyebrow mt-6 pl-5 text-brown/70 sm:pl-8 md:pl-12">{identity.fullName} · {identity.currentRole}</p>
         </motion.div>
 
         <div className="px-5 sm:px-8 md:col-span-6 md:col-start-7 md:px-0 md:pr-12">

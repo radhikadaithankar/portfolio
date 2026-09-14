@@ -88,7 +88,7 @@ function StageWord({ label, index, count, progress }: { label: string; index: nu
   const step = CYCLE / count;
   const start = index * step;
   const end = start + step;
-  const fade = step * 0.22;
+  const fade = step * 0.16;
   const first = index === 0;
   // Each word fully fades out before the next one fades in, so they never overlap.
   const range = [start, start + fade, end - fade, end];

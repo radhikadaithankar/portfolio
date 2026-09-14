@@ -125,7 +125,7 @@ function SequenceWord({ word, index, count, progress }: { word: string; index: n
   const end = start + step;
   const last = index === count - 1;
   const first = index === 0;
-  const fade = step * 0.25;
+  const fade = step * 0.16;
   const range = [start, start + fade, end - fade, end];
   const opacity = useProgress(progress, range, [first ? 1 : 0, 1, 1, last ? 1 : 0]);
   const y = useProgress(progress, range, [first ? "0%" : "40%", "0%", "0%", last ? "0%" : "-40%"]);
