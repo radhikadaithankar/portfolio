@@ -40,7 +40,7 @@ Two editorial image slots ship with a warm sunlit-paper placeholder. To use real
 | Hero (right side, bleeds off the viewport) | `public/images/portrait.jpg` | Tall, roughly 3:5, subject off-centre |
 | Founder chapter | `public/images/portrait-founder.jpg` | 3:4 or 4:5 |
 
-The server checks whether each file exists at render time, so no code change is needed: add the file, reload.
+The page checks whether each file exists when it renders, so no code change is needed. In `npm run dev` just add the file and reload; the production build is prerendered, so run `npm run build` again after adding a photo.
 
 ## Structure
 
