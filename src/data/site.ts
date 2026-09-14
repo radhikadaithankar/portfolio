@@ -3,19 +3,30 @@
  * Edit here; the sections read from this file.
  *
  * Facts come from Radhika's resume; contact links were supplied separately.
+ * Nothing here is embellished: if a detail is not in the resume it is not on the site.
  */
 
 export const identity = {
   firstName: "Radhika",
   lastName: "Daithankar",
   fullName: "Radhika Daithankar",
-  statement: ["I BUILD WHAT", "I WISH", "EXISTED."],
-  disciplines: ["AI", "PRODUCT", "TECHNOLOGY", "ENTREPRENEURSHIP"],
-  supportingLine:
-    "A technology builder exploring the space between ideas, products and the problems worth solving.",
-  currentRole: "Managing Director, CIS",
+  /** One plain sentence about what she does right now. */
+  role: "Managing Director at CIS",
+  headline: "AI engineer and technology leader. I run digital transformation for a school ecosystem in Pune and build the software behind it.",
+  intro:
+    "I have an MSc in Artificial Intelligence from Queen Mary University of London and a B.Tech in Computer Science. I have worked as a web developer, data analyst and data scientist, and I now lead technology at CIS, where I designed and shipped a school operations and parent engagement platform. On the side I am starting a technology company, Evaradh.",
   location: "Pune, India",
+  currentRole: "Managing Director, CIS",
+  since: "Since November 2025",
 };
+
+/** Short facts shown under the hero. */
+export const facts = [
+  { label: "Now", value: "Managing Director, CIS", note: "Pune · since Nov 2025" },
+  { label: "Education", value: "MSc Artificial Intelligence", note: "Queen Mary University of London, 2023" },
+  { label: "Focus", value: "AI, data and product", note: "From model training to shipped software" },
+  { label: "Building", value: "Evaradh", note: "A technology company, early stage" },
+];
 
 /**
  * Portrait photographs. Drop real photos at these paths inside /public and the
@@ -34,20 +45,11 @@ export const contact = {
 
 export const nav = [
   { label: "WORK", href: "#work" },
-  { label: "STORY", href: "#story" },
+  { label: "EXPERIENCE", href: "#experience" },
+  { label: "SKILLS", href: "#skills" },
   { label: "EVARADH", href: "#evaradh" },
-  { label: "THINK", href: "#think" },
+  { label: "ABOUT", href: "#about" },
   { label: "CONTACT", href: "#contact" },
-];
-
-export const worlds = [
-  "COMPUTER SCIENCE",
-  "ARTIFICIAL INTELLIGENCE",
-  "DATA",
-  "SOFTWARE",
-  "PRODUCTS",
-  "LEADERSHIP",
-  "ENTREPRENEURSHIP",
 ];
 
 export const education = [
@@ -56,14 +58,14 @@ export const education = [
     school: "Queen Mary University of London",
     place: "London, UK",
     period: "2022 — 2023",
-    focus: "Machine learning, computer vision, robotics. Academic research on AI applications; hands-on training of machine learning and deep learning algorithms.",
+    focus: "Machine learning, computer vision and robotics. Academic research on AI applications, and hands-on training of machine learning and deep learning models.",
   },
   {
     degree: "B.Tech Computer Science",
     school: "MGM's Jawaharlal Nehru Engineering College",
     place: "Aurangabad, India",
     period: "2017 — 2021",
-    focus: "Data structures, algorithms, software engineering, databases. Tech events and group projects, and the first taste of leading a team.",
+    focus: "Data structures, algorithms, software engineering and databases. Tech events, group projects and a first stretch of leading a team.",
   },
 ];
 
@@ -79,12 +81,13 @@ export type Chapter = {
 
 export const platform = {
   number: "01",
-  kicker: "The main thing",
+  kicker: "CIS · 2025 — present",
   title: "School Operations & Parent Engagement Platform",
+  oneLine: "One platform that runs the daily operations of a school and keeps parents informed in real time.",
   problem:
-    "A school runs on a hundred small workflows that were never designed to talk to each other. Attendance in one register, fees in another, notices on a board, appointments in a diary, homework in a bag. Parents hear about most of it too late, and teachers spend their day being interrupted by it.",
+    "A school's day is made of many separate workflows: attendance, fees, notices, homework, appointments, student records. In most schools each one lives in a different register, spreadsheet or WhatsApp group. Parents find out late, and teachers spend their day chasing information.",
   system:
-    "So I built the place where it all meets: one centralised platform for the daily life of a school, with a different experience for each person inside it. Teachers, parents and operations staff each see the version of the school that is theirs.",
+    "I designed and led the build of a single centralised platform that covers these workflows end to end, with a separate experience for teachers, parents and operations staff. Each role sees only the parts of the school that are theirs.",
   workflows: [
     "Academic workflows",
     "Attendance",
@@ -105,24 +108,25 @@ export const platform = {
       id: "qr",
       big: "15 SEC",
       label: "Dynamic QR attendance",
-      text: "Each attendance code lives for fifteen seconds and then it is gone. A screenshot is useless within a quarter of a minute. Presence becomes something you have to actually be present for.",
+      text: "Attendance is marked by scanning a QR code that regenerates every fifteen seconds. A screenshot forwarded to a friend stops working within a quarter of a minute, so a scan proves the student was actually there.",
     },
     {
       id: "radius",
       big: "100 M",
       label: "Campus-radius restriction",
-      text: "Attendance can only be submitted inside a hundred-metre radius of the campus. The boundary is invisible to the teacher taking the register and unarguable to the system behind it.",
+      text: "A scan is only accepted from inside a hundred-metre radius of the campus. The check is silent for the teacher taking the register and impossible to argue with for anyone outside the boundary.",
     },
     {
       id: "notify",
       big: "REAL TIME",
       label: "Parent notifications",
-      text: "The moment attendance is submitted, a parent knows. Not at the end of the term. Not in a letter in a school bag. Now.",
+      text: "The moment attendance is submitted, the parent receives a notification. The same channel carries notices, fee reminders and appointment confirmations.",
     },
   ],
   appointments:
-    "Teachers publish when they are free. Parents book a designated slot. Fewer classroom interruptions, fewer unplanned visits at the gate, and a conversation that both sides arrived prepared for.",
-  ai: "Underneath, AI-powered attendance capabilities make the whole thing quieter to run: fewer manual registers, fewer gaps, fewer conversations that start with “did you know…”. Student management, fee collection and school-wide communication live in the same place.",
+    "Teachers publish the slots when they are available; parents book one. This replaced unplanned visits at the school gate and interruptions in the middle of lessons with a scheduled conversation.",
+  ai: "AI-powered attendance sits underneath: fewer manual registers, fewer gaps in the data, and no end-of-term surprises. Student management, fee collection and school-wide communication share the same data, so a change in one place shows up everywhere it should.",
+  stack: ["Product design", "System design", "AI-powered attendance", "Role-based access", "Real-time notifications"],
 };
 
 export const experiments: Chapter[] = [
@@ -130,10 +134,10 @@ export const experiments: Chapter[] = [
     number: "02",
     kicker: "Deep learning",
     title: "Deep Neural Networks for Image Classification",
-    summary: "ResNet18 against VGG13, on MNIST. A study in what depth actually buys you.",
+    summary: "Compared ResNet18 and VGG13 on MNIST to measure what residual connections add to a deep network.",
     detail: [
-      "Two architectures, one small and stubborn dataset. The question was never which network wins; it was understanding why residual connections change what a network is able to learn, and how each approach behaves when asked to recognise an image.",
-      "Training curves, confusion matrices, the slow satisfaction of watching loss fall.",
+      "Implemented and trained both architectures in PyTorch on the same dataset, then compared accuracy, loss curves and confusion matrices.",
+      "The useful result was not which network scored higher, but a clear picture of how residual connections change what a deeper network is able to learn.",
     ],
     tools: ["PyTorch", "ResNet18", "VGG13", "MNIST"],
     motif: "layers",
@@ -141,11 +145,11 @@ export const experiments: Chapter[] = [
   {
     number: "03",
     kicker: "Unsupervised learning",
-    title: "Unsupervised Learning with GANs",
-    summary: "Teaching two networks to argue until one of them learns to invent.",
+    title: "Generative Adversarial Network",
+    summary: "Built a basic GAN from the ground up to learn how generative and unsupervised models train.",
     detail: [
-      "A basic GAN, implemented from the ground up to understand generative and unsupervised learning: a generator that starts by producing noise and a discriminator that refuses to be fooled, both improving because the other one is.",
-      "The moment the noise starts to look like something is still one of my favourite feelings in machine learning.",
+      "A generator that starts from random noise and a discriminator that learns to tell real samples from generated ones, trained against each other until the generated output becomes convincing.",
+      "Written from scratch rather than from a library example, so every loss term and training step is one I understand.",
     ],
     tools: ["GANs", "Deep learning", "Unsupervised learning"],
     motif: "noise",
@@ -154,73 +158,25 @@ export const experiments: Chapter[] = [
     number: "04",
     kicker: "Robotics",
     title: "Panda Robot Manipulator",
-    summary: "A ROS package that moves a seven-axis arm through Cartesian space and lets it draw on its own.",
+    summary: "A ROS package that moves a seven-axis Panda arm through Cartesian space and draws geometric shapes autonomously.",
     detail: [
-      "Getting a robot arm to move where you tell it in Cartesian space is one problem. Getting the end-effector to autonomously draw a clean geometric shape is a very different one.",
-      "Kinematics, planning, and the humbling discovery that a straight line is hard.",
+      "Cartesian motion control for the end-effector, plus a planning routine that lets the arm draw a clean geometric figure without a human guiding each move.",
+      "Kinematics and motion planning on a real manipulator model, not a simulation shortcut.",
     ],
     tools: ["ROS", "Panda manipulator", "Motion planning"],
     motif: "arm",
   },
   {
     number: "05",
-    kicker: "Accessibility",
+    kicker: "Accessibility · Embedded ML",
     title: "Gesture-Controlled Wheelchair",
-    summary: "Arduino, machine learning and embedded systems, so that a hand movement can become a direction.",
+    summary: "An Arduino-based wheelchair that reads hand gestures, classifies them with a machine-learning model and turns them into movement.",
     detail: [
-      "For someone who cannot use a joystick, a small gesture can be the difference between waiting and going. This Arduino-based wheelchair read hand gestures, classified them with a learned model, and turned them into motion.",
-      "It was the first time a model I trained moved something in the physical world.",
+      "For a user who cannot operate a joystick, a small hand movement becomes a direction. Sensor input is read on the Arduino, classified by a trained model and mapped to motor commands.",
+      "The first project where a model I trained moved something in the physical world.",
     ],
     tools: ["Arduino", "Machine learning", "Embedded systems"],
     motif: "hand",
-  },
-];
-
-export const notebook = {
-  title: "THINGS I'M THINKING ABOUT.",
-  statement: "Some ideas become experiments. Some experiments become products.",
-  themes: [
-    { word: "AI", note: "What does it change for the person on the other side of the screen?" },
-    { word: "PRODUCTS", note: "Why do the useful ones feel so obvious afterwards?" },
-    { word: "EDUCATION", note: "A school is a system. Most of it is invisible to parents." },
-    { word: "AUTOMATION", note: "Which repetitive things quietly steal a person's day?" },
-    { word: "DATA", note: "Numbers are answers to questions someone forgot to ask." },
-    { word: "HUMAN PROBLEMS", note: "The interesting ones are rarely technical at the root." },
-    { word: "STARTUPS", note: "A company is a promise to keep solving a problem." },
-    { word: "BUILDING", note: "The fastest way I know to understand anything." },
-  ],
-};
-
-export const disciplines = [
-  {
-    index: "I",
-    name: "Web Development",
-    line: "Where it started. Responsive websites, then Flutter apps: an idea becomes a screen becomes a thing other people can use.",
-    gave: "Shipping",
-  },
-  {
-    index: "II",
-    name: "Data Science",
-    line: "Then the questions changed. Cleaning real-world datasets, exploratory analysis, models tuned until they told the truth.",
-    gave: "Rigour",
-  },
-  {
-    index: "III",
-    name: "Data Analytics",
-    line: "Sales, point-of-sale and inventory data turned into forecasts, staffing schedules and decisions someone could act on.",
-    gave: "Judgement",
-  },
-  {
-    index: "IV",
-    name: "Artificial Intelligence",
-    line: "Machine learning, computer vision, robotics. Systems that learn, see and move, and a master's degree spent finding out how.",
-    gave: "Depth",
-  },
-  {
-    index: "V",
-    name: "Technology & Product Leadership",
-    line: "Deciding what to build, for whom, and why it should exist at all. Then making sure it gets implemented.",
-    gave: "Direction",
   },
 ];
 
@@ -229,115 +185,94 @@ export const roles = [
     title: "Managing Director",
     company: "CIS",
     period: "Nov 2025 — Present",
-    tool: "Ownership",
-    line: "Leading organisational and technology initiatives around digital transformation for a school ecosystem. Finding the problems, designing the solutions, and driving them all the way to implementation. This is where the platform lives.",
+    line: "Leading organisational and technology initiatives for digital transformation across a school ecosystem: identifying operational problems, designing the solutions and driving them through to implementation. Designed and led the school operations and parent engagement platform above.",
+    tags: ["Technology leadership", "Product", "Digital transformation"],
   },
   {
     title: "Data Science Intern",
     company: "The Developers Arena",
     period: "Mar 2025 — Sept 2025",
-    tool: "Experimentation",
-    line: "An end-to-end project from raw data to a deployed model. Regression, random forests, CNNs and RNNs, and the discipline of statistical testing before believing anything.",
+    line: "Delivered an end-to-end data science project from raw data to a deployed model. Built and evaluated regression models, random forests, CNNs and RNNs, and applied statistical testing before drawing conclusions.",
+    tags: ["Python", "Deep learning", "Statistics"],
   },
   {
     title: "Data Analyst",
     company: "JSYSC Holdings Ltd.",
     period: "Apr 2024 — Jun 2025",
-    tool: "Clarity",
-    line: "Sales, point-of-sale and inventory data in Python, SQL and Excel. Forecasting demand, shaping staffing schedules, and automating the cleaning and reporting so the insight arrived before the decision did.",
+    line: "Analysed sales, point-of-sale and inventory data in Python, SQL and Excel. Forecast demand, informed staffing schedules and automated data cleaning and reporting so decisions were made on current numbers.",
+    tags: ["SQL", "Forecasting", "Automation"],
   },
   {
     title: "Data Science Intern",
     company: "Unified Mentor Pvt. Ltd.",
     period: "Feb 2024 — Aug 2024",
-    tool: "Method",
-    line: "Real-world datasets, preprocessed and explored. Models tuned hyperparameter by hyperparameter, then made visible in Tableau and Matplotlib.",
+    line: "Preprocessed and explored real-world datasets, tuned model hyperparameters and presented the results in Tableau and Matplotlib.",
+    tags: ["Pandas", "Scikit-Learn", "Tableau"],
   },
   {
     title: "Web Developer",
     company: "Voran Services Pvt. Ltd.",
     period: "Feb 2021 — Feb 2022",
-    tool: "Making",
-    line: "The beginning. Responsive websites in Bootstrap and cross-platform mobile apps in Flutter, written for someone else to open the next morning.",
+    line: "Built responsive websites in Bootstrap and cross-platform mobile apps in Flutter for client projects.",
+    tags: ["Flutter", "Bootstrap", "HTML/CSS"],
   },
 ];
 
 export const toolbox = [
   {
-    name: "THINK",
-    hint: "Before anything is built",
-    items: ["Problem solving", "Product thinking", "AI product development", "Data-driven decision making"],
-  },
-  {
-    name: "BUILD",
-    hint: "Turning it into something real",
+    name: "LANGUAGES",
+    hint: "Python, SQL and the web",
     items: ["Python", "SQL", "HTML", "CSS", "Flutter", "Bootstrap", "Software development"],
   },
   {
-    name: "INTELLIGENCE",
-    hint: "Systems that learn",
+    name: "MACHINE LEARNING",
+    hint: "Training and evaluating models",
     items: ["Machine Learning", "Deep Learning", "Computer Vision", "PyTorch", "Scikit-Learn"],
   },
   {
     name: "DATA",
-    hint: "Finding out what is true",
+    hint: "Analysis, forecasting, reporting",
     items: ["NumPy", "Pandas", "SciPy", "Tableau", "Excel", "Matplotlib", "Seaborn"],
   },
   {
+    name: "PRODUCT",
+    hint: "Deciding what to build",
+    items: ["Product thinking", "AI product development", "Data-driven decision making", "Problem solving"],
+  },
+  {
     name: "SYSTEMS",
-    hint: "Making things run without you",
+    hint: "Robotics, automation, platforms",
     items: ["ROS", "Automation", "Digital transformation", "Linux · Windows · macOS"],
   },
 ];
 
-export const shift = [
-  "BUT I'M NOT DONE.",
-  "THERE ARE TOO MANY INTERESTING PROBLEMS.",
-  "SO I'M BUILDING SOMETHING OF MY OWN.",
-];
-
 export const evaradh = {
   name: "EVARADH",
-  vision:
-    "Evaradh is being built as a technology company focused on creating multiple products that solve real-world problems.",
-  philosophy: ["FIND PROBLEMS.", "BUILD USEFUL THINGS.", "KEEP BUILDING."],
-  belief:
-    "Technology is not the destination. The product is, and the product exists because the problem matters.",
-  sequence: ["PROBLEM", "QUESTION", "IDEA", "EXPERIMENT", "PRODUCT", "COMPANY", "EVARADH"],
-  manifesto: [
-    "We don't want to build technology simply because technology is possible.",
-    "We want to build because a problem is worth solving.",
-    "Some ideas will disappear.",
-    "Some will become experiments.",
-    "Some will become products.",
-    "And perhaps, some will become companies.",
+  what: "Evaradh is a technology company I am building. Its purpose is to create multiple products that solve real-world problems.",
+  stage: "Early stage. There is no product to announce yet, and this page does not pretend otherwise. It is a long-term, company-building effort rather than a single launch.",
+  approach: [
+    { step: "01", title: "Start from a real problem", text: "Something a specific group of people deals with every day, not a technology looking for a use." },
+    { step: "02", title: "Build a small working version", text: "A working version in front of the people who have the problem, before any polish." },
+    { step: "03", title: "Keep what works", text: "Ideas that hold up become products. Products that hold up may become companies of their own." },
   ],
-  closing: "THIS IS THE BEGINNING.",
-  note: "Evaradh is a long-term, company-building journey. There is no product to announce yet, and this page will not pretend otherwise.",
+  status: [
+    { label: "Founder", value: "Radhika Daithankar" },
+    { label: "Stage", value: "Pre-product" },
+    { label: "Focus", value: "Multiple products for real-world problems" },
+  ],
 };
 
-export const founder = {
-  title: "THE WOMAN BEHIND THE WORK.",
-  story: [
-    "It began with computer science in Aurangabad: the pleasure of a thing that either works or doesn't, and the patience to find out why.",
-    "Then artificial intelligence, at Queen Mary University of London: machine learning, computer vision, robotics. Systems that could learn something she had not explicitly told them.",
-    "Work took her across data, software and product development, and then into technology leadership, where the interesting question stopped being how to build and became what deserves to be built.",
+export const about = {
+  title: "ABOUT",
+  paragraphs: [
+    "I am Radhika Daithankar, an AI engineer and technology leader based in Pune, India. I studied computer science at MGM's Jawaharlal Nehru Engineering College in Aurangabad, then completed an MSc in Artificial Intelligence at Queen Mary University of London, where I worked on machine learning, computer vision and robotics.",
+    "Professionally I started as a web developer, moved into data analytics and data science across three roles, and since November 2025 I have been Managing Director at CIS, leading digital transformation for a school ecosystem. The school operations and parent engagement platform on this page is the main product of that work.",
+    "I am most useful at the point where a real operational problem meets a technical decision: understanding the problem well enough to design the right system, then building it and getting it adopted.",
   ],
-  movement: ["Learning technology", "Using technology", "Building products", "Thinking about companies"],
+  interests: ["AI products", "Education technology", "Operations automation", "Data-driven decisions", "Robotics"],
 };
 
-export const principles = [
-  "I START WITH THE PROBLEM.",
-  "I LEARN BY BUILDING.",
-  "I LIKE UNDERSTANDING HOW THINGS WORK.",
-  "AI IS A TOOL. THE PRODUCT IS THE OUTCOME.",
-  "GOOD TECHNOLOGY SHOULD FEEL SIMPLE.",
-];
-
-export const finale = {
-  question: "WHAT'S NEXT?",
-  list: ["More ideas.", "More experiments.", "More products."],
-  maybe: "MAYBE A COMPANY.",
-  name: "EVARADH",
-  invitation: "Let's build something worth building.",
+export const contactCopy = {
+  title: ["GET IN", "TOUCH."],
+  line: "Open to conversations about AI products, education technology and early-stage company building. Email is the fastest way to reach me.",
 };

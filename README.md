@@ -1,6 +1,6 @@
 # Radhika Daithankar — personal site
 
-An editorial, art-directed personal website for Radhika Daithankar: an AI-focused technology builder, Managing Director at CIS, and founder-in-progress of Evaradh. It is written as a single scrolling story ("I build what I wish existed.") rather than a résumé, with scroll-driven typography, an interactive product chapter, and a quiet finale.
+A personal portfolio for Radhika Daithankar: AI engineer and technology leader, Managing Director at CIS in Pune, and founder of the early-stage technology company Evaradh. The site is a single scrolling page with six plain-spoken sections: Work, Experience, Skills, Evaradh, About and Contact. Every headline says something specific; all facts come from the resume.
 
 ## Stack
 
@@ -29,16 +29,16 @@ npm run start   # serve the production build on port 4517
 
 ## Editing content
 
-Every fact, sentence and link lives in one file: `src/data/site.ts`. Roles, projects, education, toolbox categories, the Evaradh manifesto and the contact links are all plain data there; the section components only lay them out.
+Every fact, sentence and link lives in one file: `src/data/site.ts`. The hero headline and facts, the platform case study, the four projects, roles, education, skill categories, the Evaradh copy, the About paragraphs and the contact links are all plain data there; the section components only lay them out.
 
 ## Adding the portraits
 
-Two editorial image slots ship with a warm sunlit-paper placeholder. To use real photographs, drop files at these paths (the paths are configurable in `portraits` inside `src/data/site.ts`):
+Two image slots ship with a warm sunlit-paper placeholder. To use real photographs, drop files at these paths (the paths are configurable in `portraits` inside `src/data/site.ts`):
 
 | Slot | Path | Suggested crop |
 | --- | --- | --- |
-| Hero (right side, bleeds off the viewport) | `public/images/portrait.jpg` | Tall, roughly 3:5, subject off-centre |
-| Founder chapter | `public/images/portrait-founder.jpg` | 3:4 or 4:5 |
+| Hero (right of the name on desktop) | `public/images/portrait.jpg` | Portrait, roughly 4:5 |
+| About section | `public/images/portrait-founder.jpg` | 3:4 or 4:5 |
 
 The page checks whether each file exists when it renders, so no code change is needed. In `npm run dev` just add the file and reload; the production build is prerendered, so run `npm run build` again after adding a photo.
 
@@ -50,12 +50,14 @@ src/
   data/site.ts    all content
   components/     Intro, Nav, Cursor, SmoothScroll, Portrait, motion primitives
   components/sections/
-                  Hero, Person, Built (+ ProductDemo, Motifs), Notebook, Builder,
-                  Journey, Toolbox, Shift, Evaradh, Founder, Thinking, Finale
+                  Hero, Work (+ ProductDemo, Motifs), Experience, Skills,
+                  Evaradh, About, Contact
 ```
 
-## Motion and accessibility
+## Interaction
 
+- Opening name sequence (about two seconds; click, key, wheel or touch skips it), then a masked type reveal in the hero.
+- Interactive walkthrough of the three attendance features in the platform case study (QR refresh, campus radius, parent notification).
+- Skill categories open on hover/tap and lay their tools out on the right.
+- Custom cursor, magnetic nav and smooth scroll on desktop only; touch devices and `prefers-reduced-motion` get simpler, non-pinned versions.
 - Animations use transforms and opacity only.
-- `prefers-reduced-motion` and touch devices get simplified, non-pinned versions of the scroll sequences, and the custom cursor and smooth scroll are turned off.
-- The opening intro lasts about two seconds and can be skipped with a click, key press, wheel or touch.

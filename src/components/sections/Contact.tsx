@@ -1,13 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { contact, finale, identity } from "@/data/site";
-import { EASE } from "@/lib/motion";
+import { contact, contactCopy, identity } from "@/data/site";
 import { Lines, Reveal } from "../Reveal";
 import { Magnetic } from "../Magnetic";
+import { SectionMark } from "../SectionMark";
+import { useScrollTo } from "../SmoothScroll";
 
-/** The last page. Quiet, and open. */
-export function Finale() {
+/** Section 06. Email, LinkedIn, GitHub. */
+export function Contact() {
+  const scrollTo = useScrollTo();
   const links = [
     { label: "Email", value: contact.email, href: `mailto:${contact.email}`, external: false },
     { label: "LinkedIn", value: "linkedin.com/in/radhika-daithankar", href: contact.linkedin, external: true },
@@ -17,54 +18,22 @@ export function Finale() {
   return (
     <section id="contact" className="relative bg-ivory">
       <div className="px-5 pt-32 sm:px-8 md:px-12 md:pt-44">
-        <Lines
-          as="h2"
-          lines={finale.question.split(" ")}
-          className="display text-[16vw] text-ink sm:text-[13vw] md:text-[10vw]"
-          lineClassName={(i) => (i === 1 ? "display-italic pl-[0.3em] text-brown" : "")}
-        />
-
-        <div className="mt-16 grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <ol className="flex flex-col gap-1">
-              {finale.list.map((l, i) => (
-                <motion.li
-                  key={l}
-                  className="font-serif text-3xl leading-tight text-ink md:text-[2.6vw]"
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.6 }}
-                  transition={{ delay: 0.15 + i * 0.2, duration: 0.8, ease: EASE }}
-                >
-                  {l}
-                </motion.li>
-              ))}
-            </ol>
-            <motion.p
-              className="display display-italic mt-10 text-[9vw] text-terracotta sm:text-[8vw] md:text-[4.2vw]"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ delay: 1, duration: 1 }}
-            >
-              {finale.maybe}
-            </motion.p>
-            <motion.p
-              className="display mt-6 text-[12vw] tracking-[0.06em] text-ink sm:text-[9vw] md:text-[5vw]"
-              initial={{ opacity: 0, letterSpacing: "0.3em" }}
-              whileInView={{ opacity: 1, letterSpacing: "0.06em" }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ delay: 1.4, duration: 1.4, ease: EASE }}
-            >
-              {finale.name}
-            </motion.p>
+        <SectionMark number="06" title="Contact" />
+        <div className="mt-10 grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-6">
+            <Lines
+              as="h2"
+              lines={contactCopy.title}
+              className="display text-[16vw] text-ink sm:text-[13vw] md:text-[9vw]"
+              lineClassName={(i) => (i === 1 ? "display-italic pl-[0.3em] text-terracotta" : "")}
+            />
+            <Reveal className="mt-10" delay={0.2}>
+              <p className="measure font-serif text-xl leading-relaxed text-brown md:text-2xl">{contactCopy.line}</p>
+            </Reveal>
           </div>
 
-          <div className="md:col-span-6 md:col-start-7 md:pt-4">
-            <Reveal delay={0.2}>
-              <p className="max-w-md font-serif text-2xl italic leading-snug text-brown md:text-3xl">{finale.invitation}</p>
-            </Reveal>
-            <ul className="mt-12 flex flex-col">
+          <div className="md:col-span-5 md:col-start-8 md:pt-4">
+            <ul className="flex flex-col">
               {links.map((l, i) => (
                 <Reveal key={l.label} delay={0.3 + i * 0.08} y={16}>
                   <li className="border-t border-ink/10 last:border-b">
@@ -87,6 +56,18 @@ export function Finale() {
                 </Reveal>
               ))}
             </ul>
+            <Reveal className="mt-10" delay={0.5}>
+              <dl className="grid grid-cols-2 gap-6 text-sm text-brown">
+                <div>
+                  <dt className="eyebrow text-brown/70">Based in</dt>
+                  <dd className="mt-2 font-serif text-lg text-ink">{identity.location}</dd>
+                </div>
+                <div>
+                  <dt className="eyebrow text-brown/70">Currently</dt>
+                  <dd className="mt-2 font-serif text-lg text-ink">{identity.currentRole}</dd>
+                </div>
+              </dl>
+            </Reveal>
           </div>
         </div>
 
@@ -95,7 +76,9 @@ export function Finale() {
           <p>
             {identity.fullName} · {identity.location} · {new Date().getFullYear()}
           </p>
-          <p className="font-serif italic">This is the beginning.</p>
+          <button onClick={() => scrollTo("#top")} className="eyebrow text-left text-brown/70 transition-colors hover:text-terracotta">
+            Back to top ↑
+          </button>
         </footer>
       </div>
     </section>

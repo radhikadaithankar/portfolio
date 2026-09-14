@@ -6,34 +6,36 @@ import { EASE } from "@/lib/motion";
 import { Lines, Reveal } from "../Reveal";
 import { SectionMark } from "../SectionMark";
 
-/** Section 05. Roles as chapters. Each one named for the tool it left behind. */
-export function Journey() {
+/** Section 02. Roles in reverse chronological order, then education. */
+export function Experience() {
   return (
-    <section className="relative bg-ivory">
+    <section id="experience" className="relative bg-ivory">
       <div className="px-5 pt-32 sm:px-8 md:px-12 md:pt-44">
-        <SectionMark number="05" title="Where I've been" />
+        <SectionMark number="02" title="Experience" />
         <div className="mt-10 grid gap-10 md:grid-cols-12 md:items-end">
           <Lines
             as="h2"
-            lines={["WHERE", "I'VE BEEN."]}
-            className="display text-[15vw] text-ink sm:text-[12vw] md:col-span-6 md:text-[8vw]"
+            lines={["WHERE I'VE", "WORKED."]}
+            className="display text-[15vw] text-ink sm:text-[12vw] md:col-span-7 md:text-[8vw]"
             lineClassName={(i) => (i === 1 ? "display-italic pl-[0.3em] text-brown" : "")}
           />
           <Reveal className="md:col-span-4 md:col-start-9" delay={0.2}>
-            <p className="measure font-serif text-xl leading-relaxed text-brown">Every role gave her another tool to build with. Read from the present, backwards.</p>
+            <p className="measure font-serif text-xl leading-relaxed text-brown">
+              Five roles since 2021, from web development through data analytics and data science to technology leadership. Most recent first.
+            </p>
           </Reveal>
         </div>
 
         <ol className="mt-20 flex flex-col">
-          {roles.map((r, i) => (
-            <RoleChapter key={`${r.company}-${r.period}`} r={r} i={i} />
+          {roles.map((r) => (
+            <RoleRow key={`${r.company}-${r.period}`} r={r} />
           ))}
         </ol>
 
         <div className="mt-28 grid gap-10 border-t border-ink/10 pb-32 pt-12 md:grid-cols-12 md:pb-40">
           <Reveal className="md:col-span-3">
-            <p className="eyebrow text-terracotta">Before all of that</p>
-            <p className="mt-3 font-serif text-lg italic text-brown">Two degrees, two cities, one direction.</p>
+            <p className="eyebrow text-terracotta">Education</p>
+            <p className="mt-3 font-serif text-lg text-brown">Two degrees: computer science, then artificial intelligence.</p>
           </Reveal>
           <div className="flex flex-col gap-8 md:col-span-8 md:col-start-5">
             {education.map((e, i) => (
@@ -45,7 +47,7 @@ export function Journey() {
                     <p className="mt-1 text-sm text-brown">
                       {e.school} · {e.place}
                     </p>
-                    <p className="mt-3 max-w-lg font-serif text-base italic leading-relaxed text-brown">{e.focus}</p>
+                    <p className="mt-3 max-w-lg leading-relaxed text-ink/80">{e.focus}</p>
                   </div>
                 </div>
               </Reveal>
@@ -57,7 +59,7 @@ export function Journey() {
   );
 }
 
-function RoleChapter({ r, i }: { r: (typeof roles)[number]; i: number }) {
+function RoleRow({ r }: { r: (typeof roles)[number] }) {
   return (
     <motion.li
       className="group grid gap-4 border-t border-ink/10 py-10 md:grid-cols-12 md:gap-8 md:py-12"
@@ -66,21 +68,23 @@ function RoleChapter({ r, i }: { r: (typeof roles)[number]; i: number }) {
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.9, ease: EASE }}
     >
-      <div className="flex items-baseline justify-between md:col-span-3 md:block">
+      <div className="md:col-span-3">
         <span className="eyebrow text-brown/70">{r.period}</span>
-        <span className="eyebrow text-terracotta/70 md:mt-3 md:block">Chapter 0{roles.length - i}</span>
       </div>
       <div className="md:col-span-6">
-        <h3 className="display text-[9vw] text-ink transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-x-3 sm:text-[6.5vw] md:text-[3.6vw]">
+        <h3 className="display text-[9vw] text-ink transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-x-3 sm:text-[6.5vw] md:text-[3.4vw]">
           {r.title}
         </h3>
         <p className="mt-2 font-serif text-xl text-brown">{r.company}</p>
         <p className="mt-5 max-w-xl leading-relaxed text-ink/80">{r.line}</p>
       </div>
-      <div className="md:col-span-3 md:text-right">
-        <p className="eyebrow text-brown/60">It gave her</p>
-        <p className="display display-italic mt-2 text-[9vw] text-terracotta sm:text-[6vw] md:text-[2.8vw]">{r.tool}</p>
-      </div>
+      <ul className="flex flex-wrap gap-2 md:col-span-3 md:justify-end md:content-start">
+        {r.tags.map((t) => (
+          <li key={t} className="h-fit rounded-full border border-ink/15 px-3 py-1 text-xs tracking-wide text-brown">
+            {t}
+          </li>
+        ))}
+      </ul>
     </motion.li>
   );
 }

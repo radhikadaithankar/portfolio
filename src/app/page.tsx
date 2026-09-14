@@ -6,17 +6,12 @@ import { Intro } from "@/components/Intro";
 import { Nav } from "@/components/Nav";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Hero } from "@/components/sections/Hero";
-import { Person } from "@/components/sections/Person";
-import { Built } from "@/components/sections/Built";
-import { Notebook } from "@/components/sections/Notebook";
-import { Builder } from "@/components/sections/Builder";
-import { Journey } from "@/components/sections/Journey";
-import { Toolbox } from "@/components/sections/Toolbox";
-import { Shift } from "@/components/sections/Shift";
+import { Work } from "@/components/sections/Work";
+import { Experience } from "@/components/sections/Experience";
+import { Skills } from "@/components/sections/Skills";
 import { Evaradh } from "@/components/sections/Evaradh";
-import { Founder } from "@/components/sections/Founder";
-import { Thinking } from "@/components/sections/Thinking";
-import { Finale } from "@/components/sections/Finale";
+import { About } from "@/components/sections/About";
+import { Contact } from "@/components/sections/Contact";
 
 /** Checked on the server so a missing photo never produces a 404 in the browser. */
 function hasPublicFile(publicPath: string) {
@@ -25,7 +20,7 @@ function hasPublicFile(publicPath: string) {
 
 export default function Home() {
   const heroPortrait = hasPublicFile(portraits.hero);
-  const founderPortrait = hasPublicFile(portraits.founder);
+  const aboutPortrait = hasPublicFile(portraits.founder);
 
   return (
     <SmoothScroll>
@@ -35,17 +30,12 @@ export default function Home() {
       <Nav />
       <main>
         <Hero hasPortrait={heroPortrait} />
-        <Person />
-        <Built />
-        <Notebook />
-        <Builder />
-        <Journey />
-        <Toolbox />
-        <Shift />
+        <Work />
+        <Experience />
+        <Skills />
         <Evaradh />
-        <Founder hasPortrait={founderPortrait} />
-        <Thinking />
-        <Finale />
+        <About hasPortrait={aboutPortrait} />
+        <Contact />
       </main>
     </SmoothScroll>
   );

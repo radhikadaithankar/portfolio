@@ -1,15 +1,15 @@
 "use client";
 
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
-import { identity, portraits } from "@/data/site";
+import { facts, identity, portraits } from "@/data/site";
 import { EASE, useCalmMotion } from "@/lib/motion";
 import { Portrait } from "../Portrait";
 
 export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
   const { calm } = useCalmMotion();
   const { scrollY } = useScroll();
-  const imageY = useTransform(scrollY, [0, 900], [0, calm ? 0 : 140]);
-  const typeY = useTransform(scrollY, [0, 900], [0, calm ? 0 : -80]);
+  const imageY = useTransform(scrollY, [0, 900], [0, calm ? 0 : 120]);
+  const typeY = useTransform(scrollY, [0, 900], [0, calm ? 0 : -60]);
 
   // Cursor-reactive drift for the photograph, desktop only.
   const mx = useMotionValue(0);
@@ -19,46 +19,32 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
   const onMove = (e: React.MouseEvent) => {
     if (calm) return;
     const { innerWidth, innerHeight } = window;
-    mx.set(((e.clientX / innerWidth) - 0.5) * -24);
-    my.set(((e.clientY / innerHeight) - 0.5) * -16);
+    mx.set(((e.clientX / innerWidth) - 0.5) * -20);
+    my.set(((e.clientY / innerHeight) - 0.5) * -14);
   };
 
-  return (
-    <section id="top" className="relative min-h-[100svh] overflow-hidden pt-28 sm:pt-32 md:pt-36" onMouseMove={onMove}>
-      {/* Photograph: oversized, bleeding past the right edge. */}
-      <motion.div
-        className="pointer-events-none absolute -right-[18vw] top-[8vh] h-[62vh] w-[78vw] sm:-right-[10vw] sm:w-[58vw] md:right-[-6vw] md:top-[6vh] md:h-[88vh] md:w-[40vw] lg:w-[38vw]"
-        style={{ y: imageY }}
-      >
-        <motion.div className="h-full w-full" style={{ x: dx, y: dy }}>
-          <Portrait src={portraits.hero} available={hasPortrait} alt={`${identity.fullName}, portrait`} className="h-full w-full" delay={0.35} />
-        </motion.div>
-        <motion.span
-          className="eyebrow absolute bottom-6 left-6 hidden text-ivory/90 md:block"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
-        >
-          Portrait · {identity.location}
-        </motion.span>
-      </motion.div>
+  const nameLines = [identity.firstName.toUpperCase(), identity.lastName.toUpperCase()];
+  const fade = (delay: number) => ({
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { delay, duration: 1, ease: EASE },
+  });
 
-      {/* Type sitting on top of, and slightly over, the image. */}
+  return (
+    <section id="top" className="relative overflow-hidden pt-28 sm:pt-32 md:pt-36" onMouseMove={onMove}>
+      {/* Name and headline. The name runs full width and deliberately overlaps the photograph on desktop. */}
       <motion.div className="relative z-10 px-5 sm:px-8 md:px-12" style={{ y: typeY }}>
-        <motion.p
-          className="eyebrow mb-8 text-brown/80 md:mb-12"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.9, ease: EASE }}
-        >
-          Issue 01 &mdash; A digital portrait
+        <motion.p className="eyebrow mb-8 flex flex-wrap items-center gap-x-3 gap-y-1 text-brown/80 md:mb-12" {...fade(0.3)}>
+          <span>{identity.currentRole}</span>
+          <span className="text-terracotta">·</span>
+          <span>{identity.location}</span>
         </motion.p>
 
-        <h1 className="display text-[13.5vw] text-ink sm:text-[13vw] md:text-[12.5vw] lg:text-[11vw]">
-          {identity.statement.map((line, i) => (
+        <h1 className="display text-[15vw] text-ink sm:text-[13.5vw] md:text-[12vw] lg:text-[11vw]">
+          {nameLines.map((line, i) => (
             <span key={line} className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
               <span
-                className={`hero-line block origin-left ${i === 1 ? "display-italic pl-[0.35em] text-terracotta" : i === 2 ? "pl-[0.12em]" : ""}`}
+                className={`hero-line block origin-left ${i === 1 ? "display-italic pl-[0.18em] text-terracotta" : ""}`}
                 style={{ animationDelay: `${0.12 + i * 0.12}s` }}
               >
                 {line}
@@ -67,35 +53,41 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
           ))}
         </h1>
 
-        <div className="mt-[8vh] grid grid-cols-1 gap-8 md:mt-[10vh] md:grid-cols-12 md:items-end">
-          <motion.div
-            className="md:col-span-5"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 1, ease: EASE }}
-          >
-            <p className="font-serif text-2xl tracking-[0.12em] text-ink sm:text-3xl">{identity.fullName.toUpperCase()}</p>
-            <p className="eyebrow mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-brown/80">
-              {identity.disciplines.map((d, i) => (
-                <span key={d} className="flex items-center gap-3">
-                  {d}
-                  {i < identity.disciplines.length - 1 && <span className="text-terracotta">·</span>}
-                </span>
-              ))}
-            </p>
-          </motion.div>
-          <motion.p
-            className="measure font-serif text-lg leading-relaxed text-brown md:col-span-3 md:col-start-6 md:text-xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 1, ease: EASE }}
-          >
-            {identity.supportingLine}
-          </motion.p>
-        </div>
+        <motion.p className="mt-10 max-w-3xl font-serif text-2xl leading-[1.25] text-ink sm:text-3xl md:mt-14 md:w-[58vw] md:text-[2.5vw]" {...fade(0.9)}>
+          {identity.headline}
+        </motion.p>
+      </motion.div>
+
+      {/* Photograph: to the right on desktop, in flow below the headline on mobile. */}
+      <motion.div
+        className="relative mx-5 mt-12 aspect-[4/5] w-[78vw] max-w-[440px] sm:mx-8 sm:w-[58vw] md:absolute md:right-[-3vw] md:top-[9rem] md:mx-0 md:mt-0 md:aspect-[4/5.4] md:w-[34vw] md:max-w-none lg:w-[31vw]"
+        style={{ y: imageY }}
+      >
+        <motion.div className="h-full w-full" style={{ x: dx, y: dy }}>
+          <Portrait src={portraits.hero} available={hasPortrait} alt={`${identity.fullName}, portrait`} className="h-full w-full" delay={0.5} />
+        </motion.div>
+      </motion.div>
+
+      <div className="relative z-10 px-5 sm:px-8 md:px-12">
+        <motion.p className="measure mt-12 leading-relaxed text-brown md:mt-16 md:w-[42vw] md:text-lg" {...fade(1.1)}>
+          {identity.intro}
+        </motion.p>
+
+        <motion.dl
+          className="mt-16 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-ink/10 pt-8 md:mt-24 md:grid-cols-4"
+          {...fade(1.4)}
+        >
+          {facts.map((f) => (
+            <div key={f.label}>
+              <dt className="eyebrow text-brown/70">{f.label}</dt>
+              <dd className="mt-3 font-serif text-xl leading-tight text-ink md:text-2xl">{f.value}</dd>
+              <dd className="mt-1 text-sm text-brown">{f.note}</dd>
+            </div>
+          ))}
+        </motion.dl>
 
         <motion.div
-          className="mt-14 flex items-center gap-4 pb-14 md:mt-20"
+          className="mt-14 flex items-center gap-4 pb-16 md:mt-20 md:pb-24"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.8, duration: 1 }}
@@ -107,7 +99,7 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
             transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut", times: [0, 0.4, 0.6, 1] }}
           />
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -118,7 +118,7 @@ export function Nav() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
             >
-              {identity.supportingLine}
+              {identity.headline}
             </motion.p>
           </motion.div>
         )}
