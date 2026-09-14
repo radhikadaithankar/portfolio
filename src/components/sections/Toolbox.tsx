@@ -47,13 +47,13 @@ export function Toolbox() {
                     aria-controls={`drawer-${i}`}
                     onClick={() => setOpen(i)}
                     onMouseEnter={() => !touch && setOpen(i)}
-                    className="group flex w-full items-baseline justify-between gap-6 py-5 text-left"
+                    className="group flex w-full flex-col items-start gap-1 py-5 text-left sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
                     data-cursor="Open"
                   >
                     <span className={`display text-[11vw] transition-colors duration-500 sm:text-[7vw] md:text-[4vw] ${on ? "text-terracotta" : "text-ink/45 group-hover:text-ink"}`}>
                       {cat.name}
                     </span>
-                    <span className={`eyebrow shrink-0 text-right transition-colors duration-500 ${on ? "text-ink" : "text-ink/40"}`}>{cat.hint}</span>
+                    <span className={`eyebrow transition-colors duration-500 sm:shrink-0 sm:text-right ${on ? "text-ink" : "text-ink/40"}`}>{cat.hint}</span>
                   </button>
                   {/* Mobile: drawer contents inline below the label */}
                   <AnimatePresence initial={false}>

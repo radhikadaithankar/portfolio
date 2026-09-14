@@ -28,17 +28,17 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
     <section id="top" className="relative min-h-[100svh] overflow-hidden pt-28 sm:pt-32 md:pt-36" onMouseMove={onMove}>
       {/* Photograph: oversized, bleeding past the right edge. */}
       <motion.div
-        className="pointer-events-none absolute -right-[18vw] top-[8vh] h-[62vh] w-[78vw] sm:-right-[10vw] sm:w-[58vw] md:right-[-6vw] md:top-[6vh] md:h-[88vh] md:w-[44vw] lg:w-[40vw]"
+        className="pointer-events-none absolute -right-[18vw] top-[8vh] h-[62vh] w-[78vw] sm:-right-[10vw] sm:w-[58vw] md:right-[-6vw] md:top-[6vh] md:h-[88vh] md:w-[40vw] lg:w-[38vw]"
         style={{ y: imageY }}
       >
         <motion.div className="h-full w-full" style={{ x: dx, y: dy }}>
           <Portrait src={portraits.hero} available={hasPortrait} alt={`${identity.fullName}, portrait`} className="h-full w-full" delay={0.35} />
         </motion.div>
         <motion.span
-          className="eyebrow absolute -left-3 bottom-8 hidden origin-bottom-left -rotate-90 text-brown/70 md:block"
+          className="eyebrow absolute bottom-6 left-6 hidden text-ivory/90 md:block"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 1 }}
+          transition={{ delay: 2, duration: 1 }}
         >
           Portrait · {identity.location}
         </motion.span>
@@ -60,7 +60,7 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
           lines={identity.statement}
           animateOnMount
           delay={3}
-          className="display text-[17.5vw] text-ink sm:text-[15vw] md:text-[12.5vw] lg:text-[11vw]"
+          className="display text-[13.5vw] text-ink sm:text-[13vw] md:text-[12.5vw] lg:text-[11vw]"
           lineClassName={(i) => (i === 1 ? "display-italic pl-[0.35em] text-terracotta" : i === 2 ? "pl-[0.12em]" : "")}
         />
 
@@ -82,7 +82,7 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
             </p>
           </motion.div>
           <motion.p
-            className="measure font-serif text-lg leading-relaxed text-brown md:col-span-4 md:col-start-7 md:text-xl"
+            className="measure font-serif text-lg leading-relaxed text-brown md:col-span-3 md:col-start-6 md:text-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 1, ease: EASE }}

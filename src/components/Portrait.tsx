@@ -19,27 +19,31 @@ type PortraitProps = {
  * otherwise a warm sunlit-paper composition that reads as an intentional image.
  */
 export function Portrait({ src, available, alt, className, delay = 0, variant = "hero" }: PortraitProps) {
+  // The in-view observer sits on an unclipped wrapper: Chrome's IntersectionObserver
+  // honours clip-path, so a fully clipped element would never count as visible.
   return (
-    <motion.div
-      className={`grain relative overflow-hidden ${className ?? ""}`}
-      initial={{ clipPath: "inset(100% 0 0 0)" }}
-      whileInView={{ clipPath: "inset(0% 0 0 0)" }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 1.6, ease: EASE, delay }}
-    >
+    <motion.div className={className} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }}>
       <motion.div
-        className="absolute inset-0"
-        initial={{ scale: 1.18 }}
-        whileInView={{ scale: 1 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 2.2, ease: EASE, delay }}
+        className="grain relative h-full w-full overflow-hidden"
+        variants={{
+          hidden: { clipPath: "inset(100% 0 0 0)" },
+          show: { clipPath: "inset(0% 0 0 0)", transition: { duration: 1.6, ease: EASE, delay } },
+        }}
       >
-        {available ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={src} alt={alt} className="h-full w-full object-cover" />
-        ) : (
-          <Placeholder variant={variant} />
-        )}
+        <motion.div
+          className="absolute inset-0"
+          variants={{
+            hidden: { scale: 1.18 },
+            show: { scale: 1, transition: { duration: 2.2, ease: EASE, delay } },
+          }}
+        >
+          {available ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={src} alt={alt} className="h-full w-full object-cover" />
+          ) : (
+            <Placeholder variant={variant} />
+          )}
+        </motion.div>
       </motion.div>
     </motion.div>
   );

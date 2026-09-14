@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useScroll, type MotionValue } from "framer-motion";
 import { useRef } from "react";
-import { useCalmMotion } from "@/lib/motion";
+import { useCalmMotion, useProgress } from "@/lib/motion";
 import { Reveal } from "./Reveal";
 
 type Props = {
@@ -79,12 +79,10 @@ function Statement({ text, index, count, progress, className }: { text: string; 
   const end = start + step;
   const isFirst = index === 0;
   const isLast = index === count - 1;
-  const opacity = useTransform(
-    progress,
-    [isFirst ? -1 : start, isFirst ? -0.5 : start + step * 0.35, isLast ? 2 : end - step * 0.15, isLast ? 3 : end],
-    [0, 1, 1, 0],
-  );
-  const y = useTransform(progress, [start, start + step * 0.35, end - step * 0.15, end], [isFirst ? 0 : 40, 0, 0, isLast ? 0 : -40]);
+  // Fade-out of one statement completes exactly where the next begins, so they never overlap.
+  const range = [start, start + step * 0.3, end - step * 0.2, end];
+  const opacity = useProgress(progress, range, [isFirst ? 1 : 0, 1, 1, isLast ? 1 : 0]);
+  const y = useProgress(progress, range, [isFirst ? 0 : 40, 0, 0, isLast ? 0 : -40]);
   return (
     <motion.p className={`absolute inset-x-0 ${className}`} style={{ opacity, y }}>
       {text}

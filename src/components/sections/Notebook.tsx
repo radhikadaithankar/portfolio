@@ -53,7 +53,7 @@ function Entry({ index, word, note }: { index: number; word: string; note: strin
   return (
     <motion.li
       className="group relative border-t border-ink/10 py-6 md:py-7"
-      initial={{ opacity: 0, x: 20 }}
+      initial={{ opacity: 0, x: 12 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, amount: 0.4 }}
       transition={{ duration: 0.9, ease: EASE, delay: index * 0.05 }}

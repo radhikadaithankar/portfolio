@@ -1,9 +1,9 @@
 "use client";
 
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { motion, useScroll, type MotionValue } from "framer-motion";
 import { useRef } from "react";
 import { worlds } from "@/data/site";
-import { useCalmMotion } from "@/lib/motion";
+import { useCalmMotion, useProgress } from "@/lib/motion";
 import { Lines, Reveal } from "../Reveal";
 import { SectionMark } from "../SectionMark";
 
@@ -21,7 +21,7 @@ export function Person() {
         <Lines
           as="h2"
           lines={["I'VE NEVER", "REALLY FIT", "INTO ONE BOX."]}
-          className="display mt-10 text-[15vw] text-ink sm:text-[12vw] md:text-[9.5vw]"
+          className="display mt-10 text-[12vw] text-ink sm:text-[11vw] md:text-[9.5vw]"
           lineClassName={(i) => (i === 1 ? "display-italic pl-[0.4em] text-brown" : "")}
         />
         <Reveal className="mt-12 grid gap-6 md:grid-cols-12" delay={0.2}>
@@ -38,14 +38,17 @@ export function Person() {
   );
 }
 
+/** Portion of the pinned scroll spent cycling through the worlds; the rest is BUILDING. */
+const CYCLE = 0.84;
+
 function ScrollWorlds() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const n = worlds.length;
-  const buildingOpacity = useTransform(scrollYProgress, [0.86, 0.94], [0, 1]);
-  const buildingScale = useTransform(scrollYProgress, [0.86, 1], [0.92, 1]);
-  const stageOpacity = useTransform(scrollYProgress, [0.84, 0.9], [1, 0]);
-  const lineScale = useTransform(scrollYProgress, [0, 0.86], [0, 1]);
+  const buildingOpacity = useProgress(scrollYProgress, [0.86, 0.94], [0, 1]);
+  const buildingScale = useProgress(scrollYProgress, [0.86, 1], [0.92, 1]);
+  const stageOpacity = useProgress(scrollYProgress, [0.82, 0.88], [1, 0]);
+  const lineScale = useProgress(scrollYProgress, [0, CYCLE], [0, 1]);
 
   return (
     <div ref={ref} style={{ height: `${(n + 2) * 70}vh` }} className="relative mt-24">
@@ -82,11 +85,15 @@ function ScrollWorlds() {
 }
 
 function StageWord({ label, index, count, progress }: { label: string; index: number; count: number; progress: MotionValue<number> }) {
-  const step = 0.84 / count;
+  const step = CYCLE / count;
   const start = index * step;
   const end = start + step;
-  const opacity = useTransform(progress, [start - 0.02, start + 0.03, end - 0.03, end + 0.01], [0, 1, 1, 0]);
-  const y = useTransform(progress, [start - 0.02, start + 0.03, end - 0.03, end + 0.01], ["60%", "0%", "0%", "-60%"]);
+  const fade = step * 0.22;
+  const first = index === 0;
+  // Each word fully fades out before the next one fades in, so they never overlap.
+  const range = [start, start + fade, end - fade, end];
+  const opacity = useProgress(progress, range, [first ? 1 : 0, 1, 1, 0]);
+  const y = useProgress(progress, range, [first ? "0%" : "60%", "0%", "0%", "-60%"]);
   const parts = label.split(" ");
   return (
     <motion.p className="display absolute inset-0 flex flex-col justify-center text-[9.5vw] text-ink md:text-[7.2vw]" style={{ opacity, y }}>
@@ -100,10 +107,11 @@ function StageWord({ label, index, count, progress }: { label: string; index: nu
 }
 
 function LedgerItem({ label, index, count, progress }: { label: string; index: number; count: number; progress: MotionValue<number> }) {
-  const step = 0.84 / count;
+  const step = CYCLE / count;
   const start = index * step;
-  const opacity = useTransform(progress, [start - 0.01, start + 0.02], [0.28, 1]);
-  const x = useTransform(progress, [start - 0.01, start + 0.02], [0, 12]);
+  const range = [start, start + 0.03];
+  const opacity = useProgress(progress, range, [index === 0 ? 1 : 0.28, 1]);
+  const x = useProgress(progress, range, [index === 0 ? 12 : 0, 12]);
   return (
     <motion.li className="eyebrow flex items-center gap-3 text-ink" style={{ opacity, x }}>
       <span className="text-terracotta/70">0{index + 1}</span>

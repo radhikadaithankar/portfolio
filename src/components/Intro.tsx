@@ -35,7 +35,7 @@ export function Intro() {
       {open && (
         <motion.div
           key="intro"
-          className="fixed inset-0 z-[90] flex cursor-pointer items-center justify-center bg-ivory"
+          className="fixed inset-0 z-[90] flex cursor-pointer items-center justify-center overflow-hidden bg-ivory"
           onClick={() => setOpen(false)}
           aria-label="Skip introduction"
           role="button"
@@ -47,8 +47,8 @@ export function Intro() {
           <div className="relative flex flex-col items-center px-6 text-center">
             <motion.span
               className="display text-[13vw] leading-none text-ink sm:text-[9vw]"
-              initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-              animate={{ opacity: 1, y: [24, 0, 0, -40], filter: "blur(0px)", x: [0, 0, 0, "-18vw"] }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: [0, 1, 1, 1], y: [24, 0, 0, -40], x: [0, 0, 0, "-18vw"] }}
               transition={{ duration: 1.9, times: [0, 0.3, 0.7, 1], ease: EASE }}
             >
               {identity.firstName.toUpperCase()}

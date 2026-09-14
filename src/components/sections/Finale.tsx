@@ -19,8 +19,9 @@ export function Finale() {
       <div className="px-5 pt-32 sm:px-8 md:px-12 md:pt-44">
         <Lines
           as="h2"
-          lines={[finale.question]}
+          lines={finale.question.split(" ")}
           className="display text-[16vw] text-ink sm:text-[13vw] md:text-[10vw]"
+          lineClassName={(i) => (i === 1 ? "display-italic pl-[0.3em] text-brown" : "")}
         />
 
         <div className="mt-16 grid gap-12 md:grid-cols-12">
@@ -40,7 +41,7 @@ export function Finale() {
               ))}
             </ol>
             <motion.p
-              className="display display-italic mt-10 text-[10vw] text-terracotta sm:text-[8vw] md:text-[4.2vw]"
+              className="display display-italic mt-10 text-[9vw] text-terracotta sm:text-[8vw] md:text-[4.2vw]"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, amount: 0.6 }}
@@ -72,11 +73,11 @@ export function Finale() {
                         href={l.href}
                         target={l.external ? "_blank" : undefined}
                         rel={l.external ? "noopener noreferrer" : undefined}
-                        className="group flex items-baseline justify-between gap-6 py-6"
+                        className="group flex flex-col gap-2 py-6 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
                         data-cursor="Open"
                       >
                         <span className="eyebrow text-brown/70">{l.label}</span>
-                        <span className="relative font-serif text-xl text-ink transition-colors duration-500 group-hover:text-terracotta sm:text-2xl">
+                        <span className="relative break-all font-serif text-xl text-ink transition-colors duration-500 group-hover:text-terracotta sm:text-2xl">
                           {l.value}
                           <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-terracotta transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100" />
                         </span>

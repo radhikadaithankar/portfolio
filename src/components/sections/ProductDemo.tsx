@@ -31,7 +31,7 @@ export function ProductDemo() {
             return (
               <li key={f.id} className="border-t border-ink/10 last:border-b">
                 <button
-                  className="group flex w-full items-baseline justify-between gap-6 py-5 text-left"
+                  className="group flex w-full flex-col items-start gap-1 py-5 text-left sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
                   onMouseEnter={() => !touch && setActive(f.id as FactId)}
                   onClick={() => select(f.id as FactId)}
                   onFocus={() => setActive(f.id as FactId)}
@@ -41,7 +41,7 @@ export function ProductDemo() {
                   <span className={`display text-[13vw] transition-colors duration-500 sm:text-[9vw] md:text-[5.2vw] ${on ? "text-terracotta" : "text-ink/40 group-hover:text-ink"}`}>
                     {f.big}
                   </span>
-                  <span className={`eyebrow shrink-0 transition-colors duration-500 ${on ? "text-ink" : "text-ink/40"}`}>{f.label}</span>
+                  <span className={`eyebrow transition-colors duration-500 sm:shrink-0 ${on ? "text-ink" : "text-ink/40"}`}>{f.label}</span>
                 </button>
                 <AnimatePresence initial={false}>
                   {on && (
@@ -132,7 +132,8 @@ function finderOn(x: number, y: number) {
 
 /** Remounted (via key) whenever the visitor asks for a replay, so state resets naturally. */
 function QRView() {
-  const [seed, setSeed] = useState(() => Math.floor(Math.random() * 1e9));
+  // Deterministic first seed so server and client render the same code; it rotates after mount.
+  const [seed, setSeed] = useState(20250915);
   const [cycle, setCycle] = useState(0);
   const { reduced } = useCalmMotion();
 

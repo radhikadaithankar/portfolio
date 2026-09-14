@@ -28,6 +28,7 @@ html {
   background: var(--color-ivory);
   color: var(--color-ink);
   scroll-behavior: auto;
+  overflow-x: clip;
   -webkit-text-size-adjust: 100%;
 }
 

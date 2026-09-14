@@ -25,7 +25,7 @@ export function Builder() {
           <Lines
             as="h2"
             lines={["I LEARN", "BY BUILDING."]}
-            className="display text-[15vw] text-ink sm:text-[12vw] md:col-span-7 md:text-[8vw]"
+            className="display text-[12.5vw] text-ink sm:text-[11vw] md:col-span-7 md:text-[8vw]"
             lineClassName={(i) => (i === 1 ? "display-italic text-terracotta" : "")}
           />
           <Reveal className="md:col-span-4 md:col-start-9" delay={0.2}>

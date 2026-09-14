@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { useRef } from "react";
 import { evaradh } from "@/data/site";
-import { EASE, useCalmMotion } from "@/lib/motion";
+import { EASE, useCalmMotion, useProgress } from "@/lib/motion";
 import { Lines, Reveal } from "../Reveal";
 import { SectionMark } from "../SectionMark";
 
@@ -53,9 +53,9 @@ export function Evaradh() {
               {evaradh.manifesto.map((line, i) => (
                 <motion.li
                   key={i}
-                  className="flex gap-6 border-l border-terracotta/40 pl-6 font-serif text-2xl leading-snug text-ink md:text-[2.1vw] md:leading-[1.25]"
-                  initial={{ opacity: 0, x: 24 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  className="border-l border-terracotta/40 pl-6 font-serif text-2xl leading-snug text-ink md:text-[2.1vw] md:leading-[1.25]"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.6 }}
                   transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
                 >
@@ -80,9 +80,9 @@ function ScrollSequence() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const words = evaradh.sequence;
   const n = words.length;
-  const lineScale = useTransform(scrollYProgress, [0, 0.92], [0, 1]);
-  const glow = useTransform(scrollYProgress, [0.82, 1], [0, 1]);
-  const captionOpacity = useTransform(scrollYProgress, [0.86, 0.96], [0, 1]);
+  const lineScale = useProgress(scrollYProgress, [0, 0.92], [0, 1]);
+  const glow = useProgress(scrollYProgress, [0.82, 1], [0, 1]);
+  const captionOpacity = useProgress(scrollYProgress, [0.86, 0.96], [0, 1]);
 
   return (
     <div ref={ref} style={{ height: `${n * 85 + 30}vh` }} className="relative">
@@ -124,12 +124,15 @@ function SequenceWord({ word, index, count, progress }: { word: string; index: n
   const start = index * step;
   const end = start + step;
   const last = index === count - 1;
-  const opacity = useTransform(progress, [start - 0.02, start + 0.03, last ? 2 : end - 0.03, last ? 3 : end + 0.01], [0, 1, 1, 0]);
-  const y = useTransform(progress, [start - 0.02, start + 0.03, end - 0.03, end + 0.01], ["40%", "0%", "0%", last ? "0%" : "-40%"]);
-  const letterSpacing = useTransform(progress, [start - 0.02, start + 0.05], ["0.08em", "-0.03em"]);
+  const first = index === 0;
+  const fade = step * 0.25;
+  const range = [start, start + fade, end - fade, end];
+  const opacity = useProgress(progress, range, [first ? 1 : 0, 1, 1, last ? 1 : 0]);
+  const y = useProgress(progress, range, [first ? "0%" : "40%", "0%", "0%", last ? "0%" : "-40%"]);
+  const letterSpacing = useProgress(progress, [start, start + fade * 1.5], [first ? "-0.03em" : "0.08em", "-0.03em"]);
   return (
     <motion.p
-      className={`display absolute inset-0 flex items-center text-[16vw] md:text-[11.5vw] ${last ? "text-peach" : "text-ivory"}`}
+      className={`display absolute inset-0 flex items-center text-[14vw] md:text-[11.5vw] ${last ? "text-peach" : "text-ivory"}`}
       style={{ opacity, y, letterSpacing }}
     >
       {word}
