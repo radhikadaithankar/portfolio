@@ -49,6 +49,7 @@ html.lenis body {
 body {
   font-family: var(--font-sans);
   font-feature-settings: "ss01", "cv11";
+  font-variant-numeric: lining-nums;
   overflow-x: clip;
   text-rendering: optimizeLegibility;
 }
@@ -87,6 +88,24 @@ body {
 
 .measure {
   max-width: 34rem;
+}
+
+@layer components {
+  .pad {
+    padding-inline: clamp(1.25rem, 5vw, 5.5rem);
+  }
+}
+
+.hero-name {
+  animation: hero-settle 1.6s var(--ease-editorial) both;
+}
+@keyframes hero-settle {
+  from {
+    letter-spacing: 0.045em;
+  }
+  to {
+    letter-spacing: -0.03em;
+  }
 }
 
 /* Film grain overlay */
@@ -154,5 +173,8 @@ button {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  .hero-name {
+    animation: none;
   }
 }

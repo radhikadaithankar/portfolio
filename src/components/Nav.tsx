@@ -1,9 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { identity, nav } from "@/data/site";
-import { EASE } from "@/lib/motion";
+import { EASE, useActiveSection } from "@/lib/motion";
 import { useScrollTo } from "./SmoothScroll";
 import { Magnetic } from "./Magnetic";
 
@@ -14,6 +14,8 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menu, setMenu] = useState(false);
   const scrollTo = useScrollTo();
+  const ids = useMemo(() => ["top", ...nav.map((n) => n.href.slice(1))], []);
+  const active = useActiveSection(ids);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -41,35 +43,45 @@ export function Nav() {
   return (
     <>
       <motion.header
-        className="fixed inset-x-0 top-0 z-[70] flex items-center justify-between px-5 py-5 sm:px-8 md:px-12"
+        className="fixed inset-x-0 top-0 z-[70] flex items-center justify-between px-5 py-5 sm:px-8 md:px-12 lg:px-16"
         animate={{ y: hidden ? -96 : 0 }}
         transition={{ duration: 0.6, ease: EASE }}
       >
         <button
           onClick={() => go("#top")}
-          className={`font-serif text-lg tracking-[0.18em] transition-colors duration-500 ${menu ? "text-ivory" : "text-ink"}`}
+          className={`font-serif text-lg tracking-[0.22em] transition-colors duration-500 ${menu ? "text-ivory" : "text-ink"}`}
           aria-label="Back to top"
         >
           {identity.firstName.toUpperCase()}
         </button>
 
         <nav
-          className={`hidden items-center gap-1 rounded-full px-2 py-1 transition-all duration-500 md:flex ${
-            scrolled ? "bg-ivory/70 shadow-[0_1px_0_rgba(42,30,26,0.08)] backdrop-blur-md" : ""
+          className={`hidden items-center gap-0.5 rounded-full px-1.5 py-1 transition-all duration-500 md:flex ${
+            scrolled ? "bg-ivory/75 shadow-[0_1px_0_rgba(42,30,26,0.08)] backdrop-blur-md" : ""
           }`}
           aria-label="Primary"
         >
-          {nav.map((item) => (
-            <Magnetic key={item.href} strength={0.2}>
-              <button
-                onClick={() => go(item.href)}
-                className="eyebrow group relative px-4 py-2 text-ink/80 transition-colors hover:text-terracotta"
-              >
-                {item.label}
-                <span className="absolute inset-x-4 bottom-1 h-px origin-left scale-x-0 bg-terracotta transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100" />
-              </button>
-            </Magnetic>
-          ))}
+          {nav.map((item) => {
+            const on = active === item.href.slice(1);
+            return (
+              <Magnetic key={item.href} strength={0.18}>
+                <button
+                  onClick={() => go(item.href)}
+                  className={`eyebrow group relative px-3 py-2 !tracking-[0.2em] transition-colors duration-500 lg:px-3.5 ${
+                    on ? "text-terracotta" : "text-ink/75 hover:text-terracotta"
+                  }`}
+                  aria-current={on ? "true" : undefined}
+                >
+                  {item.label}
+                  <span
+                    className={`absolute inset-x-3 bottom-1 h-px origin-left bg-terracotta transition-transform duration-500 ease-[cubic-bezier(.22,1,.36,1)] lg:inset-x-4 ${
+                      on ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                    }`}
+                  />
+                </button>
+              </Magnetic>
+            );
+          })}
         </nav>
 
         <button
@@ -97,15 +109,18 @@ export function Nav() {
             transition={{ duration: 0.7, ease: EASE }}
           >
             <div className="grain absolute inset-0 overflow-hidden opacity-60" />
-            <ul className="relative flex flex-col gap-2">
+            <ul className="relative flex flex-col gap-1">
               {nav.map((item, i) => (
                 <motion.li
                   key={item.href}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.25 + i * 0.07, duration: 0.7, ease: EASE }}
+                  transition={{ delay: 0.2 + i * 0.06, duration: 0.7, ease: EASE }}
                 >
-                  <button onClick={() => go(item.href)} className="display flex items-baseline gap-4 py-2 text-[15vw] leading-[0.95] text-ivory sm:text-[11vw]">
+                  <button
+                    onClick={() => go(item.href)}
+                    className="display flex w-full items-baseline gap-4 py-2 text-left text-[13vw] leading-[0.95] text-ivory sm:text-[10vw]"
+                  >
                     <span className="eyebrow text-peach/70">0{i + 1}</span>
                     {item.label}
                   </button>
@@ -113,7 +128,7 @@ export function Nav() {
               ))}
             </ul>
             <motion.p
-              className="relative measure font-serif text-lg italic text-sand/80"
+              className="relative font-serif text-lg italic text-sand/80"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}

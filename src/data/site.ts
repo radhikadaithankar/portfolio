@@ -33,7 +33,7 @@ export const contact = {
 };
 
 export const nav = [
-  { label: "WORK", href: "#work" },
+  { label: "PROJECTS", href: "#projects" },
   { label: "EXPERIENCE", href: "#experience" },
   { label: "SKILLS", href: "#skills" },
   { label: "EVARADH", href: "#evaradh" },
@@ -68,7 +68,7 @@ export type Chapter = {
 export const platform = {
   number: "01",
   kicker: "CIS · 2025 —",
-  title: "School Operations Platform",
+  title: "School Operations & Parent Engagement Platform",
   oneLine: "One system for attendance, fees, notices, homework and parent communication.",
   workflows: [
     "Attendance",
@@ -111,15 +111,15 @@ export const experiments: Chapter[] = [
   {
     number: "02",
     kicker: "Deep learning",
-    title: "Image Classification",
+    title: "Deep Neural Networks for Image Classification",
     summary: "ResNet18 vs VGG13 on MNIST, in PyTorch.",
     tools: ["PyTorch", "ResNet18", "VGG13", "MNIST"],
     motif: "layers",
   },
   {
     number: "03",
-    kicker: "Unsupervised",
-    title: "GAN",
+    kicker: "Unsupervised learning",
+    title: "Unsupervised Learning with GANs",
     summary: "A generator and discriminator trained from scratch.",
     tools: ["GANs", "Deep learning"],
     motif: "noise",
@@ -127,7 +127,7 @@ export const experiments: Chapter[] = [
   {
     number: "04",
     kicker: "Robotics",
-    title: "Panda Manipulator",
+    title: "Panda Robot Manipulator",
     summary: "ROS package: Cartesian motion and autonomous drawing.",
     tools: ["ROS", "Motion planning"],
     motif: "arm",
@@ -135,7 +135,7 @@ export const experiments: Chapter[] = [
   {
     number: "05",
     kicker: "Embedded ML",
-    title: "Gesture Wheelchair",
+    title: "Gesture-Controlled Wheelchair",
     summary: "Arduino wheelchair driven by a gesture classifier.",
     tools: ["Arduino", "Machine learning"],
     motif: "hand",
@@ -181,7 +181,7 @@ export const toolbox = [
     items: ["Python", "SQL", "HTML", "CSS", "Flutter", "Bootstrap"],
   },
   {
-    name: "ML",
+    name: "MACHINE LEARNING",
     items: ["Machine Learning", "Deep Learning", "Computer Vision", "PyTorch", "Scikit-Learn"],
   },
   {

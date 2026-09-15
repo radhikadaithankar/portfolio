@@ -13,7 +13,7 @@ type PortraitProps = {
 export function Portrait({ src, available, alt, className, variant = "hero" }: PortraitProps) {
   return (
     <div className={className}>
-      <div className="grain relative h-full w-full overflow-hidden">
+      <div className="grain relative h-full w-full overflow-hidden ring-1 ring-ink/10">
         <div className="absolute inset-0">
           {available ? (
             // eslint-disable-next-line @next/next/no-img-element

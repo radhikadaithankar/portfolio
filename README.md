@@ -1,6 +1,6 @@
 # Radhika Daithankar — personal site
 
-A personal portfolio for Radhika Daithankar: AI engineer and technology leader, Managing Director at CIS in Pune, and founder of the early-stage technology company Evaradh. The site is a single scrolling page with six plain-spoken sections: Work, Experience, Skills, Evaradh, About and Contact. Every headline says something specific; all facts come from the resume.
+A personal portfolio for Radhika Daithankar: AI engineer, Managing Director at CIS in Pune, and founder of the early-stage company Evaradh. One scrolling page: Projects, Experience, Skills, Evaradh, About, Contact. Copy is short and factual; all facts come from the resume.
 
 ## Stack
 
@@ -29,18 +29,18 @@ npm run start   # serve the production build on port 4517
 
 ## Editing content
 
-Every fact, sentence and link lives in one file: `src/data/site.ts`. The hero headline and facts, the platform case study, the four projects, roles, education, skill categories, the Evaradh copy, the About paragraphs and the contact links are all plain data there; the section components only lay them out.
+Every fact, sentence and link lives in `src/data/site.ts`. The section components only lay that data out.
 
 ## Adding the portraits
 
-Two image slots ship with a warm sunlit-paper placeholder. To use real photographs, drop files at these paths (the paths are configurable in `portraits` inside `src/data/site.ts`):
+Two image slots ship with a warm sunlit-paper placeholder. Drop files at:
 
 | Slot | Path | Suggested crop |
 | --- | --- | --- |
-| Hero (right of the name on desktop) | `public/images/portrait.jpg` | Portrait, roughly 4:5 |
-| About section | `public/images/portrait-founder.jpg` | 3:4 or 4:5 |
+| Hero | `public/images/portrait.jpg` | Portrait, roughly 4:5 |
+| About | `public/images/portrait-founder.jpg` | 3:4 or 4:5 |
 
-The page checks whether each file exists when it renders, so no code change is needed. In `npm run dev` just add the file and reload; the production build is prerendered, so run `npm run build` again after adding a photo.
+The page checks whether each file exists when it renders. In `npm run dev` add the file and reload; after `npm run build`, rebuild to pick up a new photo.
 
 ## Structure
 
@@ -50,14 +50,14 @@ src/
   data/site.ts    all content
   components/     Nav, Cursor, SmoothScroll, Portrait, motion primitives
   components/sections/
-                  Hero, Work (+ ProductDemo, Motifs), Experience, Skills,
+                  Hero, Projects (+ ProductDemo, Motifs), Experience, Skills,
                   Evaradh, About, Contact
 ```
 
 ## Interaction
 
-- The first screen is the hero: name, role, a short bio and a fact strip. Nothing is hidden behind an opening overlay.
-- Interactive walkthrough of the three attendance features in the platform case study (QR refresh, campus radius, parent notification).
-- Skill categories open on hover/tap and lay their tools out on the right.
-- Custom cursor, magnetic nav and smooth scroll on desktop only; touch devices and `prefers-reduced-motion` get simpler, non-pinned versions.
+- First screen is the hero: name, role, fact strip. No opening overlay.
+- Projects follows the CV: school platform first (with the 15s QR / 100m / live-alert demo), then four technical projects.
+- Skill categories open on hover/tap.
+- Custom cursor, magnetic nav and smooth scroll on desktop; touch and `prefers-reduced-motion` get simpler motion.
 - Animations use transforms and opacity only.

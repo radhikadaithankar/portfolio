@@ -29,11 +29,10 @@ export function Reveal({ children, delay = 0, y = 28, className, once = true, am
 }
 
 const lineVariants: Variants = {
-  hidden: { y: "110%", rotate: 2 },
+  hidden: { y: "108%" },
   show: (i: number) => ({
     y: "0%",
-    rotate: 0,
-    transition: { duration: 1.1, ease: EASE, delay: i * 0.11 },
+    transition: { duration: 1, ease: EASE, delay: i * 0.1 },
   }),
 };
 

@@ -3,9 +3,10 @@ import path from "node:path";
 import { portraits } from "@/data/site";
 import { Cursor } from "@/components/Cursor";
 import { Nav } from "@/components/Nav";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Hero } from "@/components/sections/Hero";
-import { Work } from "@/components/sections/Work";
+import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
 import { Skills } from "@/components/sections/Skills";
 import { Evaradh } from "@/components/sections/Evaradh";
@@ -23,12 +24,13 @@ export default function Home() {
 
   return (
     <SmoothScroll>
+      <ScrollProgress />
       <Cursor />
       <div className="page-grain grain" aria-hidden />
       <Nav />
       <main className="relative z-10">
         <Hero hasPortrait={heroPortrait} />
-        <Work />
+        <Projects />
         <Experience />
         <Skills />
         <Evaradh />

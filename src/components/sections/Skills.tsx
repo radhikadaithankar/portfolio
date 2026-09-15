@@ -14,11 +14,11 @@ export function Skills() {
 
   return (
     <section id="skills" className="relative bg-cream">
-      <div className="px-5 pt-28 sm:px-8 md:px-12 md:pt-36">
+      <div className="pad pt-28 md:pt-40">
         <SectionMark number="03" title="Skills" />
-        <Lines as="h2" lines={["SKILLS."]} className="display mt-8 text-[16vw] text-ink sm:text-[12vw] md:text-[8vw]" />
+        <Lines as="h2" lines={["SKILLS."]} className="display mt-8 text-[16vw] text-ink sm:text-[12vw] md:text-[7.5vw]" />
 
-        <div className="mt-16 grid gap-10 pb-28 md:grid-cols-12 md:pb-36">
+        <div className="mt-14 grid gap-10 pb-28 md:mt-16 md:grid-cols-12 md:pb-40">
           <ul className="flex flex-col md:col-span-5" role="tablist" aria-label="Skill categories">
             {toolbox.map((cat, i) => {
               const on = i === open;
@@ -30,13 +30,17 @@ export function Skills() {
                     aria-controls={`drawer-${i}`}
                     onClick={() => setOpen(i)}
                     onMouseEnter={() => !touch && setOpen(i)}
-                    className="group flex w-full items-baseline justify-between gap-6 py-5 text-left"
+                    className="group flex w-full items-baseline justify-between gap-4 py-5 text-left"
                     data-cursor="Open"
                   >
-                    <span className={`display text-[10vw] transition-colors duration-500 sm:text-[6vw] md:text-[3.2vw] ${on ? "text-terracotta" : "text-ink/45 group-hover:text-ink"}`}>
+                    <span
+                      className={`display text-[9vw] leading-[0.95] transition-colors duration-500 sm:text-[5.5vw] md:text-[2.8vw] ${
+                        on ? "text-terracotta" : "text-ink/40 group-hover:text-ink"
+                      }`}
+                    >
                       {cat.name}
                     </span>
-                    <span className={`eyebrow ${on ? "text-ink" : "text-ink/40"}`}>{cat.items.length}</span>
+                    <span className={`eyebrow shrink-0 ${on ? "text-ink" : "text-ink/35"}`}>{String(cat.items.length).padStart(2, "0")}</span>
                   </button>
                   <AnimatePresence initial={false}>
                     {on && (
@@ -60,8 +64,8 @@ export function Skills() {
             })}
           </ul>
 
-          <div className="relative hidden min-h-[400px] md:col-span-6 md:col-start-7 md:block" id={`drawer-${open}`} role="tabpanel">
-            <div className="absolute inset-0 rounded-sm bg-sand/50" aria-hidden />
+          <div className="relative hidden min-h-[420px] md:col-span-6 md:col-start-7 md:block" id={`drawer-${open}`} role="tabpanel">
+            <div className="absolute inset-0 rounded-sm bg-sand/45" aria-hidden />
             <AnimatePresence mode="wait">
               <motion.ul
                 key={current.name}
@@ -93,7 +97,7 @@ function Tool({ label, index }: { label: string; index: number }) {
         hidden: { opacity: 0, y: 24, rotate: tilt * 3 },
         show: { opacity: 1, y: 0, rotate: tilt, transition: { duration: 0.7, ease: EASE, delay: index * 0.06 } },
       }}
-      whileHover={{ rotate: 0, y: -6, scale: 1.04 }}
+      whileHover={{ rotate: 0, y: -8, scale: 1.05 }}
       style={{ marginTop: (index % 3) * 8 }}
     >
       <span className="block border border-ink/15 bg-ivory px-6 py-4 font-serif text-2xl text-ink shadow-[0_12px_30px_-20px_rgba(58,42,36,0.6)]">

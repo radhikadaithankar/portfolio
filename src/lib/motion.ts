@@ -63,3 +63,26 @@ export function useMediaQuery(query: string) {
   }, [query]);
   return matches;
 }
+
+/** Which page section is currently in the middle of the viewport. */
+export function useActiveSection(ids: string[]) {
+  const [active, setActive] = useState(ids[0] ?? "");
+  const key = ids.join("|");
+  useEffect(() => {
+    const list = key.split("|").filter(Boolean);
+    const els = list.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+    if (!els.length) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const hit = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (hit?.target.id) setActive(hit.target.id);
+      },
+      { rootMargin: "-28% 0px -55% 0px", threshold: [0, 0.15, 0.4, 0.7] },
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, [key]);
+  return active;
+}

@@ -29,16 +29,17 @@ export function ProductDemo() {
           {platform.facts.map((f) => {
             const on = active === f.id;
             return (
-              <li key={f.id} className="border-t border-ink/10 last:border-b">
+              <li key={f.id} className={`border-t border-ink/10 last:border-b ${on ? "border-l-2 border-l-terracotta" : "border-l-2 border-l-transparent"}`}>
                 <button
-                  className="group flex w-full flex-col items-start gap-1 py-5 text-left sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+                  className="group flex w-full flex-col items-start gap-1 py-5 pl-4 text-left sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+
                   onMouseEnter={() => !touch && setActive(f.id as FactId)}
                   onClick={() => select(f.id as FactId)}
                   onFocus={() => setActive(f.id as FactId)}
                   aria-pressed={on}
                   data-cursor={on ? "Replay" : "Show"}
                 >
-                  <span className={`display text-[13vw] transition-colors duration-500 sm:text-[9vw] md:text-[5.2vw] ${on ? "text-terracotta" : "text-ink/40 group-hover:text-ink"}`}>
+                  <span className={`display text-[12vw] transition-colors duration-500 sm:text-[8vw] md:text-[4.6vw] ${on ? "text-terracotta" : "text-ink/35 group-hover:text-ink"}`}>
                     {f.big}
                   </span>
                   <span className={`eyebrow transition-colors duration-500 sm:shrink-0 ${on ? "text-ink" : "text-ink/40"}`}>{f.label}</span>
