@@ -70,7 +70,7 @@ export type Chapter = {
 export const experiments: Chapter[] = [
   {
     number: "01",
-    kicker: "CIS · 2025 —",
+    kicker: "School operations",
     title: "School Operations & Parent Engagement Platform",
     summary: "A centralised platform for the daily running of a school, with a separate experience for teachers, parents and operations staff.",
     detail:
@@ -89,7 +89,7 @@ export const experiments: Chapter[] = [
     title: "Deep Neural Networks for Image Classification",
     summary: "ResNet18 against VGG13, trained on MNIST in PyTorch.",
     detail:
-      "Both architectures on the same dataset, then compared on accuracy, loss curves and confusion matrices — to see what residual connections actually change in a deeper network.",
+      "Both architectures trained on the same MNIST dataset, so the comparison is between the networks rather than the data.",
     tools: ["PyTorch", "ResNet18", "VGG13", "MNIST"],
     motif: "layers",
   },
@@ -97,9 +97,9 @@ export const experiments: Chapter[] = [
     number: "03",
     kicker: "Unsupervised learning",
     title: "Unsupervised Learning with GANs",
-    summary: "A basic GAN, implemented from scratch.",
+    summary: "A basic GAN: a generator and a discriminator trained against each other.",
     detail:
-      "A generator that starts from random noise and a discriminator that learns to tell real samples from generated ones, trained against each other until the output becomes convincing. Written to understand generative and unsupervised learning, not to wrap a library example.",
+      "The generator starts from random noise. The discriminator learns to tell real samples from generated ones. Both improve because the other one is — a way to see how generative and unsupervised models train.",
     tools: ["GANs", "Deep learning"],
     motif: "noise",
   },
@@ -107,7 +107,7 @@ export const experiments: Chapter[] = [
     number: "04",
     kicker: "Robotics",
     title: "Panda Robot Manipulator",
-    summary: "A ROS package for a seven-axis Panda arm.",
+    summary: "A ROS package for a Panda arm.",
     detail:
       "Cartesian motion for the end-effector, plus a planning routine that lets the arm draw a geometric shape on its own.",
     tools: ["ROS", "Panda manipulator", "Motion planning"],
@@ -119,7 +119,7 @@ export const experiments: Chapter[] = [
     title: "Gesture-Controlled Wheelchair",
     summary: "An Arduino wheelchair driven by hand gestures.",
     detail:
-      "Sensor input is read on the Arduino, classified with a machine-learning model, and mapped to motor commands — so a small movement can become a direction for someone who cannot use a joystick.",
+      "Sensor input is read on the Arduino, classified with a machine-learning model, and mapped to motor commands.",
     tools: ["Arduino", "Machine learning", "Embedded systems"],
     motif: "hand",
   },
