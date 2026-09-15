@@ -96,6 +96,10 @@ body {
   }
 }
 
+.hero-plate {
+  background: color-mix(in oklab, var(--color-sand) 62%, var(--color-cream));
+}
+
 .hero-name {
   animation: hero-settle 1.6s var(--ease-editorial) both;
 }

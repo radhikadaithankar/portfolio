@@ -43,12 +43,14 @@ function Placeholder({ variant }: { variant: "hero" | "founder" }) {
         </defs>
         {variant === "hero" ? (
           <>
-            <path d="M120 820 V420 A180 180 0 0 1 480 420 V820 Z" fill={`url(#arch-${variant})`} />
-            <path d="M-40 0 L260 0 L120 820 L-40 820 Z" fill={`url(#light-${variant})`} />
-            <rect x="0" y="0" width="600" height="800" fill="none" />
-            <path d="M0 640 H600" stroke="#6e4d3c" strokeOpacity="0.18" />
-            <path d="M0 655 H600" stroke="#6e4d3c" strokeOpacity="0.1" />
-            <circle cx="470" cy="150" r="70" fill="#fff4e4" fillOpacity="0.55" />
+            <rect width="600" height="800" fill="#ead9c4" />
+            <path d="M0 0 H280 V800 H0 Z" fill={`url(#light-${variant})`} />
+            <rect x="88" y="64" width="214" height="348" fill="#f7efe4" fillOpacity="0.58" />
+            <path d="M195 64 V412" stroke="#6e4d3c" strokeOpacity="0.2" />
+            <path d="M88 238 H302" stroke="#6e4d3c" strokeOpacity="0.12" />
+            <path d="M0 628 L600 548 V800 H0 Z" fill="#c4a08a" fillOpacity="0.42" />
+            <path d="M248 820 V478 A138 138 0 0 1 524 478 V820 Z" fill={`url(#arch-${variant})`} />
+            <circle cx="486" cy="128" r="52" fill="#fff4e4" fillOpacity="0.72" />
           </>
         ) : (
           <>

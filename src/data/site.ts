@@ -9,6 +9,7 @@ export const identity = {
   firstName: "Radhika",
   lastName: "Daithankar",
   fullName: "Radhika Daithankar",
+  discipline: "AI engineer",
   headline: "AI engineer · Managing Director, CIS",
   location: "Pune, India",
   currentRole: "Managing Director, CIS",

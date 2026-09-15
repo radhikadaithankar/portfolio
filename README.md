@@ -56,7 +56,7 @@ src/
 
 ## Interaction
 
-- First screen is the hero: name, role, fact strip. No opening overlay.
+- First screen is an editorial spread: name and facts on the left, a mounted portrait still on the right. Role, place and discipline each appear once. No opening overlay.
 - Projects follows the CV: school platform first, then four technical projects. Each has a title, a short paragraph of resume facts, and tools.
 - Skill categories open on hover/tap.
 - Custom cursor, magnetic nav and smooth scroll on desktop; touch and `prefers-reduced-motion` get simpler motion.
