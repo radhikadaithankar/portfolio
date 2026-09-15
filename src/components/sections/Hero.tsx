@@ -33,7 +33,7 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
           <span>{identity.location}</span>
         </p>
 
-        <h1 className="display hero-name text-[16vw] text-ink sm:text-[13.5vw] md:text-[11.5vw] lg:text-[10.5vw]">
+        <h1 className="display hero-name text-[14vw] text-ink sm:text-[12vw] md:text-[10vw] lg:text-[9vw]">
           {nameLines.map((line, i) => (
             <span key={line} className={`block ${i === 1 ? "display-italic pl-[0.12em] text-terracotta" : ""}`}>
               {line}
