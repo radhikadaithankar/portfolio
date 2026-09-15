@@ -57,7 +57,7 @@ src/
 ## Interaction
 
 - First screen is the hero: name, role, fact strip. No opening overlay.
-- Projects follows the CV: school platform first, then four technical projects. Each is a title, one line and tools.
+- Projects follows the CV: school platform first, then four technical projects. Each has a title, a short paragraph of resume facts, and tools.
 - Skill categories open on hover/tap.
 - Custom cursor, magnetic nav and smooth scroll on desktop; touch and `prefers-reduced-motion` get simpler motion.
 - Animations use transforms and opacity only.

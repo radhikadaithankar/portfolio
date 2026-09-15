@@ -61,6 +61,8 @@ export type Chapter = {
   title: string;
   kicker: string;
   summary: string;
+  detail: string;
+  notes?: string[];
   tools: string[];
   motif: "grid" | "layers" | "noise" | "arm" | "hand";
 };
@@ -70,7 +72,14 @@ export const experiments: Chapter[] = [
     number: "01",
     kicker: "CIS · 2025 —",
     title: "School Operations & Parent Engagement Platform",
-    summary: "One system for attendance, fees, notices, homework and parent communication.",
+    summary: "A centralised platform for the daily running of a school, with a separate experience for teachers, parents and operations staff.",
+    detail:
+      "Attendance, fees, notices, homework, assessments, behaviour, leave, student records, timetables, calendars, parent–teacher appointments and school-wide communication live in one system. Each role sees only the parts of the school that are theirs.",
+    notes: [
+      "Attendance QR regenerates every 15 seconds.",
+      "Scans are only accepted inside 100 metres of campus.",
+      "Parents are notified the moment attendance is marked.",
+    ],
     tools: ["Attendance", "Fees", "Notices", "Homework"],
     motif: "grid",
   },
@@ -78,7 +87,9 @@ export const experiments: Chapter[] = [
     number: "02",
     kicker: "Deep learning",
     title: "Deep Neural Networks for Image Classification",
-    summary: "ResNet18 vs VGG13 on MNIST, in PyTorch.",
+    summary: "ResNet18 against VGG13, trained on MNIST in PyTorch.",
+    detail:
+      "Both architectures on the same dataset, then compared on accuracy, loss curves and confusion matrices — to see what residual connections actually change in a deeper network.",
     tools: ["PyTorch", "ResNet18", "VGG13", "MNIST"],
     motif: "layers",
   },
@@ -86,7 +97,9 @@ export const experiments: Chapter[] = [
     number: "03",
     kicker: "Unsupervised learning",
     title: "Unsupervised Learning with GANs",
-    summary: "A generator and discriminator trained from scratch.",
+    summary: "A basic GAN, implemented from scratch.",
+    detail:
+      "A generator that starts from random noise and a discriminator that learns to tell real samples from generated ones, trained against each other until the output becomes convincing. Written to understand generative and unsupervised learning, not to wrap a library example.",
     tools: ["GANs", "Deep learning"],
     motif: "noise",
   },
@@ -94,16 +107,20 @@ export const experiments: Chapter[] = [
     number: "04",
     kicker: "Robotics",
     title: "Panda Robot Manipulator",
-    summary: "ROS package: Cartesian motion and autonomous drawing.",
-    tools: ["ROS", "Motion planning"],
+    summary: "A ROS package for a seven-axis Panda arm.",
+    detail:
+      "Cartesian motion for the end-effector, plus a planning routine that lets the arm draw a geometric shape on its own.",
+    tools: ["ROS", "Panda manipulator", "Motion planning"],
     motif: "arm",
   },
   {
     number: "05",
     kicker: "Embedded ML",
     title: "Gesture-Controlled Wheelchair",
-    summary: "Arduino wheelchair driven by a gesture classifier.",
-    tools: ["Arduino", "Machine learning"],
+    summary: "An Arduino wheelchair driven by hand gestures.",
+    detail:
+      "Sensor input is read on the Arduino, classified with a machine-learning model, and mapped to motor commands — so a small movement can become a direction for someone who cannot use a joystick.",
+    tools: ["Arduino", "Machine learning", "Embedded systems"],
     motif: "hand",
   },
 ];

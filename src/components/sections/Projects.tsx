@@ -43,8 +43,19 @@ function ProjectRow({ chapter }: { chapter: (typeof experiments)[number] }) {
         >
           {chapter.title}
         </h3>
-        <p className="mt-4 max-w-lg font-serif text-lg text-brown md:text-xl">{chapter.summary}</p>
-        <ul className="mt-5 flex flex-wrap gap-2">
+        <p className="mt-4 max-w-lg font-serif text-lg leading-snug text-ink md:text-xl">{chapter.summary}</p>
+        <p className="mt-4 max-w-lg leading-relaxed text-brown">{chapter.detail}</p>
+        {chapter.notes && (
+          <ul className="mt-5 max-w-lg space-y-2">
+            {chapter.notes.map((n) => (
+              <li key={n} className="flex gap-3 text-sm leading-relaxed text-ink/80">
+                <span className="mt-[0.55em] h-1 w-1 shrink-0 rounded-full bg-terracotta" />
+                {n}
+              </li>
+            ))}
+          </ul>
+        )}
+        <ul className="mt-6 flex flex-wrap gap-2">
           {chapter.tools.map((t) => (
             <li
               key={t}
