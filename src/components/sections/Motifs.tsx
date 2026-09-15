@@ -8,6 +8,8 @@ import { EASE, useCalmMotion } from "@/lib/motion";
 /** Abstract, warm diagrams: one per experiment. Drawn, not photographed. */
 export function Motif({ kind }: { kind: Chapter["motif"] }) {
   switch (kind) {
+    case "grid":
+      return <Grid />;
     case "layers":
       return <Layers />;
     case "noise":
@@ -20,6 +22,51 @@ export function Motif({ kind }: { kind: Chapter["motif"] }) {
 }
 
 const view = { once: true, amount: 0.4 };
+
+/* Connected school workflows, as a small lattice. */
+function Grid() {
+  const nodes = [
+    { x: 70, y: 70, label: "ATTENDANCE" },
+    { x: 250, y: 70, label: "FEES" },
+    { x: 70, y: 170, label: "NOTICES" },
+    { x: 250, y: 170, label: "HOMEWORK" },
+  ];
+  const edges: [number, number][] = [
+    [0, 1],
+    [0, 2],
+    [1, 3],
+    [2, 3],
+    [0, 3],
+  ];
+  return (
+    <svg viewBox="0 0 400 300" className="h-full w-full" aria-hidden>
+      {edges.map(([a, b], i) => (
+        <motion.line
+          key={i}
+          x1={nodes[a].x + 40}
+          y1={nodes[a].y + 16}
+          x2={nodes[b].x + 40}
+          y2={nodes[b].y + 16}
+          stroke="#b2624a"
+          strokeOpacity="0.45"
+          strokeWidth="1.2"
+          initial={{ pathLength: 0, opacity: 0 }}
+          whileInView={{ pathLength: 1, opacity: 1 }}
+          viewport={view}
+          transition={{ delay: 0.15 + i * 0.08, duration: 0.8, ease: EASE }}
+        />
+      ))}
+      {nodes.map((n, i) => (
+        <motion.g key={n.label} initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={view} transition={{ delay: 0.2 + i * 0.08, duration: 0.7, ease: EASE }}>
+          <rect x={n.x} y={n.y} width="80" height="32" rx="2" fill="#f7f2ea" stroke="#6e4d3c" strokeOpacity="0.35" />
+          <text x={n.x + 40} y={n.y + 20} textAnchor="middle" fontSize="8" fill="#6e4d3c" fontFamily="var(--font-manrope)" letterSpacing="1.2">
+            {n.label}
+          </text>
+        </motion.g>
+      ))}
+    </svg>
+  );
+}
 
 /* Residual blocks vs a plain stack: depth with shortcuts. */
 function Layers() {

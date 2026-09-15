@@ -50,14 +50,14 @@ src/
   data/site.ts    all content
   components/     Nav, Cursor, SmoothScroll, Portrait, motion primitives
   components/sections/
-                  Hero, Projects (+ ProductDemo, Motifs), Experience, Skills,
+                  Hero, Projects, Experience, Skills,
                   Evaradh, About, Contact
 ```
 
 ## Interaction
 
 - First screen is the hero: name, role, fact strip. No opening overlay.
-- Projects follows the CV: school platform first (with the 15s QR / 100m / live-alert demo), then four technical projects.
+- Projects follows the CV: school platform first, then four technical projects. Each is a title, one line and tools.
 - Skill categories open on hover/tap.
 - Custom cursor, magnetic nav and smooth scroll on desktop; touch and `prefers-reduced-motion` get simpler motion.
 - Animations use transforms and opacity only.

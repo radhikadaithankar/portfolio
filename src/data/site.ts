@@ -62,52 +62,18 @@ export type Chapter = {
   kicker: string;
   summary: string;
   tools: string[];
-  motif: "layers" | "noise" | "arm" | "hand";
-};
-
-export const platform = {
-  number: "01",
-  kicker: "CIS · 2025 —",
-  title: "School Operations & Parent Engagement Platform",
-  oneLine: "One system for attendance, fees, notices, homework and parent communication.",
-  workflows: [
-    "Attendance",
-    "Homework",
-    "Assessments",
-    "Behaviour",
-    "Leave",
-    "Notices",
-    "Fees",
-    "Student records",
-    "Timetables",
-    "Calendars",
-    "Appointments",
-    "Communication",
-  ],
-  facts: [
-    {
-      id: "qr",
-      big: "15 SEC",
-      label: "Dynamic QR",
-      text: "Attendance QR regenerates every 15 seconds. A screenshot is useless.",
-    },
-    {
-      id: "radius",
-      big: "100 M",
-      label: "Campus radius",
-      text: "Scans only work inside 100 metres of campus.",
-    },
-    {
-      id: "notify",
-      big: "LIVE",
-      label: "Parent alerts",
-      text: "Parents are notified the moment attendance is marked.",
-    },
-  ],
-  stack: ["Product", "System design", "AI attendance"],
+  motif: "grid" | "layers" | "noise" | "arm" | "hand";
 };
 
 export const experiments: Chapter[] = [
+  {
+    number: "01",
+    kicker: "CIS · 2025 —",
+    title: "School Operations & Parent Engagement Platform",
+    summary: "One system for attendance, fees, notices, homework and parent communication.",
+    tools: ["Attendance", "Fees", "Notices", "Homework"],
+    motif: "grid",
+  },
   {
     number: "02",
     kicker: "Deep learning",
