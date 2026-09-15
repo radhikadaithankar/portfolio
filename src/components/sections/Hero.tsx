@@ -25,15 +25,15 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
 
   return (
     <section id="top" className="relative overflow-hidden" onMouseMove={onMove}>
-      <div className="grid grid-cols-1 md:min-h-[100svh] md:grid-cols-12 md:grid-rows-[auto_1fr]">
-        <motion.div className="pad pt-28 sm:pt-32 md:col-span-6 md:row-start-1 md:pb-6" style={{ y: typeY }}>
+      <div className="grid grid-cols-1 lg:min-h-[100svh] lg:grid-cols-12 lg:grid-rows-[auto_auto_1fr]">
+        <motion.div className="pad pt-28 sm:pt-32 lg:col-span-6 lg:row-start-1 lg:pb-2" style={{ y: typeY }}>
           <div className="flex items-baseline justify-between gap-6">
             <p className="eyebrow text-brown/70">{identity.discipline}</p>
-            <p className="eyebrow text-right text-brown/55 md:hidden">{identity.location}</p>
+            <p className="eyebrow text-right text-brown/55 lg:hidden">{identity.location}</p>
           </div>
           <span className="mt-4 block h-px w-10 bg-terracotta" aria-hidden />
 
-          <h1 className="hero-name mt-8 md:mt-12">
+          <h1 className="hero-name mt-8 lg:mt-12">
             <span className="display block text-[clamp(3.35rem,7vw,5.5rem)] text-ink">{identity.firstName}</span>
             <span className="display display-italic mt-[0.06em] block text-[clamp(2.85rem,6vw,4.65rem)] text-terracotta">
               {identity.lastName}
@@ -42,12 +42,12 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
         </motion.div>
 
         <figure
-          className="mt-8 md:col-span-6 md:row-span-2 md:row-start-1 md:mt-0 md:min-h-[100svh]"
+          className="mt-8 lg:col-span-6 lg:row-span-3 lg:row-start-1 lg:mt-0 lg:min-h-[100svh]"
           aria-label={`${identity.fullName}, portrait`}
         >
-          <div className="hero-plate flex h-full flex-col px-5 py-5 sm:px-8 md:px-8 md:pt-32 md:pb-8 lg:px-10">
-            <p className="eyebrow mb-5 hidden text-right text-brown/55 md:block">{identity.location}</p>
-            <div className="relative aspect-[4/5] w-full min-h-0 flex-1 overflow-hidden md:aspect-auto">
+          <div className="hero-plate flex h-full flex-col px-5 py-4 sm:px-8 sm:py-5 lg:px-8 lg:pt-32 lg:pb-8 xl:px-10">
+            <p className="eyebrow mb-5 hidden text-right text-brown/55 lg:block">{identity.location}</p>
+            <div className="relative h-[32vh] w-full overflow-hidden sm:h-[40vh] lg:h-auto lg:min-h-0 lg:flex-1">
               <motion.div
                 className="absolute inset-[-6%] h-[112%] w-[112%]"
                 style={{ x: dx, y: stillY }}
@@ -65,11 +65,8 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
           </div>
         </figure>
 
-        <motion.div
-          className="pad flex flex-col justify-end pt-10 md:col-span-6 md:row-start-2 md:pt-0 md:pb-8"
-          style={{ y: typeY }}
-        >
-          <dl className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-ink/10 pt-8">
+        <motion.div className="pad pt-6 lg:col-span-6 lg:row-start-2 lg:pt-8 lg:pb-8" style={{ y: typeY }}>
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-6 border-t border-ink/10 pt-7 md:gap-y-8 md:pt-8">
             {facts.map((f) => (
               <div key={f.label} className="group">
                 <dt className="eyebrow text-brown/65">{f.label}</dt>
@@ -81,7 +78,7 @@ export function Hero({ hasPortrait }: { hasPortrait: boolean }) {
             ))}
           </dl>
 
-          <div className="mt-10 flex items-center gap-4 pb-12 md:mt-12 md:pb-2">
+          <div className="mt-8 flex items-center gap-4 pb-10 lg:mt-12 lg:pb-2">
             <span className="eyebrow text-brown/55">Scroll</span>
             <motion.span
               className="block h-px w-16 origin-left bg-terracotta"
