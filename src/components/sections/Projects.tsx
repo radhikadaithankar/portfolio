@@ -1,81 +1,158 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { experiments } from "@/data/site";
-import { EASE } from "@/lib/motion";
-import { Lines, Reveal } from "../Reveal";
-import { SectionMark } from "../SectionMark";
-import { Motif } from "./Motifs";
+import Link from "next/link";
+import { useState } from "react";
+import { notebooks, projects } from "@/data/projects";
+import { contact } from "@/data/site";
+import { ProjectVisual } from "../ProjectVisual";
+import { LiveWebsites } from "../LiveWebsites";
 
-/** Section 01. Five projects in CV order, each the same kind of row. */
+const filters = ["All work", "Product", "AI & ML", "Robotics"] as const;
+
 export function Projects() {
+  const [filter, setFilter] = useState<(typeof filters)[number]>("All work");
+  const visible =
+    filter === "All work"
+      ? projects
+      : projects.filter((project) => project.category === filter);
   return (
-    <section id="projects" className="relative bg-cream">
-      <div className="pad pt-28 md:pt-40">
-        <SectionMark number="01" title="Projects" />
-        <Lines as="h2" lines={["PROJECTS."]} className="display mt-8 text-[16vw] text-ink sm:text-[12vw] md:text-[9vw]" />
-
-        <div className="mt-14 flex flex-col pb-28 md:mt-16 md:pb-40">
-          {experiments.map((c) => (
-            <ProjectRow key={c.number} chapter={c} />
+    <section id="projects" className="work-section shell">
+      <div className="section-topline">
+        <span className="eyebrow">01 / Selected work</span>
+        <span className="eyebrow muted">An idea is a good place to start.</span>
+      </div>
+      <div className="work-heading">
+        <h2>
+          A little thinking.
+          <br />
+          <em>A lot of making.</em>
+        </h2>
+        <p>
+          Products, models and machines.
+          <br />
+          Each project built independently by me.
+        </p>
+      </div>
+      <div className="work-toolbar">
+        <div
+          className="project-filters"
+          role="group"
+          aria-label="Filter projects"
+        >
+          {filters.map((item) => (
+            <button
+              key={item}
+              onClick={() => setFilter(item)}
+              aria-pressed={filter === item}
+              className={filter === item ? "filter active" : "filter"}
+            >
+              {item}
+              {item === "All work" && (
+                <span aria-hidden="true">
+                  {String(projects.length).padStart(2, "0")}
+                </span>
+              )}
+            </button>
           ))}
         </div>
+        <span className="project-count" role="status">
+          {visible.length} {visible.length === 1 ? "project" : "projects"}
+        </span>
       </div>
-    </section>
-  );
-}
-
-function ProjectRow({ chapter }: { chapter: (typeof experiments)[number] }) {
-  return (
-    <article
-      className="group grid gap-6 border-t border-ink/10 py-12 md:grid-cols-12 md:items-start md:gap-8 md:py-16"
-      aria-labelledby={`project-${chapter.number}`}
-    >
-      <Reveal className="md:col-span-2">
-        <p className="eyebrow text-terracotta">{chapter.number}</p>
-        <p className="eyebrow mt-2 text-brown/70">{chapter.kicker}</p>
-      </Reveal>
-
-      <Reveal className="md:col-span-6" delay={0.08}>
-        <h3
-          id={`project-${chapter.number}`}
-          className="display max-w-[16ch] text-[8.5vw] leading-[0.98] text-ink transition-colors duration-500 group-hover:text-terracotta sm:text-[5.5vw] md:text-[2.8vw]"
-        >
-          {chapter.title}
-        </h3>
-        <p className="mt-4 max-w-lg font-serif text-lg leading-snug text-ink md:text-xl">{chapter.summary}</p>
-        <p className="mt-4 max-w-lg leading-relaxed text-brown">{chapter.detail}</p>
-        {chapter.notes && (
-          <ul className="mt-5 max-w-lg space-y-2">
-            {chapter.notes.map((n) => (
-              <li key={n} className="flex gap-3 text-sm leading-relaxed text-ink/80">
-                <span className="mt-[0.55em] h-1 w-1 shrink-0 rounded-full bg-terracotta" />
-                {n}
-              </li>
-            ))}
-          </ul>
-        )}
-        <ul className="mt-6 flex flex-wrap gap-2">
-          {chapter.tools.map((t) => (
-            <li
-              key={t}
-              className="rounded-full border border-ink/15 px-3 py-1 text-xs tracking-wide text-brown transition-colors duration-500 group-hover:border-terracotta/40 group-hover:text-ink"
+      <div className="project-grid">
+        {visible.map((project) => (
+          <article
+            className={`project-card ${project.visual === "school" ? "featured-project" : ""}`}
+            key={project.slug}
+          >
+            <Link
+              className="project-visual-link"
+              href={`/work/${project.slug}`}
+              aria-label={`View project: ${project.shortTitle}`}
             >
-              {t}
-            </li>
+              <ProjectVisual kind={project.visual} />
+              <span className="project-open" aria-hidden="true">
+                ↗
+              </span>
+            </Link>
+            <div className="project-copy">
+              <p className="eyebrow">
+                <span>{project.number}</span> / {project.discipline}
+              </p>
+              <h3>
+                <Link href={`/work/${project.slug}`}>
+                  {project.visual === "school"
+                    ? project.title
+                    : project.shortTitle}
+                </Link>
+              </h3>
+              <p className="project-summary">{project.summary}</p>
+              <details className="project-scope">
+                <summary>
+                  What I built <span aria-hidden="true">+</span>
+                </summary>
+                <ul>
+                  {project.scope.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </details>
+              <ul className="project-tags">
+                {project.tools.map((tool) => (
+                  <li key={tool}>{tool}</li>
+                ))}
+              </ul>
+              <Link className="text-link" href={`/work/${project.slug}`}>
+                Explore the project <span aria-hidden="true">↗</span>
+              </Link>
+              {project.visual === "school" && <LiveWebsites />}
+            </div>
+          </article>
+        ))}
+      </div>
+      <section className="notebook-section" aria-labelledby="notebook-heading">
+        <div className="notebook-heading">
+          <div>
+            <p className="eyebrow">Code & experiments</p>
+            <h3 id="notebook-heading">
+              From my <em>notebooks.</em>
+            </h3>
+          </div>
+          <a
+            className="text-link"
+            href={contact.github}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Browse my GitHub <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <p className="notebook-intro">
+          Academic experiments in the methods behind the models. Open the
+          notebooks to explore the code.
+        </p>
+        <div className="notebook-grid">
+          {notebooks.map((notebook) => (
+            <article className="notebook-card" key={notebook.url}>
+              <h4>{notebook.title}</h4>
+              <p>{notebook.description}</p>
+              <ul className="project-tags">
+                {notebook.tools.map((tool) => (
+                  <li key={tool}>{tool}</li>
+                ))}
+              </ul>
+              <a
+                className="text-link"
+                href={notebook.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Explore the notebook <span aria-hidden="true">↗</span>
+              </a>
+            </article>
           ))}
-        </ul>
-      </Reveal>
-
-      <Reveal className="md:col-span-4" delay={0.16} amount={0.2}>
-        <motion.div
-          className="relative aspect-[4/3] overflow-hidden rounded-sm bg-sand/55 p-4 shadow-[0_30px_60px_-40px_rgba(58,42,36,0.35)]"
-          whileHover={{ y: -6, rotate: 0.6 }}
-          transition={{ duration: 0.7, ease: EASE }}
-        >
-          <Motif kind={chapter.motif} />
-        </motion.div>
-      </Reveal>
-    </article>
+        </div>
+      </section>
+    </section>
   );
 }

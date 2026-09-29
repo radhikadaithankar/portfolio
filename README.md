@@ -1,63 +1,90 @@
-# Radhika Daithankar — personal site
+# Radhika Daithankar's portfolio
 
-A personal portfolio for Radhika Daithankar: AI engineer, Managing Director at CIS in Pune, and founder of the early-stage company Evaradh. One scrolling page: Projects, Experience, Skills, Evaradh, About, Contact. Copy is short and factual; all facts come from the resume.
+A portfolio organised around project stories and a visual work gallery. Chintamani International School is the featured project, supported by an editorial gallery of machine learning and robotics work.
 
-## Stack
-
-- [Next.js](https://nextjs.org) (App Router) + TypeScript
-- Tailwind CSS v4
-- [framer-motion](https://www.framer.com/motion/) for scroll-driven and in-view animation
-- [lenis](https://github.com/darkroomengineering/lenis) for smooth wheel scrolling (disabled on touch and for `prefers-reduced-motion`)
-- `next/font` with Fraunces (editorial serif) and Manrope (sans)
-
-## Run it locally
+## Run locally
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-The dev server binds to **http://localhost:4517**.
-
-Other scripts:
+Open http://localhost:4517.
 
 ```bash
-npm run lint    # eslint
-npm run build   # production build
-npm run start   # serve the production build on port 4517
+npm run lint
+npm run build
+npm run start
 ```
 
-## Editing content
+## Content and structure
 
-Every fact, sentence and link lives in `src/data/site.ts`. The section components only lay that data out.
+The first cream-and-terracotta design has been restored, with the later verified project facts and CIS app previews retained.
 
-## Adding the portraits
+- `src/data/site.ts`: identity, contact, experience and education.
+- `src/data/projects.ts`: project facts and individual page content.
+- `src/components/sections/`: homepage hero, filterable work gallery, visible work experience, about and contact.
+- `src/data/journey.ts`: six chapters adapted from Radhika's personal story. Unreleased ideas remain labelled as explorations.
+- `src/components/JourneyMap.tsx`: interactive story map with chapter selection, keyboard navigation, reduced-motion support and a native disclosure containing the complete story. The route is schematic, not geographic.
+- `src/components/PortfolioMotion.tsx`: brief hero and scroll entrances, pointer movement on the collage, project-filter entrances and reading progress. Motion respects the system preference, cleans up on navigation and never hides the page's content.
+- `src/components/CISAppScreens.tsx`: public teacher and parent app previews.
+- `src/components/ProjectVisual.tsx`: project visuals and technical concept diagrams.
+- `src/app/work/[slug]/page.tsx`: statically generated project pages.
+- `src/app/globals.css`: restored layout, responsive styles and interaction states.
+- `src/app/opengraph-image.tsx`: social sharing image.
 
-Two image slots ship with a warm sunlit-paper placeholder. Drop files at:
+The project gallery uses client state for category filters. Navigation, scrolling and the background disclosure use native browser behavior. Later design explorations remain in `src/components/studio/` and `src/design-archive/`, outside public routes. Files under `docs/` record design evaluations and the [site audit](docs/gap-audit.md).
 
-| Slot | Path | Suggested crop |
-| --- | --- | --- |
-| Hero | `public/images/portrait.jpg` | Portrait, roughly 4:5 |
-| About | `public/images/portrait-founder.jpg` | 3:4 or 4:5 |
+## Project evidence
 
-The page checks whether each file exists when it renders. In `npm run dev` add the file and reload; after `npm run build`, rebuild to pick up a new photo.
+Radhika confirmed building both the public Chintamani website and the school management app. Evaradh's public website identifies this app as CIS Compass, its first product, in use at Chintamani. The portfolio includes the company's founder story and direct links to https://evaradh.com/. The featured images capture the teacher and parent app previews published at https://evaradh.com/#work on 28 September 2026. They contain illustrative data, not private student records. The public digital-school page supplies the workflow categories. The app preview images use `next/image`.
 
-## Structure
+The app previews use illustrative data. Technical diagrams are not model outputs. Outcome metrics, private app access and technical-project repositories have not been assumed.
 
+## Production metadata
+
+The production domain is `https://radhikakd.com`, with DNS managed through Cloudflare. Metadata and canonical links default to this origin. Set `NEXT_PUBLIC_SITE_URL` only to override it. Local development still runs at `http://localhost:4517`; setting the metadata domain does not deploy the site or configure DNS.
+
+The custom domain is active. A Cloudflare Bulk Redirect rule forwards the project's Pages address and all deployment subdomains to `https://radhikakd.com`, preserving paths and query strings. Visitors use the custom domain even when they follow an older deployment link.
+
+## Search discovery
+
+The homepage and five project pages include canonical URLs, social metadata and structured data. `src/lib/seo.ts` defines the shared identity and project schema. `/robots.txt` and `/sitemap.xml` are generated during the static build. Design experiments are excluded from indexing.
+
+See [the search launch checklist](docs/search-discovery.md) for domain activation, Search Console and Bing verification, and the profile links needed on Evaradh, CIS and LinkedIn. Search rankings and AI citations are not guaranteed.
+
+## Stack
+
+Next.js App Router, React, TypeScript, Tailwind CSS, Fraunces and Manrope via `next/font`. No animation or scroll-control dependencies.
+
+## Cloudflare Pages
+
+The portfolio is deployed as a static export. Build with `npm run build:pages`, which writes the upload to `out/`. The normal `npm run dev` workflow remains available on port 4517.
+
+Deploy from this checkout using your existing Cloudflare login:
+
+```bash
+npm run build:pages
+npm run check:export
+npx wrangler@4.143.0 pages deploy out --project-name radhikakd --branch main --commit-dirty=true
 ```
-src/
-  app/            layout (fonts, metadata), page (section order), global styles
-  data/site.ts    all content
-  components/     Nav, Cursor, SmoothScroll, Portrait, motion primitives
-  components/sections/
-                  Hero, Projects, Experience, Skills,
-                  Evaradh, About, Contact
+
+This is a direct-upload Pages project. GitHub pushes do not automatically publish it. Run the build and deploy commands after future changes. `public/_headers` sets the generated social image's content type for static hosting.
+
+Both build commands explicitly use Webpack. `check:export` checks the generated portfolio and CV for missing local links, anchors and assets, invalid structured data, missing canonical metadata, sitemap destinations and the PDF download. Run it after building and before uploading either site.
+
+The `www` hostname redirects to the root domain with status 301, preserving paths and query strings. Its proxied DNS record exists only to run the Cloudflare redirect.
+
+## CV subdomain
+
+`https://cv.radhikakd.com/` serves a responsive web CV through a separate static Pages project, `radhikakd-cv`. The portfolio's CV navigation link opens it in a new browser tab. Experience, education, projects and skills are semantic HTML in `cv-site/index.html`. Styles and print rules live in `cv-site/styles.css`; `site.js` adds section highlighting and the print button. Self-hosted fonts match the portfolio. The original PDF remains available as a download.
+
+To update the web CV, edit its HTML content. Print CV prints this current web content; Original PDF downloads the supplied document, which is maintained separately. To update that document, replace `cv-site/Radhika-Daithankar-CV.pdf`, keeping its filename. Publish the CV separately:
+
+```bash
+npx wrangler@4.143.0 pages deploy cv-site --project-name radhikakd-cv --branch main --commit-dirty=true
 ```
 
-## Interaction
+The proxied `cv` CNAME points to `radhikakd-cv.pages.dev`. The existing `radhikakd_canonical` Bulk Redirect list also forwards this Pages address and its deployment subdomains to `https://cv.radhikakd.com/`, preserving paths and query strings. The portfolio and CV deployments are independent.
 
-- First screen is an editorial spread: name and facts on the left, a mounted portrait still on the right. Role, place and discipline each appear once. No opening overlay.
-- Projects follows the CV: school platform first, then four technical projects. Each has a title, a short paragraph of resume facts, and tools.
-- Skill categories open on hover/tap.
-- Custom cursor, magnetic nav and smooth scroll on desktop; touch and `prefers-reduced-motion` get simpler motion.
-- Animations use transforms and opacity only.
+The CV stylesheet and script use versioned URLs. Bump their `v` query value when changing these assets so returning visitors receive the new version. Their cache headers also require revalidation.

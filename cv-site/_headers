@@ -1,0 +1,13 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/styles.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/site.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/Radhika-Daithankar-CV.pdf
+  Content-Type: application/pdf
+  Content-Disposition: inline; filename="Radhika-Daithankar-CV.pdf"

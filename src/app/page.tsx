@@ -1,42 +1,34 @@
-import fs from "node:fs";
-import path from "node:path";
-import { portraits } from "@/data/site";
-import { Cursor } from "@/components/Cursor";
+import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
-import { ScrollProgress } from "@/components/ScrollProgress";
-import { SmoothScroll } from "@/components/SmoothScroll";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
-import { Skills } from "@/components/sections/Skills";
-import { Evaradh } from "@/components/sections/Evaradh";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
+import { StructuredData } from "@/components/StructuredData";
+import { profileStructuredData } from "@/lib/seo";
+import { PortfolioMotion } from "@/components/PortfolioMotion";
 
-/** Checked on the server so a missing photo never produces a 404 in the browser. */
-function hasPublicFile(publicPath: string) {
-  return fs.existsSync(path.join(process.cwd(), "public", publicPath));
-}
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
-  const heroPortrait = hasPublicFile(portraits.hero);
-  const aboutPortrait = hasPublicFile(portraits.founder);
-
   return (
-    <SmoothScroll>
-      <ScrollProgress />
-      <Cursor />
-      <div className="page-grain grain" aria-hidden />
+    <>
+      <StructuredData data={profileStructuredData()} />
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <Nav />
-      <main className="relative z-10">
-        <Hero hasPortrait={heroPortrait} />
+      <PortfolioMotion />
+      <main id="main" tabIndex={-1}>
+        <Hero />
         <Projects />
         <Experience />
-        <Skills />
-        <Evaradh />
-        <About hasPortrait={aboutPortrait} />
+        <About />
         <Contact />
       </main>
-    </SmoothScroll>
+    </>
   );
 }

@@ -1,44 +1,106 @@
-"use client";
+import { company, contact, education, school } from "@/data/site";
+import { JourneyMap } from "@/components/JourneyMap";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { about, identity, portraits } from "@/data/site";
-import { useCalmMotion } from "@/lib/motion";
-import { Lines } from "../Reveal";
-import { Portrait } from "../Portrait";
-import { SectionMark } from "../SectionMark";
-
-export function About({ hasPortrait }: { hasPortrait: boolean }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { calm } = useCalmMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const imgY = useTransform(scrollYProgress, [0, 1], [calm ? 0 : -48, calm ? 0 : 48]);
-
+export function About() {
   return (
-    <section id="about" ref={ref} className="relative overflow-hidden bg-cream">
-      <div className="pad pt-28 md:pt-40">
-        <SectionMark number="05" title="About" />
+    <section
+      id="about"
+      className="story-section shell"
+      aria-labelledby="story-title"
+    >
+      <div className="story-intro">
+        <div>
+          <p className="eyebrow">03 / The person behind the work</p>
+          <h2 id="story-title">
+            Everything
+            <br />
+            <em>can evolve.</em>
+          </h2>
+        </div>
+        <div className="story-intro-copy">
+          <p>
+            I&apos;m Radhika Daithankar, an AI engineer, founder of Evaradh and
+            Managing Director at CIS. The route here had a few unexpected turns.
+          </p>
+          <p>
+            A computer science classroom. A move to London. Bakery and
+            restaurant shifts. A school back home. Each gave me a different
+            reason to build.
+          </p>
+          <a href="#journey-start" className="story-start-link">
+            Follow the thread <span aria-hidden="true">↘</span>
+          </a>
+        </div>
       </div>
-      <div className="mt-10 grid gap-10 md:grid-cols-12 md:gap-8">
-        <motion.div className="relative md:col-span-5" style={{ y: imgY }}>
-          <div className="relative ml-[-5vw] aspect-[4/5] w-[88vw] sm:w-[64vw] md:ml-0 md:aspect-[3/4] md:w-full">
-            <Portrait src={portraits.founder} available={hasPortrait} alt={`${identity.fullName}, portrait`} className="h-full w-full" variant="founder" />
-          </div>
-        </motion.div>
-
-        <div className="pad pb-28 md:col-span-6 md:col-start-7 md:px-0 md:pr-16 md:pb-40 xl:pr-20">
-          <Lines as="h2" lines={["ABOUT."]} className="display text-[15vw] text-ink sm:text-[11vw] md:text-[6.5vw]" />
-          <p className="mt-8 max-w-md font-serif text-xl leading-relaxed text-ink/90">{about.line}</p>
-          <ul className="mt-10 flex flex-wrap gap-2.5">
-            {about.interests.map((m) => (
-              <li
-                key={m}
-                className="rounded-full border border-ink/15 bg-ivory px-4 py-2 font-serif text-base text-ink transition-colors duration-500 hover:border-terracotta/50 hover:text-terracotta"
-              >
-                {m}
-              </li>
-            ))}
-          </ul>
+      <div id="journey-start" className="story-map-anchor">
+        <JourneyMap />
+      </div>
+      <div className="story-afterword">
+        <div className="story-personal">
+          <p className="eyebrow">Away from the keyboard</p>
+          <h3>
+            There&apos;s more than
+            <br />
+            one version of me.
+          </h3>
+          <p>
+            I love dancing. I also like cooking, trying new recipes, travelling
+            and design. A day can take me from a machine learning problem to a
+            school poster, then into the kitchen to try something new.
+          </p>
+          <p className="story-location">
+            <span className="status-dot" /> Based in Pune. Building at CIS &
+            Evaradh.
+          </p>
+        </div>
+        <div>
+          <nav
+            className="profile-links"
+            aria-label="Related websites and profiles"
+          >
+            <a href={company.url} target="_blank" rel="noopener noreferrer">
+              <span>
+                Evaradh<small>Company I founded</small>
+              </span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a href={school.url} target="_blank" rel="noopener noreferrer">
+              <span>
+                Chintamani International School
+                <small>Managing Director · Parbhani</small>
+              </span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a
+              href={contact.linkedin}
+              target="_blank"
+              rel="me noopener noreferrer"
+            >
+              <span>
+                LinkedIn<small>My professional profile</small>
+              </span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </nav>
+          <details className="background-details">
+            <summary>
+              Education
+              <span className="details-plus" aria-hidden="true">
+                +
+              </span>
+            </summary>
+            <div className="background-content">
+              {education.map((item) => (
+                <div className="background-row" key={item.degree}>
+                  <div>
+                    <strong>{item.degree}</strong>
+                    <span>{item.school}</span>
+                  </div>
+                  <span>{item.period}</span>
+                </div>
+              ))}
+            </div>
+          </details>
         </div>
       </div>
     </section>

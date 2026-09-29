@@ -1,9 +1,4 @@
-/**
- * Single source of truth for everything factual on the site.
- * Edit here; the sections read from this file.
- *
- * Facts come from Radhika's resume; contact links were supplied separately.
- */
+/** Identity and career facts checked against the supplied CV. Project content lives in projects.ts. */
 
 export const identity = {
   firstName: "Radhika",
@@ -15,32 +10,11 @@ export const identity = {
   currentRole: "Managing Director, CIS",
 };
 
-export const facts = [
-  { label: "Now", value: "MD, CIS", note: "Nov 2025 —" },
-  { label: "Education", value: "MSc AI", note: "Queen Mary, 2023" },
-  { label: "Focus", value: "AI & product" },
-  { label: "Building", value: "Evaradh" },
-];
-
-export const portraits = {
-  hero: "/images/portrait.jpg",
-  founder: "/images/portrait-founder.jpg",
-};
-
 export const contact = {
   email: "radhikadaithankar@gmail.com",
   linkedin: "https://www.linkedin.com/in/radhika-daithankar-5411161b3",
   github: "https://github.com/radhikadaithankar",
 };
-
-export const nav = [
-  { label: "PROJECTS", href: "#projects" },
-  { label: "EXPERIENCE", href: "#experience" },
-  { label: "SKILLS", href: "#skills" },
-  { label: "EVARADH", href: "#evaradh" },
-  { label: "ABOUT", href: "#about" },
-  { label: "CONTACT", href: "#contact" },
-];
 
 export const education = [
   {
@@ -57,142 +31,86 @@ export const education = [
   },
 ];
 
-export type Chapter = {
-  number: string;
-  title: string;
-  kicker: string;
-  summary: string;
-  detail: string;
-  notes?: string[];
-  tools: string[];
-  motif: "grid" | "layers" | "noise" | "arm" | "hand";
-};
-
-export const experiments: Chapter[] = [
-  {
-    number: "01",
-    kicker: "School operations",
-    title: "School Operations & Parent Engagement Platform",
-    summary: "A centralised platform for the daily running of a school, with a separate experience for teachers, parents and operations staff.",
-    detail:
-      "Attendance, fees, notices, homework, assessments, behaviour, leave, student records, timetables, calendars, parent–teacher appointments and school-wide communication live in one system. Each role sees only the parts of the school that are theirs.",
-    notes: [
-      "Attendance QR regenerates every 15 seconds.",
-      "Scans are only accepted inside 100 metres of campus.",
-      "Parents are notified the moment attendance is marked.",
-    ],
-    tools: ["Attendance", "Fees", "Notices", "Homework"],
-    motif: "grid",
-  },
-  {
-    number: "02",
-    kicker: "Deep learning",
-    title: "Deep Neural Networks for Image Classification",
-    summary: "ResNet18 against VGG13, trained on MNIST in PyTorch.",
-    detail:
-      "Both architectures trained on the same MNIST dataset, so the comparison is between the networks rather than the data.",
-    tools: ["PyTorch", "ResNet18", "VGG13", "MNIST"],
-    motif: "layers",
-  },
-  {
-    number: "03",
-    kicker: "Unsupervised learning",
-    title: "Unsupervised Learning with GANs",
-    summary: "A basic GAN: a generator and a discriminator trained against each other.",
-    detail:
-      "The generator starts from random noise. The discriminator learns to tell real samples from generated ones. Both improve because the other one is — a way to see how generative and unsupervised models train.",
-    tools: ["GANs", "Deep learning"],
-    motif: "noise",
-  },
-  {
-    number: "04",
-    kicker: "Robotics",
-    title: "Panda Robot Manipulator",
-    summary: "A ROS package for a Panda arm.",
-    detail:
-      "Cartesian motion for the end-effector, plus a planning routine that lets the arm draw a geometric shape on its own.",
-    tools: ["ROS", "Panda manipulator", "Motion planning"],
-    motif: "arm",
-  },
-  {
-    number: "05",
-    kicker: "Embedded ML",
-    title: "Gesture-Controlled Wheelchair",
-    summary: "An Arduino wheelchair driven by hand gestures.",
-    detail:
-      "Sensor input is read on the Arduino, classified with a machine-learning model, and mapped to motor commands.",
-    tools: ["Arduino", "Machine learning", "Embedded systems"],
-    motif: "hand",
-  },
-];
-
 export const roles = [
   {
     title: "Managing Director",
     company: "CIS",
-    period: "Nov 2025 —",
+    location: "Parbhani, India",
+    period: "Nov 2025 – Present",
+    current: true,
+    contribution:
+      "Leading the school's technology initiatives and turning day-to-day operational needs into working products.",
+    highlights: [
+      "Independently built the public school website and CIS Compass, the management app developed under Evaradh.",
+      "Created workflows for staff, teachers and parents, including attendance, student records, notifications and appointment booking.",
+      "Identify operational problems and drive the implementation of digital solutions across the school.",
+    ],
     tags: ["Leadership", "Product"],
   },
   {
     title: "Data Science Intern",
     company: "The Developers Arena",
     period: "Mar — Sept 2025",
+    contribution:
+      "Worked through the machine learning lifecycle, from preparing datasets to deploying a model.",
+    highlights: [
+      "Cleaned and transformed data with Python, NumPy and Pandas, then used exploratory analysis and statistical tests to investigate patterns.",
+      "Built and evaluated regression, Random Forest and convolutional neural network models, completing an end-to-end ML project through deployment.",
+    ],
     tags: ["Python", "Deep learning"],
   },
   {
+    id: "experience-yori",
     title: "Data Analyst",
-    company: "JSYSC Holdings Ltd.",
+    company: "JSYSC Holdings Ltd. · YORI",
+    location: "London, UK",
     period: "Apr 2024 — Jun 2025",
+    contribution:
+      "Built a data-analysis project to make my own work at YORI easier, using sales, point-of-sale and inventory data.",
+    highlights: [
+      "Analysed purchasing and inventory patterns with Python, SQL and Excel, and applied demand forecasting to support stock and staffing decisions.",
+      "Automated data cleaning and reporting to reduce repetitive manual work and make business insights easier to use.",
+      "Started at YORI as a waitress, then progressed to team leader and supervisor.",
+    ],
     tags: ["SQL", "Forecasting"],
   },
   {
     title: "Data Science Intern",
     company: "Unified Mentor Pvt. Ltd.",
     period: "Feb — Aug 2024",
+    contribution:
+      "Prepared real-world datasets for analysis and communicated findings through models and visualisations.",
+    highlights: [
+      "Handled missing and inconsistent data, performed exploratory analysis and tuned machine learning models through hyperparameter adjustments.",
+      "Created Tableau and Matplotlib visualisations to explain results and share findings with the team.",
+    ],
     tags: ["Pandas", "Tableau"],
   },
   {
     title: "Web Developer",
     company: "Voran Services Pvt. Ltd.",
     period: "Feb 2021 — Feb 2022",
+    contribution:
+      "Built interfaces for the web and contributed to mobile application development.",
+    highlights: [
+      "Developed responsive websites using Bootstrap and modern frontend technologies, adapting layouts for different screen sizes.",
+      "Worked on cross-platform mobile applications using Flutter.",
+    ],
     tags: ["Flutter", "Bootstrap"],
   },
 ];
 
-export const toolbox = [
-  {
-    name: "LANGUAGES",
-    items: ["Python", "SQL", "HTML", "CSS", "Flutter", "Bootstrap"],
-  },
-  {
-    name: "MACHINE LEARNING",
-    items: ["Machine Learning", "Deep Learning", "Computer Vision", "PyTorch", "Scikit-Learn"],
-  },
-  {
-    name: "DATA",
-    items: ["NumPy", "Pandas", "SciPy", "Tableau", "Excel", "Matplotlib", "Seaborn"],
-  },
-  {
-    name: "PRODUCT",
-    items: ["Product thinking", "AI products", "Problem solving"],
-  },
-  {
-    name: "SYSTEMS",
-    items: ["ROS", "Automation", "Linux · Windows · macOS"],
-  },
-];
-
-export const evaradh = {
-  name: "EVARADH",
-  line: "A technology company in progress. Pre-product. Building software for real-world problems.",
-  status: [
-    { label: "Founder", value: "Radhika Daithankar" },
-    { label: "Stage", value: "Pre-product" },
-    { label: "Focus", value: "Multiple products" },
-  ],
+/** Company positioning and product status checked against evaradh.com on 28 September 2026. */
+export const company = {
+  name: "Evaradh",
+  url: "https://evaradh.com/",
+  description: "A technology product company",
+  firstProduct: "CIS Compass",
 };
 
-export const about = {
-  line: "Computer science in Aurangabad, MSc AI at Queen Mary, then data and product work. Since Nov 2025 I lead technology at CIS in Pune.",
-  interests: ["AI products", "EdTech", "Automation", "Robotics"],
+export const school = {
+  name: "Chintamani International School",
+  shortName: "CIS",
+  url: "https://chintamani-school.org/",
+  location: "Parbhani, India",
 };

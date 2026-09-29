@@ -1,0 +1,11 @@
+/opengraph-image
+  Content-Type: image/png
+
+/designs
+  X-Robots-Tag: noindex, nofollow
+
+/designs.html
+  X-Robots-Tag: noindex, nofollow
+
+/404.html
+  X-Robots-Tag: noindex
