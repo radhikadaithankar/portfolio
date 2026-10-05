@@ -42,7 +42,20 @@ export const education = [
   },
 ];
 
-export const roles = [
+export type Role = {
+  id?: string;
+  title: string;
+  company: string;
+  location?: string;
+  period: string;
+  current?: boolean;
+  contribution: string;
+  highlights: string[];
+  tags: string[];
+  impact?: string;
+};
+
+export const roles: Role[] = [
   {
     title: "Managing Director",
     company: "CIS",
@@ -72,6 +85,9 @@ export const roles = [
   },
   {
     id: "experience-yori",
+    // TODO(yori-impact): Add measured reporting hours saved or forecast accuracy,
+    // with the baseline, time period and method. Leave empty until verified.
+    impact: undefined,
     title: "Data Analyst",
     company: "JSYSC Holdings Ltd. · YORI",
     location: "London, UK",

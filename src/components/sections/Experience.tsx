@@ -55,6 +55,9 @@ export function Experience() {
                   <li key={highlight}>{highlight}</li>
                 ))}
               </ul>
+              {role.impact?.trim() && (
+                <p className="experience-impact">{role.impact}</p>
+              )}
               {role.current && (
                 <Link
                   className="experience-project"
