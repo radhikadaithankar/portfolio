@@ -13,6 +13,7 @@ Open http://localhost:4517.
 
 ```bash
 npm run lint
+npm run typecheck
 npm run build
 npm run start
 ```
@@ -34,6 +35,18 @@ The first cream-and-terracotta design has been restored, with the later verified
 - `src/app/opengraph-image.tsx`: social sharing image.
 
 The project gallery uses client state for category filters. Navigation, scrolling and the background disclosure use native browser behavior. Later design explorations remain in `src/components/studio/` and `src/design-archive/`, outside public routes. Files under `docs/` record design evaluations and the [site audit](docs/gap-audit.md).
+
+## Updating project evidence
+
+The shared hero and social positioning lives in `src/data/site.ts`. Contact offers separate routes for hiring teams and Evaradh clients. The story carousel and expanded story both continue to read `src/data/journey.ts`.
+
+In `src/data/projects.ts`, `collection` separates featured work from academic experiments. Category filters apply to both collections; the academic notebooks appear under All work and AI & ML. Public project slugs stay unchanged.
+
+Projects accept optional `year`, `context`, `resultLine` and `media` fields. Roles in `src/data/site.ts` accept an optional `impact` line. Leave unknown values undefined; the UI omits them. Use verified outcomes and include a baseline, period and source when publishing a measured result.
+
+The CIS project's `caseStudy` holds its one-liner, problem, AI explanations, results, privacy information and future plans. Existing build details and screenshots are retained. Comments marked `TODO(...)` identify content awaiting confirmation. Empty strings and undefined optional fields do not create visible sections. Keep drafting notes in comments; the export check rejects visible TODO text.
+
+For a walkthrough, put the clip and a still poster in `public/` and set `media` with `type` of `video` or `gif`, `src`, `poster`, descriptive `alt` text and an optional `caption`. `ProjectMedia.tsx` renders it in the project card and case study. Video sources load on entering the viewport and use muted looping playback, inline playback and native controls. Reduced motion prevents automatic playback; GIFs show their poster and provide explicit play/pause controls.
 
 ## Project evidence
 

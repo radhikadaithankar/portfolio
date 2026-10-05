@@ -8,6 +8,7 @@
     "build:pages": "STATIC_EXPORT=1 next build --webpack",
     "start": "next start -p 4517",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
     "check:export": "node scripts/check-export.mjs"
   },
   "dependencies": {

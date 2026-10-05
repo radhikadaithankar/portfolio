@@ -1,0 +1,195 @@
+{
+  "date": "2026-10-05",
+  "environment": "Local production static export, served with gzip; Lighthouse 13.5.0, default mobile simulation. These are lab results, not field measurements of the live site.",
+  "checks": {
+    "lint": "passed",
+    "typecheck": "passed",
+    "staticBuild": "passed",
+    "exportValidation": "10 HTML pages passed links, anchors, assets, canonical metadata, structured data, sitemaps and CV download checks",
+    "visibleTodoText": "none; export validation now rejects visible TODO text",
+    "axe": {
+      "home": {
+        "violations": 0,
+        "passes": 43
+      },
+      "cis": {
+        "violations": 0,
+        "passes": 40
+      }
+    },
+    "browser": [
+      "Featured group contains CIS Compass, Panda and wheelchair. Academic group contains classification, GANs and both notebooks.",
+      "All, Product, AI & ML and Robotics return the expected project/notebook counts.",
+      "Project accordions open with Enter and close with Space.",
+      "Story map changes chapters and focus with arrow keys, Home and End. Expanded story opens with Enter.",
+      "Reduced motion disables running portfolio animations and the progress indicator.",
+      "Native video source remains absent offscreen, loads on intersection, and does not autoplay with reduced motion.",
+      "Video autoplays muted when motion is allowed, pauses with the keyboard and keeps a manual pause after scrolling away and back.",
+      "GIFs display the still poster with reduced motion and offer working manual play/pause controls.",
+      "Missing media and whitespace-only optional sections render nothing. Filled case-study slots render the intended headings.",
+      "Temporary media fixture removed before production build; export check prevents publishing it.",
+      "320px mobile home and CIS page have no horizontal overflow. Desktop screenshots reviewed.",
+      "Hero artwork link opens CIS by keyboard. Panda artwork link opens the existing project URL by pointer.",
+      "No browser errors observed on tested production pages."
+    ],
+    "contentPreservation": [
+      "Story data, both story views, story stylesheet and About component unchanged from dc4e58e.",
+      "All experience highlight bullets unchanged from dc4e58e.",
+      "Homepage description, Open Graph and Twitter descriptions match the shared positioning.",
+      "No new measured outcomes, testimonials, user counts or application dependencies."
+    ]
+  },
+  "pages": {
+    "home": {
+      "path": "/",
+      "scores": {
+        "performance": 91,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": "1.1 s",
+        "largest-contentful-paint": "3.5 s",
+        "total-blocking-time": "30 ms",
+        "cumulative-layout-shift": "0"
+      },
+      "remainingAuditWarnings": [
+        {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "detail": "3.5 s"
+        },
+        {
+          "id": "max-potential-fid",
+          "title": "Max Potential First Input Delay",
+          "detail": "100 ms"
+        },
+        {
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "detail": "3.5 s"
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "title": "Elements with visible text labels do not have matching accessible names."
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "detail": "Est savings of 52 KiB"
+        },
+        {
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "detail": "Est savings of 65 KiB"
+        },
+        {
+          "id": "legacy-javascript-insight",
+          "title": "Legacy JavaScript",
+          "detail": "Est savings of 12 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree"
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "detail": "Est savings of 130 ms"
+        }
+      ]
+    },
+    "cis": {
+      "path": "/work/school-platform",
+      "scores": {
+        "performance": 94,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": "0.8 s",
+        "largest-contentful-paint": "3.2 s",
+        "total-blocking-time": "30 ms",
+        "cumulative-layout-shift": "0"
+      },
+      "remainingAuditWarnings": [
+        {
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "detail": "3.2 s"
+        },
+        {
+          "id": "max-potential-fid",
+          "title": "Max Potential First Input Delay",
+          "detail": "100 ms"
+        },
+        {
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "detail": "3.2 s"
+        },
+        {
+          "id": "label-content-name-mismatch",
+          "title": "Elements with visible text labels do not have matching accessible names."
+        },
+        {
+          "id": "unused-javascript",
+          "title": "Reduce unused JavaScript",
+          "detail": "Est savings of 52 KiB"
+        },
+        {
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "detail": "Est savings of 68 KiB"
+        },
+        {
+          "id": "legacy-javascript-insight",
+          "title": "Legacy JavaScript",
+          "detail": "Est savings of 12 KiB"
+        },
+        {
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree"
+        },
+        {
+          "id": "render-blocking-insight",
+          "title": "Render-blocking requests",
+          "detail": "Est savings of 100 ms"
+        }
+      ]
+    }
+  },
+  "remainingOutsideScope": [
+    {
+      "files": ["src/components/Nav.tsx"],
+      "issue": "Work label includes a visible zero-padded count that differs from the accessible label."
+    },
+    {
+      "files": ["src/components/JourneyMap.tsx"],
+      "issue": "Story buttons show zero-padded chapter numbers while accessible labels use unpadded numbers. Both story views and their copy were preserved."
+    },
+    {
+      "files": ["src/components/LiveWebsites.tsx"],
+      "issue": "Accessible website-link names omit the visible domain text."
+    },
+    {
+      "files": [
+        "src/components/CISAppScreens.tsx",
+        "public/images/cis-teacher-preview.png",
+        "public/images/cis-parent-preview.png",
+        "next.config.ts"
+      ],
+      "issue": "Static export serves full-size PNG previews; Lighthouse recommends responsive image delivery."
+    },
+    {
+      "files": [
+        "src/app/layout.tsx",
+        "src/app/globals.css",
+        "Next.js generated assets"
+      ],
+      "issue": "Lighthouse reports LCP of 3.5s / 3.2s, unused and legacy framework JavaScript, render-blocking CSS and the initial network dependency chain. No changes to typography, animations or framework configuration were made to chase these diagnostics."
+    }
+  ]
+}

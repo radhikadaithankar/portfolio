@@ -77,7 +77,11 @@ for (const [host, root] of sites) {
     const markup = html
       .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
       .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, "");
-    for (const match of markup.matchAll(/\b(?:href|src)=["']([^"']+)["']/g))
+    if (/\bTODO\b/.test(markup))
+      errors.push(`${file}: unpublished TODO text is visible`);
+    for (const match of markup.matchAll(
+      /\b(?:href|src|poster)=["']([^"']+)["']/g,
+    ))
       checkLink(match[1], base, file);
     for (const match of html.matchAll(
       /<script\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/g,
@@ -117,6 +121,10 @@ for (const [host, root] of sites) {
 assert(
   !existsSync("out/designs.html"),
   "Private design experiments must not be deployed",
+);
+assert(
+  !existsSync("out/media-check.html"),
+  "Temporary media verification must not be deployed",
 );
 assert(
   readFileSync("cv-site/Radhika-Daithankar-CV.pdf")
