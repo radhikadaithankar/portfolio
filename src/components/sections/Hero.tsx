@@ -40,11 +40,7 @@ export function Hero() {
           Building at CIS & Evaradh
         </div>
       </div>
-      <Link
-        href="/work/school-platform"
-        className="hero-board"
-        aria-label="Explore the school operations platform"
-      >
+      <div className="hero-board">
         <span className="board-label">A FEW THINGS I&apos;VE BUILT</span>
         <span className="board-orbit orbit-one" aria-hidden="true" />
         <span className="board-orbit orbit-two" aria-hidden="true" />
@@ -73,7 +69,12 @@ export function Hero() {
         <span className="board-foot">
           SOFTWARE / MACHINE LEARNING / ROBOTICS<span>↗</span>
         </span>
-      </Link>
+        <Link
+          href="/work/school-platform"
+          className="hero-board-link"
+          aria-label="Explore the school operations platform"
+        />
+      </div>
       <div className="hero-bottom">
         <span>Selected projects & experiments</span>
         <span>

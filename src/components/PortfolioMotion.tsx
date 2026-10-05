@@ -51,7 +51,9 @@ export function PortfolioMotion() {
       if (!introPlayed) {
         introPlayed = true;
         document
-          .querySelectorAll(".hero-intro > *, .hero-board > :not(.board-orbit)")
+          .querySelectorAll(
+            ".hero-intro > *, .hero-board > :not(.board-orbit):not(.hero-board-link)",
+          )
           .forEach((element, index) => {
             const box = element.getBoundingClientRect();
             if (box.bottom > 0 && box.top < window.innerHeight)
@@ -92,19 +94,28 @@ export function PortfolioMotion() {
         .forEach((element) => observe(element));
 
       // Filters replace project cards; only newly mounted cards need observing.
-      const grid = document.querySelector(".project-grid");
+      const grid = document.querySelector(".work-collections");
       const gridObserver = new MutationObserver((records) => {
         for (const record of records) {
           record.removedNodes.forEach((node) => {
-            if (node instanceof Element) observer.unobserve(node);
+            if (node instanceof Element) {
+              observer.unobserve(node);
+              node
+                .querySelectorAll(revealTargets)
+                .forEach((element) => observer.unobserve(element));
+            }
           });
           record.addedNodes.forEach((node) => {
-            if (node instanceof Element && node.matches(".project-card"))
-              observe(node, true);
+            if (node instanceof Element) {
+              if (node.matches(revealTargets)) observe(node, true);
+              node
+                .querySelectorAll(revealTargets)
+                .forEach((element) => observe(element, true));
+            }
           });
         }
       });
-      if (grid) gridObserver.observe(grid, { childList: true });
+      if (grid) gridObserver.observe(grid, { childList: true, subtree: true });
 
       const bar = progress.current;
       let scrollFrame = 0;

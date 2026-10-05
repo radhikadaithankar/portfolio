@@ -2187,3 +2187,53 @@ h2 {
 .live-website-grid a:is(:hover, :focus-visible) .live-website-arrow {
   translate: 2px -2px;
 }
+
+/* New content uses the existing type scale, colours and spacing. */
+.collection-heading {
+  margin-top: 32px;
+}
+.project-metadata,
+.project-media figcaption {
+  color: var(--muted);
+  font-size: var(--type-caption);
+  margin-top: 12px;
+}
+.project-result,
+.experience-impact {
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
+  margin-top: 16px;
+}
+.project-media {
+  margin-top: 24px;
+}
+.project-media-frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.6;
+  object-fit: contain;
+  background: var(--color-cream);
+  border-radius: 4px;
+}
+.project-gif-frame {
+  position: relative;
+}
+.project-gif-frame img {
+  object-fit: contain;
+}
+.case-header + .live-websites {
+  margin-bottom: 45px;
+}
+.case-media {
+  margin-top: 45px;
+}
+.hero-board-link,
+.project-visual-target {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: 4px;
+}
+.project-visual-target:focus-visible {
+  outline-offset: -6px;
+}

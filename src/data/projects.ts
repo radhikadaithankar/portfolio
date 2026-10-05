@@ -1,3 +1,23 @@
+export type ProjectMedia = {
+  type: "video" | "gif";
+  src: string;
+  poster: string;
+  alt: string;
+  caption?: string;
+};
+
+export type ProjectDetail = { title: string; text: string };
+
+export type SchoolCaseStudy = {
+  oneLiner?: string;
+  problem?: string;
+  aiAssistant?: ProjectDetail[];
+  results?: string;
+  measurableResult?: string;
+  privacyAndSafety?: string;
+  nextSteps?: { cisPassport?: string; teacherAiTraining?: string };
+};
+
 export type Project = {
   slug: string;
   number: string;
@@ -9,11 +29,16 @@ export type Project = {
   contribution: string;
   question: string;
   approach: string;
-  context: string;
+  context?: string;
+  year?: string;
+  resultLine?: string;
+  media?: ProjectMedia;
+  collection: "Featured" | "Academic experiments";
+  caseStudy?: SchoolCaseStudy;
   scope: string[];
   delivery: { title: string; text: string };
   repository?: string;
-  details: { title: string; text: string }[];
+  details: ProjectDetail[];
   tools: string[];
   visual: "school" | "networks" | "gan" | "robot" | "gesture";
 };
@@ -24,12 +49,15 @@ export type Project = {
 // sole ownership of her employers' wider products or business outcomes.
 // Public references: https://chintamani-school.org/digital-school and https://evaradh.com/.
 // Diagrams explain concepts; they are not model outputs or benchmark results.
+// TODO(project-years): Add each project's confirmed year when available.
+// Omitted years and result lines stay hidden. Keep TODOs in comments, never copy.
 export const projects: Project[] = [
   {
     slug: "school-platform",
     number: "01",
-    title: "Chintamani International School",
-    shortTitle: "Chintamani: website & management app",
+    title: "CIS Compass",
+    shortTitle: "CIS Compass",
+    collection: "Featured",
     category: "Product",
     discipline: "School operations · Parent engagement",
     summary:
@@ -40,7 +68,48 @@ export const projects: Project[] = [
       "How do you bring daily school operations and parent communication into the same system?",
     approach:
       "I built both the public school website and CIS Compass, the school management app developed under Evaradh. The website introduces the school and gives families a route into admissions. The app brings attendance, fees, homework, notices and student records into one system, with separate experiences for parents, teachers and operations staff.",
-    context: "Live product · Evaradh / CIS, Parbhani",
+    context: "Production · Evaradh / CIS, Parbhani",
+    resultLine: "In use at Chintamani International School, Parbhani.",
+    caseStudy: {
+      oneLiner:
+        "CIS Compass brings school operations and an AI assistant for teachers into one app, in use at Chintamani International School.",
+      // TODO(cis-problem): Describe the school's previous workflow and the specific
+      // problems teachers, parents or office staff faced before Compass.
+      problem: undefined,
+      aiAssistant: [
+        {
+          title: "An assistant for everyday teaching tasks",
+          text: "The AI assistant helps teachers take attendance and post homework within CIS Compass, bringing those tasks into the same conversation as their teaching questions.",
+        },
+        {
+          title: "Explanations that match the class",
+          text: "Teachers can ask syllabus-related questions and specify the class they are teaching. A request to explain photosynthesis to Class 2 receives different content from the same request for Class 10, with the explanation adapted to the class level.",
+        },
+        {
+          title: "Hints after an attempt",
+          text: "For student homework requests, the assistant is designed to encourage learning rather than supply completed answers. It asks students to try the problem themselves first. If they are stuck, it asks them to show their attempt, then offers a hint to help them continue.",
+        },
+      ],
+      results:
+        "The school website and CIS Compass are both live. CIS Compass is Evaradh's first product, in use at Chintamani International School in Parbhani.",
+      // TODO(cis-results): Add a measured result only with its baseline, period and
+      // source. No user counts, time savings or accuracy figures are assumed.
+      measurableResult: undefined,
+      // TODO(cis-privacy): Confirm what data the assistant can access, access
+      // controls, retention and the safeguards actually implemented.
+      privacyAndSafety: undefined,
+      nextSteps: {
+        // TODO(cis-passport): Describe CIS Passport and confirm its planned scope
+        // and status. Do not imply that an unshipped feature is available.
+        cisPassport: undefined,
+        // TODO(teacher-ai-training): Describe the teacher AI training plan and
+        // confirm its status before publishing it.
+        teacherAiTraining: undefined,
+      },
+    },
+    // TODO(cis-walkthrough): Supply a video or GIF, a still poster, descriptive alt
+    // text and an optional caption. Do not publish private school or student data.
+    media: undefined,
     scope: [
       "Public school website",
       "Role-based management app",
@@ -53,18 +122,6 @@ export const projects: Project[] = [
       text: "The school website and CIS Compass are both live. Together, they cover how families first learn about the school and how staff and parents manage the school day. CIS Compass is Evaradh's first product, in use at Chintamani International School in Parbhani.",
     },
     details: [
-      {
-        title: "An assistant for everyday teaching tasks",
-        text: "The AI assistant helps teachers take attendance and post homework within CIS Compass, bringing those tasks into the same conversation as their teaching questions.",
-      },
-      {
-        title: "Explanations that match the class",
-        text: "Teachers can ask syllabus-related questions and specify the class they are teaching. A request to explain photosynthesis to Class 2 receives different content from the same request for Class 10, with the explanation adapted to the class level.",
-      },
-      {
-        title: "Hints after an attempt",
-        text: "For student homework requests, the assistant is designed to encourage learning rather than supply completed answers. It asks students to try the problem themselves first. If they are stuck, it asks them to show their attempt, then offers a hint to help them continue.",
-      },
       {
         title: "A view for each role",
         text: "Teachers, parents and operations staff use separate experiences within one platform. Access is organised around each role's responsibilities.",
@@ -95,7 +152,86 @@ export const projects: Project[] = [
     visual: "school",
   },
   {
+    slug: "panda-manipulator",
+    collection: "Featured",
+    number: "04",
+    title: "Cartesian motion for a Panda robot",
+    shortTitle: "Panda robot motion planning",
+    category: "Robotics",
+    discipline: "Robotics · Motion planning",
+    summary:
+      "Cartesian motion and an autonomous drawing routine for a Panda robot arm, packaged in ROS.",
+    contribution:
+      "I independently developed the ROS package for Cartesian movement and autonomous geometric drawing with the Panda robot.",
+    question:
+      "How do you turn a geometric shape into a path a robot arm can follow?",
+    approach:
+      "I built a ROS package for a Panda manipulator with Cartesian control of the end-effector. A planning routine lets the arm draw a geometric shape autonomously.",
+    context: "Independent robotics project",
+    scope: [
+      "ROS package development",
+      "Cartesian end-effector control",
+      "Autonomous geometric drawing",
+    ],
+    delivery: {
+      title: "From geometry to a drawing routine",
+      text: "The deliverable is a ROS package that combines Cartesian movement with an autonomous drawing routine for the Panda manipulator. I developed both the movement control and the routine that translates a geometric shape into positions for the end-effector.",
+    },
+    details: [
+      {
+        title: "Plan the path",
+        text: "The drawing routine describes the end-effector's movement in Cartesian space, translating a shape into a sequence of positions.",
+      },
+      {
+        title: "Move the arm",
+        text: "The ROS package connects motion planning with the Panda manipulator so the arm can follow the drawing routine.",
+      },
+    ],
+    tools: ["ROS", "Panda manipulator", "Motion planning"],
+    visual: "robot",
+  },
+  {
+    slug: "gesture-wheelchair",
+    collection: "Featured",
+    number: "05",
+    title: "Gesture-controlled wheelchair",
+    shortTitle: "Gesture-controlled wheelchair",
+    category: "Robotics",
+    discipline: "Embedded ML · Assistive technology",
+    summary:
+      "Hand gestures translated into wheelchair motor commands using sensors, machine learning and Arduino.",
+    contribution:
+      "I independently designed and built the Arduino-based gesture-control system, applying machine learning and embedded systems concepts.",
+    question:
+      "How can a hand gesture become a control signal for a wheelchair?",
+    approach:
+      "I connected sensor input, a machine-learning classifier and motor control in an Arduino-based wheelchair system. The classified hand gesture is mapped to a motor command.",
+    context: "Independent embedded systems project",
+    scope: [
+      "Sensor-based gesture input",
+      "Machine learning classification",
+      "Arduino motor-command integration",
+    ],
+    delivery: {
+      title: "A complete control path",
+      text: "My work connected the input and output sides of the system: reading a hand gesture, classifying it and mapping it to a wheelchair motor command. The project brought machine learning and embedded control together in one Arduino-based build.",
+    },
+    details: [
+      {
+        title: "Read the gesture",
+        text: "Sensors provide the input for a machine-learning model that classifies the hand gesture.",
+      },
+      {
+        title: "Translate it into motion",
+        text: "The classified gesture maps to motor commands in the Arduino-based wheelchair system, connecting the model's output with physical movement.",
+      },
+    ],
+    tools: ["Arduino", "Machine learning", "Embedded systems"],
+    visual: "gesture",
+  },
+  {
     slug: "image-classification",
+    collection: "Academic experiments",
     number: "02",
     title: "ResNet18 & VGG13",
     shortTitle: "Image classification with ResNet18 & VGG13",
@@ -109,7 +245,7 @@ export const projects: Project[] = [
       "How do two different network architectures approach the same image classification task?",
     approach:
       "I trained ResNet18 and VGG13 on MNIST using PyTorch. Keeping the dataset the same focuses the comparison on the architectures, including ResNet's residual connections and VGG's sequential layers.",
-    context: "Independent computer vision project",
+    context: "Academic experiment · Computer vision",
     scope: [
       "MNIST image classification",
       "Two PyTorch model implementations",
@@ -138,6 +274,7 @@ export const projects: Project[] = [
   },
   {
     slug: "generative-networks",
+    collection: "Academic experiments",
     number: "03",
     title: "Generative adversarial networks",
     shortTitle: "Generative adversarial networks",
@@ -179,82 +316,6 @@ export const projects: Project[] = [
     ],
     tools: ["PyTorch", "MNIST", "Adam", "Matplotlib"],
     visual: "gan",
-  },
-  {
-    slug: "panda-manipulator",
-    number: "04",
-    title: "Cartesian motion for a Panda robot",
-    shortTitle: "Panda robot motion planning",
-    category: "Robotics",
-    discipline: "Robotics · Motion planning",
-    summary:
-      "Cartesian motion and an autonomous drawing routine for a Panda robot arm, packaged in ROS.",
-    contribution:
-      "I independently developed the ROS package for Cartesian movement and autonomous geometric drawing with the Panda robot.",
-    question:
-      "How do you turn a geometric shape into a path a robot arm can follow?",
-    approach:
-      "I built a ROS package for a Panda manipulator with Cartesian control of the end-effector. A planning routine lets the arm draw a geometric shape autonomously.",
-    context: "Independent robotics project",
-    scope: [
-      "ROS package development",
-      "Cartesian end-effector control",
-      "Autonomous geometric drawing",
-    ],
-    delivery: {
-      title: "From geometry to a drawing routine",
-      text: "The deliverable is a ROS package that combines Cartesian movement with an autonomous drawing routine for the Panda manipulator. I developed both the movement control and the routine that translates a geometric shape into positions for the end-effector.",
-    },
-    details: [
-      {
-        title: "Plan the path",
-        text: "The drawing routine describes the end-effector's movement in Cartesian space, translating a shape into a sequence of positions.",
-      },
-      {
-        title: "Move the arm",
-        text: "The ROS package connects motion planning with the Panda manipulator so the arm can follow the drawing routine.",
-      },
-    ],
-    tools: ["ROS", "Panda manipulator", "Motion planning"],
-    visual: "robot",
-  },
-  {
-    slug: "gesture-wheelchair",
-    number: "05",
-    title: "Gesture-controlled wheelchair",
-    shortTitle: "Gesture-controlled wheelchair",
-    category: "Robotics",
-    discipline: "Embedded ML · Assistive technology",
-    summary:
-      "Hand gestures translated into wheelchair motor commands using sensors, machine learning and Arduino.",
-    contribution:
-      "I independently designed and built the Arduino-based gesture-control system, applying machine learning and embedded systems concepts.",
-    question:
-      "How can a hand gesture become a control signal for a wheelchair?",
-    approach:
-      "I connected sensor input, a machine-learning classifier and motor control in an Arduino-based wheelchair system. The classified hand gesture is mapped to a motor command.",
-    context: "Independent embedded systems project",
-    scope: [
-      "Sensor-based gesture input",
-      "Machine learning classification",
-      "Arduino motor-command integration",
-    ],
-    delivery: {
-      title: "A complete control path",
-      text: "My work connected the input and output sides of the system: reading a hand gesture, classifying it and mapping it to a wheelchair motor command. The project brought machine learning and embedded control together in one Arduino-based build.",
-    },
-    details: [
-      {
-        title: "Read the gesture",
-        text: "Sensors provide the input for a machine-learning model that classifies the hand gesture.",
-      },
-      {
-        title: "Translate it into motion",
-        text: "The classified gesture maps to motor commands in the Arduino-based wheelchair system, connecting the model's output with physical movement.",
-      },
-    ],
-    tools: ["Arduino", "Machine learning", "Embedded systems"],
-    visual: "gesture",
   },
 ];
 
