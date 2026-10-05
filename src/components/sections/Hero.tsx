@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ProjectVisual } from "../ProjectVisual";
+import { positioning } from "@/data/site";
 
 export function Hero() {
   return (
@@ -19,10 +20,10 @@ export function Hero() {
           <br />
           <em>Daithankar.</em>
         </h1>
-        <p className="hero-tagline">Ideas, made useful.</p>
-        <p className="hero-description">
-          I build software that connects with the real world. A school day, a
-          handwritten digit, a robot&apos;s next move.
+        <p className="hero-tagline">{positioning.statement}</p>
+        <p className="hero-description">{positioning.supporting}</p>
+        <p className="eyebrow muted hero-secondary-tagline">
+          {positioning.tagline}
         </p>
         <div className="hero-actions">
           <a className="button button-dark" href="#projects">

@@ -1,4 +1,4 @@
-import { contact, identity } from "@/data/site";
+import { company, contact, identity } from "@/data/site";
 
 export function Contact() {
   return (
@@ -16,13 +16,36 @@ export function Contact() {
           </h2>
           <div className="contact-invitation">
             <p>
-              A product to build, an interesting role,
-              <br className="desktop-break" /> or a problem worth figuring out
-              together.
+              Hiring for AI or data roles?{" "}
+              <a
+                className="contact-inline-link"
+                href={`mailto:${contact.email}`}
+              >
+                Email me
+              </a>{" "}
+              or{" "}
+              <a
+                className="contact-inline-link"
+                href="https://cv.radhikakd.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                view my CV
+              </a>
+              .
             </p>
-            <a className="button button-light" href={`mailto:${contact.email}`}>
-              Let&apos;s talk <span aria-hidden="true">↗</span>
-            </a>
+            <p>
+              Want Compass for your school, or a custom build?{" "}
+              <a
+                className="contact-inline-link"
+                href={company.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Talk to Evaradh
+              </a>
+              .
+            </p>
             <a className="contact-email" href={`mailto:${contact.email}`}>
               {contact.email}
             </a>

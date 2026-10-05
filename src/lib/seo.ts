@@ -1,4 +1,4 @@
-import { company, contact, identity, school } from "@/data/site";
+import { company, contact, identity, positioning, school } from "@/data/site";
 import { projects, type Project } from "@/data/projects";
 
 export const siteOrigin = new URL(
@@ -7,13 +7,12 @@ export const siteOrigin = new URL(
 export const absoluteUrl = (path: string) =>
   new URL(path, `${siteOrigin}/`).href;
 export const siteTitle = "Radhika Daithankar | AI Engineer & Evaradh Founder";
-export const siteDescription =
-  "Radhika Daithankar is an AI engineer, founder of Evaradh and Managing Director at Chintamani International School, Parbhani. Explore her independently built projects.";
+export const siteDescription = positioning.description;
 export const socialImage = {
   url: absoluteUrl("/opengraph-image"),
   width: 1200,
   height: 630,
-  alt: "Radhika Daithankar, AI engineer and founder of Evaradh",
+  alt: `Radhika Daithankar. ${positioning.statement}`,
 };
 
 const personId = absoluteUrl("/#person");

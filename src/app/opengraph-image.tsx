@@ -1,9 +1,9 @@
 import { ImageResponse } from "next/og";
+import { positioning } from "@/data/site";
 
 export const dynamic = "force-static";
 
-export const alt =
-  "Radhika Daithankar. AI engineering and product development.";
+export const alt = `Radhika Daithankar. ${positioning.statement}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -52,7 +52,7 @@ export default function Image() {
           fontSize: 21,
         }}
       >
-        Selected work in software, machine learning and robotics
+        {positioning.statement}
       </div>
     </div>,
     size,

@@ -211,6 +211,9 @@ h2 em {
   color: var(--muted);
   margin-bottom: 28px;
 }
+.hero-secondary-tagline {
+  margin-bottom: 28px;
+}
 .button {
   display: inline-flex;
   align-items: center;
@@ -1233,6 +1236,11 @@ h2 {
   text-decoration-color: #f7f4ed66;
   text-underline-offset: 5px;
   overflow-wrap: anywhere;
+}
+.contact-inline-link {
+  color: var(--color-ivory);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 .site-footer {
   border-top: 1px solid #f7f4ed26;

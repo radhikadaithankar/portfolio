@@ -16,6 +16,17 @@ export const contact = {
   github: "https://github.com/radhikadaithankar",
 };
 
+// Lead with the builder and a product already in use. Contact offers a route
+// for hiring teams and a separate route for schools and Evaradh clients.
+export const positioning = {
+  statement: "AI engineer building software that schools actually use.",
+  supporting:
+    "I built CIS Compass, a school management app with an AI assistant for teachers, now in use at Chintamani International School. Before that: data science and analytics in London.",
+  tagline: "Ideas, made useful.",
+  description:
+    "Radhika Daithankar is an AI engineer and Evaradh founder who built CIS Compass, a school management app with teacher AI support, in use at Chintamani International School.",
+};
+
 export const education = [
   {
     degree: "MSc Artificial Intelligence",
