@@ -114,9 +114,11 @@
     box-shadow var(--motion-fast) var(--motion-ease),
     transform var(--motion-fast) var(--motion-ease);
 }
-.stop:hover .pin {
-  transform: scale(1.12);
-  border-color: var(--color-terracotta);
+@media (hover: hover) and (pointer: fine) {
+  .stop:hover .pin {
+    transform: scale(1.12);
+    border-color: var(--color-terracotta);
+  }
 }
 .pastStop .pin {
   border-color: var(--color-terracotta);
@@ -502,13 +504,12 @@
     grid-template-columns: 1fr;
   }
 }
+
+:global(html[data-motion="reduce"]) .pin {
+  transform: none !important;
+}
 @media (prefers-reduced-motion: reduce) {
-  .routeTraced,
-  .pin,
-  .readStory summary > span {
-    transition: none;
-  }
-  .chapterContent {
-    animation: none;
+  :global(html:not([data-motion="full"])) .pin {
+    transform: none !important;
   }
 }

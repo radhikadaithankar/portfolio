@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { prefersReducedMotion, subscribeMotion } from "@/lib/motion-preference";
 import type { ProjectMedia as Media } from "@/data/projects";
 
 /** Source loading and automatic playback start only when the clip is visible. */
@@ -11,14 +12,13 @@ export function ProjectVideo({ media }: { media: Media }) {
   useEffect(() => {
     const video = ref.current;
     if (!video) return;
-    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     let visible = false;
     let loaded = false;
     let userPaused = false;
 
     function syncPlayback() {
       if (!video) return;
-      if (!visible || preference.matches) {
+      if (!visible || document.hidden || prefersReducedMotion()) {
         video.pause();
         return;
       }
@@ -28,7 +28,8 @@ export function ProjectVideo({ media }: { media: Media }) {
         });
     }
     function rememberPause() {
-      if (visible && !preference.matches) userPaused = true;
+      if (visible && !document.hidden && !prefersReducedMotion())
+        userPaused = true;
     }
     function rememberPlay() {
       userPaused = false;
@@ -47,12 +48,14 @@ export function ProjectVideo({ media }: { media: Media }) {
     );
 
     observer.observe(video);
-    preference.addEventListener("change", syncPlayback);
+    const unsubscribe = subscribeMotion(syncPlayback);
+    document.addEventListener("visibilitychange", syncPlayback);
     video.addEventListener("pause", rememberPause);
     video.addEventListener("play", rememberPlay);
     return () => {
       observer.disconnect();
-      preference.removeEventListener("change", syncPlayback);
+      unsubscribe();
+      document.removeEventListener("visibilitychange", syncPlayback);
       video.removeEventListener("pause", rememberPause);
       video.removeEventListener("play", rememberPlay);
       video.pause();
@@ -84,10 +87,14 @@ function ProjectGif({ media }: { media: Media }) {
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
-    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     let visible = false;
     function syncPlayback() {
-      setPlaying(visible && !preference.matches && !userPaused.current);
+      setPlaying(
+        visible &&
+          !document.hidden &&
+          !prefersReducedMotion() &&
+          !userPaused.current,
+      );
     }
     const observer = new IntersectionObserver(
       (entries) => {
@@ -97,10 +104,12 @@ function ProjectGif({ media }: { media: Media }) {
       { threshold: 0.15 },
     );
     observer.observe(element);
-    preference.addEventListener("change", syncPlayback);
+    const unsubscribe = subscribeMotion(syncPlayback);
+    document.addEventListener("visibilitychange", syncPlayback);
     return () => {
       observer.disconnect();
-      preference.removeEventListener("change", syncPlayback);
+      unsubscribe();
+      document.removeEventListener("visibilitychange", syncPlayback);
     };
   }, [media.src]);
 

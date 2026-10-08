@@ -227,8 +227,10 @@ h2 em {
     background var(--motion-fast) var(--motion-ease),
     transform var(--motion-fast) var(--motion-ease);
 }
-.button:hover {
-  transform: translateY(-3px);
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    transform: translateY(-3px);
+  }
 }
 .button-dark {
   background: var(--wine);
@@ -301,8 +303,10 @@ h2 em {
   box-shadow: 5px 14px 45px #39282019;
   transition: transform var(--motion-standard) var(--motion-ease);
 }
-.hero-board:hover .board-school {
-  transform: translateY(-6px) rotate(-5deg);
+@media (hover: hover) and (pointer: fine) {
+  .hero-board:hover .board-school {
+    transform: translateY(-6px) rotate(-5deg);
+  }
 }
 .board-school .school-art {
   padding: 0;
@@ -526,8 +530,10 @@ h2 {
   color: var(--color-ink);
   transition: transform var(--motion-fast) var(--motion-ease);
 }
-.project-visual-link:hover .project-open {
-  transform: rotate(45deg);
+@media (hover: hover) and (pointer: fine) {
+  .project-visual-link:hover .project-open {
+    transform: rotate(45deg);
+  }
 }
 .project-copy {
   padding-top: 22px;
@@ -1862,17 +1868,6 @@ h2 {
     font-size: 7px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition: none !important;
-  }
-}
 
 /* Keep the original collage, using the public CIS app previews. */
 .cis-app-screens {
@@ -2121,12 +2116,6 @@ h2 {
   transform-origin: left;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .reading-progress {
-    display: none;
-  }
-}
-
 .live-websites {
   margin-top: 24px;
   max-width: 620px;
@@ -2290,17 +2279,6 @@ h2 {
     transform: scale(0.99);
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .project-tilt .project-visual-link,
-  .project-tilt figure,
-  .project-tilt .project-visual-target,
-  .project-tilt .project-open {
-    transform: none !important;
-  }
-  .project-tilt .project-visual-link::after {
-    display: none;
-  }
-}
 
 /* The hero retains its existing reserved column and height. */
 .robot-board {
@@ -2328,4 +2306,72 @@ h2 {
 }
 .featured-project .project-tilt .project-visual-link {
   height: 100%;
+}
+
+/* Manual choice wins over the OS; the OS still works without JavaScript. */
+
+html[data-motion="reduce"] *,
+html[data-motion="reduce"] *::before,
+html[data-motion="reduce"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+html[data-motion="reduce"] .reading-progress,
+html[data-motion="reduce"] .story-scroll-progress {
+  display: none;
+}
+html[data-motion="reduce"] :is(.button, .nav-contact):is(:hover, :active),
+html[data-motion="reduce"]
+  .project-tilt
+  :is(.project-visual-link, figure, .project-visual-target, .project-open) {
+  transform: none !important;
+  scale: none !important;
+}
+html[data-motion="reduce"] :is(.button span, .live-website-arrow) {
+  translate: none !important;
+}
+html[data-motion="reduce"] .project-tilt .project-visual-link::after {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-motion="full"]) *,
+  html:not([data-motion="full"]) *::before,
+  html:not([data-motion="full"]) *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  html:not([data-motion="full"]) .reading-progress,
+  html:not([data-motion="full"]) .story-scroll-progress {
+    display: none;
+  }
+  html:not([data-motion="full"]) :is(.button, .nav-contact):is(:hover, :active),
+  html:not([data-motion="full"])
+    .project-tilt
+    :is(.project-visual-link, figure, .project-visual-target, .project-open) {
+    transform: none !important;
+    scale: none !important;
+  }
+  html:not([data-motion="full"]) :is(.button span, .live-website-arrow) {
+    translate: none !important;
+  }
+  html:not([data-motion="full"]) .project-tilt .project-visual-link::after {
+    display: none;
+  }
+}
+.motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  padding: 6px 10px;
+  font-size: var(--type-caption);
+  color: inherit;
+}
+.motion-toggle span {
+  min-width: 2ch;
+  font-size: var(--type-label);
 }

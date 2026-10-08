@@ -1,5 +1,7 @@
 import { company, contact, identity } from "@/data/site";
 
+import { MotionToggle } from "../MotionToggle";
+
 export function Contact() {
   return (
     <section id="contact" className="contact-section">
@@ -73,6 +75,7 @@ export function Contact() {
               LinkedIn ↗
             </a>
             <a href="#top">Back to top ↑</a>
+            <MotionToggle />
           </div>
         </footer>
       </div>

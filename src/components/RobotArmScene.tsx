@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows } from "@react-three/drei/core/ContactShadows";
 import { useEffect, useRef, type ReactNode } from "react";
 import { Group, MathUtils } from "three";
@@ -173,9 +173,11 @@ function Arm() {
 export default function RobotArmScene({
   active,
   onReady,
+  onFailure,
 }: {
   active: boolean;
   onReady: () => void;
+  onFailure: () => void;
 }) {
   return (
     <div className="robot-canvas">
@@ -187,7 +189,6 @@ export default function RobotArmScene({
         camera={{ position: [3.2, 1.8, 6], fov: 32 }}
         onCreated={({ camera }) => {
           camera.lookAt(0, -0.1, 0);
-          onReady();
         }}
       >
         <ambientLight intensity={0.8} />
@@ -202,6 +203,7 @@ export default function RobotArmScene({
           intensity={1.1}
           color="#f7f4ed"
         />
+        <Lifecycle onReady={onReady} onFailure={onFailure} />
         <Arm />
         <ContactShadows
           position={[0, -1.3, 0]}
@@ -216,4 +218,21 @@ export default function RobotArmScene({
       </Canvas>
     </div>
   );
+}
+
+function Lifecycle({
+  onReady,
+  onFailure,
+}: {
+  onReady: () => void;
+  onFailure: () => void;
+}) {
+  const gl = useThree((state) => state.gl);
+  useEffect(() => {
+    const canvas = gl.domElement;
+    canvas.addEventListener("webglcontextlost", onFailure);
+    onReady();
+    return () => canvas.removeEventListener("webglcontextlost", onFailure);
+  }, [gl, onReady, onFailure]);
+  return null;
 }

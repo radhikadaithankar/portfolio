@@ -132,7 +132,7 @@ export function JourneyMap() {
                 } as CSSProperties
               }
               type="button"
-              aria-label={`Chapter ${String(index + 1).padStart(2, "0")}: ${stop.place} ${stop.label}`}
+              aria-label={`${String(index + 1).padStart(2, "0")} ${stop.place} ${stop.label}`}
               aria-pressed={index === active}
               aria-controls="journey-chapter"
               onClick={() => setActive(index)}

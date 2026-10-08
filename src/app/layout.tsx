@@ -69,8 +69,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       style={motionStyles}
+      suppressHydrationWarning
       className={`${fraunces.variable} ${manrope.variable} antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(()=>{let p;try{p=localStorage.getItem("portfolio-motion-v1")}catch{}document.documentElement.dataset.motion=p==="reduce"||p!=="full"&&matchMedia("(prefers-reduced-motion: reduce)").matches?"reduce":"full"})()`,
+          }}
+        />
+      </head>
       <body className="min-h-screen bg-ivory text-ink">{children}</body>
     </html>
   );
