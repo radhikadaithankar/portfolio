@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { ProjectVisual } from "../ProjectVisual";
+import { HeroRobot } from "../HeroRobot";
 import { positioning } from "@/data/site";
 
 export function Hero() {
@@ -40,41 +39,7 @@ export function Hero() {
           Building at CIS & Evaradh
         </div>
       </div>
-      <div className="hero-board">
-        <span className="board-label">A FEW THINGS I&apos;VE BUILT</span>
-        <span className="board-orbit orbit-one" aria-hidden="true" />
-        <span className="board-orbit orbit-two" aria-hidden="true" />
-        <div className="board-school">
-          <ProjectVisual kind="school" compact />
-        </div>
-        <div className="board-network">
-          <ProjectVisual kind="networks" compact />
-        </div>
-        <div className="board-gesture">
-          <span className="eyebrow">Human → machine</span>
-          <span className="gesture-glyph" aria-hidden="true">
-            ↗
-          </span>
-          <span>
-            Small gestures.
-            <br />
-            Physical movement.
-          </span>
-        </div>
-        <span className="board-sticker" aria-hidden="true">
-          built with
-          <br />
-          <em>curiosity.</em>
-        </span>
-        <span className="board-foot">
-          SOFTWARE / MACHINE LEARNING / ROBOTICS<span>↗</span>
-        </span>
-        <Link
-          href="/work/school-platform"
-          className="hero-board-link"
-          aria-label="Explore the school operations platform"
-        />
-      </div>
+      <HeroRobot />
       <div className="hero-bottom">
         <span>Selected projects & experiments</span>
         <span>
