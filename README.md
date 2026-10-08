@@ -27,7 +27,7 @@ The first cream-and-terracotta design has been restored, with the later verified
 - `src/components/sections/`: homepage hero, filterable work gallery, visible work experience, about and contact.
 - `src/data/journey.ts`: six chapters adapted from Radhika's personal story. Unreleased ideas remain labelled as explorations.
 - `src/components/JourneyMap.tsx`: interactive story map with chapter selection, keyboard navigation, reduced-motion support and a native disclosure containing the complete story. The route is schematic, not geographic.
-- `src/components/PortfolioMotion.tsx`: brief hero and scroll entrances, pointer movement on the collage, project-filter entrances and reading progress. Motion respects the system preference, cleans up on navigation and never hides the page's content.
+- `src/components/PortfolioMotion.tsx`: scroll reveals, staggered project-filter entrances, story parallax and reading progress. Above-the-fold text paints without an entrance delay; all enhancements clean up on navigation.
 - `src/components/CISAppScreens.tsx`: public teacher and parent app previews.
 - `src/components/ProjectVisual.tsx`: project visuals and technical concept diagrams.
 - `src/app/work/[slug]/page.tsx`: statically generated project pages.
@@ -68,7 +68,19 @@ See [the search launch checklist](docs/search-discovery.md) for domain activatio
 
 ## Stack
 
-Next.js App Router, React, TypeScript, Tailwind CSS, Fraunces and Manrope via `next/font`. No animation or scroll-control dependencies.
+Next.js 16.3.5, React 19.2.8, TypeScript, Tailwind CSS, Fraunces and Manrope via `next/font`. The optional hero uses Three.js 0.186.1, React Three Fiber 9.8.1 and Drei 10.7.9. Page motion uses CSS and the Web Animations API.
+
+## Motion and fallbacks
+
+Timing, easing, stagger and damping values live in `src/lib/motion.ts`. The root layout exposes the CSS tokens. Scrolling stays native. Pointer tilt affects project visuals, with separate depths for the Compass teacher and parent previews; project text and keyboard targets remain stable.
+
+`HeroRobot.tsx` reserves the existing hero space and renders an SVG in the server HTML. It waits for a paint and idle time before importing `RobotArmScene.tsx` through `next/dynamic`. The scene uses seven joints made from geometry, a transparent canvas, local lighting and one generated contact shadow. It fetches no external models or textures. Rendering pauses offscreen and when the tab is hidden. The scene uses DPR 1–2 and small, damped pointer movements on fine pointers; touch has idle motion only.
+
+The SVG remains on viewports below 900px, devices reporting four or fewer CPU cores or 4 GB or less memory, data-saving connections, reduced motion, unavailable WebGL, a renderer error or context loss. Unknown device signals use the viewport and remaining signals. There is no attempt to identify a specific phone model.
+
+The footer's Reduce motion button persists `reduce` or `full` in `localStorage` under `portfolio-motion-v1`. With no saved choice, the OS setting applies. Both directions override the OS; blocked storage still permits a choice for the visit. The preference controls reveals, tilt, parallax, the arm and project media. An early inline script avoids a flash of unwanted CSS animation. The SVG and all page content remain available without JavaScript.
+
+See [the motion audit](docs/motion-audit.json) for the before/after mobile Lighthouse results, throttled frame sample, browser checks, changed files and remaining issues. The audit used a gzip-served production export, not the development server.
 
 ## Cloudflare Pages
 
@@ -101,3 +113,16 @@ npx wrangler@4.143.0 pages deploy cv-site --project-name radhikakd-cv --branch m
 The proxied `cv` CNAME points to `radhikakd-cv.pages.dev`. The existing `radhikakd_canonical` Bulk Redirect list also forwards this Pages address and its deployment subdomains to `https://cv.radhikakd.com/`, preserving paths and query strings. The portfolio and CV deployments are independent.
 
 The CV stylesheet and script use versioned URLs. Bump their `v` query value when changing these assets so returning visitors receive the new version. Their cache headers also require revalidation.
+
+## Content still to supply
+
+These slots are comments and undefined values, never public placeholder text.
+
+- [ ] Confirm the year of each project: `src/data/projects.ts`, `TODO(project-years)`.
+- [ ] Describe the previous school workflow and its specific problems: `src/data/projects.ts`, `TODO(cis-problem)`.
+- [ ] Supply a measured CIS result with baseline, period and source: `src/data/projects.ts`, `TODO(cis-results)`.
+- [ ] Confirm AI data access, permissions, retention and safeguards: `src/data/projects.ts`, `TODO(cis-privacy)`.
+- [ ] Confirm CIS Passport's scope and status: `src/data/projects.ts`, `TODO(cis-passport)`.
+- [ ] Confirm the teacher AI training plan and status: `src/data/projects.ts`, `TODO(teacher-ai-training)`.
+- [ ] Supply a walkthrough clip or GIF, still poster and alt text: `src/data/projects.ts`, `TODO(cis-walkthrough)`.
+- [ ] Supply YORI hours saved or forecast accuracy with baseline, period and method: `src/data/site.ts`, `TODO(yori-impact)`.

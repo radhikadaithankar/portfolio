@@ -1,0 +1,493 @@
+{
+  "date": "2026-10-08",
+  "status": "Committed repo implementation; this task did not upload to Cloudflare.",
+  "baseBeforeContent": "dc4e58e",
+  "baseBeforeMotion": "f7c96aa",
+  "codeRevision": "b8b52c5515f8ce2f24015b4e5b81a218c55c1fa2",
+  "summary": [
+    "Concrete AI engineer positioning with Compass production proof and separate hiring/Evaradh contact routes.",
+    "Featured work separated from academic experiments; optional evidence fields, lazy video/GIF playback and data-driven CIS case study.",
+    "Native-scroll reveals, shared motion tokens, CSS card tilt with layered Compass previews and story progress/parallax.",
+    "Idle-loaded seven-joint robot, static SVG, device and WebGL fallbacks, persistent reduced-motion choice.",
+    "Visible text supplies accessible names for story stops, navigation and external site links."
+  ],
+  "environment": {
+    "lighthouse": "13.5.0",
+    "chrome": "153.0.0.0 (headless, macOS)",
+    "server": "Local production static export, gzip compression, port 4518",
+    "method": "Default mobile Lighthouse simulated throttling, RTT 150 ms, throughput 1638.4 Kbps, CPU slowdown 4x. These are lab measurements, not live-site field data.",
+    "finalBuild": "npm run build:pages (Next/Webpack static export)"
+  },
+  "dependencies": {
+    "@react-three/drei": "10.7.9",
+    "@react-three/fiber": "9.8.1",
+    "next": "16.3.5",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "three": "0.186.1",
+    "@types/three": "0.186.0",
+    "compatibilityReference": "https://r3f.docs.pmnd.rs/getting-started/introduction",
+    "reasonForTypePackage": "Type checking Three.js geometry, cameras and refs; no browser runtime cost."
+  },
+  "lighthouse": {
+    "home": {
+      "before": {
+        "scores": {
+          "performance": 90,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100,
+          "agentic-browsing": 100
+        },
+        "FCPms": 1067.9431,
+        "LCPms": 3560.8862,
+        "TBTms": 27.5,
+        "CLS": 0,
+        "accessibleNameAudit": 0
+      },
+      "after": {
+        "scores": {
+          "performance": 91,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100,
+          "agentic-browsing": 100
+        },
+        "FCPms": 1056.6015,
+        "LCPms": 3456.6015,
+        "TBTms": 30.5,
+        "CLS": 0,
+        "accessibleNameAudit": 1
+      }
+    },
+    "cis": {
+      "before": {
+        "scores": {
+          "performance": 94,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100,
+          "agentic-browsing": 100
+        },
+        "FCPms": 755.3340000000001,
+        "LCPms": 3155.334,
+        "TBTms": 25.5,
+        "CLS": 0,
+        "accessibleNameAudit": 0
+      },
+      "after": {
+        "scores": {
+          "performance": 94,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100,
+          "agentic-browsing": 100
+        },
+        "FCPms": 753.6727000000001,
+        "LCPms": 3153.6727,
+        "TBTms": 24.500000000000227,
+        "CLS": 0,
+        "accessibleNameAudit": 1
+      }
+    }
+  },
+  "javascript": {
+    "measurement": "Gzip sum of initial script files referenced in server HTML, excluding the non-executed nomodule polyfill for the modern-browser figure.",
+    "modernBeforeBytes": 153586,
+    "modernAfterBytes": 157046,
+    "deltaBytes": 3460,
+    "deltaPercent": 2.25,
+    "initialScripts": [
+      {
+        "path": "/_next/static/chunks/4bd1b696-92152b0f5947070d.js",
+        "gzipBytes": 63370
+      },
+      {
+        "path": "/_next/static/chunks/794-dbea506235e91bd2.js",
+        "gzipBytes": 65779
+      },
+      {
+        "path": "/_next/static/chunks/main-app-495fcfd36cdcb5af.js",
+        "gzipBytes": 223
+      },
+      {
+        "path": "/_next/static/chunks/500-b13bb91f5a6311b6.js",
+        "gzipBytes": 3532
+      },
+      {
+        "path": "/_next/static/chunks/772-6f96b24e39535deb.js",
+        "gzipBytes": 5597
+      },
+      {
+        "path": "/_next/static/chunks/app/page-dc8fcb53ee3ae36b.js",
+        "gzipBytes": 16732
+      },
+      {
+        "path": "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+        "gzipBytes": 39473
+      },
+      {
+        "path": "/_next/static/chunks/webpack-4318f2419b10b971.js",
+        "gzipBytes": 1813
+      }
+    ],
+    "deferredSceneChunks": [
+      {
+        "path": "static/chunks/b536a0f1.4357ad16972f68f4.js",
+        "gzipBytes": 88418
+      },
+      {
+        "path": "static/chunks/bd904a5c.c73a00c7d46f8d71.js",
+        "gzipBytes": 100595
+      },
+      {
+        "path": "static/chunks/f5ef5e1c.9a2e934f7c080121.js",
+        "gzipBytes": 51374
+      },
+      {
+        "path": "static/chunks/386.6245a1319633f5fa.js",
+        "gzipBytes": 8463
+      }
+    ],
+    "sceneChunksInInitialHTML": false,
+    "mobileDoesNotFetchScene": true
+  },
+  "browser": {
+    "checks": [
+      "Desktop loads live WebGL after paint",
+      "Measure approximate WebGL frames at 4x CPU slowdown",
+      "Offscreen canvas pauses drawing",
+      "Hidden tab pauses drawing and resumes",
+      "Fine-pointer tilt and Compass image depths",
+      "All four project filters and native project accordions",
+      "Story keyboard controls, chapter transition and both story views",
+      "Footer toggle cancels motion, persists and applies on a project route",
+      "OS reduced motion shows SVG and downloads no 3D chunks",
+      "Manual full motion overrides reduced OS preference",
+      "375px touch viewport shows SVG and downloads no 3D chunks",
+      "Low core count shows SVG and downloads no 3D chunks",
+      "Low device memory shows SVG and downloads no 3D chunks",
+      "WebGL creation exception is caught with static fallback",
+      "Context loss returns to the static pose",
+      "Storage unavailable still permits a session motion choice",
+      "Browser launched with WebGL disabled retains static SVG"
+    ],
+    "errors": [],
+    "fps": {
+      "rate": 4,
+      "frames": 241,
+      "seconds": 4.001,
+      "fps": 60.2
+    },
+    "lazyLoadAfterPaintMs": 53,
+    "depthTransforms": [
+      "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 32, 1)",
+      "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 14, 1)"
+    ]
+  },
+  "accessibility": {
+    "home": {
+      "labelViolations": [],
+      "violations": [],
+      "passes": 27,
+      "contrast": 250
+    },
+    "cis": {
+      "labelViolations": [],
+      "violations": [],
+      "passes": 25,
+      "contrast": 67
+    },
+    "mobile": {
+      "labelViolations": [],
+      "violations": [],
+      "passes": 27,
+      "contrast": 252
+    },
+    "noJavaScript": {
+      "headline": "Radhika✳\nDaithankar.",
+      "staticPose": "visible",
+      "projects": 5
+    }
+  },
+  "checks": {
+    "lint": "passed",
+    "typecheck": "passed",
+    "productionBuild": "passed",
+    "export": "10 HTML pages passed; URLs, anchors, media posters, metadata, structured data, sitemaps and CV PDF checked; no visible TODO text.",
+    "storySourceAndAboutCopy": "Unchanged from dc4e58e; both story views read src/data/journey.ts.",
+    "experienceBullets": "Unchanged; optional impact line added separately.",
+    "screenshots": "Desktop hero, tilted Compass card, story, 375px hero/story and mobile footer inspected.",
+    "reactReview": "Heavy renderer isolated behind dynamic import; effect listeners/observers/RAF cleaned up; animation values use refs instead of React state per frame; semantic controls and server-rendered content retained."
+  },
+  "decisions": [
+    {
+      "decision": "No motion/framer-motion dependency.",
+      "reason": "Existing CSS and Web Animations APIs provide the requested effects with about 3.4 KB initial gzip growth."
+    },
+    {
+      "decision": "Use static SVG on small or low-power devices even though mobile performance exceeds 85.",
+      "reason": "Avoid GPU work and downloading the optional scene; preserve the same hero footprint."
+    },
+    {
+      "decision": "No models, textures or remote lighting assets.",
+      "reason": "The requested arm is generated from local primitive geometry."
+    },
+    {
+      "decision": "Do not change archived studio/design experiments.",
+      "reason": "They are not served by any public route; active site motion uses shared tokens."
+    },
+    {
+      "decision": "Keep story text, CV site and existing URLs.",
+      "reason": "These are outside the requested content changes."
+    },
+    {
+      "decision": "Do not combine a framework security upgrade with motion commits.",
+      "reason": "Nine package audit warnings predate these changes; see remainingIssues. A separate dependency update needs its own verification."
+    },
+    {
+      "decision": "No deployment in this task.",
+      "reason": "The current request specifies repo changes, verification and commits. Cloudflare uses direct upload, so a GitHub push does not deploy."
+    }
+  ],
+  "remainingIssues": {
+    "performance": [
+      "Responsive PNG delivery in src/components/CISAppScreens.tsx remains an opportunity.",
+      "Next.js legacy/unused JavaScript and render-blocking CSS still appear as Lighthouse opportunities."
+    ],
+    "dependencies": [
+      {
+        "name": "@next/eslint-plugin-next",
+        "severity": "high",
+        "unchangedSinceBeforeMotion": true,
+        "advisories": []
+      },
+      {
+        "name": "brace-expansion",
+        "severity": "high",
+        "unchangedSinceBeforeMotion": true,
+        "advisories": [
+          {
+            "title": "brace-expansion: Quadratic-time expansion of the `{a},b}` rewrite causes CPU denial of service",
+            "url": "https://github.com/advisories/GHSA-q2hr-2g5m-vwhr"
+          },
+          {
+            "title": "brace-expansion: Quadratic-time expansion of the `{a},b}` rewrite causes CPU denial of service",
+            "url": "https://github.com/advisories/GHSA-q2hr-2g5m-vwhr"
+          },
+          {
+            "title": "brace-expansion: DoS via uncontrolled recursion on nested brace groups causing stack exhaustion",
+            "url": "https://github.com/advisories/GHSA-qhr7-859c-m2p7"
+          },
+          {
+            "title": "brace-expansion: DoS via uncontrolled recursion on nested brace groups causing stack exhaustion",
+            "url": "https://github.com/advisories/GHSA-qhr7-859c-m2p7"
+          },
+          {
+            "title": "brace-expansion: DoS via uncontrolled recursion in parseCommaParts causing stack exhaustion",
+            "url": "https://github.com/advisories/GHSA-6j4f-fj2g-mc7p"
+          },
+          {
+            "title": "brace-expansion: DoS via uncontrolled recursion in parseCommaParts causing stack exhaustion",
+            "url": "https://github.com/advisories/GHSA-6j4f-fj2g-mc7p"
+          }
+        ]
+      },
+      {
+        "name": "braces",
+        "severity": "high",
+        "unchangedSinceBeforeMotion": true,
+        "advisories": [
+          {
+            "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+            "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm"
+          }
+        ]
+      },
+      {
+        "name": "eslint-config-next",
+        "severity": "high",
+        "unchangedSinceBeforeMotion": true,
+        "advisories": []
+      },
+      {
+        "name": "fast-glob",
+        "severity": "high",
+        "unchangedSinceBeforeMotion": true,
+        "advisories": []
+      },
+      {
+        "name": "micromatch",
+        "severity": "high",
+        "unchangedSinceBeforeMotion": true,
+        "advisories": []
+      },
+      {
+        "name": "next",
+        "severity": "critical",
+        "unchangedSinceBeforeMotion": true,
+        "advisories": [
+          {
+            "title": "Next.js: Remote Code Execution in next/og ImageResponse",
+            "url": "https://github.com/advisories/GHSA-vcvr-r3jv-pc5j"
+          },
+          {
+            "title": "Next.js: Pending `use cache` fill can leak Draft Mode content into regular responses and persisted pages",
+            "url": "https://github.com/advisories/GHSA-3w37-wq28-93x7"
+          },
+          {
+            "title": "Next.js has cache poisoning of SSG and ISR pages in self-hosted applications",
+            "url": "https://github.com/advisories/GHSA-4jqv-mc3x-m676"
+          },
+          {
+            "title": "Next.js has information disclosure in development server's Model Context Protocol endpoint",
+            "url": "https://github.com/advisories/GHSA-39w2-rjm5-chcv"
+          },
+          {
+            "title": "Next.js has information disclosure in App Router metadata image routes via dynamicParams bypass",
+            "url": "https://github.com/advisories/GHSA-f87g-xv8r-7p7x"
+          },
+          {
+            "title": "Next.js has cache poisoning in SSG/ISR rendering that leads to cross-user content substitution and persistent denial of service",
+            "url": "https://github.com/advisories/GHSA-mcj8-r9mp-w47p"
+          },
+          {
+            "title": "Next.js has Server-Side Request Forgery in Image Optimization",
+            "url": "https://github.com/advisories/GHSA-cjq9-62q9-8jv4"
+          }
+        ]
+      },
+      {
+        "name": "sharp",
+        "severity": "high",
+        "unchangedSinceBeforeMotion": true,
+        "advisories": [
+          {
+            "title": "sharp : Vulnerability in librsvg dependency CVE-2026-96889",
+            "url": "https://github.com/advisories/GHSA-wq5f-xc86-pv6w"
+          }
+        ]
+      },
+      {
+        "name": "source-map-js",
+        "severity": "high",
+        "unchangedSinceBeforeMotion": true,
+        "advisories": [
+          {
+            "title": "source-map-js allows event-loop denial of service through indexed source-map section offsets",
+            "url": "https://github.com/advisories/GHSA-68fv-2mgg-jv7q"
+          }
+        ]
+      }
+    ],
+    "accessibility": "No violations in the final home/CIS/mobile WCAG and accessible-name checks."
+  },
+  "todoChecklist": [
+    {
+      "marker": "project-years",
+      "file": "src/data/projects.ts",
+      "line": 52,
+      "instruction": "Add each project's confirmed year when available."
+    },
+    {
+      "marker": "cis-problem",
+      "file": "src/data/projects.ts",
+      "line": 76,
+      "instruction": "Describe the school's previous workflow and the specific"
+    },
+    {
+      "marker": "cis-results",
+      "file": "src/data/projects.ts",
+      "line": 95,
+      "instruction": "Add a measured result only with its baseline, period and"
+    },
+    {
+      "marker": "cis-privacy",
+      "file": "src/data/projects.ts",
+      "line": 98,
+      "instruction": "Confirm what data the assistant can access, access"
+    },
+    {
+      "marker": "cis-passport",
+      "file": "src/data/projects.ts",
+      "line": 102,
+      "instruction": "Describe CIS Passport and confirm its planned scope"
+    },
+    {
+      "marker": "teacher-ai-training",
+      "file": "src/data/projects.ts",
+      "line": 105,
+      "instruction": "Describe the teacher AI training plan and"
+    },
+    {
+      "marker": "cis-walkthrough",
+      "file": "src/data/projects.ts",
+      "line": 110,
+      "instruction": "Supply a video or GIF, a still poster, descriptive alt"
+    },
+    {
+      "marker": "yori-impact",
+      "file": "src/data/site.ts",
+      "line": 88,
+      "instruction": "Add measured reporting hours saved or forecast accuracy,"
+    }
+  ],
+  "changedFilesMotion": [
+    "README.md",
+    "docs/motion-audit.json",
+    "package-lock.json",
+    "package.json",
+    "src/app/globals.css",
+    "src/app/layout.tsx",
+    "src/components/CardTilt.tsx",
+    "src/components/HeroRobot.tsx",
+    "src/components/JourneyMap.module.css",
+    "src/components/JourneyMap.tsx",
+    "src/components/LiveWebsites.tsx",
+    "src/components/MotionToggle.tsx",
+    "src/components/Nav.tsx",
+    "src/components/PortfolioMotion.tsx",
+    "src/components/ProjectCard.tsx",
+    "src/components/ProjectMedia.tsx",
+    "src/components/RobotArmFallback.tsx",
+    "src/components/RobotArmScene.tsx",
+    "src/components/sections/Contact.tsx",
+    "src/components/sections/Hero.tsx",
+    "src/lib/motion-preference.ts",
+    "src/lib/motion.ts"
+  ],
+  "changedFilesContentAndMotion": [
+    "README.md",
+    "docs/content-structure-audit.json",
+    "docs/motion-audit.json",
+    "package-lock.json",
+    "package.json",
+    "scripts/check-export.mjs",
+    "src/app/globals.css",
+    "src/app/layout.tsx",
+    "src/app/opengraph-image.tsx",
+    "src/app/work/[slug]/page.tsx",
+    "src/components/CardTilt.tsx",
+    "src/components/HeroRobot.tsx",
+    "src/components/JourneyMap.module.css",
+    "src/components/JourneyMap.tsx",
+    "src/components/LiveWebsites.tsx",
+    "src/components/MotionToggle.tsx",
+    "src/components/Nav.tsx",
+    "src/components/PortfolioMotion.tsx",
+    "src/components/ProjectCard.tsx",
+    "src/components/ProjectMedia.tsx",
+    "src/components/RobotArmFallback.tsx",
+    "src/components/RobotArmScene.tsx",
+    "src/components/SchoolCaseStudy.tsx",
+    "src/components/sections/Contact.tsx",
+    "src/components/sections/Experience.tsx",
+    "src/components/sections/Hero.tsx",
+    "src/components/sections/Projects.tsx",
+    "src/data/projects.ts",
+    "src/data/site.ts",
+    "src/lib/motion-preference.ts",
+    "src/lib/motion.ts",
+    "src/lib/seo.ts"
+  ]
+}
