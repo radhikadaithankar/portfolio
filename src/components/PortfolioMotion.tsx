@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { motion } from "@/lib/motion";
+import { useReducedMotion } from "@/lib/motion-preference";
 
 const revealTargets = [
   ".work-heading",
+  ".collection-heading",
   ".project-card",
   ".notebook-heading",
   ".notebook-card",
@@ -11,198 +14,148 @@ const revealTargets = [
   ".experience-role",
   ".story-intro",
   "#journey-start",
+  "[data-story-chapter]",
   ".story-afterword",
   ".contact-main",
 ].join(", ");
 
-/** All content renders normally; motion is a cancellable enhancement. */
+/** Content stays readable before JavaScript and when any enhancement is cancelled. */
 export function PortfolioMotion() {
   const progress = useRef<HTMLDivElement>(null);
+  const seen = useRef(new WeakSet<Element>());
+  const reduced = useReducedMotion();
 
   useEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const finePointer = window.matchMedia(
-      "(hover: hover) and (pointer: fine) and (min-width: 851px)",
-    );
-    const seen = new WeakSet<Element>();
-    let introPlayed = false;
-    let dispose = () => {};
-
-    function configure() {
-      dispose();
-      dispose = () => {};
-      if (reduceMotion.matches) return;
-      const animations = new Set<Animation>();
-      const cleanups: (() => void)[] = [];
-      function enter(element: Element, delay = 0, distance = 24) {
-        const animation = element.animate(
-          [{ translate: `0 ${distance}px` }, { translate: "0 0" }],
-          {
-            duration: 850,
-            delay,
-            easing: "cubic-bezier(.16,1,.3,1)",
-            fill: "backwards",
-          },
-        );
-        animations.add(animation);
-        animation.onfinish = () => animations.delete(animation);
-      }
-
-      if (!introPlayed) {
-        introPlayed = true;
-        document
-          .querySelectorAll(
-            ".hero-intro > *, .hero-board > :not(.board-orbit):not(.hero-board-link)",
-          )
-          .forEach((element, index) => {
-            const box = element.getBoundingClientRect();
-            if (box.bottom > 0 && box.top < window.innerHeight)
-              enter(element, Math.min(index * 55, 400), 32);
-          });
-      }
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          let order = 0;
-          for (const entry of entries) {
-            if (!entry.isIntersecting) continue;
-            observer.unobserve(entry.target);
-            seen.add(entry.target);
-            // Keep focused elements and content above the viewport stable.
-            if (
-              entry.target.contains(document.activeElement) ||
-              entry.boundingClientRect.top < 0
-            )
-              continue;
-            enter(entry.target, Math.min(order++ * 75, 225));
-          }
+    if (reduced) return;
+    const animations = new Set<Animation>();
+    function enter(element: Element, delay = 0) {
+      const animation = element.animate(
+        [
+          { opacity: 0, translate: `0 ${motion.rise}px` },
+          { opacity: 1, translate: "0 0" },
+        ],
+        {
+          duration: motion.duration.reveal,
+          delay,
+          easing: motion.ease,
+          fill: "backwards",
         },
-        { threshold: 0.06 },
       );
-
-      function observe(element: Element, newlyAdded = false) {
-        if (seen.has(element)) return;
-        const box = element.getBoundingClientRect();
-        if (box.top >= window.innerHeight) observer.observe(element);
-        else {
-          seen.add(element);
-          if (newlyAdded && box.bottom > 0) enter(element, 0, 16);
-        }
-      }
-      document
-        .querySelectorAll(revealTargets)
-        .forEach((element) => observe(element));
-
-      // Filters replace project cards; only newly mounted cards need observing.
-      const grid = document.querySelector(".work-collections");
-      const gridObserver = new MutationObserver((records) => {
-        for (const record of records) {
-          record.removedNodes.forEach((node) => {
-            if (node instanceof Element) {
-              observer.unobserve(node);
-              node
-                .querySelectorAll(revealTargets)
-                .forEach((element) => observer.unobserve(element));
-            }
-          });
-          record.addedNodes.forEach((node) => {
-            if (node instanceof Element) {
-              if (node.matches(revealTargets)) observe(node, true);
-              node
-                .querySelectorAll(revealTargets)
-                .forEach((element) => observe(element, true));
-            }
-          });
-        }
-      });
-      if (grid) gridObserver.observe(grid, { childList: true, subtree: true });
-
-      const bar = progress.current;
-      let scrollFrame = 0;
-      let scrollRange = 1;
-      function updateProgress() {
-        scrollFrame = 0;
-        if (bar)
-          bar.style.transform = `scaleX(${Math.max(0, Math.min(1, window.scrollY / scrollRange))})`;
-      }
-      function scheduleProgress() {
-        if (!scrollFrame) scrollFrame = requestAnimationFrame(updateProgress);
-      }
-      function measurePage() {
-        scrollRange = Math.max(
-          1,
-          document.documentElement.scrollHeight - window.innerHeight,
-        );
-        scheduleProgress();
-      }
-      const resizeObserver = new ResizeObserver(measurePage);
-      resizeObserver.observe(document.body);
-      window.addEventListener("scroll", scheduleProgress, { passive: true });
-      window.addEventListener("resize", measurePage, { passive: true });
-      measurePage();
-
-      const board = document.querySelector<HTMLElement>(".hero-board");
-      if (board && finePointer.matches) {
-        let pointerFrame = 0;
-        let x = 0;
-        let y = 0;
-        function move(event: PointerEvent) {
-          if (event.pointerType !== "mouse" || !board) return;
-          const box = board.getBoundingClientRect();
-          x = Math.max(
-            -1,
-            Math.min(1, ((event.clientX - box.left) / box.width) * 2 - 1),
+      animations.add(animation);
+      animation.onfinish = () => animations.delete(animation);
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let order = 0;
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          observer.unobserve(entry.target);
+          if (seen.current.has(entry.target)) continue;
+          seen.current.add(entry.target);
+          if (
+            entry.target.contains(document.activeElement) ||
+            entry.boundingClientRect.top < 0
+          )
+            continue;
+          enter(
+            entry.target,
+            Math.min(order++ * motion.stagger, motion.maxStagger),
           );
-          y = Math.max(
-            -1,
-            Math.min(1, ((event.clientY - box.top) / box.height) * 2 - 1),
-          );
-          if (!pointerFrame)
-            pointerFrame = requestAnimationFrame(() => {
-              board.style.setProperty("--board-x", `${x * 10}px`);
-              board.style.setProperty("--board-y", `${y * 8}px`);
-              pointerFrame = 0;
-            });
         }
-        function reset() {
-          cancelAnimationFrame(pointerFrame);
-          pointerFrame = 0;
-          board?.style.removeProperty("--board-x");
-          board?.style.removeProperty("--board-y");
-        }
-        board.addEventListener("pointermove", move, { passive: true });
-        board.addEventListener("pointerleave", reset);
-        board.addEventListener("pointercancel", reset);
-        cleanups.push(() => {
-          board.removeEventListener("pointermove", move);
-          board.removeEventListener("pointerleave", reset);
-          board.removeEventListener("pointercancel", reset);
-          reset();
+      },
+      { threshold: 0.06 },
+    );
+
+    function observe(element: Element, newlyAdded = false) {
+      if (seen.current.has(element)) return;
+      const box = element.getBoundingClientRect();
+      if (
+        !newlyAdded &&
+        box.height > 0 &&
+        box.top < innerHeight &&
+        box.bottom > 0
+      ) {
+        // Never hide above-the-fold text or delay its paint.
+        seen.current.add(element);
+      } else observer.observe(element);
+    }
+    document
+      .querySelectorAll(revealTargets)
+      .forEach((element) => observe(element));
+    const grid = document.querySelector(".work-collections");
+    const gridObserver = new MutationObserver((records) => {
+      for (const record of records) {
+        record.removedNodes.forEach((node) => {
+          if (!(node instanceof Element)) return;
+          observer.unobserve(node);
+          node
+            .querySelectorAll(revealTargets)
+            .forEach((el) => observer.unobserve(el));
+        });
+        record.addedNodes.forEach((node) => {
+          if (!(node instanceof Element)) return;
+          if (node.matches(revealTargets)) observe(node, true);
+          node
+            .querySelectorAll(revealTargets)
+            .forEach((el) => observe(el, true));
         });
       }
+    });
+    if (grid) gridObserver.observe(grid, { childList: true, subtree: true });
 
-      dispose = () => {
-        observer.disconnect();
-        gridObserver.disconnect();
-        resizeObserver.disconnect();
-        animations.forEach((animation) => animation.cancel());
-        cancelAnimationFrame(scrollFrame);
-        window.removeEventListener("scroll", scheduleProgress);
-        window.removeEventListener("resize", measurePage);
-        if (bar) bar.style.removeProperty("transform");
-        cleanups.forEach((cleanup) => cleanup());
-      };
+    const bar = progress.current;
+    const story = document.querySelector<HTMLElement>("[data-story-map]");
+    const landscape = document.querySelector<SVGElement>(
+      "[data-story-parallax]",
+    );
+    const storyBar = document.querySelector<HTMLElement>(
+      ".story-scroll-progress span",
+    );
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
+    let frame = 0;
+    let range = 1;
+    const clamp = (value: number) => Math.max(0, Math.min(1, value));
+    function update() {
+      frame = 0;
+      if (bar) bar.style.transform = `scaleX(${clamp(scrollY / range)})`;
+      if (!story) return;
+      const rect = story.getBoundingClientRect();
+      const position = clamp(
+        (innerHeight - rect.top) / (innerHeight + rect.height),
+      );
+      if (storyBar) storyBar.style.transform = `scaleX(${position})`;
+      if (landscape)
+        landscape.style.translate = fine.matches
+          ? `0 ${(position - 0.5) * motion.parallax}px`
+          : "none";
     }
-
-    configure();
-    reduceMotion.addEventListener("change", configure);
-    finePointer.addEventListener("change", configure);
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+    function measure() {
+      range = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+      schedule();
+    }
+    const resize = new ResizeObserver(measure);
+    resize.observe(document.body);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", measure, { passive: true });
+    fine.addEventListener("change", schedule);
+    measure();
     return () => {
-      dispose();
-      reduceMotion.removeEventListener("change", configure);
-      finePointer.removeEventListener("change", configure);
+      observer.disconnect();
+      gridObserver.disconnect();
+      resize.disconnect();
+      animations.forEach((animation) => animation.cancel());
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", measure);
+      fine.removeEventListener("change", schedule);
+      bar?.style.removeProperty("transform");
+      landscape?.style.removeProperty("translate");
+      storyBar?.style.removeProperty("transform");
     };
-  }, []);
+  }, [reduced]);
 
   return <div ref={progress} className="reading-progress" aria-hidden="true" />;
 }

@@ -1,4 +1,5 @@
 .journey {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
   border-top: 1px solid var(--rule);
@@ -57,7 +58,7 @@
   stroke: var(--color-terracotta);
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  transition: stroke-dashoffset 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition: stroke-dashoffset var(--motion-reveal) var(--motion-ease);
 }
 .traced {
   stroke-dashoffset: 0;
@@ -110,8 +111,8 @@
   background: var(--color-ivory);
   box-shadow: 0 0 0 5px var(--color-ivory);
   transition:
-    box-shadow 0.25s,
-    transform 0.25s;
+    box-shadow var(--motion-fast) var(--motion-ease),
+    transform var(--motion-fast) var(--motion-ease);
 }
 .stop:hover .pin {
   transform: scale(1.12);
@@ -205,7 +206,7 @@
   min-height: 416px;
 }
 .chapterContent {
-  animation: chapter-arrive 0.35s ease-out;
+  animation: chapter-arrive var(--motion-chapter) var(--motion-ease);
 }
 .period {
   font-size: var(--type-label);
@@ -318,7 +319,7 @@
 .readStory summary > span {
   font-size: 24px;
   font-weight: 300;
-  transition: rotate 0.2s;
+  transition: rotate var(--motion-fast) var(--motion-ease);
 }
 .readStory[open] summary > span {
   rotate: 45deg;
@@ -354,9 +355,11 @@
 }
 @keyframes chapter-arrive {
   from {
+    opacity: 0;
     transform: translateY(8px);
   }
   to {
+    opacity: 1;
     transform: translateY(0);
   }
 }

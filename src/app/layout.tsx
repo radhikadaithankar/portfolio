@@ -3,6 +3,7 @@ import { Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
 import { identity } from "@/data/site";
 import { siteOrigin, siteTitle, siteDescription, socialImage } from "@/lib/seo";
+import { motionStyles } from "@/lib/motion";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -67,7 +68,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      data-scroll-behavior="smooth"
+      style={motionStyles}
       className={`${fraunces.variable} ${manrope.variable} antialiased`}
     >
       <body className="min-h-screen bg-ivory text-ink">{children}</body>

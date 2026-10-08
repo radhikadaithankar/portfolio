@@ -52,7 +52,10 @@ export function JourneyMap() {
   }
 
   return (
-    <div className={styles.journey}>
+    <div className={styles.journey} data-story-map>
+      <div className="story-scroll-progress" aria-hidden="true">
+        <span />
+      </div>
       <div className={styles.atlas}>
         <div className={styles.atlasHeading}>
           <span className="eyebrow">A personal atlas</span>
@@ -67,6 +70,7 @@ export function JourneyMap() {
         >
           <svg
             className={styles.routes}
+            data-story-parallax
             viewBox="0 0 1000 600"
             aria-hidden="true"
           >
@@ -128,7 +132,7 @@ export function JourneyMap() {
                 } as CSSProperties
               }
               type="button"
-              aria-label={`Chapter ${index + 1}: ${stop.place} ${stop.label}`}
+              aria-label={`Chapter ${String(index + 1).padStart(2, "0")}: ${stop.place} ${stop.label}`}
               aria-pressed={index === active}
               aria-controls="journey-chapter"
               onClick={() => setActive(index)}
@@ -224,7 +228,7 @@ export function JourneyMap() {
         </summary>
         <div className={styles.fullStory}>
           {journey.map((stop, index) => (
-            <article key={stop.id}>
+            <article key={stop.id} data-story-chapter>
               <p className="eyebrow">
                 {String(index + 1).padStart(2, "0")} / {stop.place}
               </p>

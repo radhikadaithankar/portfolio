@@ -37,7 +37,7 @@
   box-sizing: border-box;
 }
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   scroll-padding-top: 100px;
   background: var(--color-ivory);
 }
@@ -224,8 +224,8 @@ h2 em {
   font-weight: 500;
   border-radius: 3px;
   transition:
-    background 0.2s,
-    transform 0.2s;
+    background var(--motion-fast) var(--motion-ease),
+    transform var(--motion-fast) var(--motion-ease);
 }
 .button:hover {
   transform: translateY(-3px);
@@ -299,7 +299,7 @@ h2 em {
   transform: rotate(-7deg);
   z-index: 2;
   box-shadow: 5px 14px 45px #39282019;
-  transition: transform 0.5s;
+  transition: transform var(--motion-standard) var(--motion-ease);
 }
 .hero-board:hover .board-school {
   transform: translateY(-6px) rotate(-5deg);
@@ -473,8 +473,8 @@ h2 {
   border-radius: 3px;
   color: var(--muted);
   transition:
-    background 0.2s,
-    color 0.2s;
+    background var(--motion-fast) var(--motion-ease),
+    color var(--motion-fast) var(--motion-ease);
   font-weight: 500;
 }
 .filter:hover {
@@ -510,7 +510,7 @@ h2 {
 }
 .project-visual-link .project-art,
 .project-visual-link .school-sheet {
-  transition: transform 0.45s;
+  transition: transform var(--motion-standard) var(--motion-ease);
 }
 .project-visual-link:hover .project-art {
   transform: scale(1.025);
@@ -529,7 +529,7 @@ h2 {
   place-items: center;
   background: var(--color-ivory);
   color: var(--color-ink);
-  transition: transform 0.2s;
+  transition: transform var(--motion-fast) var(--motion-ease);
 }
 .project-visual-link:hover .project-open {
   transform: rotate(45deg);
@@ -1034,7 +1034,7 @@ h2 {
   font-weight: 500;
 }
 .experience-project span {
-  transition: transform 0.2s;
+  transition: transform var(--motion-fast) var(--motion-ease);
 }
 .experience-project:hover span {
   transform: translate(2px, -2px);
@@ -1961,7 +1961,7 @@ h2 {
 .story-start-link span {
   color: var(--color-terracotta);
   font-size: 23px;
-  transition: transform 0.2s;
+  transition: transform var(--motion-fast) var(--motion-ease);
 }
 .hero-story-link:hover,
 .story-start-link:hover {
@@ -2082,47 +2082,50 @@ h2 {
   transform: scaleX(0);
   transform-origin: left;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .board-school,
-  .board-network,
-  .board-gesture,
-  .board-sticker {
-    transition:
-      transform 0.5s,
-      translate 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-  .board-school {
-    translate: var(--board-x, 0px) var(--board-y, 0px);
-  }
-  .board-network {
-    translate: calc(var(--board-x, 0px) * -0.7) calc(var(--board-y, 0px) * -0.7);
-  }
-  .board-gesture {
-    translate: calc(var(--board-x, 0px) * 0.5) calc(var(--board-y, 0px) * 0.5);
-  }
-  .board-sticker {
-    translate: calc(var(--board-x, 0px) * 1.4) calc(var(--board-y, 0px) * 1.4);
-  }
-  .main-nav a:not(.nav-contact) {
-    background-image: linear-gradient(
-      var(--color-terracotta),
-      var(--color-terracotta)
-    );
-    background-repeat: no-repeat;
-    background-size: 0% 1px;
-    background-position: left calc(100% - 7px);
-    transition: background-size 0.25s;
-  }
-  .main-nav a:not(.nav-contact):is(:hover, :focus-visible) {
-    background-size: 100% 1px;
-  }
-  .button span {
-    transition: translate 0.25s;
-  }
+.main-nav a:not(.nav-contact) {
+  background-image: linear-gradient(
+    var(--color-terracotta),
+    var(--color-terracotta)
+  );
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  background-position: left calc(100% - 7px);
+  transition: background-size var(--motion-fast) var(--motion-ease);
+}
+.main-nav a:not(.nav-contact):is(:hover, :focus-visible) {
+  background-size: 100% 1px;
+}
+.button span {
+  transition: translate var(--motion-fast) var(--motion-ease);
+}
+@media (hover: hover) and (pointer: fine) {
   .button:is(:hover, :focus-visible) span {
-    translate: 3px -2px;
+    translate: 2px -1px;
   }
 }
+.button:active,
+.nav-contact:active {
+  scale: 0.98;
+}
+.nav-contact {
+  transition:
+    scale var(--motion-fast) var(--motion-ease),
+    background var(--motion-fast) var(--motion-ease);
+}
+.story-scroll-progress {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  pointer-events: none;
+}
+.story-scroll-progress span {
+  display: block;
+  height: 100%;
+  background: var(--color-terracotta);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reading-progress {
     display: none;
@@ -2154,8 +2157,8 @@ h2 {
   background: var(--color-ivory);
   border-radius: 3px;
   transition:
-    border-color 0.2s,
-    background 0.2s;
+    border-color var(--motion-fast) var(--motion-ease),
+    background var(--motion-fast) var(--motion-ease);
 }
 .live-website-grid a > span:first-child {
   min-width: 0;
@@ -2178,7 +2181,7 @@ h2 {
 }
 .live-website-arrow {
   color: var(--color-terracotta);
-  transition: translate 0.2s;
+  transition: translate var(--motion-fast) var(--motion-ease);
 }
 .live-website-grid a:is(:hover, :focus-visible) {
   border-color: var(--color-terracotta);
