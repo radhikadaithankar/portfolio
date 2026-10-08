@@ -1,6 +1,6 @@
 {
   "date": "2026-10-08",
-  "status": "Committed repo implementation; this task did not upload to Cloudflare.",
+  "status": "Published to https://radhikakd.com and verified on desktop and mobile.",
   "baseBeforeContent": "dc4e58e",
   "baseBeforeMotion": "f7c96aa",
   "codeRevision": "b8b52c5515f8ce2f24015b4e5b81a218c55c1fa2",
@@ -244,10 +244,6 @@
     {
       "decision": "Do not combine a framework security upgrade with motion commits.",
       "reason": "Nine package audit warnings predate these changes; see remainingIssues. A separate dependency update needs its own verification."
-    },
-    {
-      "decision": "No deployment in this task.",
-      "reason": "The current request specifies repo changes, verification and commits. Cloudflare uses direct upload, so a GitHub push does not deploy."
     }
   ],
   "remainingIssues": {
@@ -489,5 +485,63 @@
     "src/lib/motion-preference.ts",
     "src/lib/motion.ts",
     "src/lib/seo.ts"
-  ]
+  ],
+  "deployment": {
+    "project": "radhikakd",
+    "environment": "production",
+    "deploymentId": "1b82029b",
+    "sourceCommit": "ea1b0a3df917c318673654d23e3482f0fdb8ef8b",
+    "origin": "https://radhikakd.com",
+    "verifiedAt": "2026-10-08T08:52:11.724Z",
+    "http": [
+      {
+        "path": "/",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/work/school-platform",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/robots.txt",
+        "status": 200,
+        "contentType": "text/plain; charset=utf-8"
+      },
+      {
+        "path": "/sitemap.xml",
+        "status": 200,
+        "contentType": "application/xml"
+      },
+      {
+        "path": "/opengraph-image",
+        "status": 200,
+        "contentType": "image/png"
+      },
+      {
+        "host": "https://www.radhikakd.com",
+        "status": 301,
+        "redirect": "https://radhikakd.com/work/school-platform?verify=canonical"
+      },
+      {
+        "host": "https://radhikakd.pages.dev",
+        "status": 301,
+        "redirect": "https://radhikakd.com/work/school-platform?verify=canonical"
+      },
+      {
+        "host": "https://1b82029b.radhikakd.pages.dev",
+        "status": 301,
+        "redirect": "https://radhikakd.com/work/school-platform?verify=canonical"
+      }
+    ],
+    "browser": [
+      "Production desktop hero loads the live robot and readable name.",
+      "Product filter returns CIS Compass.",
+      "Reduce motion persists after a production-page reload.",
+      "CIS case study renders with the new content and footer control.",
+      "375px viewport uses the static arm with no horizontal overflow."
+    ],
+    "errors": []
+  }
 }
