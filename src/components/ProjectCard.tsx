@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Project } from "@/data/projects";
 import { ProjectVisual } from "./ProjectVisual";
 import { ProjectMedia } from "./ProjectMedia";
+import { CardTilt } from "./CardTilt";
 import { LiveWebsites } from "./LiveWebsites";
 
 export function ProjectCard({ project }: { project: Project }) {
@@ -12,17 +13,19 @@ export function ProjectCard({ project }: { project: Project }) {
     <article
       className={`project-card ${project.visual === "school" ? "featured-project" : ""}`}
     >
-      <div className="project-visual-link">
-        <ProjectVisual kind={project.visual} />
-        <span className="project-open" aria-hidden="true">
-          ↗
-        </span>
-        <Link
-          className="project-visual-target"
-          href={`/work/${project.slug}`}
-          aria-label={`View project: ${project.shortTitle}`}
-        />
-      </div>
+      <CardTilt>
+        <div className="project-visual-link">
+          <ProjectVisual kind={project.visual} />
+          <span className="project-open" aria-hidden="true">
+            ↗
+          </span>
+          <Link
+            className="project-visual-target"
+            href={`/work/${project.slug}`}
+            aria-label={`View project: ${project.shortTitle}`}
+          />
+        </div>
+      </CardTilt>
       <div className="project-copy">
         <p className="eyebrow">
           <span>{project.number}</span> / {project.discipline}

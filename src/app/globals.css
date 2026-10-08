@@ -512,12 +512,7 @@ h2 {
 .project-visual-link .school-sheet {
   transition: transform var(--motion-standard) var(--motion-ease);
 }
-.project-visual-link:hover .project-art {
-  transform: scale(1.025);
-}
-.project-visual-link:hover .school-sheet {
-  transform: rotate(-1deg) translateY(-4px);
-}
+
 .project-open {
   position: absolute;
   bottom: 15px;
@@ -2239,4 +2234,70 @@ h2 {
 }
 .project-visual-target:focus-visible {
   outline-offset: -6px;
+}
+
+/* Hover depth is restricted to precise pointers; content and links stay in place. */
+.project-tilt {
+  min-width: 0;
+  perspective: 1100px;
+}
+.project-tilt .project-visual-link {
+  transition: transform var(--motion-standard) var(--motion-ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .project-tilt .project-visual-link {
+    overflow: visible;
+    transform-style: preserve-3d;
+    transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  }
+  .project-tilt .project-visual-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at var(--glare-x, 50%) var(--glare-y, 50%),
+      #fff8 0,
+      transparent 65%
+    );
+    opacity: 0;
+    transform: translateZ(46px);
+    transition: opacity var(--motion-fast) var(--motion-ease);
+  }
+  .project-tilt[data-tilting] .project-visual-link::after {
+    opacity: 0.2;
+  }
+  .project-tilt .school-art,
+  .project-tilt .cis-app-screens {
+    transform-style: preserve-3d;
+  }
+  .project-tilt .cis-app-screens figure:first-child {
+    transform: translateZ(32px);
+  }
+  .project-tilt .cis-app-screens figure:last-child {
+    transform: translateZ(14px);
+  }
+  .project-tilt .project-visual-target {
+    transform: translateZ(48px);
+  }
+  .project-tilt .project-open {
+    transform: translateZ(38px);
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  .project-tilt:active .project-visual-link {
+    transform: scale(0.99);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-tilt .project-visual-link,
+  .project-tilt figure,
+  .project-tilt .project-visual-target,
+  .project-tilt .project-open {
+    transform: none !important;
+  }
+  .project-tilt .project-visual-link::after {
+    display: none;
+  }
 }
