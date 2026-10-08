@@ -132,7 +132,6 @@ export function JourneyMap() {
                 } as CSSProperties
               }
               type="button"
-              aria-label={`${String(index + 1).padStart(2, "0")} ${stop.place} ${stop.label}`}
               aria-pressed={index === active}
               aria-controls="journey-chapter"
               onClick={() => setActive(index)}
@@ -141,7 +140,7 @@ export function JourneyMap() {
               <span className={styles.pin}>
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <span className={styles.stopLabel} aria-hidden="true">
+              <span className={styles.stopLabel}>
                 <strong>{stop.place}</strong>
                 <small>{stop.label}</small>
               </span>

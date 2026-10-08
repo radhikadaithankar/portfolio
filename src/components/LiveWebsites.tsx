@@ -26,7 +26,7 @@ export function LiveWebsites() {
             href={website.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Visit ${website.fullName}'s website (opens in a new tab)`}
+            title={`${website.fullName} (opens in a new tab)`}
           >
             <span>
               <strong>{website.name}</strong>

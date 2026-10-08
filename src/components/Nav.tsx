@@ -5,12 +5,9 @@ export function Nav({ subpage = false }: { subpage?: boolean }) {
   return (
     <header className="site-header">
       <nav aria-label="Primary" className="main-nav">
-        <a
-          href={`${root}#projects`}
-          aria-label={`Work, ${projects.length} projects`}
-        >
+        <a href={`${root}#projects`} title={`View ${projects.length} projects`}>
           Work
-          <span className="nav-count" aria-hidden="true">
+          <span className="nav-count">
             {String(projects.length).padStart(2, "0")}
           </span>
         </a>
