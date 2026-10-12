@@ -147,6 +147,11 @@ export function HeroRobot() {
           </SceneBoundary>
         )}
       </div>
+      {live && ready && (
+        <span className="robot-hint">
+          Drag to spin <span>·</span> Click to draw
+        </span>
+      )}
       <span className="board-foot">
         SOFTWARE / MACHINE LEARNING / ROBOTICS<span>↗</span>
       </span>

@@ -2,8 +2,18 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { ContactShadows } from "@react-three/drei/core/ContactShadows";
-import { useEffect, useRef, type ReactNode } from "react";
-import { Group, MathUtils } from "three";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  type PointerEvent as ReactPointerEvent,
+  type ReactNode,
+  type RefObject,
+} from "react";
+import { Group, MathUtils, Vector3, type InterleavedBufferAttribute } from "three";
+import { Line2 } from "three/examples/jsm/lines/Line2.js";
+import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
+import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
 import { motion } from "@/lib/motion";
 
 const enamel = "#f7f4ed";
@@ -11,6 +21,37 @@ const beige = "#d8cbbb";
 const accent = "#4e2639";
 const lengths = [0.32, 1, 0.18, 1.03, 0.18, 0.35, 0.18];
 const pose = [0, 0.48, 0, -1.75, 0.25, -1, 0];
+const ink = "#a75037";
+const trailPoints = 720;
+const scratch = new Vector3();
+const drawSeconds = 7;
+const fadeSeconds = 2.4;
+
+/** Shared between DOM pointer handlers and the render loop. */
+type Controls = {
+  spin: number;
+  velocity: number;
+  dragging: boolean;
+  lastX: number;
+  downX: number;
+  downY: number;
+  drawRequested: boolean;
+};
+
+/**
+ * A five-petal rose traced by the shoulder and elbow, so it lies in the plane
+ * facing the camera. This echoes the Panda drawing routine. The trail records
+ * the gripper's real position, so it shows whatever the joints actually trace.
+ */
+function drawingOffsets(progress: number) {
+  const s = progress * Math.PI * 2;
+  const r = 0.55 + 0.45 * Math.cos(5 * s);
+  const ease = Math.min(progress * 12, 1, (1 - progress) * 12);
+  return {
+    shoulder: 0.3 * r * Math.sin(s) * ease,
+    elbow: 0.34 * r * Math.cos(s) * ease,
+  };
+}
 
 function LinkBody({
   length,
@@ -65,8 +106,38 @@ function Joint({ index, children }: { index: number; children: ReactNode }) {
   );
 }
 
-function Arm() {
+function Arm({ controlsRef }: { controlsRef: RefObject<Controls> }) {
   const joints = useRef<(Group | null)[]>([]);
+  const turntable = useRef<Group>(null);
+  const tip = useRef<Group>(null);
+  const pen = useRef<Group>(null);
+  const draw = useRef({ elapsed: -1, count: 0, fade: 0 });
+  const trailRef = useRef<Line2>(null);
+  const last = useRef(new Vector3());
+  const trailObject = useMemo(() => {
+    // Allocate every segment once; frames write into the buffer in place.
+    const geometry = new LineGeometry();
+    geometry.setPositions(new Float32Array(trailPoints * 3));
+    geometry.instanceCount = 0;
+    const line = new Line2(
+      geometry,
+      new LineMaterial({
+        color: ink,
+        linewidth: 3,
+        transparent: true,
+        opacity: 0.9,
+      }),
+    );
+    line.frustumCulled = false;
+    return line;
+  }, []);
+  useEffect(
+    () => () => {
+      trailObject.geometry.dispose();
+      trailObject.material.dispose();
+    },
+    [trailObject],
+  );
   const pointer = useRef({ x: 0, y: 0 });
   const time = useRef(0);
   useEffect(() => {
@@ -98,25 +169,103 @@ function Arm() {
   }, []);
   useFrame((_, delta) => {
     const dt = Math.min(delta, 0.05);
+    const control = controlsRef.current;
     time.current += dt * motion.idleSpeed;
+
+    // Turntable: drag sets velocity directly, release coasts to a stop.
+    if (!control.dragging) {
+      control.spin += control.velocity * dt;
+      control.velocity = MathUtils.damp(control.velocity, 0, 2.2, dt);
+    }
+    if (turntable.current) turntable.current.rotation.y = control.spin;
+
+    // Drawing routine: start on click, trace, then let the ink fade.
+    const state = draw.current;
+    const trail = trailRef.current;
+    if (!trail) return;
+    if (control.drawRequested) {
+      control.drawRequested = false;
+      if (state.elapsed < 0) {
+        state.elapsed = 0;
+        state.count = 0;
+        state.fade = 0;
+        trail.visible = false;
+        trail.geometry.instanceCount = 0;
+        trail.material.opacity = 0.9;
+      }
+    }
+    const drawing = state.elapsed >= 0 && state.elapsed < drawSeconds;
+    const offsets = drawing
+      ? drawingOffsets(state.elapsed / drawSeconds)
+      : { shoulder: 0, elbow: 0 };
+    if (state.elapsed >= 0) {
+      state.elapsed += dt;
+      if (state.elapsed >= drawSeconds) {
+        state.fade += dt;
+        const opacity = 0.9 * (1 - state.fade / fadeSeconds);
+        trail.material.opacity = Math.max(opacity, 0);
+        if (state.fade >= fadeSeconds) {
+          state.elapsed = -1;
+          trail.visible = false;
+        }
+      }
+    }
+    const penDown = drawing && state.elapsed > 0.6;
+    if (pen.current)
+      pen.current.scale.setScalar(
+        MathUtils.damp(pen.current.scale.x, penDown ? 1 : 0, 10, dt),
+      );
+
+    const following = drawing ? 0 : 1;
     joints.current.forEach((joint, index) => {
       if (!joint) return;
       const axis = index % 2 === 0 ? "y" : "z";
       const follow =
-        index === 0
-          ? pointer.current.x * 0.22
+        following *
+        (index === 0
+          ? pointer.current.x * 0.5
           : index === 1
-            ? pointer.current.y * 0.08
-            : 0;
+            ? pointer.current.y * 0.14
+            : index === 3
+              ? -pointer.current.y * 0.16
+              : 0);
+      const routine =
+        index === 1 ? offsets.shoulder : index === 3 ? offsets.elbow : 0;
       const idle =
-        Math.sin(time.current + index * 0.6) * (index === 0 ? 0.07 : 0.025);
+        Math.sin(time.current + index * 0.6) *
+        (index === 0 ? 0.07 : 0.025) *
+        (drawing ? 0.2 : 1);
       joint.rotation[axis] = MathUtils.damp(
         joint.rotation[axis],
-        pose[index] + follow + idle,
-        motion.damping,
+        pose[index] + follow + routine + idle,
+        drawing ? 9 : motion.damping,
         dt,
       );
     });
+
+    // Record the gripper's real position in turntable space, so the drawing
+    // turns with the robot like paper on a lazy Susan.
+    if (penDown && tip.current && turntable.current && state.count < trailPoints) {
+      tip.current.getWorldPosition(scratch);
+      turntable.current.worldToLocal(scratch);
+      if (state.count > 0) {
+        const segments = (
+          trail.geometry.getAttribute(
+            "instanceStart",
+          ) as InterleavedBufferAttribute
+        ).data;
+        const previous = last.current;
+        segments.array.set(
+          [previous.x, previous.y, previous.z, scratch.x, scratch.y, scratch.z],
+          (state.count - 1) * 6,
+        );
+        segments.needsUpdate = true;
+        trail.geometry.instanceCount = state.count;
+        trail.visible = true;
+      }
+      last.current.copy(scratch);
+      state.count += 1;
+    }
   });
 
   function segment(index: number): ReactNode {
@@ -139,6 +288,18 @@ function Arm() {
               </mesh>
             </group>
           ))}
+          <group ref={tip} position={[0, 0.34, 0]}>
+            <group ref={pen} scale={0}>
+              <mesh>
+                <sphereGeometry args={[0.045, 12, 12]} />
+                <meshStandardMaterial
+                  color={ink}
+                  emissive={ink}
+                  emissiveIntensity={0.4}
+                />
+              </mesh>
+            </group>
+          </group>
         </group>
       );
     return (
@@ -157,6 +318,17 @@ function Arm() {
   }
   return (
     <group position={[-0.45, -1.15, 0]} rotation={[0, -0.2, 0]}>
+      <group ref={turntable}>
+        <primitive ref={trailRef} object={trailObject} visible={false} />
+        <ArmBody>{segment(0)}</ArmBody>
+      </group>
+    </group>
+  );
+}
+
+function ArmBody({ children }: { children: ReactNode }) {
+  return (
+    <>
       <mesh position={[0, -0.07, 0]} receiveShadow>
         <cylinderGeometry args={[0.48, 0.54, 0.15, 12]} />
         <meshStandardMaterial color={beige} roughness={0.85} />
@@ -165,8 +337,8 @@ function Arm() {
         <cylinderGeometry args={[0.29, 0.38, 0.13, 12]} />
         <meshStandardMaterial color={enamel} roughness={0.7} />
       </mesh>
-      <group position={[0, 0.15, 0]}>{segment(0)}</group>
-    </group>
+      <group position={[0, 0.15, 0]}>{children}</group>
+    </>
   );
 }
 
@@ -179,8 +351,60 @@ export default function RobotArmScene({
   onReady: () => void;
   onFailure: () => void;
 }) {
+  const controls = useRef<Controls>({
+    spin: 0,
+    velocity: 0,
+    dragging: false,
+    lastX: 0,
+    downX: 0,
+    downY: 0,
+    drawRequested: false,
+  });
+  const lastMove = useRef(0);
+
+  function down(event: ReactPointerEvent<HTMLDivElement>) {
+    if (event.button !== 0) return;
+    const control = controls.current;
+    control.dragging = true;
+    control.velocity = 0;
+    control.lastX = control.downX = event.clientX;
+    control.downY = event.clientY;
+    lastMove.current = event.timeStamp;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }
+  function move(event: ReactPointerEvent<HTMLDivElement>) {
+    const control = controls.current;
+    if (!control.dragging) return;
+    const dx = event.clientX - control.lastX;
+    const elapsed = Math.max(event.timeStamp - lastMove.current, 1) / 1000;
+    control.spin += dx * 0.012;
+    control.velocity = MathUtils.clamp((dx * 0.012) / elapsed, -9, 9);
+    control.lastX = event.clientX;
+    lastMove.current = event.timeStamp;
+  }
+  function up(event: ReactPointerEvent<HTMLDivElement>) {
+    const control = controls.current;
+    if (!control.dragging) return;
+    control.dragging = false;
+    // A drag that stalls before release should not fling the arm.
+    if (event.timeStamp - lastMove.current > 90) control.velocity = 0;
+    const distance = Math.hypot(
+      event.clientX - control.downX,
+      event.clientY - control.downY,
+    );
+    if (distance < 6) control.drawRequested = true;
+  }
+
   return (
-    <div className="robot-canvas">
+    <div
+      className="robot-canvas"
+      onPointerDown={down}
+      onPointerMove={move}
+      onPointerUp={up}
+      onPointerCancel={() => {
+        controls.current.dragging = false;
+      }}
+    >
       <Canvas
         aria-hidden="true"
         dpr={[1, 2]}
@@ -204,7 +428,7 @@ export default function RobotArmScene({
           color="#f7f4ed"
         />
         <Lifecycle onReady={onReady} onFailure={onFailure} />
-        <Arm />
+        <Arm controlsRef={controls} />
         <ContactShadows
           position={[0, -1.3, 0]}
           opacity={0.3}
