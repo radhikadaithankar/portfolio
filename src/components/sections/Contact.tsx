@@ -17,37 +17,38 @@ export function Contact() {
             <em>in mind?</em>
           </h2>
           <div className="contact-invitation">
-            <p>
-              Hiring for AI or data roles?{" "}
-              <a
-                className="contact-inline-link"
-                href={`mailto:${contact.email}`}
-              >
-                Email me
-              </a>{" "}
-              or{" "}
-              <a
-                className="contact-inline-link"
-                href="https://cv.radhikakd.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                view my CV
-              </a>
-              .
-            </p>
-            <p>
-              Want Compass for your school, or a custom build?{" "}
-              <a
-                className="contact-inline-link"
-                href={company.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Talk to Evaradh
-              </a>
-              .
-            </p>
+            <div className="contact-route">
+              <p>Hiring for AI or data roles?</p>
+              <div className="contact-actions">
+                <a
+                  className="button button-light"
+                  href={`mailto:${contact.email}`}
+                >
+                  Email me <span aria-hidden="true">→</span>
+                </a>
+                <a
+                  className="button button-outline"
+                  href="https://cv.radhikakd.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View my CV <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
+            <div className="contact-route">
+              <p>Want Compass for your school, or a custom build?</p>
+              <div className="contact-actions">
+                <a
+                  className="button button-outline"
+                  href={company.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Talk to Evaradh <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
             <a className="contact-email" href={`mailto:${contact.email}`}>
               {contact.email}
             </a>

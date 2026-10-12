@@ -1,6 +1,8 @@
 import { company, contact, school } from "@/data/site";
 import { JourneyMap } from "@/components/JourneyMap";
 
+const interests = ["Dancing", "Cooking", "Travel", "Design"];
+
 export function About() {
   return (
     <section
@@ -48,12 +50,14 @@ export function About() {
             and design. A day can take me from a machine learning problem to a
             school poster, then into the kitchen to try something new.
           </p>
-          <p className="story-location">
-            <span className="status-dot" /> Based in Pune. Building at CIS &
-            Evaradh.
-          </p>
+          <ul className="story-interests" aria-label="Interests">
+            {interests.map((interest) => (
+              <li key={interest}>{interest}</li>
+            ))}
+          </ul>
         </div>
-        <div>
+        <div className="story-elsewhere">
+          <p className="eyebrow">Find me elsewhere</p>
           <nav
             className="profile-links"
             aria-label="Related websites and profiles"
@@ -78,6 +82,16 @@ export function About() {
             >
               <span>
                 LinkedIn<small>My professional profile</small>
+              </span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a
+              href={contact.github}
+              target="_blank"
+              rel="me noopener noreferrer"
+            >
+              <span>
+                GitHub<small>Notebooks and code</small>
               </span>
               <span aria-hidden="true">↗</span>
             </a>

@@ -11,7 +11,8 @@ export function MotionToggle() {
       aria-pressed={reduced}
       onClick={() => setReducedMotion(!reduced)}
     >
-      Reduce motion <span aria-hidden="true">{reduced ? "On" : "Off"}</span>
+      Reduce motion
+      <span className="motion-switch" aria-hidden="true" />
     </button>
   );
 }
