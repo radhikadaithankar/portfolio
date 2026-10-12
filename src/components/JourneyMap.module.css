@@ -1,8 +1,21 @@
 .journey {
   position: relative;
+  border-top: 1px solid var(--rule);
+}
+.stage {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-  border-top: 1px solid var(--rule);
+}
+/* Scroll mode: the track supplies one step of scroll per chapter while the
+   stage stays pinned below the header. */
+.track[data-scrolly="true"] {
+  height: var(--track-height);
+}
+.track[data-scrolly="true"] .stage {
+  position: sticky;
+  top: var(--stage-top);
+  background: var(--color-ivory);
 }
 .atlas {
   align-self: start;
@@ -210,6 +223,57 @@
 .chapterContent {
   animation: chapter-arrive var(--motion-chapter) var(--motion-ease);
 }
+.chapterContent:not([data-active]) {
+  display: none;
+}
+/* On wide screens every chapter shares one grid cell, so the panel keeps the
+   tallest chapter's height and the pinned stage never resizes. */
+.track[data-wide="true"] .stage {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+.track[data-wide="true"] .chapter {
+  display: grid;
+  min-height: 0;
+}
+.track[data-wide="true"] .chapterContent {
+  display: block;
+  grid-area: 1 / 1;
+  animation: none;
+  transition:
+    opacity var(--motion-chapter) var(--motion-ease),
+    translate var(--motion-chapter) var(--motion-ease),
+    visibility 0s linear var(--motion-chapter);
+}
+.track[data-wide="true"] .chapterContent:not([data-active]) {
+  visibility: hidden;
+  opacity: 0;
+  translate: 0 8px;
+}
+.track[data-wide="true"] .chapterContent[data-active] {
+  transition-delay: 0s;
+}
+.track[data-wide="true"] .chapterPanel {
+  padding-block: 20px 12px;
+}
+.track[data-wide="true"] .period {
+  margin: 14px 0 8px;
+}
+.track[data-wide="true"] .chapter h3 {
+  font-size: var(--type-subtitle);
+  max-width: none;
+  margin-bottom: 12px;
+}
+.track[data-wide="true"] .chapterContent > p:not(.period):not(.chapterNote) {
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+.track[data-wide="true"] .chapterNote {
+  margin-top: 14px;
+  font-size: var(--type-lead);
+}
+.track[data-wide="true"] .chapterLink {
+  margin-top: 6px;
+}
 .period {
   font-size: var(--type-label);
   letter-spacing: 0.1em;
@@ -303,7 +367,6 @@
   background: var(--color-terracotta);
 }
 .readStory {
-  grid-column: 1 / -1;
   border-block: 1px solid var(--rule);
 }
 .readStory summary {
@@ -370,7 +433,7 @@
   }
 }
 @media (max-width: 1100px) {
-  .journey {
+  .stage {
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   }
   .atlas {
@@ -396,7 +459,7 @@
   }
 }
 @media (max-width: 850px) {
-  .journey {
+  .stage {
     grid-template-columns: 1fr;
   }
   .atlas {
