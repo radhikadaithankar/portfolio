@@ -22,7 +22,7 @@
 }
 .atlasHeading > span:last-child span {
   margin-left: 8px;
-  font-size: 18px;
+  font-size: var(--type-icon);
   color: var(--color-terracotta);
 }
 .map {
@@ -106,7 +106,7 @@
   margin: auto;
   border: 1px solid #a79a85;
   border-radius: 50%;
-  font-size: 11px;
+  font-size: var(--type-label);
   font-weight: 600;
   background: var(--color-ivory);
   box-shadow: 0 0 0 5px var(--color-ivory);
@@ -145,14 +145,14 @@
 .stopLabel strong {
   display: block;
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: var(--type-lead);
   font-weight: 400;
   line-height: 1.2;
 }
 .stopLabel small {
   display: block;
   margin-top: 5px;
-  font-size: 10px;
+  font-size: var(--type-micro);
   color: var(--muted);
 }
 .activeStop .stopLabel strong {
@@ -195,7 +195,7 @@
 }
 .pageCount {
   font-family: var(--font-serif);
-  font-size: 25px;
+  font-size: var(--type-subtitle);
 }
 .pageCount > span {
   font-family: var(--font-sans);
@@ -212,7 +212,8 @@
 }
 .period {
   font-size: var(--type-label);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
+  font-weight: 600;
   text-transform: uppercase;
   color: var(--muted);
   margin: 25px 0 12px;
@@ -319,8 +320,8 @@
   display: none;
 }
 .readStory summary > span {
-  font-size: 24px;
-  font-weight: 300;
+  font-size: var(--type-icon);
+  font-weight: 400;
   transition: rotate var(--motion-fast) var(--motion-ease);
 }
 .readStory[open] summary > span {
@@ -339,6 +340,9 @@
   margin: 12px 0 18px;
   letter-spacing: -0.025em;
   font-weight: 400;
+}
+.fullStory article > :global(.eyebrow) {
+  font-size: var(--type-label);
 }
 .fullStory article > p:not(.eyebrow) {
   font-size: var(--type-body);
@@ -380,11 +384,8 @@
   .chapterPanel {
     padding-inline: 24px;
   }
-  .stopLabel strong {
-    font-size: 16px;
-  }
   .stopLabel small {
-    font-size: 9px;
+    font-size: var(--type-micro);
   }
   .stopLabel {
     width: 105px;
@@ -459,10 +460,10 @@
     width: 86px;
   }
   .stopLabel strong {
-    font-size: 14px;
+    font-size: var(--type-ui);
   }
   .stopLabel small {
-    font-size: 9px;
+    font-size: var(--type-micro);
     margin-top: 3px;
   }
   .stop[data-stop="foundation"] .stopLabel {
@@ -482,13 +483,13 @@
   .pin {
     width: 31px;
     height: 31px;
-    font-size: 10px;
+    font-size: var(--type-micro);
     box-shadow: 0 0 0 4px var(--color-ivory);
   }
   .mapAside {
     top: 88%;
     left: 4%;
-    font-size: 14px;
+    font-size: var(--type-ui);
   }
   .mapLegend {
     margin-top: 28px;

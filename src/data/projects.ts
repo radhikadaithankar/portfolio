@@ -61,7 +61,7 @@ export const projects: Project[] = [
     category: "Product",
     discipline: "School operations · Parent engagement",
     summary:
-      "The school website and CIS Compass, Evaradh's school management app, with AI support for teacher tasks and class-level explanations. In use at Chintamani International School.",
+      "The school website and CIS Compass, Evaradh's school management app, with AI support for teacher tasks and class-level explanations.",
     contribution:
       "I independently built the school website and CIS Compass, including the role-based workflows, attendance, parent notifications and appointment booking.",
     question:

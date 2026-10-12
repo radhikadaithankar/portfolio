@@ -112,8 +112,9 @@ function Network() {
         y="18"
         textAnchor="middle"
         fill="currentColor"
-        fontSize="9"
-        letterSpacing="2"
+        fontSize="10"
+        fontWeight="600"
+        letterSpacing="1"
       >
         RESIDUAL CONNECTION
       </text>
@@ -159,7 +160,7 @@ function Generative() {
         x="259"
         y="123"
         textAnchor="middle"
-        fontFamily="Georgia,serif"
+        style={{ fontFamily: "var(--font-serif)" }}
         fontStyle="italic"
         fontSize="32"
         fill="currentColor"
@@ -179,7 +180,7 @@ function Generative() {
         x="398"
         y="123"
         textAnchor="middle"
-        fontFamily="Georgia,serif"
+        style={{ fontFamily: "var(--font-serif)" }}
         fontStyle="italic"
         fontSize="32"
         fill="currentColor"
@@ -197,9 +198,10 @@ function Generative() {
         x="329"
         y="220"
         textAnchor="middle"
-        fontSize="9"
+        fontSize="10"
         fill="currentColor"
-        letterSpacing="2"
+        letterSpacing="1"
+        fontWeight="600"
       >
         FEEDBACK
       </text>
@@ -295,8 +297,9 @@ function Gesture() {
         x="375"
         y="170"
         textAnchor="middle"
-        fontSize="9"
-        letterSpacing="2"
+        fontSize="10"
+        fontWeight="600"
+        letterSpacing="1"
         fill="currentColor"
       >
         MOTOR

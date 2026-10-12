@@ -23,13 +23,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = projects.find((item) => item.slug === slug);
   if (!project) return { title: "Project not found" };
+  const description = [project.summary, project.resultLine]
+    .filter(Boolean)
+    .join(" ");
   return {
     title: `${project.shortTitle} | Radhika Daithankar`,
-    description: project.summary,
+    description,
     alternates: { canonical: `/work/${project.slug}` },
     openGraph: {
       title: `${project.shortTitle} | Radhika Daithankar`,
-      description: project.summary,
+      description,
       url: absoluteUrl(`/work/${project.slug}`),
       siteName: "Radhika Daithankar",
       type: "website",
@@ -38,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: `${project.shortTitle} | Radhika Daithankar`,
-      description: project.summary,
+      description,
       images: [socialImage.url],
     },
   };
