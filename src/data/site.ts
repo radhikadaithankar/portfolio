@@ -61,7 +61,17 @@ export const toolkit = [
   },
   {
     group: "Building",
-    items: ["Flutter", "Bootstrap", "ROS", "Arduino"],
+    items: [
+      "Flutter",
+      "TypeScript",
+      "Node.js & Express",
+      "React",
+      "PostgreSQL & Prisma",
+      "Firebase",
+      "Gemini API",
+      "ROS",
+      "Arduino",
+    ],
   },
 ];
 

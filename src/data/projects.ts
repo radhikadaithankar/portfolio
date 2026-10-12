@@ -139,6 +139,10 @@ export const projects: Project[] = [
         text: "I built a booking workflow where teachers publish their availability and parents reserve designated appointment slots.",
       },
       {
+        title: "How it's built",
+        text: "The teacher and parent apps are written in Flutter for Android and iOS. A TypeScript, Node.js and Express API with Prisma and PostgreSQL serves them and a React admin dashboard. Firebase Cloud Messaging delivers notifications, and the AI assistant runs on Google's Gemini API. The public school website is built with React and Vite and served from Cloudflare.",
+      },
+      {
         title: "The rest of the school day",
         text: "The same system covers assessments, behaviour, leave, timetables, calendars and parent–teacher appointments, alongside fees, notices and homework.",
       },
