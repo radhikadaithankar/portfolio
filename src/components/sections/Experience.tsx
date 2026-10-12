@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { roles } from "@/data/site";
+import { education, roles, toolkit } from "@/data/site";
 
 export function Experience() {
   return (
@@ -70,6 +70,39 @@ export function Experience() {
           </li>
         ))}
       </ol>
+      <div className="credentials">
+        <div className="credentials-block">
+          <h3 className="eyebrow">Toolkit</h3>
+          <dl className="toolkit">
+            {toolkit.map((set) => (
+              <div className="toolkit-row" key={set.group}>
+                <dt>{set.group}</dt>
+                <dd>
+                  <ul>
+                    {set.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div className="credentials-block">
+          <h3 className="eyebrow">Education</h3>
+          <ul className="education-list">
+            {education.map((item) => (
+              <li key={item.degree}>
+                <strong>{item.degree}</strong>
+                <span>
+                  {item.school} · {item.place}
+                </span>
+                <span className="education-period">{item.period}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </section>
   );
 }

@@ -1,4 +1,4 @@
-import { company, contact, education, school } from "@/data/site";
+import { company, contact, school } from "@/data/site";
 import { JourneyMap } from "@/components/JourneyMap";
 
 export function About() {
@@ -82,25 +82,6 @@ export function About() {
               <span aria-hidden="true">↗</span>
             </a>
           </nav>
-          <details className="background-details">
-            <summary>
-              Education
-              <span className="details-plus" aria-hidden="true">
-                +
-              </span>
-            </summary>
-            <div className="background-content">
-              {education.map((item) => (
-                <div className="background-row" key={item.degree}>
-                  <div>
-                    <strong>{item.degree}</strong>
-                    <span>{item.school}</span>
-                  </div>
-                  <span>{item.period}</span>
-                </div>
-              ))}
-            </div>
-          </details>
         </div>
       </div>
     </section>
