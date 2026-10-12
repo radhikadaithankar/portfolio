@@ -19,6 +19,11 @@ const revealTargets = [
   ".contact-main",
 ].join(", ");
 
+/** Italic heading words wipe in from the left. */
+const wipeTargets = "main h2 em";
+/** Groups whose children enter one after another. */
+const cascadeTargets = ".toolkit ul, .education-list";
+
 /** Content stays readable before JavaScript and when any enhancement is cancelled. */
 export function PortfolioMotion() {
   const progress = useRef<HTMLDivElement>(null);
@@ -66,6 +71,66 @@ export function PortfolioMotion() {
       { threshold: 0.06 },
     );
 
+    function track(animation: Animation) {
+      animations.add(animation);
+      animation.onfinish = () => animations.delete(animation);
+    }
+    function wipe(element: Element) {
+      track(
+        element.animate(
+          [
+            { clipPath: "inset(-20% 100% -30% -5%)", translate: "-0.12em 0" },
+            { clipPath: "inset(-20% -10% -30% -5%)", translate: "0 0" },
+          ],
+          {
+            duration: motion.duration.reveal * 1.4,
+            delay: motion.duration.standard,
+            easing: motion.ease,
+            fill: "backwards",
+          },
+        ),
+      );
+    }
+    function cascade(group: Element) {
+      [...group.children].forEach((child, index) =>
+        track(
+          child.animate(
+            [
+              { opacity: 0, scale: "0.86", translate: "0 8px" },
+              { opacity: 1, scale: "1", translate: "0 0" },
+            ],
+            {
+              duration: motion.duration.reveal,
+              delay: motion.duration.fast + index * 45,
+              easing: motion.ease,
+              fill: "backwards",
+            },
+          ),
+        ),
+      );
+    }
+    function inView(element: Element) {
+      const box = element.getBoundingClientRect();
+      return box.height > 0 && box.top < innerHeight && box.bottom > 0;
+    }
+    const extras = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          extras.unobserve(entry.target);
+          if (entry.boundingClientRect.top < 0) continue;
+          if (entry.target.matches(wipeTargets)) wipe(entry.target);
+          else cascade(entry.target);
+        }
+      },
+      { threshold: 0.2 },
+    );
+    document
+      .querySelectorAll(`${wipeTargets}, ${cascadeTargets}`)
+      .forEach((element) => {
+        if (!inView(element)) extras.observe(element);
+      });
+
     function observe(element: Element, newlyAdded = false) {
       if (seen.current.has(element)) return;
       const box = element.getBoundingClientRect();
@@ -111,6 +176,7 @@ export function PortfolioMotion() {
     const storyBar = document.querySelector<HTMLElement>(
       ".story-scroll-progress span",
     );
+    const timeline = document.querySelector<HTMLElement>(".experience-list");
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
     let frame = 0;
     let range = 1;
@@ -118,6 +184,11 @@ export function PortfolioMotion() {
     function update() {
       frame = 0;
       if (bar) bar.style.transform = `scaleX(${clamp(scrollY / range)})`;
+      if (timeline) {
+        const rect = timeline.getBoundingClientRect();
+        const filled = clamp((innerHeight * 0.6 - rect.top) / rect.height);
+        timeline.style.setProperty("--timeline", filled.toFixed(4));
+      }
       if (!story) return;
       const rect = story.getBoundingClientRect();
       const position = clamp(
@@ -144,6 +215,7 @@ export function PortfolioMotion() {
     measure();
     return () => {
       observer.disconnect();
+      extras.disconnect();
       gridObserver.disconnect();
       resize.disconnect();
       animations.forEach((animation) => animation.cancel());
@@ -154,6 +226,7 @@ export function PortfolioMotion() {
       bar?.style.removeProperty("transform");
       landscape?.style.removeProperty("translate");
       storyBar?.style.removeProperty("transform");
+      timeline?.style.removeProperty("--timeline");
     };
   }, [reduced]);
 

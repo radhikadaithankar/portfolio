@@ -2425,6 +2425,71 @@ h2 {
   height: 100%;
 }
 
+/* Ambient and scroll-linked motion. Static states read correctly without it. */
+h2 em {
+  display: inline-block;
+}
+.headline-star,
+.contact-top > span {
+  display: inline-block;
+  animation: star-turn 24s linear infinite;
+}
+.tiny-star {
+  display: inline-block;
+  animation: star-turn 12s linear infinite;
+}
+@keyframes star-turn {
+  to {
+    rotate: 360deg;
+  }
+}
+.board-orbit {
+  animation: orbit-drift 16s ease-in-out infinite alternate;
+}
+.orbit-two {
+  animation-duration: 21s;
+  animation-direction: alternate-reverse;
+}
+@keyframes orbit-drift {
+  from {
+    rotate: -5deg;
+    scale: 0.98;
+  }
+  to {
+    rotate: 6deg;
+    scale: 1.02;
+  }
+}
+.experience-list {
+  position: relative;
+  --timeline: 1;
+}
+.experience-list::before,
+.experience-list::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -18px;
+  width: 2px;
+  border-radius: 2px;
+  pointer-events: none;
+}
+.experience-list::before {
+  background: var(--rule);
+}
+.experience-list::after {
+  background: var(--color-terracotta);
+  transform-origin: top;
+  transform: scaleY(var(--timeline));
+}
+@media (max-width: 700px) {
+  .experience-list::before,
+  .experience-list::after {
+    left: -11px;
+  }
+}
+
 /* Manual choice wins over the OS; the OS still works without JavaScript. */
 
 html[data-motion="reduce"] *,
