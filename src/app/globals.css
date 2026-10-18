@@ -2184,9 +2184,20 @@ h2 {
   pointer-events: none;
   animation: robot-hint-in var(--motion-reveal) var(--motion-ease) both;
 }
-.robot-hint > span {
+.robot-hint > span:not([class]) {
   margin-inline: 4px;
   color: var(--color-terracotta);
+}
+.hint-coarse {
+  display: none;
+}
+@media (hover: none), (pointer: coarse) {
+  .hint-fine {
+    display: none;
+  }
+  .hint-coarse {
+    display: inline;
+  }
 }
 @keyframes robot-hint-in {
   from {
@@ -2266,6 +2277,160 @@ h2 em {
   }
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.hero-letter {
+  display: inline-block;
+  transition:
+    translate var(--motion-standard) var(--motion-ease),
+    color var(--motion-standard) var(--motion-ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .hero-letter:hover {
+    translate: 0 -0.09em;
+    transition-duration: var(--motion-fast);
+  }
+  h1 > .hero-letters .hero-letter:hover {
+    color: var(--color-terracotta);
+  }
+  h1 em .hero-letter:hover {
+    color: var(--wine);
+  }
+}
+
+/* Decorative skill sphere under Education. */
+.skill-orb {
+  margin-top: 28px;
+}
+.skill-orb-stage {
+  position: relative;
+  height: 390px;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  isolation: isolate;
+}
+.skill-orb-stage:active {
+  cursor: grabbing;
+}
+.skill-orb-core {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 312px;
+  height: 312px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  border: 1px dashed var(--rule);
+  background: radial-gradient(
+    circle at 35% 30%,
+    var(--color-cream),
+    transparent 70%
+  );
+  z-index: 0;
+}
+.skill-orb-tag {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 3px 8px;
+  border: 1px solid color-mix(in srgb, var(--tone) 40%, transparent);
+  border-radius: 3px;
+  background: var(--color-ivory);
+  color: var(--tone);
+  font-size: var(--type-caption);
+  font-weight: 500;
+  white-space: nowrap;
+  will-change: transform, opacity;
+  transition:
+    color var(--motion-fast) var(--motion-ease),
+    border-color var(--motion-fast) var(--motion-ease);
+}
+.skill-orb-tag[data-dim],
+.credentials:has(.toolkit-row:nth-child(1):hover)
+  .skill-orb-tag:not([data-group="0"]),
+.credentials:has(.toolkit-row:nth-child(2):hover)
+  .skill-orb-tag:not([data-group="1"]),
+.credentials:has(.toolkit-row:nth-child(3):hover)
+  .skill-orb-tag:not([data-group="2"]) {
+  color: #c2b6ad;
+  border-color: var(--rule);
+}
+.toolkit-row {
+  transition: background var(--motion-fast) var(--motion-ease);
+}
+.toolkit-row:hover {
+  background: color-mix(in srgb, var(--color-cream) 70%, transparent);
+}
+.skill-orb-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  font-size: var(--type-caption);
+  color: var(--muted);
+}
+.skill-orb-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: default;
+}
+.skill-orb-legend > span::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tone);
+}
+.skill-orb-legend > span[data-active] {
+  color: var(--color-ink);
+}
+.skill-orb-legend small {
+  margin-left: auto;
+  font-size: var(--type-caption);
+}
+@media (max-width: 500px) {
+  .skill-orb-stage {
+    height: 300px;
+  }
+  .skill-orb-core {
+    width: 220px;
+    height: 220px;
+  }
+  .skill-orb-tag {
+    font-size: var(--type-micro);
+  }
+}
+
+/* CIS phones swing in from an angle as the featured card scrolls up. */
+.featured-project .cis-app-screens {
+  perspective: 1100px;
+}
+.featured-project .cis-app-screens figure {
+  transition: rotate 120ms linear;
+}
+.featured-project .cis-app-screens figure:first-child {
+  rotate: -0.25 1 0 calc(var(--phone-turn, 0) * 28deg);
+  translate: calc(var(--phone-turn, 0) * -24px) 0;
+}
+.featured-project .cis-app-screens figure:last-child {
+  rotate: 0.25 1 0 calc(var(--phone-turn, 0) * -28deg);
+  translate: calc(var(--phone-turn, 0) * 24px) 0;
+}
+.button,
+.nav-contact {
+  transition:
+    background var(--motion-fast) var(--motion-ease),
+    transform var(--motion-fast) var(--motion-ease),
+    translate var(--motion-standard) var(--motion-ease);
+}
+
 /* Manual choice wins over the OS; the OS still works without JavaScript. */
 
 html[data-motion="reduce"] *,
@@ -2284,6 +2449,9 @@ html[data-motion="reduce"]
   :is(.project-visual-link, figure, .project-visual-target, .project-open) {
   transform: none !important;
   scale: none !important;
+}
+html[data-motion="reduce"] .hero-letter {
+  translate: none !important;
 }
 html[data-motion="reduce"] :is(.button span, .live-website-arrow) {
   translate: none !important;
@@ -2309,6 +2477,9 @@ html[data-motion="reduce"] .project-tilt .project-visual-link::after {
     :is(.project-visual-link, figure, .project-visual-target, .project-open) {
     transform: none !important;
     scale: none !important;
+  }
+  html:not([data-motion="full"]) .hero-letter {
+    translate: none !important;
   }
   html:not([data-motion="full"]) :is(.button span, .live-website-arrow) {
     translate: none !important;

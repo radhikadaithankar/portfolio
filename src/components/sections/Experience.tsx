@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { education, roles, toolkit } from "@/data/site";
+import { SkillOrb } from "@/components/SkillOrb";
 
 export function Experience() {
   return (
@@ -101,6 +102,7 @@ export function Experience() {
               </li>
             ))}
           </ul>
+          <SkillOrb />
         </div>
       </div>
     </section>

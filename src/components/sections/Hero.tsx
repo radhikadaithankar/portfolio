@@ -1,5 +1,18 @@
 import { HeroRobot } from "../HeroRobot";
-import { positioning } from "@/data/site";
+import { identity, positioning } from "@/data/site";
+
+/** Letters lift under the pointer; the heading keeps one readable name. */
+function Letters({ text }: { text: string }) {
+  return (
+    <span className="hero-letters" aria-hidden="true">
+      {[...text].map((letter, index) => (
+        <span key={index} className="hero-letter">
+          {letter}
+        </span>
+      ))}
+    </span>
+  );
+}
 
 export function Hero() {
   return (
@@ -12,12 +25,15 @@ export function Hero() {
           AI engineer & builder
         </p>
         <h1>
-          Radhika
+          <span className="sr-only">{identity.fullName}</span>
+          <Letters text={identity.firstName} />
           <span className="headline-star" aria-hidden="true">
             ✳
           </span>
           <br />
-          <em>Daithankar.</em>
+          <em>
+            <Letters text={`${identity.lastName}.`} />
+          </em>
         </h1>
         <p className="hero-tagline">{positioning.statement}</p>
         <p className="hero-description">{positioning.supporting}</p>

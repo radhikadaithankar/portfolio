@@ -177,6 +177,9 @@ export function PortfolioMotion() {
       ".story-scroll-progress span",
     );
     const timeline = document.querySelector<HTMLElement>(".experience-list");
+    const phones = document.querySelector<HTMLElement>(
+      ".featured-project .cis-app-screens",
+    );
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
     let frame = 0;
     let range = 1;
@@ -184,6 +187,13 @@ export function PortfolioMotion() {
     function update() {
       frame = 0;
       if (bar) bar.style.transform = `scaleX(${clamp(scrollY / range)})`;
+      if (phones) {
+        // 1 while the phones enter from below, 0 once they reach mid-screen.
+        const rect = phones.getBoundingClientRect();
+        const centre = rect.top + rect.height / 2;
+        const turn = clamp((centre - innerHeight * 0.5) / (innerHeight * 0.5));
+        phones.style.setProperty("--phone-turn", turn.toFixed(3));
+      }
       if (timeline) {
         const rect = timeline.getBoundingClientRect();
         const filled = clamp((innerHeight * 0.6 - rect.top) / rect.height);
@@ -212,8 +222,33 @@ export function PortfolioMotion() {
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", measure, { passive: true });
     fine.addEventListener("change", schedule);
+    // Primary buttons lean a few pixels toward a precise pointer.
+    const magnets = [
+      ...document.querySelectorAll<HTMLElement>(".button, .nav-contact"),
+    ];
+    function pull(event: PointerEvent) {
+      if (!fine.matches) return;
+      const target = event.currentTarget as HTMLElement;
+      const box = target.getBoundingClientRect();
+      const x = (event.clientX - box.left - box.width / 2) / box.width;
+      const y = (event.clientY - box.top - box.height / 2) / box.height;
+      target.style.translate = `${(x * 8).toFixed(1)}px ${(y * 6).toFixed(1)}px`;
+    }
+    function release(event: PointerEvent) {
+      (event.currentTarget as HTMLElement).style.removeProperty("translate");
+    }
+    magnets.forEach((magnet) => {
+      magnet.addEventListener("pointermove", pull);
+      magnet.addEventListener("pointerleave", release);
+    });
     measure();
     return () => {
+      magnets.forEach((magnet) => {
+        magnet.removeEventListener("pointermove", pull);
+        magnet.removeEventListener("pointerleave", release);
+        magnet.style.removeProperty("translate");
+      });
+      phones?.style.removeProperty("--phone-turn");
       observer.disconnect();
       extras.disconnect();
       gridObserver.disconnect();

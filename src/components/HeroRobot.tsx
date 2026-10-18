@@ -38,8 +38,8 @@ function deviceAllowsScene() {
     deviceMemory?: number;
     connection?: { saveData?: boolean };
   };
+  // Phones are welcome when they have the cores and memory for WebGL.
   return (
-    window.matchMedia("(min-width: 900px)").matches &&
     (device.hardwareConcurrency || 8) > 4 &&
     (device.deviceMemory ?? 8) > 4 &&
     !device.connection?.saveData
@@ -149,7 +149,10 @@ export function HeroRobot() {
       </div>
       {live && ready && (
         <span className="robot-hint">
-          Drag to spin <span>·</span> Click to draw
+          <span className="hint-fine">Drag to spin</span>
+          <span className="hint-coarse">Swipe to spin</span> <span>·</span>{" "}
+          <span className="hint-fine">Click to draw</span>
+          <span className="hint-coarse">Tap to draw</span>
         </span>
       )}
       <span className="board-foot">
