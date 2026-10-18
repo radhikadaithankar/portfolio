@@ -158,7 +158,7 @@ export const projects: Project[] = [
   {
     slug: "panda-manipulator",
     collection: "Featured",
-    number: "04",
+    number: "02",
     title: "Cartesian motion for a Panda robot",
     shortTitle: "Panda robot motion planning",
     category: "Robotics",
@@ -197,7 +197,7 @@ export const projects: Project[] = [
   {
     slug: "gesture-wheelchair",
     collection: "Featured",
-    number: "05",
+    number: "03",
     title: "Gesture-controlled wheelchair",
     shortTitle: "Gesture-controlled wheelchair",
     category: "Robotics",
@@ -236,7 +236,7 @@ export const projects: Project[] = [
   {
     slug: "image-classification",
     collection: "Academic experiments",
-    number: "02",
+    number: "04",
     title: "ResNet18 & VGG13",
     shortTitle: "Image classification with ResNet18 & VGG13",
     category: "AI & ML",
@@ -279,7 +279,7 @@ export const projects: Project[] = [
   {
     slug: "generative-networks",
     collection: "Academic experiments",
-    number: "03",
+    number: "05",
     title: "Generative adversarial networks",
     shortTitle: "Generative adversarial networks",
     category: "AI & ML",

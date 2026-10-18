@@ -26,12 +26,14 @@ The first cream-and-terracotta design has been restored, with the later verified
 - `src/data/projects.ts`: project facts and individual page content.
 - `src/components/sections/`: homepage hero, filterable work gallery, visible work experience, about and contact.
 - `src/data/journey.ts`: six chapters adapted from Radhika's personal story. Unreleased ideas remain labelled as explorations.
-- `src/components/JourneyMap.tsx`: interactive story map with chapter selection, keyboard navigation, reduced-motion support and a native disclosure containing the complete story. The route is schematic, not geographic.
-- `src/components/PortfolioMotion.tsx`: scroll reveals, staggered project-filter entrances, story parallax and reading progress. Above-the-fold text paints without an entrance delay; all enhancements clean up on navigation.
+- `src/components/JourneyMap.tsx`: interactive story map with chapter selection, keyboard navigation, reduced-motion support and a native disclosure containing the complete story. On screens at least 1051px wide where the stage fits below the sticky header, the map pins and each scroll step advances a chapter; stops and Previous/Next scroll to their chapter. Smaller screens keep click-through navigation. The route is schematic, not geographic.
+- `src/components/PortfolioMotion.tsx`: scroll reveals, staggered project-filter entrances, heading wipes, toolkit cascades, the experience timeline fill, the CIS phones' scroll-linked 3D swing, magnetic buttons, story parallax and reading progress. Above-the-fold text paints without an entrance delay; all enhancements clean up on navigation.
+- `src/components/HeroRobot.tsx` and `RobotArmScene.tsx`: the idle-loaded three.js arm. It follows the pointer, spins when dragged and traces a rose with its gripper when clicked or tapped. It runs on any device with more than four cores and four GB of memory, including phones, and falls back to `RobotArmFallback.tsx` for reduced motion or no WebGL.
+- `src/components/SkillOrb.tsx`: a decorative, draggable CSS 3D sphere of the toolkit under Education. The toolkit list remains the accessible source.
 - `src/components/CISAppScreens.tsx`: public teacher and parent app previews.
 - `src/components/ProjectVisual.tsx`: project visuals and technical concept diagrams.
 - `src/app/work/[slug]/page.tsx`: statically generated project pages.
-- `src/app/globals.css`: restored layout, responsive styles and interaction states.
+- `src/app/globals.css`: layout, responsive styles and interaction states. Font sizes come from the `--type-*` scale on `:root`; add a token rather than a one-off size.
 - `src/app/opengraph-image.tsx`: social sharing image.
 
 The project gallery uses client state for category filters. Navigation, scrolling and the background disclosure use native browser behavior. Later design explorations remain in `src/components/studio/` and `src/design-archive/`, outside public routes. Files under `docs/` record design evaluations and the [site audit](docs/gap-audit.md).

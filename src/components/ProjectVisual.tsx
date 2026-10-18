@@ -1,5 +1,5 @@
 import { CISAppScreens } from "./CISAppScreens";
-import type { Project } from "@/data/projects";
+import { projects, type Project } from "@/data/projects";
 
 export function ProjectVisual({
   kind,
@@ -26,13 +26,7 @@ export function ProjectVisual({
                 : "HUMAN → MACHINE"}
         </span>
         <span>
-          {kind === "networks"
-            ? "02"
-            : kind === "gan"
-              ? "03"
-              : kind === "robot"
-                ? "04"
-                : "05"}
+          {projects.find((project) => project.visual === kind)?.number}
         </span>
       </div>
       {kind === "networks" ? (

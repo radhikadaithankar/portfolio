@@ -1285,6 +1285,8 @@ h2 {
 }
 .case-scope li::before {
   content: "0" counter(scope);
+  flex: 0 0 2.2ch;
+  font-variant-numeric: tabular-nums;
   color: var(--color-terracotta);
   font-size: var(--type-caption);
   padding-top: 3px;
