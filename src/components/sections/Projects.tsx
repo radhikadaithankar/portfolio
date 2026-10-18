@@ -1,31 +1,54 @@
-"use client";
-
-import { useState } from "react";
-import { notebooks, projects } from "@/data/projects";
+import Link from "next/link";
+import { notebooks, projects, type Project } from "@/data/projects";
 import { contact } from "@/data/site";
-import { ProjectCard } from "../ProjectCard";
+import { CardTilt } from "../CardTilt";
+import { LiveWebsites } from "../LiveWebsites";
+import { ProjectMedia } from "../ProjectMedia";
+import { ProjectVisual } from "../ProjectVisual";
 
-const filters = ["All work", "Product", "AI & ML", "Robotics"] as const;
+/** A whole-tile link; the visual tilts while text and hit area stay put. */
+function Tile({ project }: { project: Project }) {
+  const academic = project.collection === "Academic experiments";
+  return (
+    <article className={`bento-tile tile-${project.visual}`}>
+      <CardTilt>
+        <div className="project-visual-link">
+          <ProjectVisual kind={project.visual} />
+        </div>
+      </CardTilt>
+      <div className="bento-copy">
+        <p className="eyebrow">
+          <span>{project.number}</span> / {project.discipline}
+        </p>
+        <h3>
+          <Link className="bento-link" href={`/work/${project.slug}`}>
+            {project.shortTitle}
+          </Link>
+        </h3>
+        <p className="bento-summary">{project.summary}</p>
+        <ul className="project-tags">
+          {academic && <li className="tag-accent">Academic</li>}
+          {project.tools.map((tool) => (
+            <li key={tool}>{tool}</li>
+          ))}
+        </ul>
+      </div>
+      <span className="bento-arrow" aria-hidden="true">
+        ↗
+      </span>
+    </article>
+  );
+}
 
 export function Projects() {
-  const [filter, setFilter] = useState<(typeof filters)[number]>("All work");
-  const visible =
-    filter === "All work"
-      ? projects
-      : projects.filter((project) => project.category === filter);
-  const featured = visible.filter(
-    (project) => project.collection === "Featured",
-  );
-  const academic = visible.filter(
-    (project) => project.collection === "Academic experiments",
-  );
-  const visibleNotebooks =
-    filter === "All work" || filter === "AI & ML" ? notebooks : [];
+  const [featured, ...rest] = projects;
   return (
     <section id="projects" className="work-section shell">
       <div className="section-topline">
         <span className="eyebrow">01 / Selected work</span>
-        <span className="eyebrow muted">An idea is a good place to start.</span>
+        <span className="eyebrow muted">
+          {projects.length} projects · {notebooks.length} notebooks
+        </span>
       </div>
       <div className="work-heading">
         <h2>
@@ -34,109 +57,95 @@ export function Projects() {
           <em>A lot of making.</em>
         </h2>
         <p>
-          Products, models and machines.
-          <br />
-          Each project built independently by me.
+          Products, models and machines. Each project built independently by me.
         </p>
       </div>
-      <div className="work-toolbar">
-        <div
-          className="project-filters"
-          role="group"
-          aria-label="Filter projects"
-        >
-          {filters.map((item) => (
-            <button
-              key={item}
-              onClick={() => setFilter(item)}
-              aria-pressed={filter === item}
-              className={filter === item ? "filter active" : "filter"}
-            >
-              {item}
-              {item === "All work" && (
-                <span aria-hidden="true">
-                  {String(projects.length).padStart(2, "0")}
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
-        <span className="project-count" role="status">
-          {visible.length} {visible.length === 1 ? "project" : "projects"}
-          {visibleNotebooks.length > 0 &&
-            ` · ${visibleNotebooks.length} notebooks`}
-        </span>
-      </div>
-      <div className="work-collections">
-        {featured.length > 0 && (
-          <section
-            className="work-collection"
-            aria-labelledby="featured-heading"
-          >
-            <h3 id="featured-heading" className="eyebrow collection-heading">
-              Featured
-            </h3>
-            <div className="project-grid">
-              {featured.map((project) => (
-                <ProjectCard key={project.slug} project={project} />
-              ))}
+
+      <div className="bento">
+        <article className="bento-feature featured-project">
+          <CardTilt>
+            <div className="project-visual-link">
+              <ProjectVisual kind={featured.visual} />
             </div>
-          </section>
-        )}
-        {(academic.length > 0 || visibleNotebooks.length > 0) && (
-          <section
-            className="notebook-section"
-            aria-labelledby="academic-heading"
-          >
-            <div className="notebook-heading">
-              <h3 id="academic-heading">
-                Academic <em>experiments.</em>
-              </h3>
+          </CardTilt>
+          <div className="bento-feature-copy">
+            <p className="eyebrow">
+              <span>{featured.number}</span> / {featured.discipline}
+            </p>
+            {featured.context && (
+              <p className="project-metadata">{featured.context}</p>
+            )}
+            <h3>
+              <Link href={`/work/${featured.slug}`}>{featured.title}</Link>
+            </h3>
+            <p className="bento-summary">{featured.summary}</p>
+            {featured.resultLine?.trim() && (
+              <p className="project-result">
+                <span className="status-dot" aria-hidden="true" />
+                {featured.resultLine}
+              </p>
+            )}
+            <ProjectMedia media={featured.media} />
+            <ul className="project-tags">
+              {featured.tools.map((tool) => (
+                <li key={tool}>{tool}</li>
+              ))}
+            </ul>
+            <Link
+              className="button button-dark"
+              href={`/work/${featured.slug}`}
+            >
+              Read the case study <span aria-hidden="true">↗</span>
+            </Link>
+            <LiveWebsites />
+          </div>
+        </article>
+
+        {rest.map((project) => (
+          <Tile key={project.slug} project={project} />
+        ))}
+
+        {notebooks.map((notebook) => (
+          <article className="bento-note" key={notebook.url}>
+            <p className="eyebrow">Notebook</p>
+            <h3>
               <a
-                className="text-link"
-                href={contact.github}
+                className="bento-link"
+                href={notebook.url}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Browse my GitHub <span aria-hidden="true">↗</span>
+                {notebook.title}
               </a>
-            </div>
-            <p className="notebook-intro">
-              Academic experiments in the methods behind the models. Open the
-              notebooks to explore the code.
-            </p>
-            {academic.length > 0 && (
-              <div className="project-grid">
-                {academic.map((project) => (
-                  <ProjectCard key={project.slug} project={project} />
-                ))}
-              </div>
-            )}
-            {visibleNotebooks.length > 0 && (
-              <div className="notebook-grid">
-                {visibleNotebooks.map((notebook) => (
-                  <article className="notebook-card" key={notebook.url}>
-                    <h4>{notebook.title}</h4>
-                    <p>{notebook.description}</p>
-                    <ul className="project-tags">
-                      {notebook.tools.map((tool) => (
-                        <li key={tool}>{tool}</li>
-                      ))}
-                    </ul>
-                    <a
-                      className="text-link"
-                      href={notebook.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Explore the notebook <span aria-hidden="true">↗</span>
-                    </a>
-                  </article>
-                ))}
-              </div>
-            )}
-          </section>
-        )}
+            </h3>
+            <p className="bento-summary">{notebook.description}</p>
+            <ul className="project-tags">
+              {notebook.tools.map((tool) => (
+                <li key={tool}>{tool}</li>
+              ))}
+            </ul>
+            <span className="bento-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </article>
+        ))}
+
+        <a
+          className="bento-github"
+          href={contact.github}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className="eyebrow">More on GitHub</span>
+          <strong>
+            Notebooks, experiments
+            <br />
+            and code.
+          </strong>
+          <span className="bento-arrow" aria-hidden="true">
+            ↗
+          </span>
+        </a>
       </div>
     </section>
   );

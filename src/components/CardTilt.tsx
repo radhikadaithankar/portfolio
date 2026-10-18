@@ -12,6 +12,8 @@ export function CardTilt({ children }: { children: ReactNode }) {
     const element = ref.current;
     if (!element || reduced) return;
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
+    // A whole-tile link can sit above the visual, so listen on the tile.
+    const host = element.closest<HTMLElement>("article") ?? element;
     let frame = 0;
     let x = 0;
     let y = 0;
@@ -43,17 +45,17 @@ export function CardTilt({ children }: { children: ReactNode }) {
         element!.style.setProperty("--glare-y", `${(y + 1) * 50}%`);
       });
     }
-    element.addEventListener("pointermove", move, { passive: true });
-    element.addEventListener("pointerleave", reset);
-    element.addEventListener("pointercancel", reset);
-    element.addEventListener("focusin", reset);
+    host.addEventListener("pointermove", move, { passive: true });
+    host.addEventListener("pointerleave", reset);
+    host.addEventListener("pointercancel", reset);
+    host.addEventListener("focusin", reset);
     fine.addEventListener("change", reset);
     return () => {
       reset();
-      element.removeEventListener("pointermove", move);
-      element.removeEventListener("pointerleave", reset);
-      element.removeEventListener("pointercancel", reset);
-      element.removeEventListener("focusin", reset);
+      host.removeEventListener("pointermove", move);
+      host.removeEventListener("pointerleave", reset);
+      host.removeEventListener("pointercancel", reset);
+      host.removeEventListener("focusin", reset);
       fine.removeEventListener("change", reset);
     };
   }, [reduced]);

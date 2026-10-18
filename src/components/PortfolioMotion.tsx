@@ -6,12 +6,10 @@ import { useReducedMotion } from "@/lib/motion-preference";
 
 const revealTargets = [
   ".work-heading",
-  ".collection-heading",
-  ".project-card",
-  ".notebook-heading",
-  ".notebook-card",
-  ".experience-intro",
+  ".bento > *",
+  ".experience-aside",
   ".experience-role",
+  ".toolkit-band",
   ".story-intro",
   "#journey-start",
   "[data-story-chapter]",
@@ -22,7 +20,7 @@ const revealTargets = [
 /** Italic heading words wipe in from the left. */
 const wipeTargets = "main h2 em";
 /** Groups whose children enter one after another. */
-const cascadeTargets = ".toolkit ul, .education-list";
+const cascadeTargets = ".toolkit ul, .education-list, .hero-proof";
 
 /** Content stays readable before JavaScript and when any enhancement is cancelled. */
 export function PortfolioMotion() {
