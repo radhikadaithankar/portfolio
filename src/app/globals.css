@@ -680,6 +680,11 @@ h2 {
 .tile-gan {
   grid-column: span 4;
 }
+/* Wide tiles use a flatter frame so their art doesn't dominate the row. */
+.tile-robot .project-art,
+.tile-gan .project-art {
+  aspect-ratio: 2.2;
+}
 .tile-gesture .project-art,
 .tile-networks .project-art {
   aspect-ratio: auto;
@@ -737,9 +742,26 @@ h2 {
   border-color: #a7503755 !important;
   color: var(--color-terracotta) !important;
 }
+@media (max-width: 850px) {
+  .hero-proof {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .hero-proof a {
+    padding: 16px 48px 16px 18px;
+  }
+  .discipline-marquee {
+    margin-top: 40px;
+  }
+}
 @media (max-width: 1050px) {
   .bento {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tile-robot .project-art,
+  .tile-gan .project-art {
+    aspect-ratio: 1.62;
   }
   .tile-robot,
   .tile-gesture,
