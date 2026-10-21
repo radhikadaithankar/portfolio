@@ -14,8 +14,8 @@ export default function Image() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        background: "#f7f4ed",
-        color: "#33262c",
+        background: "#ffffff",
+        color: "#0a0a0a",
         width: "100%",
         height: "100%",
         padding: "58px 64px",
@@ -30,7 +30,7 @@ export default function Image() {
         }}
       >
         <span>Radhika Daithankar</span>
-        <span style={{ color: "#a75037" }}>Pune, India</span>
+        <span style={{ color: "#2b4bff" }}>Pune, India</span>
       </div>
       <div
         style={{
@@ -42,12 +42,12 @@ export default function Image() {
         }}
       >
         <span>Radhika</span>
-        <span style={{ color: "#a75037" }}>Daithankar.</span>
+        <span style={{ color: "#2b4bff" }}>Daithankar.</span>
       </div>
       <div
         style={{
           display: "flex",
-          borderTop: "1px solid #e2d8c9",
+          borderTop: "1px solid #e6e6e6",
           paddingTop: 25,
           fontSize: 21,
         }}

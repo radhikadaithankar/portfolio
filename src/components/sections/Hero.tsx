@@ -14,59 +14,53 @@ function Letters({ text }: { text: string }) {
   );
 }
 
-const proof = [
+const facts = [
   {
     label: "In production",
-    title: "CIS Compass",
+    value: "CIS Compass",
     detail: `In use at ${school.name}`,
     href: "#projects",
   },
   {
     label: "Education",
-    title: education[0].degree,
+    value: education[0].degree,
     detail: education[0].school,
     href: "#experience",
   },
   {
     label: "Founder",
-    title: company.name,
+    value: company.name,
     detail: "A technology product company",
     href: company.url,
   },
 ];
 
-const disciplines = [
-  "Software",
-  "Machine learning",
-  "Robotics",
-  "Product",
-  "Computer vision",
-  "School technology",
-];
-
 export function Hero() {
   return (
-    <>
-      <section id="top" className="portfolio-hero shell">
-        <div className="hero-intro">
-          <p className="eyebrow">
-            <span className="tiny-star" aria-hidden="true">
-              ✳
-            </span>{" "}
-            AI engineer & builder · {identity.location}
-          </p>
-          <h1>
-            <span className="sr-only">{identity.fullName}</span>
-            <Letters text={identity.firstName} />
-            <span className="headline-star" aria-hidden="true">
-              ✳
-            </span>
-            <br />
-            <em>
-              <Letters text={`${identity.lastName}.`} />
-            </em>
-          </h1>
-          <p className="hero-tagline">{positioning.statement}</p>
+    <section id="top" className="portfolio-hero shell">
+      <div className="hero-topline">
+        <p className="eyebrow">
+          <span className="status-dot" aria-hidden="true" />
+          {identity.discipline} — {identity.location}
+        </p>
+        <p className="eyebrow muted">Portfolio / {new Date().getFullYear()}</p>
+      </div>
+
+      <div className="hero-stage">
+        <h1>
+          <span className="sr-only">{identity.fullName}</span>
+          <Letters text={identity.firstName} />
+          <br />
+          <em>
+            <Letters text={`${identity.lastName}.`} />
+          </em>
+        </h1>
+        <HeroRobot />
+      </div>
+
+      <div className="hero-grid">
+        <p className="hero-tagline">{positioning.statement}</p>
+        <div className="hero-body">
           <p className="hero-description">{positioning.supporting}</p>
           <div className="hero-actions">
             <a className="button button-dark" href="#projects">
@@ -82,22 +76,21 @@ export function Hero() {
             </a>
           </div>
         </div>
-        <HeroRobot />
-        <ul className="hero-proof" aria-label="Highlights">
-          {proof.map((item) => {
-            const external = item.href.startsWith("http");
+        <ul className="hero-facts" aria-label="Highlights">
+          {facts.map((fact) => {
+            const external = fact.href.startsWith("http");
             return (
-              <li key={item.label}>
+              <li key={fact.label}>
                 <a
-                  href={item.href}
+                  href={fact.href}
                   {...(external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
                 >
-                  <span className="hero-proof-label">{item.label}</span>
-                  <strong>{item.title}</strong>
-                  <span className="hero-proof-detail">{item.detail}</span>
-                  <span className="hero-proof-arrow" aria-hidden="true">
+                  <span className="eyebrow">{fact.label}</span>
+                  <strong>{fact.value}</strong>
+                  <span className="hero-fact-detail">{fact.detail}</span>
+                  <span className="hero-fact-arrow" aria-hidden="true">
                     {external ? "↗" : "↘"}
                   </span>
                 </a>
@@ -105,21 +98,7 @@ export function Hero() {
             );
           })}
         </ul>
-      </section>
-      <div className="discipline-marquee" aria-hidden="true">
-        <div className="discipline-track">
-          {[0, 1].map((copy) => (
-            <span key={copy}>
-              {disciplines.map((item) => (
-                <span key={item}>
-                  {item}
-                  <i>✳</i>
-                </span>
-              ))}
-            </span>
-          ))}
-        </div>
       </div>
-    </>
+    </section>
   );
 }

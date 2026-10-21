@@ -1,21 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Inter_Tight, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { identity } from "@/data/site";
 import { siteOrigin, siteTitle, siteDescription, socialImage } from "@/lib/seo";
 import { motionStyles } from "@/lib/motion";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const interTight = Inter_Tight({
+  variable: "--font-inter-tight",
   subsets: ["latin"],
-  style: ["normal", "italic"],
-  axes: ["opsz"],
   display: "swap",
 });
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -59,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f4ed",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
@@ -70,7 +69,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       style={motionStyles}
       suppressHydrationWarning
-      className={`${fraunces.variable} ${manrope.variable} antialiased`}
+      className={`${interTight.variable} ${jetbrainsMono.variable} antialiased`}
     >
       <head>
         <script
