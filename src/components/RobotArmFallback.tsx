@@ -17,8 +17,8 @@ export function RobotArmFallback() {
           y2="360"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#ffffff" />
-          <stop offset="1" stopColor="#cbcbcb" />
+          <stop stopColor="#fff8e7" />
+          <stop offset="1" stopColor="#cdb097" />
         </linearGradient>
       </defs>
       <ellipse
@@ -26,22 +26,22 @@ export function RobotArmFallback() {
         cy="421"
         rx="151"
         ry="24"
-        fill="#252525"
+        fill="#5a1226"
         opacity=".06"
       />
-      <ellipse cx="236" cy="407" rx="78" ry="17" fill="#cbcbcb" />
-      <path d="M169 391v14c0 17 132 17 132 0v-14" fill="#aeaeae" />
+      <ellipse cx="236" cy="407" rx="78" ry="17" fill="#cdb097" />
+      <path d="M169 391v14c0 17 132 17 132 0v-14" fill="#b8947a" />
       <ellipse
         cx="235"
         cy="391"
         rx="66"
         ry="17"
         fill="url(#arm-enamel)"
-        stroke="#b8b8b8"
+        stroke="#c4b7ad"
       />
       <path
         d="M234 380v-48l-46-111 12-28 121 37 15 48"
-        stroke="#b8b8b8"
+        stroke="#c4b7ad"
         strokeWidth="45"
         strokeLinejoin="round"
       />
@@ -51,7 +51,7 @@ export function RobotArmFallback() {
         strokeWidth="38"
         strokeLinejoin="round"
       />
-      <g fill="#2b2b2b" stroke="#d5d5d5" strokeWidth="7">
+      <g fill="#5a1226" stroke="#dcd1c5" strokeWidth="7">
         <ellipse cx="234" cy="366" rx="22" ry="10" />
         <circle cx="234" cy="328" r="22" />
         <ellipse
@@ -72,14 +72,14 @@ export function RobotArmFallback() {
         <circle cx="323" cy="234" r="19" />
         <ellipse cx="337" cy="274" rx="17" ry="10" />
       </g>
-      <g fill="#ffffff" opacity=".75">
+      <g fill="#fff8e7" opacity=".75">
         <circle cx="234" cy="328" r="8" />
         <circle cx="203" cy="193" r="8" />
         <circle cx="323" cy="234" r="6" />
       </g>
       <path
         d="m323 284-2 24 9 10m23-37 7 22-6 12"
-        stroke="#2b2b2b"
+        stroke="#5a1226"
         strokeWidth="8"
         strokeLinejoin="round"
       />

@@ -88,15 +88,15 @@ function Network() {
             cx={85 + col * 104}
             cy={125 + (row - (count - 1) / 2) * 34}
             r="8"
-            fill={col === 3 ? "#8c9bff" : "#696969"}
-            stroke="#c4c4c4"
+            fill={col === 3 ? "#e0b7a0" : "#826e6c"}
+            stroke="#cec2b7"
             strokeWidth="1.3"
           />
         )),
       )}
       <path
         d="M85 59 V27 H293 V40"
-        stroke="#8c9bff"
+        stroke="#e0b7a0"
         strokeWidth="1.4"
         fill="none"
         strokeDasharray="4 5"
@@ -217,36 +217,36 @@ function Robot() {
       <path
         d="M286 162 l90 -24 58 38 -92 25 Z"
         fill="none"
-        stroke="#2b4bff"
+        stroke="#7b1c34"
         strokeWidth="1.5"
         strokeDasharray="5 4"
       />
       <path
         d="M107 206 L162 90 L274 64 L310 140"
         fill="none"
-        stroke="#c6c6c6"
+        stroke="#cfc4b8"
         strokeWidth="24"
         strokeLinejoin="round"
       />
       <path
         d="M107 206 L162 90 L274 64 L310 140"
         fill="none"
-        stroke="#606060"
+        stroke="#7a6665"
         strokeWidth="13"
         strokeLinejoin="round"
       />
-      <g fill="#e7e7e7" stroke="#606060" strokeWidth="4">
+      <g fill="#ebe2d3" stroke="#7a6665" strokeWidth="4">
         <circle cx="162" cy="90" r="14" />
         <circle cx="274" cy="64" r="12" />
       </g>
       <path
         d="M310 140 l7 15 -8 10 M310 140 l17 10 1 12"
         fill="none"
-        stroke="#606060"
+        stroke="#7a6665"
         strokeWidth="4"
       />
-      <rect x="71" y="205" width="79" height="12" rx="3" fill="#606060" />
-      <circle cx="324" cy="159" r="4" fill="#2b4bff" />
+      <rect x="71" y="205" width="79" height="12" rx="3" fill="#7a6665" />
+      <circle cx="324" cy="159" r="4" fill="#7b1c34" />
     </svg>
   );
 }
@@ -283,7 +283,7 @@ function Gesture() {
       <rect x="354" y="104" width="42" height="42" rx="5" fill="currentColor" />
       <path
         d="M375 134 V115 m-7 7 7-7 7 7"
-        stroke="#dedede"
+        stroke="#e3dacc"
         strokeWidth="2"
         fill="none"
       />

@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { education, roles, toolkit } from "@/data/site";
+import { SkillOrb } from "@/components/SkillOrb";
 
 export function Experience() {
   return (
     <section
       id="experience"
-      className="experience-section shell"
+      className="experience-section"
       aria-labelledby="experience-heading"
     >
-      <div className="experience-layout">
+      <div className="experience-layout shell">
         <aside className="experience-aside">
           <p className="eyebrow">02 / Along the way</p>
           <h2 id="experience-heading">
@@ -82,22 +83,28 @@ export function Experience() {
         </ol>
       </div>
 
-      <div className="toolkit-band">
-        <h3 className="eyebrow">Toolkit</h3>
-        <dl className="toolkit">
-          {toolkit.map((set) => (
-            <div className="toolkit-row" key={set.group}>
-              <dt>{set.group}</dt>
-              <dd>
-                <ul>
-                  {set.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </dd>
-            </div>
-          ))}
-        </dl>
+      <div className="toolkit-band shell">
+        <div className="toolkit-copy">
+          <h3 className="eyebrow">Toolkit</h3>
+          <p className="toolkit-lede">
+            The tools behind the work, from models to mobile apps.
+          </p>
+          <dl className="toolkit">
+            {toolkit.map((set) => (
+              <div className="toolkit-row" key={set.group}>
+                <dt>{set.group}</dt>
+                <dd>
+                  <ul>
+                    {set.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <SkillOrb />
       </div>
     </section>
   );

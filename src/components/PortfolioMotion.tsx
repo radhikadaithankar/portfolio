@@ -5,8 +5,6 @@ import { motion } from "@/lib/motion";
 import { useReducedMotion } from "@/lib/motion-preference";
 
 const revealTargets = [
-  ".work-heading",
-  ".bento > *",
   ".experience-aside",
   ".experience-role",
   ".toolkit-band",
@@ -175,9 +173,7 @@ export function PortfolioMotion() {
       ".story-scroll-progress span",
     );
     const timeline = document.querySelector<HTMLElement>(".experience-list");
-    const phones = document.querySelector<HTMLElement>(
-      ".featured-project .cis-app-screens",
-    );
+    const hero = document.querySelector<HTMLElement>(".hero-scene");
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
     let frame = 0;
     let range = 1;
@@ -185,12 +181,12 @@ export function PortfolioMotion() {
     function update() {
       frame = 0;
       if (bar) bar.style.transform = `scaleX(${clamp(scrollY / range)})`;
-      if (phones) {
-        // 1 while the phones enter from below, 0 once they reach mid-screen.
-        const rect = phones.getBoundingClientRect();
-        const centre = rect.top + rect.height / 2;
-        const turn = clamp((centre - innerHeight * 0.5) / (innerHeight * 0.5));
-        phones.style.setProperty("--phone-turn", turn.toFixed(3));
+      if (hero) {
+        // 0 at the top of the page, 1 once the hero has scrolled away.
+        hero.style.setProperty(
+          "--hero-p",
+          clamp(scrollY / innerHeight).toFixed(3),
+        );
       }
       if (timeline) {
         const rect = timeline.getBoundingClientRect();
@@ -220,6 +216,13 @@ export function PortfolioMotion() {
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", measure, { passive: true });
     fine.addEventListener("change", schedule);
+    // A soft light follows a precise pointer across the hero.
+    function glow(event: PointerEvent) {
+      if (!hero || !fine.matches) return;
+      hero.style.setProperty("--mx", `${(event.clientX / innerWidth) * 100}%`);
+      hero.style.setProperty("--my", `${(event.clientY / innerHeight) * 100}%`);
+    }
+    hero?.addEventListener("pointermove", glow);
     // Primary buttons lean a few pixels toward a precise pointer.
     const magnets = [
       ...document.querySelectorAll<HTMLElement>(".button, .nav-contact"),
@@ -241,12 +244,15 @@ export function PortfolioMotion() {
     });
     measure();
     return () => {
+      hero?.removeEventListener("pointermove", glow);
+      hero?.style.removeProperty("--mx");
+      hero?.style.removeProperty("--my");
       magnets.forEach((magnet) => {
         magnet.removeEventListener("pointermove", pull);
         magnet.removeEventListener("pointerleave", release);
         magnet.style.removeProperty("translate");
       });
-      phones?.style.removeProperty("--phone-turn");
+      hero?.style.removeProperty("--hero-p");
       observer.disconnect();
       extras.disconnect();
       gridObserver.disconnect();

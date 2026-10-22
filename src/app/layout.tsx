@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Inter_Tight, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { identity } from "@/data/site";
 import { siteOrigin, siteTitle, siteDescription, socialImage } from "@/lib/seo";
@@ -11,10 +11,11 @@ const interTight = Inter_Tight({
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: "400",
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -58,7 +59,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#fff8e7",
   width: "device-width",
   initialScale: 1,
 };
@@ -69,7 +70,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       style={motionStyles}
       suppressHydrationWarning
-      className={`${interTight.variable} ${jetbrainsMono.variable} antialiased`}
+      className={`${interTight.variable} ${instrumentSerif.variable} antialiased`}
     >
       <head>
         <script

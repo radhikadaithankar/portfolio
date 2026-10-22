@@ -16,12 +16,12 @@ import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
 import { motion } from "@/lib/motion";
 
-const enamel = "#ffffff";
-const beige = "#cbcbcb";
-const accent = "#2b2b2b";
+const enamel = "#f6e7d3";
+const beige = "#c9a98f";
+const accent = "#5a1226";
 const lengths = [0.32, 1, 0.18, 1.03, 0.18, 0.35, 0.18];
 const pose = [0, 0.48, 0, -1.75, 0.25, -1, 0];
-const ink = "#2b4bff";
+const ink = "#7b1c34";
 const trailPoints = 720;
 const scratch = new Vector3();
 const drawSeconds = 7;
@@ -416,16 +416,16 @@ export default function RobotArmScene({
         }}
       >
         <ambientLight intensity={0.8} />
-        <hemisphereLight args={["#ffffff", "#cbcbcb", 1.6]} />
+        <hemisphereLight args={["#fff4df", "#c9a98f", 1.6]} />
         <directionalLight
           position={[-3, 5, 4]}
           intensity={2.4}
-          color="#ffffff"
+          color="#fff3dc"
         />
         <directionalLight
           position={[4, 1, -2]}
           intensity={1.1}
-          color="#ffffff"
+          color="#fff3dc"
         />
         <Lifecycle onReady={onReady} onFailure={onFailure} />
         <Arm controlsRef={controls} />
@@ -437,7 +437,7 @@ export default function RobotArmScene({
           far={4}
           resolution={256}
           frames={1}
-          color="#252525"
+          color="#3a1420"
         />
       </Canvas>
     </div>

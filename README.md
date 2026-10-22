@@ -20,7 +20,7 @@ npm run start
 
 ## Content and structure
 
-The first cream-and-terracotta design has been restored, with the later verified project facts and CIS app previews retained.
+The site is an immersive scroll story in cosmic latte, mocha cream and deep burgundy (Instrument Serif and Inter Tight). Scenes: a hero with the 3D arm, a pinned work stage that steps through the projects, burgundy experience with a draggable 3D skills sphere, the story map, and a closing contact scene.
 
 - `src/data/site.ts`: identity, contact, experience and education.
 - `src/data/projects.ts`: project facts and individual page content.
