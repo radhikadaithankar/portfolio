@@ -216,6 +216,34 @@ export function PortfolioMotion() {
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", measure, { passive: true });
     fine.addEventListener("change", schedule);
+    // Mark the nav link for the section on screen.
+    const links = new Map(
+      ["projects", "experience", "about", "contact"].flatMap((id) => {
+        const link = document.querySelector<HTMLElement>(
+          `.main-nav a[href$="#${id}"]`,
+        );
+        return link ? [[id, link] as const] : [];
+      }),
+    );
+    const spy = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const link = links.get(entry.target.id);
+          if (!link) continue;
+          if (entry.isIntersecting) {
+            links.forEach((other) => other.removeAttribute("aria-current"));
+            link.setAttribute("aria-current", "true");
+          } else if (link.getAttribute("aria-current") === "true") {
+            link.removeAttribute("aria-current");
+          }
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    links.forEach((_, id) => {
+      const section = document.getElementById(id);
+      if (section) spy.observe(section);
+    });
     // A soft light follows a precise pointer across the hero.
     function glow(event: PointerEvent) {
       if (!hero || !fine.matches) return;
@@ -244,6 +272,8 @@ export function PortfolioMotion() {
     });
     measure();
     return () => {
+      spy.disconnect();
+      links.forEach((link) => link.removeAttribute("aria-current"));
       hero?.removeEventListener("pointermove", glow);
       hero?.style.removeProperty("--mx");
       hero?.style.removeProperty("--my");

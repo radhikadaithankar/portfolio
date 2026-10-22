@@ -175,11 +175,28 @@ export function Projects() {
                     {project.visual === "school" && <LiveWebsites />}
                   </div>
                   <div className="work-visual">
-                    <CardTilt>
-                      <div className="project-visual-link">
-                        <ProjectVisual kind={project.visual} />
+                    <div className="frame">
+                      <div className="frame-bar" aria-hidden="true">
+                        <i />
+                        <i />
+                        <i />
+                        <span>~/work/{project.slug}</span>
                       </div>
-                    </CardTilt>
+                      <CardTilt>
+                        <div className="project-visual-link">
+                          <ProjectVisual kind={project.visual} />
+                        </div>
+                      </CardTilt>
+                    </div>
+                    {project.tools.slice(0, 3).map((tool, chip) => (
+                      <span
+                        key={tool}
+                        className={`frame-chip chip-${chip + 1}`}
+                        aria-hidden="true"
+                      >
+                        {tool}
+                      </span>
+                    ))}
                   </div>
                 </article>
               ))}
