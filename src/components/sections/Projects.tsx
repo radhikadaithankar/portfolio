@@ -57,8 +57,8 @@ export function Projects() {
             Things I&apos;ve <em>built.</em>
           </h2>
           <p className="v-section-lede">
-            Products, models and machines, each built independently. Scroll and
-            the cards stack.
+            Products, models and machines, each built independently, from a
+            school app in daily use to robotics and deep learning.
           </p>
         </div>
 

@@ -417,7 +417,7 @@ export default function RobotArmScene({
     >
       <Canvas
         aria-hidden="true"
-        dpr={[1, 2]}
+        dpr={[1, window.matchMedia("(pointer: coarse)").matches ? 1.5 : 2]}
         frameloop={active ? "always" : "never"}
         gl={{ alpha: true, antialias: true, powerPreference: "low-power" }}
         camera={{ position: [3.2, 1.8, 6], fov: 32 }}

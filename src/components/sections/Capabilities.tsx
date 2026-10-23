@@ -35,6 +35,25 @@ export function Capabilities() {
           <div className="v-tile v-tile-orb">
             <p className="eyebrow">Toolkit in 3D</p>
             <SkillOrb />
+            <details className="v-toolkit">
+              <summary>
+                See the full toolkit as a list <span aria-hidden="true">+</span>
+              </summary>
+              <dl>
+                {toolkit.map((set) => (
+                  <div key={set.group}>
+                    <dt>{set.group}</dt>
+                    <dd>
+                      <ul className="v-chips">
+                        {set.items.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </details>
           </div>
           <div className="v-tile v-tile-stats">
             <p className="eyebrow">At a glance</p>
@@ -54,16 +73,6 @@ export function Capabilities() {
               ))}
             </ul>
           </div>
-          {toolkit.map((set) => (
-            <div className="v-tile v-tile-tools" key={set.group}>
-              <p className="eyebrow">{set.group}</p>
-              <ul className="v-chips">
-                {set.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
         </div>
       </div>
     </section>

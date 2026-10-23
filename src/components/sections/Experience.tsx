@@ -30,6 +30,11 @@ export function Experience() {
         wide.matches && !reduced
           ? Math.max(0, railElement!.scrollWidth - railElement!.clientWidth)
           : 0;
+      // Only pin when the heading and full cards fit the window.
+      const head = trackElement!.querySelector<HTMLElement>(".v-exp-head");
+      const needed =
+        (head?.offsetHeight ?? 0) + railElement!.offsetHeight + 36 + 72 + 24;
+      if (needed > innerHeight) travel = 0;
       if (!travel) delete trackElement!.dataset.sideways;
       setDistance(travel);
       sync();

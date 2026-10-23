@@ -12,7 +12,7 @@ export function About() {
     >
       <div className="story-intro">
         <div>
-          <p className="eyebrow">03 / The person behind the work</p>
+          <p className="eyebrow">My story</p>
           <h2 id="story-title">
             Everything
             <br />

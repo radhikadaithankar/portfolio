@@ -2713,11 +2713,6 @@ h3 em {
   font-weight: 600;
   color: var(--burgundy);
 }
-@media (max-height: 780px) {
-  .v-exp-track[data-sideways="true"] .v-role-points {
-    display: none;
-  }
-}
 @media (max-width: 850px) {
   .v-exp-head {
     flex-direction: column;
@@ -2868,4 +2863,104 @@ h3 em {
 .case-visual .project-visual-link,
 .case-visual .school-art {
   border-radius: var(--radius-md);
+}
+
+/* Fixes from the site review */
+
+/* 3. One button shape everywhere: the pill. */
+.button {
+  min-height: 48px;
+  padding: 12px 22px;
+  gap: 18px;
+  border-radius: 999px;
+}
+.button-dark {
+  background: var(--burgundy);
+  color: var(--latte);
+}
+.button-dark:hover {
+  background: #7b1c34;
+}
+.not-found {
+  padding-top: 160px;
+  padding-bottom: 120px;
+}
+.not-found h1 {
+  margin: 16px 0 32px;
+  font-family: var(--font-serif);
+  font-size: var(--type-section);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+}
+
+/* 5. The ring frames the arm and stays clear of the name. */
+.v-ring {
+  top: 57%;
+  left: 57%;
+  width: min(50vh, 460px);
+  translate: -50% -50%;
+  opacity: 0.75;
+}
+.v-robot {
+  left: 57%;
+  top: 56%;
+  translate: -50% -50%;
+}
+
+/* 8. The full toolkit, one click away from the sphere. */
+.v-toolkit {
+  margin-top: 18px;
+  border-top: 1px solid #fff8e72e;
+}
+.v-toolkit summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 48px;
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--type-small);
+  font-weight: 500;
+}
+.v-toolkit summary::-webkit-details-marker {
+  display: none;
+}
+.v-toolkit summary span {
+  font-size: var(--type-icon);
+  transition: rotate var(--motion-fast) var(--motion-ease);
+}
+.v-toolkit[open] summary span {
+  rotate: 45deg;
+}
+.v-toolkit dl {
+  display: grid;
+  gap: 16px;
+  margin: 4px 0 8px;
+}
+.v-toolkit dt {
+  font-size: var(--type-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #f0d6c6;
+}
+.v-toolkit .v-chips {
+  margin-top: 8px;
+}
+.v-toolkit .v-chips li {
+  background: #fff8e71a;
+  color: var(--latte);
+}
+@media (max-width: 850px) {
+  .v-ring,
+  .v-robot {
+    left: auto;
+    translate: none;
+  }
+  .v-ring {
+    top: 330px;
+    left: 50%;
+    translate: -50% -50%;
+  }
 }
