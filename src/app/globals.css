@@ -891,8 +891,7 @@ h2 {
 }
 @media (max-width: 850px) {
   html {
-    /* The fixed pill nav ends 66–70px down; leave air under it. */
-    scroll-padding-top: 88px;
+    scroll-padding-top: 20px;
   }
   .shell,
   .site-header {
