@@ -27,8 +27,6 @@ const instrumentSerif = Instrument_Serif({
   weight: "400",
   style: ["normal", "italic"],
   display: "swap",
-  // Only heading italics use it, all below the fold; keep it off the critical path.
-  preload: false,
 });
 
 export const metadata: Metadata = {
