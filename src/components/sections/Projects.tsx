@@ -1,170 +1,104 @@
 "use client";
 
 import Link from "next/link";
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-} from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { notebooks, projects } from "@/data/projects";
 import { contact } from "@/data/site";
-import { prefersReducedMotion } from "@/lib/motion-preference";
+import { useReducedMotion } from "@/lib/motion-preference";
 import { CardTilt } from "../CardTilt";
 import { LiveWebsites } from "../LiveWebsites";
 import { ProjectMedia } from "../ProjectMedia";
 import { ProjectVisual } from "../ProjectVisual";
 
-/** One background tone per step; the last step is the notebooks panel. */
-const tones = ["mocha", "latte", "mocha", "burgundy", "latte", "mocha"];
-const steps = projects.length + 1;
-
-type Layout = { top: number; stage: number; step: number } | null;
-
+/**
+ * Project cards stick one after another; each card eases back as the next
+ * slides over it. On small screens they are ordinary stacked cards.
+ */
 export function Projects() {
-  const track = useRef<HTMLDivElement>(null);
-  const stage = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
-  const [layout, setLayout] = useState<Layout>(null);
+  const list = useRef<HTMLOListElement>(null);
+  const reduced = useReducedMotion();
 
-  // Pin the stage and advance one project per scroll step on tall, wide
-  // screens. Everywhere else the projects stack as ordinary sections.
   useEffect(() => {
-    const trackElement = track.current;
-    const stageElement = stage.current;
-    if (!trackElement || !stageElement) return;
-    const wide = window.matchMedia("(min-width: 1051px)");
+    const element = list.current;
+    if (!element || reduced) return;
+    const cards = [...element.querySelectorAll<HTMLElement>(".v-card")];
     let frame = 0;
-    let current: Layout = null;
-
-    function sync() {
+    function update() {
       frame = 0;
-      if (!current) return;
-      const scrolled = current.top - trackElement!.getBoundingClientRect().top;
-      const position = Math.min(
-        steps - 1,
-        Math.max(0, scrolled / current.step),
-      );
-      stageElement!.style.setProperty("--f", position.toFixed(3));
-      setActive(Math.round(position));
-    }
-    function measure() {
-      const header = document.querySelector<HTMLElement>(".site-header");
-      const top = header?.offsetHeight ?? 0;
-      current =
-        wide.matches && innerHeight >= 700
-          ? {
-              top,
-              stage: innerHeight - top,
-              step: Math.min(Math.max(innerHeight * 0.75, 440), 680),
-            }
-          : null;
-      setLayout(current);
-      if (!current) stageElement!.style.removeProperty("--f");
-      sync();
+      cards.forEach((card, index) => {
+        const next = cards[index + 1];
+        if (!next) return card.style.removeProperty("--t");
+        const stick = parseFloat(getComputedStyle(next).top) || 0;
+        const top = next.getBoundingClientRect().top;
+        const t = 1 - (top - stick) / Math.max(innerHeight - stick, 1);
+        card.style.setProperty("--t", Math.min(1, Math.max(0, t)).toFixed(3));
+      });
     }
     function schedule() {
-      if (!frame) frame = requestAnimationFrame(sync);
+      if (!frame) frame = requestAnimationFrame(update);
     }
-    measure();
+    update();
     window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", measure, { passive: true });
-    wide.addEventListener("change", measure);
+    window.addEventListener("resize", schedule, { passive: true });
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", measure);
-      wide.removeEventListener("change", measure);
+      window.removeEventListener("resize", schedule);
+      cards.forEach((card) => card.style.removeProperty("--t"));
     };
-  }, []);
-
-  const goTo = useCallback(
-    (index: number) => {
-      setActive(index);
-      const trackElement = track.current;
-      if (!layout || !trackElement) return;
-      const start =
-        trackElement.getBoundingClientRect().top + scrollY - layout.top;
-      window.scrollTo({
-        top: start + index * layout.step,
-        behavior: prefersReducedMotion() ? "auto" : "smooth",
-      });
-    },
-    [layout],
-  );
+  }, [reduced]);
 
   return (
-    <section id="projects" className="work-scene" aria-label="Selected work">
-      <div
-        ref={track}
-        className="work-track"
-        data-scrolly={layout ? "true" : undefined}
-        style={
-          layout
-            ? ({
-                "--track-height": `${layout.stage + (steps - 1) * layout.step}px`,
-                "--stage-top": `${layout.top}px`,
-                "--stage-height": `${layout.stage}px`,
-              } as CSSProperties)
-            : undefined
-        }
-      >
-        <div
-          ref={stage}
-          className="work-stage"
-          data-tone={tones[active] ?? "latte"}
-        >
-          <div className="shell work-shell">
-            <div className="work-head">
-              <p className="eyebrow">01 / Selected work</p>
-              <p className="eyebrow work-count">
-                {String(active + 1).padStart(2, "0")} /{" "}
-                {String(steps).padStart(2, "0")}
-              </p>
-            </div>
+    <section id="projects" className="v-work" aria-labelledby="work-title">
+      <div className="shell">
+        <div className="v-section-head">
+          <p className="eyebrow">Selected work</p>
+          <h2 id="work-title">
+            Things I&apos;ve <em>built.</em>
+          </h2>
+          <p className="v-section-lede">
+            Products, models and machines, each built independently. Scroll and
+            the cards stack.
+          </p>
+        </div>
 
-            <div className="work-panels">
-              {projects.map((project, index) => (
-                <article
-                  key={project.slug}
-                  className="work-panel"
-                  data-active={index === active || undefined}
-                  style={{ "--idx": index } as CSSProperties}
-                >
-                  <span className="work-numeral" aria-hidden="true">
-                    {project.number}
-                  </span>
-                  <div className="work-copy">
-                    <p className="eyebrow">
-                      {project.number} / {project.discipline}
+        <ol className="v-cards" ref={list}>
+          {projects.map((project, index) => (
+            <li
+              key={project.slug}
+              className="v-card"
+              style={{ "--i": index } as CSSProperties}
+            >
+              <article className="v-card-inner">
+                <div className="v-card-copy">
+                  <div className="v-card-top">
+                    <span className="v-card-number">{project.number}</span>
+                    <span className="eyebrow">{project.discipline}</span>
+                  </div>
+                  <h3>
+                    <Link href={`/work/${project.slug}`}>
+                      {project.shortTitle}
+                    </Link>
+                  </h3>
+                  <p className="v-card-summary">{project.summary}</p>
+                  {project.resultLine?.trim() && (
+                    <p className="v-card-result">
+                      <span className="status-dot" aria-hidden="true" />
+                      {project.resultLine}
                     </p>
-                    {project.context && (
-                      <p className="work-context">{project.context}</p>
+                  )}
+                  <ProjectMedia media={project.media} />
+                  <ul className="project-tags">
+                    {project.collection === "Academic experiments" && (
+                      <li className="tag-accent">Academic</li>
                     )}
-                    <h2>
-                      <Link href={`/work/${project.slug}`}>
-                        {project.title}
-                      </Link>
-                    </h2>
-                    <p className="work-summary">{project.summary}</p>
-                    {project.resultLine?.trim() && (
-                      <p className="work-result">
-                        <span className="status-dot" aria-hidden="true" />
-                        {project.resultLine}
-                      </p>
-                    )}
-                    <ProjectMedia media={project.media} />
-                    <ul className="project-tags">
-                      {project.collection === "Academic experiments" && (
-                        <li className="tag-accent">Academic</li>
-                      )}
-                      {project.tools.map((tool) => (
-                        <li key={tool}>{tool}</li>
-                      ))}
-                    </ul>
+                    {project.tools.map((tool) => (
+                      <li key={tool}>{tool}</li>
+                    ))}
+                  </ul>
+                  <div className="v-card-actions">
                     <Link
-                      className="button button-dark"
+                      className="pill pill-dark"
                       href={`/work/${project.slug}`}
                     >
                       {project.visual === "school"
@@ -172,54 +106,37 @@ export function Projects() {
                         : "Explore the project"}{" "}
                       <span aria-hidden="true">↗</span>
                     </Link>
-                    {project.visual === "school" && <LiveWebsites />}
                   </div>
-                  <div className="work-visual">
-                    <div className="frame">
-                      <div className="frame-bar" aria-hidden="true">
-                        <i />
-                        <i />
-                        <i />
-                        <span>~/work/{project.slug}</span>
-                      </div>
-                      <CardTilt>
-                        <div className="project-visual-link">
-                          <ProjectVisual kind={project.visual} />
-                        </div>
-                      </CardTilt>
+                  {project.visual === "school" && <LiveWebsites />}
+                </div>
+                <div className="v-card-visual">
+                  <CardTilt>
+                    <div className="project-visual-link">
+                      <ProjectVisual kind={project.visual} />
                     </div>
-                    {project.tools.slice(0, 3).map((tool, chip) => (
-                      <span
-                        key={tool}
-                        className={`frame-chip chip-${chip + 1}`}
-                        aria-hidden="true"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-                </article>
-              ))}
-
-              <article
-                className="work-panel work-notes"
-                data-active={active === steps - 1 || undefined}
-                style={{ "--idx": steps - 1 } as CSSProperties}
-              >
-                <span className="work-numeral" aria-hidden="true">
-                  +
-                </span>
-                <div className="work-copy">
-                  <p className="eyebrow">Notebooks / Academic work</p>
-                  <h2>
-                    More to <em>explore.</em>
-                  </h2>
-                  <p className="work-summary">
-                    Academic experiments in the methods behind the models. Open
-                    the notebooks to explore the code.
-                  </p>
+                  </CardTilt>
+                </div>
+              </article>
+            </li>
+          ))}
+          <li
+            className="v-card v-card-notes"
+            style={{ "--i": projects.length } as CSSProperties}
+          >
+            <article className="v-card-inner">
+              <div className="v-card-copy">
+                <div className="v-card-top">
+                  <span className="v-card-number">+</span>
+                  <span className="eyebrow">Notebooks · academic work</span>
+                </div>
+                <h3>More to explore.</h3>
+                <p className="v-card-summary">
+                  Experiments in the methods behind the models. Open the
+                  notebooks to read and run the code.
+                </p>
+                <div className="v-card-actions">
                   <a
-                    className="button button-dark"
+                    className="pill pill-dark"
                     href={contact.github}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -227,50 +144,25 @@ export function Projects() {
                     Browse my GitHub <span aria-hidden="true">↗</span>
                   </a>
                 </div>
-                <ul className="work-notebooks">
-                  {notebooks.map((notebook, index) => (
-                    <li key={notebook.url}>
-                      <a
-                        href={notebook.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <span className="eyebrow">N{index + 1}</span>
-                        <strong>{notebook.title}</strong>
-                        <span>{notebook.tools.join(" · ")}</span>
-                        <i aria-hidden="true">↗</i>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            </div>
-
-            <div
-              className="work-rail"
-              role="group"
-              aria-label="Choose a project"
-            >
-              {Array.from({ length: steps }, (_, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  aria-pressed={index === active}
-                  aria-label={
-                    index < projects.length
-                      ? `Project ${index + 1}: ${projects[index].shortTitle}`
-                      : "Notebooks"
-                  }
-                  onClick={() => goTo(index)}
-                >
-                  <span aria-hidden="true">
-                    {index < projects.length ? projects[index].number : "+"}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
+              </div>
+              <ul className="v-notebooks">
+                {notebooks.map((notebook) => (
+                  <li key={notebook.url}>
+                    <a
+                      href={notebook.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <strong>{notebook.title}</strong>
+                      <span>{notebook.tools.join(" · ")}</span>
+                      <i aria-hidden="true">↗</i>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </li>
+        </ol>
       </div>
     </section>
   );

@@ -6,7 +6,13 @@ import { useReducedMotion } from "@/lib/motion-preference";
 type Stat = { value: number; label: string; note: string };
 
 /** Counts up once when scrolled into view; static with reduced motion. */
-export function Stats({ stats }: { stats: Stat[] }) {
+export function Stats({
+  stats,
+  className = "stats",
+}: {
+  stats: Stat[];
+  className?: string;
+}) {
   const host = useRef<HTMLUListElement>(null);
   const reduced = useReducedMotion();
   const [progress, setProgress] = useState(0);
@@ -38,21 +44,19 @@ export function Stats({ stats }: { stats: Stat[] }) {
 
   const shown = reduced ? 1 : progress;
   return (
-    <section className="stats-scene" aria-label="At a glance">
-      <ul className="stats shell" ref={host}>
-        {stats.map((stat) => (
-          <li key={stat.label}>
-            <strong>
-              <span className="sr-only">{stat.value}</span>
-              <span aria-hidden="true">
-                {String(Math.round(stat.value * shown)).padStart(2, "0")}
-              </span>
-            </strong>
-            <span className="stat-label">{stat.label}</span>
-            <span className="stat-note">{stat.note}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <ul className={className} ref={host}>
+      {stats.map((stat) => (
+        <li key={stat.label}>
+          <strong>
+            <span className="sr-only">{stat.value}</span>
+            <span aria-hidden="true">
+              {String(Math.round(stat.value * shown)).padStart(2, "0")}
+            </span>
+          </strong>
+          <span className="stat-label">{stat.label}</span>
+          <span className="stat-note">{stat.note}</span>
+        </li>
+      ))}
+    </ul>
   );
 }

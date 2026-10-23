@@ -1,33 +1,41 @@
 import { company, contact, identity } from "@/data/site";
-
 import { MotionToggle } from "../MotionToggle";
+
+const loop = ["Let's talk", "Let's build", "Something useful"];
 
 export function Contact() {
   return (
-    <section id="contact" className="contact-section">
-      <div className="shell">
-        <div className="contact-top">
-          <p className="eyebrow">04 / Start a conversation</p>
-          <span aria-hidden="true">✳</span>
+    <section id="contact" className="v-contact">
+      <div className="v-contact-marquee" aria-hidden="true">
+        <div className="discipline-track">
+          {[0, 1].map((copy) => (
+            <span key={copy}>
+              {[...loop, ...loop].map((item, index) => (
+                <span key={index}>
+                  {item}
+                  <i>✳</i>
+                </span>
+              ))}
+            </span>
+          ))}
         </div>
-        <div className="contact-main">
+      </div>
+
+      <div className="shell">
+        <div className="v-contact-card">
+          <p className="eyebrow">Start a conversation</p>
           <h2>
-            Have something
-            <br />
-            <em>in mind?</em>
+            Have something <em>in mind?</em>
           </h2>
-          <div className="contact-invitation">
-            <div className="contact-route">
+          <div className="v-contact-routes">
+            <div>
               <p>Hiring for AI or data roles?</p>
-              <div className="contact-actions">
-                <a
-                  className="button button-light"
-                  href={`mailto:${contact.email}`}
-                >
+              <div className="v-contact-actions">
+                <a className="pill pill-dark" href={`mailto:${contact.email}`}>
                   Email me <span aria-hidden="true">→</span>
                 </a>
                 <a
-                  className="button button-outline"
+                  className="pill pill-ghost"
                   href="https://cv.radhikakd.com/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -36,11 +44,11 @@ export function Contact() {
                 </a>
               </div>
             </div>
-            <div className="contact-route">
+            <div>
               <p>Want Compass for your school, or a custom build?</p>
-              <div className="contact-actions">
+              <div className="v-contact-actions">
                 <a
-                  className="button button-outline"
+                  className="pill pill-ghost"
                   href={company.url}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -49,11 +57,12 @@ export function Contact() {
                 </a>
               </div>
             </div>
-            <a className="contact-email" href={`mailto:${contact.email}`}>
-              {contact.email}
-            </a>
           </div>
+          <a className="v-contact-email" href={`mailto:${contact.email}`}>
+            {contact.email}
+          </a>
         </div>
+
         <footer className="site-footer">
           <span>
             © {new Date().getFullYear()} {identity.fullName}

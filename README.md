@@ -20,7 +20,7 @@ npm run start
 
 ## Content and structure
 
-The site is an immersive scroll story in cosmic latte, mocha cream and deep burgundy (Instrument Serif and Inter Tight). Scenes: a hero with the 3D arm, a pinned work stage that steps through the projects, burgundy experience with a draggable 3D skills sphere, the story map, and a closing contact scene.
+The site uses 60% mocha, 30% latte and 10% burgundy, with Bricolage Grotesque headings, Inter Tight text and Instrument Serif italic accents. Sections: a centred hero with the 3D arm in front of the name and a rotating text ring, a scroll-lit statement, stacking project cards, a capabilities bento with the 3D skills sphere, a sideways-scrolling experience timeline, the story map in a latte card, and a contact card.
 
 - `src/data/site.ts`: identity, contact, experience and education.
 - `src/data/projects.ts`: project facts and individual page content.

@@ -10,7 +10,12 @@ import {
   type ReactNode,
   type RefObject,
 } from "react";
-import { Group, MathUtils, Vector3, type InterleavedBufferAttribute } from "three";
+import {
+  Group,
+  MathUtils,
+  Vector3,
+  type InterleavedBufferAttribute,
+} from "three";
 import { Line2 } from "three/examples/jsm/lines/Line2.js";
 import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
@@ -245,7 +250,12 @@ function Arm({ controlsRef }: { controlsRef: RefObject<Controls> }) {
 
     // Record the gripper's real position in turntable space, so the drawing
     // turns with the robot like paper on a lazy Susan.
-    if (penDown && tip.current && turntable.current && state.count < trailPoints) {
+    if (
+      penDown &&
+      tip.current &&
+      turntable.current &&
+      state.count < trailPoints
+    ) {
       tip.current.getWorldPosition(scratch);
       turntable.current.worldToLocal(scratch);
       if (state.count > 0) {

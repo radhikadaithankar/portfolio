@@ -5,20 +5,19 @@ import { motion } from "@/lib/motion";
 import { useReducedMotion } from "@/lib/motion-preference";
 
 const revealTargets = [
-  ".experience-aside",
-  ".experience-role",
-  ".toolkit-band",
+  ".v-section-head",
+  ".v-tile",
   ".story-intro",
   "#journey-start",
   "[data-story-chapter]",
   ".story-afterword",
-  ".contact-main",
+  ".v-contact-card",
 ].join(", ");
 
 /** Italic heading words wipe in from the left. */
 const wipeTargets = "main h2 em";
 /** Groups whose children enter one after another. */
-const cascadeTargets = ".toolkit ul, .education-list, .hero-proof";
+const cascadeTargets = ".v-chips, .education-list";
 
 /** Content stays readable before JavaScript and when any enhancement is cancelled. */
 export function PortfolioMotion() {
@@ -173,7 +172,7 @@ export function PortfolioMotion() {
       ".story-scroll-progress span",
     );
     const timeline = document.querySelector<HTMLElement>(".experience-list");
-    const hero = document.querySelector<HTMLElement>(".hero-scene");
+    const hero = document.querySelector<HTMLElement>(".v-hero");
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
     let frame = 0;
     let range = 1;
@@ -253,7 +252,7 @@ export function PortfolioMotion() {
     hero?.addEventListener("pointermove", glow);
     // Primary buttons lean a few pixels toward a precise pointer.
     const magnets = [
-      ...document.querySelectorAll<HTMLElement>(".button, .nav-contact"),
+      ...document.querySelectorAll<HTMLElement>(".button, .nav-contact, .pill"),
     ];
     function pull(event: PointerEvent) {
       if (!fine.matches) return;

@@ -1,5 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Inter_Tight, Instrument_Serif } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Inter_Tight,
+  Instrument_Serif,
+} from "next/font/google";
 import "./globals.css";
 import { identity } from "@/data/site";
 import { siteOrigin, siteTitle, siteDescription, socialImage } from "@/lib/seo";
@@ -7,6 +11,12 @@ import { motionStyles } from "@/lib/motion";
 
 const interTight = Inter_Tight({
   variable: "--font-inter-tight",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
   display: "swap",
 });
@@ -70,7 +80,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       style={motionStyles}
       suppressHydrationWarning
-      className={`${interTight.variable} ${instrumentSerif.variable} antialiased`}
+      className={`${bricolage.variable} ${interTight.variable} ${instrumentSerif.variable} antialiased`}
     >
       <head>
         <script

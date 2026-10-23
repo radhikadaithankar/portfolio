@@ -50,7 +50,7 @@ export function JourneyMap() {
     }
     function measure() {
       const header = document.querySelector<HTMLElement>(".site-header");
-      const top = (header?.offsetHeight ?? 0) + 8;
+      const top = (header?.getBoundingClientRect().bottom ?? 0) + 12;
       // Stack the chapters before measuring so the height is the tallest one.
       if (wide.matches) trackElement!.dataset.wide = "true";
       else delete trackElement!.dataset.wide;

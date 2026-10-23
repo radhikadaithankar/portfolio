@@ -1,110 +1,135 @@
-import Link from "next/link";
-import { education, roles, toolkit } from "@/data/site";
-import { SkillOrb } from "@/components/SkillOrb";
+"use client";
 
+import Link from "next/link";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { roles } from "@/data/site";
+import { useReducedMotion } from "@/lib/motion-preference";
+
+/**
+ * On wide screens the timeline pins and slides sideways as the page scrolls
+ * down. Narrow screens, and reduced motion, get a vertical list.
+ */
 export function Experience() {
+  const track = useRef<HTMLDivElement>(null);
+  const rail = useRef<HTMLOListElement>(null);
+  const reduced = useReducedMotion();
+  const [distance, setDistance] = useState(0);
+
+  useEffect(() => {
+    const trackElement = track.current;
+    const railElement = rail.current;
+    if (!trackElement || !railElement) return;
+    const wide = window.matchMedia("(min-width: 1051px)");
+    let frame = 0;
+    let travel = 0;
+    function measure() {
+      // Lay the rail out in a row before measuring how far it must travel.
+      if (wide.matches && !reduced) trackElement!.dataset.sideways = "true";
+      else delete trackElement!.dataset.sideways;
+      travel =
+        wide.matches && !reduced
+          ? Math.max(0, railElement!.scrollWidth - railElement!.clientWidth)
+          : 0;
+      if (!travel) delete trackElement!.dataset.sideways;
+      setDistance(travel);
+      sync();
+    }
+    function sync() {
+      frame = 0;
+      if (!travel) return railElement!.style.removeProperty("--x");
+      const box = trackElement!.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -box.top / travel));
+      railElement!.style.setProperty("--x", `${(-p * travel).toFixed(1)}px`);
+    }
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(sync);
+    }
+    measure();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", measure, { passive: true });
+    wide.addEventListener("change", measure);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", measure);
+      wide.removeEventListener("change", measure);
+    };
+  }, [reduced]);
+
   return (
     <section
       id="experience"
-      className="experience-section"
+      className="v-experience"
       aria-labelledby="experience-heading"
     >
-      <div className="experience-layout shell">
-        <aside className="experience-aside">
-          <p className="eyebrow">02 / Along the way</p>
-          <h2 id="experience-heading">
-            Work <em>experience.</em>
-          </h2>
-          <p className="experience-lede">
-            Building software, working with data and bringing products into
-            everyday use.
-          </p>
-          <div className="credentials-block">
-            <h3 className="eyebrow">Education</h3>
-            <ul className="education-list">
-              {education.map((item) => (
-                <li key={item.degree}>
-                  <strong>{item.degree}</strong>
-                  <span>
-                    {item.school} · {item.place}
-                  </span>
-                  <span className="education-period">{item.period}</span>
-                </li>
-              ))}
-            </ul>
+      <div
+        ref={track}
+        className="v-exp-track"
+        data-sideways={distance ? "true" : undefined}
+        style={
+          distance
+            ? ({ "--travel": `${distance}px` } as CSSProperties)
+            : undefined
+        }
+      >
+        <div className="v-exp-stage">
+          <div className="shell v-exp-head">
+            <div>
+              <p className="eyebrow">Experience</p>
+              <h2 id="experience-heading">
+                Where I&apos;ve <em>worked.</em>
+              </h2>
+            </div>
+            <p className="v-section-lede">
+              Building software, working with data and bringing products into
+              everyday use.
+            </p>
           </div>
-        </aside>
-
-        <ol className="experience-list">
-          {roles.map((role) => (
-            <li
-              id={role.id}
-              key={`${role.company}-${role.title}`}
-              className={`experience-role${role.current ? " experience-current" : ""}`}
-            >
-              <div className="experience-meta">
-                <p className="experience-period">{role.period}</p>
-                {role.current && (
-                  <span className="experience-status">
-                    <span className="status-dot" aria-hidden="true" />
-                    Current role
-                  </span>
+          <ol className="v-exp-rail" ref={rail}>
+            {roles.map((role) => (
+              <li
+                key={`${role.company}-${role.title}`}
+                id={role.id}
+                className={`v-role${role.current ? " v-role-current" : ""}`}
+              >
+                <div className="v-role-top">
+                  <span>{role.period}</span>
+                  {role.current && (
+                    <span className="v-role-badge">
+                      <span className="status-dot" aria-hidden="true" />
+                      Now
+                    </span>
+                  )}
+                </div>
+                <h3>{role.title}</h3>
+                <p className="v-role-company">
+                  {role.company}
+                  {role.location && <span> · {role.location}</span>}
+                </p>
+                <p className="v-role-text">{role.contribution}</p>
+                <ul className="v-role-points">
+                  {role.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+                {role.impact?.trim() && (
+                  <p className="experience-impact">{role.impact}</p>
                 )}
-              </div>
-              <p className="experience-company">
-                {role.company}
-                {role.location && <span> / {role.location}</span>}
-              </p>
-              <h3>{role.title}</h3>
-              <p className="experience-contribution">{role.contribution}</p>
-              <ul className="experience-highlights">
-                {role.highlights.map((highlight) => (
-                  <li key={highlight}>{highlight}</li>
-                ))}
-              </ul>
-              {role.impact?.trim() && (
-                <p className="experience-impact">{role.impact}</p>
-              )}
-              <ul className="experience-skills" aria-label="Areas of work">
-                {role.tags.map((tag) => (
-                  <li key={tag}>{tag}</li>
-                ))}
-              </ul>
-              {role.current && (
-                <Link
-                  className="experience-project"
-                  href="/work/school-platform"
-                >
-                  Explore the school platform <span aria-hidden="true">↗</span>
-                </Link>
-              )}
-            </li>
-          ))}
-        </ol>
-      </div>
-
-      <div className="toolkit-band shell">
-        <div className="toolkit-copy">
-          <h3 className="eyebrow">Toolkit</h3>
-          <p className="toolkit-lede">
-            The tools behind the work, from models to mobile apps.
-          </p>
-          <dl className="toolkit">
-            {toolkit.map((set) => (
-              <div className="toolkit-row" key={set.group}>
-                <dt>{set.group}</dt>
-                <dd>
-                  <ul>
-                    {set.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </dd>
-              </div>
+                <ul className="v-chips" aria-label="Areas of work">
+                  {role.tags.map((tag) => (
+                    <li key={tag}>{tag}</li>
+                  ))}
+                </ul>
+                {role.current && (
+                  <Link className="v-role-link" href="/work/school-platform">
+                    Explore the school platform{" "}
+                    <span aria-hidden="true">↗</span>
+                  </Link>
+                )}
+              </li>
             ))}
-          </dl>
+          </ol>
         </div>
-        <SkillOrb />
       </div>
     </section>
   );
