@@ -3085,3 +3085,31 @@ body::before {
     translate: -50% -50%;
   }
 }
+
+/* A larger name. */
+@media (min-width: 851px) {
+  .v-hero {
+    --type-display: clamp(5rem, 1rem + 11.2vw, 14.5rem);
+  }
+}
+@media (max-width: 850px) {
+  .v-name {
+    font-size: clamp(3.5rem, 17.5vw, 7.5rem);
+  }
+}
+@media (max-width: 850px) {
+  .v-hero {
+    --name-size: clamp(3.5rem, 17.5vw, 7.5rem);
+  }
+  .v-name {
+    font-size: var(--name-size);
+  }
+  .v-robot {
+    margin-top: 0;
+  }
+  /* Centre the ring on the arm, which starts just below the two name lines. */
+  .v-ring {
+    top: calc(104px + var(--name-size) * 1.64 + 165px);
+    width: 280px;
+  }
+}
