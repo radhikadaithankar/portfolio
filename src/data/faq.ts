@@ -1,9 +1,8 @@
 import { company, contact, education, identity, school, toolkit } from "./site";
 
 /**
- * Short, factual answers for answer engines, published through llms.txt (the
- * home page no longer has an FAQ section). Every answer is built from facts
- * already published on this site; do not add unverified claims.
+ * Short, factual answers for search and answer engines. Every answer is built
+ * from facts already published on this site; do not add unverified claims.
  */
 export const faq = [
   {
@@ -43,3 +42,15 @@ export const faq = [
     answer: `Email ${contact.email}, view the CV at cv.radhikakd.com, or connect on LinkedIn. For school software or a custom build, contact ${company.name}.`,
   },
 ];
+
+/**
+ * The home page shows only the two questions the rest of the page does not
+ * already answer. The full list still feeds llms.txt.
+ */
+const homeQuestions = [
+  `How can I contact or hire ${identity.firstName}?`,
+  `What technologies does ${identity.firstName} work with?`,
+];
+export const homeFaq = homeQuestions.map(
+  (question) => faq.find((item) => item.question === question)!,
+);

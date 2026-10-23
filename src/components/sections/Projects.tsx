@@ -2,14 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useRef, type CSSProperties } from "react";
-import {
-  courseworkProjects,
-  featuredProjects,
-  notebooks,
-} from "@/data/projects";
+import { notebooks, projects } from "@/data/projects";
 import { contact } from "@/data/site";
-
-const courseworkTags = ["PyTorch", "MNIST", "NumPy", "Matplotlib"];
 import { useReducedMotion } from "@/lib/motion-preference";
 import { CardTilt } from "../CardTilt";
 import { LiveWebsites } from "../LiveWebsites";
@@ -69,7 +63,7 @@ export function Projects() {
         </div>
 
         <ol className="v-cards" ref={list}>
-          {featuredProjects.map((project, index) => (
+          {projects.map((project, index) => (
             <li
               key={project.slug}
               className="v-card"
@@ -126,28 +120,20 @@ export function Projects() {
             </li>
           ))}
           <li
-            className="v-card v-card-coursework"
-            style={{ "--i": featuredProjects.length } as CSSProperties}
+            className="v-card v-card-notes"
+            style={{ "--i": projects.length } as CSSProperties}
           >
             <article className="v-card-inner">
               <div className="v-card-copy">
                 <div className="v-card-top">
-                  <span className="v-card-number">
-                    {String(featuredProjects.length + 1).padStart(2, "0")}
-                  </span>
-                  <span className="eyebrow">Coursework · Deep learning</span>
+                  <span className="v-card-number">+</span>
+                  <span className="eyebrow">Notebooks · academic work</span>
                 </div>
-                <h3>Coursework.</h3>
+                <h3>More to explore.</h3>
                 <p className="v-card-summary">
-                  MNIST classifiers and public notebooks from my MSc. Open any
-                  of them to read and run the code.
+                  Experiments in the methods behind the models. Open the
+                  notebooks to read and run the code.
                 </p>
-                <ul className="project-tags">
-                  <li className="tag-accent">Academic</li>
-                  {courseworkTags.map((tool) => (
-                    <li key={tool}>{tool}</li>
-                  ))}
-                </ul>
                 <div className="v-card-actions">
                   <a
                     className="pill pill-dark"
@@ -159,16 +145,7 @@ export function Projects() {
                   </a>
                 </div>
               </div>
-              <ul className="v-notebooks" aria-label="Coursework and notebooks">
-                {courseworkProjects.map((project) => (
-                  <li key={project.slug}>
-                    <Link href={`/work/${project.slug}`}>
-                      <strong>{project.shortTitle}</strong>
-                      <span>{project.tools.join(" · ")}</span>
-                      <i aria-hidden="true">↗</i>
-                    </Link>
-                  </li>
-                ))}
+              <ul className="v-notebooks">
                 {notebooks.map((notebook) => (
                   <li key={notebook.url}>
                     <a
@@ -177,7 +154,7 @@ export function Projects() {
                       rel="noopener noreferrer"
                     >
                       <strong>{notebook.title}</strong>
-                      <span>{notebook.tools.join(" · ")} · GitHub</span>
+                      <span>{notebook.tools.join(" · ")}</span>
                       <i aria-hidden="true">↗</i>
                     </a>
                   </li>
