@@ -322,25 +322,6 @@ export function JourneyMap() {
           </div>
         </div>
       </div>
-
-      <details className={styles.readStory}>
-        <summary>
-          Read the whole story <span aria-hidden="true">+</span>
-        </summary>
-        <div className={styles.fullStory}>
-          {journey.map((stop, index) => (
-            <article key={stop.id} data-story-chapter>
-              <p className="eyebrow">
-                {String(index + 1).padStart(2, "0")} / {stop.place}
-              </p>
-              <h3>{stop.title}</h3>
-              {stop.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </article>
-          ))}
-        </div>
-      </details>
     </div>
   );
 }

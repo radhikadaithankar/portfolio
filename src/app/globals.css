@@ -2285,27 +2285,6 @@ h3 em {
   }
 }
 
-/* Statement, lit word by word */
-.v-statement {
-  padding-block: 140px 110px;
-}
-.v-statement-text {
-  max-width: 1120px;
-  margin-top: 22px;
-  font-family: var(--font-serif);
-  font-size: calc(clamp(2rem, 1.1rem + 2.7vw, 4.25rem) * var(--fs, 1));
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 1.1;
-}
-.v-statement-text span {
-  opacity: clamp(0.58, calc((var(--p, 0) - var(--w, 0)) * 9 + 0.58), 1);
-  color: var(--ink);
-  transition:
-    opacity 160ms linear,
-    color 160ms linear;
-}
-
 /* Section headings */
 .v-section-head h2 {
   margin-top: 14px;
@@ -2320,7 +2299,13 @@ h3 em {
 
 /* Work: stacking cards */
 .v-work {
-  padding-block: 40px 120px;
+  /* Follows the hero directly now that the introduction is gone. */
+  padding-block: 120px 120px;
+}
+@media (max-width: 850px) {
+  .v-work {
+    padding-top: 80px;
+  }
 }
 .v-cards {
   display: grid;

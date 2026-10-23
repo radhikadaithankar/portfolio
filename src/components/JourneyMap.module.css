@@ -367,53 +367,6 @@
 .chapterProgress .progressFilled {
   background: var(--color-terracotta);
 }
-.readStory {
-  border-block: 1px solid var(--rule);
-}
-.readStory summary {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  min-height: 58px;
-  font-size: calc(var(--type-ui) * var(--fs, 1));
-  list-style: none;
-  font-weight: 500;
-}
-.readStory summary::-webkit-details-marker {
-  display: none;
-}
-.readStory summary > span {
-  font-size: calc(var(--type-icon) * var(--fs, 1));
-  font-weight: 400;
-  transition: rotate var(--motion-fast) var(--motion-ease);
-}
-.readStory[open] summary > span {
-  rotate: 45deg;
-}
-.fullStory {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 36px 60px;
-  padding: 20px 0 36px;
-}
-.fullStory h3 {
-  font-family: var(--font-serif);
-  font-size: calc(var(--type-title) * var(--fs, 1));
-  line-height: 1.2;
-  margin: 12px 0 18px;
-  letter-spacing: -0.025em;
-  font-weight: 500;
-}
-.fullStory article > :global(.eyebrow) {
-  font-size: calc(var(--type-label) * var(--fs, 1));
-}
-.fullStory article > p:not(.eyebrow) {
-  font-size: calc(var(--type-body) * var(--fs, 1));
-  line-height: var(--leading-body);
-  color: var(--muted);
-  margin-bottom: 12px;
-}
 .srOnly {
   position: absolute;
   width: 1px;
@@ -496,9 +449,6 @@
   .chapterContent > p:not(.period):not(.chapterNote) {
     font-size: calc(var(--type-body) * var(--fs, 1));
   }
-  .fullStory {
-    gap: 28px;
-  }
 }
 @media (max-width: 500px) {
   .atlasHeading > span:last-child {
@@ -564,9 +514,6 @@
   }
   .chapter h3 {
     font-size: calc(var(--type-title) * var(--fs, 1));
-  }
-  .fullStory {
-    grid-template-columns: 1fr;
   }
 }
 
