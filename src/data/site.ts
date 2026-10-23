@@ -21,7 +21,8 @@ export const contact = {
 export const positioning = {
   statement: "AI engineer building software that schools actually use.",
   supporting:
-    "I turn everyday problems into working software, from a school app with an AI assistant for teachers to a robot arm that draws on its own. I trained in artificial intelligence at Queen Mary University of London, sharpened it with data work in London, and now build products through Evaradh.",
+    "From a school app with an AI assistant for teachers to a robot arm that draws on its own. I trained in artificial intelligence at Queen Mary University of London, sharpened it with data work in London, and now build products through Evaradh.",
+  intro: { lead: "I turn everyday problems into", accent: "working software." },
   tagline: "Ideas, made useful.",
   description:
     "Radhika Daithankar is an AI engineer and Evaradh founder who built CIS Compass, a school management app with teacher AI support, in use at Chintamani International School.",
