@@ -15,9 +15,9 @@
   --color-chocolate: #2a0e16;
   --color-ink: #2a0e16;
   --color-gold: #b8947a;
-  --font-serif: var(--font-instrument-serif), "Iowan Old Style", Georgia, serif;
-  --font-sans: var(--font-inter-tight), "Helvetica Neue", Arial, sans-serif;
-  --font-mono: var(--font-inter-tight), "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-fraunces), "Georgia", serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-plex-mono), "Menlo", monospace;
 }
 
 :root {
@@ -1963,8 +1963,8 @@ body::after {
   --rule-strong: #2a0e16;
   --radius-lg: 28px;
   --radius-md: 18px;
-  --font-serif: var(--font-bricolage), "Helvetica Neue", Arial, sans-serif;
-  --font-accent: var(--font-instrument-serif), Georgia, serif;
+  --font-serif: var(--font-fraunces), "Georgia", serif;
+  --font-accent: var(--font-fraunces), "Georgia", serif;
   --type-display: clamp(4.5rem, 1rem + 12.5vw, 15rem);
   --type-section: clamp(2.75rem, 1.6rem + 4.4vw, 6rem);
 }
@@ -3121,4 +3121,135 @@ body::before {
 .v-hero {
   --fs: 1;
   font-size: calc(var(--type-body) * var(--fs));
+}
+
+/* ==========================================================================
+   Evaradh typography: light Fraunces, Inter text, IBM Plex Mono labels,
+   italic accents and softer corners, in the mocha, latte and burgundy palette.
+   ========================================================================== */
+:root {
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-plex-mono), "Menlo", monospace;
+  --radius-lg: 16px;
+  --radius-md: 10px;
+}
+body {
+  font-family: var(--font-sans);
+}
+
+/* Display and headings: light Fraunces with gentle negative tracking. */
+h1,
+h2,
+h3,
+.v-name,
+.v-statement-text,
+.v-card h3,
+.v-role h3,
+.v-notebooks strong,
+.v-stats strong,
+.v-faq summary h3,
+.education-list strong,
+.v-contact-card h2,
+.v-contact-email,
+.v-contact-marquee .discipline-track > span > span,
+.case-header h1,
+.not-found h1 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+}
+.v-name {
+  letter-spacing: -0.045em;
+  line-height: 0.85;
+}
+.v-statement-text {
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+h1 em,
+h2 em,
+h3 em,
+.v-name-bottom {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--burgundy);
+}
+/* The surname is an italic wordmark, not an outline. */
+.v-name-bottom {
+  -webkit-text-stroke: 0;
+}
+.v-name-bottom .hero-letter:hover {
+  color: #7b1c34;
+}
+
+/* Small caps: IBM Plex Mono, widely spaced, as on Evaradh. */
+.eyebrow,
+.stat-label,
+.v-toolkit dt,
+.v-role-top,
+.v-hero-meta,
+.robot-hint,
+.v-ring,
+.index-kind,
+.case-meta .eyebrow {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.eyebrow,
+.stat-label,
+.v-toolkit dt {
+  font-size: calc(0.6875rem * var(--fs, 1));
+}
+.v-role-top,
+.v-hero-meta,
+.robot-hint {
+  font-size: calc(0.6875rem * var(--fs, 1));
+  letter-spacing: 0.12em;
+}
+.v-ring {
+  font-size: 8.5px;
+  letter-spacing: 0.3em;
+}
+
+/* Brand mark in the nav, like the Evaradh wordmark. */
+.brand {
+  font-family: var(--font-mono);
+  font-size: calc(0.75rem * var(--fs, 1));
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Buttons and chips keep the pill shape; text is Inter medium. */
+.pill,
+.button,
+.main-nav {
+  font-family: var(--font-sans);
+}
+
+/* The scrolling band: upright and italic words with burgundy dots. */
+.v-contact-marquee .discipline-track span:nth-child(even) > span,
+.v-contact-marquee .discipline-track > span > span:nth-child(even) {
+  font-style: italic;
+  color: var(--burgundy);
+}
+.v-contact-marquee .discipline-track i {
+  font-style: normal;
+  font-size: 0.3em;
+  color: var(--burgundy);
+}
+/* The hint sits under the arm, clear of the ring's text. */
+.v-robot .robot-hint {
+  top: auto;
+  right: 50%;
+  bottom: -6px;
+  translate: 50% 0;
+  white-space: nowrap;
+}
+.v-ring {
+  font-size: 9.5px;
 }

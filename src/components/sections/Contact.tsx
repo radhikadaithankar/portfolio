@@ -13,7 +13,7 @@ export function Contact() {
               {[...loop, ...loop].map((item, index) => (
                 <span key={index}>
                   {item}
-                  <i>✳</i>
+                  <i>●</i>
                 </span>
               ))}
             </span>

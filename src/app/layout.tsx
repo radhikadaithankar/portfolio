@@ -1,31 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Bricolage_Grotesque,
-  Inter_Tight,
-  Instrument_Serif,
-} from "next/font/google";
+import { Fraunces, IBM_Plex_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { identity } from "@/data/site";
 import { siteOrigin, siteTitle, siteDescription, socialImage } from "@/lib/seo";
 import { motionStyles } from "@/lib/motion";
 
-const interTight = Inter_Tight({
-  variable: "--font-inter-tight",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
-  display: "swap",
-});
-
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  subsets: ["latin"],
-  weight: "400",
   style: ["normal", "italic"],
+  axes: ["opsz"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -80,7 +77,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       style={motionStyles}
       suppressHydrationWarning
-      className={`${bricolage.variable} ${interTight.variable} ${instrumentSerif.variable} antialiased`}
+      className={`${fraunces.variable} ${inter.variable} ${plexMono.variable} antialiased`}
     >
       <head>
         <script
