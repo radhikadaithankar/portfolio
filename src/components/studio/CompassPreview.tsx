@@ -12,7 +12,7 @@ const views = [
     title: "The classroom, at a glance.",
     description:
       "Class overview, attendance and homework in one daily workspace.",
-    image: "/images/cis-teacher-preview.png",
+    image: "/images/cis-teacher-preview.webp",
     alt: "Public CIS Compass teacher app preview showing the class overview and daily briefing",
   },
   {
@@ -20,7 +20,7 @@ const views = [
     title: "Stay connected to the school day.",
     description:
       "Attendance, homework and fee information together in the parent app.",
-    image: "/images/cis-parent-preview.png",
+    image: "/images/cis-parent-preview.webp",
     alt: "Public CIS Compass parent app preview showing attendance, homework and fees",
   },
 ];
@@ -108,8 +108,8 @@ export function CompassPreview() {
                 <Image
                   src={view.image}
                   alt={view.alt}
-                  width={404}
-                  height={804}
+                  width={360}
+                  height={716}
                   sizes="(max-width: 650px) 43vw, (max-width: 1100px) 23vw, 230px"
                   preload
                 />

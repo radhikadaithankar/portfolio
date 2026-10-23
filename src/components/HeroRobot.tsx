@@ -33,19 +33,19 @@ class SceneBoundary extends Component<
   }
 }
 
+/**
+ * The WebGL scene is desktop-only. Phones and tablets keep the static pose so
+ * the three.js chunks never enter their bundle; WebGL's own performance check
+ * still guards weak desktop GPUs.
+ */
 function deviceAllowsScene() {
   const device = navigator as Navigator & {
-    deviceMemory?: number;
     connection?: { saveData?: boolean };
   };
   if (device.connection?.saveData) return false;
-  // Desktops always qualify; WebGL's own performance check guards weak GPUs.
-  // Privacy browsers such as Brave under-report cores, so only phones and
-  // tablets are filtered by hardware.
-  if (!window.matchMedia("(pointer: coarse)").matches) return true;
-  return (
-    (device.hardwareConcurrency || 8) >= 4 && (device.deviceMemory ?? 8) >= 3
-  );
+  return window.matchMedia(
+    "(min-width: 851px) and (hover: hover) and (pointer: fine)",
+  ).matches;
 }
 
 function hasWebGL() {
