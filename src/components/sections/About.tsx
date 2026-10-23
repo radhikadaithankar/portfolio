@@ -14,7 +14,7 @@ export function About() {
         <div>
           <p className="eyebrow">My story</p>
           <h2 id="story-title">
-            Everything{" "}
+            Everything
             <br />
             <em>can evolve.</em>
           </h2>
@@ -41,7 +41,7 @@ export function About() {
         <div className="story-personal">
           <p className="eyebrow">Away from the keyboard</p>
           <h3>
-            There&apos;s more than{" "}
+            There&apos;s more than
             <br />
             one version of me.
           </h3>
