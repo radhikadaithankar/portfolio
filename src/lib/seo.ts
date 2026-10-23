@@ -1,4 +1,13 @@
-import { company, contact, identity, positioning, school } from "@/data/site";
+import {
+  company,
+  contact,
+  education,
+  identity,
+  positioning,
+  school,
+  toolkit,
+} from "@/data/site";
+import { faq } from "@/data/faq";
 import { projects, type Project } from "@/data/projects";
 
 export const siteOrigin = new URL(
@@ -55,23 +64,27 @@ export function profileStructuredData() {
           "Managing Director at CIS",
         ],
         homeLocation: { "@type": "Place", name: identity.location },
-        sameAs: [contact.linkedin, contact.github],
+        email: `mailto:${contact.email}`,
+        sameAs: [contact.linkedin, contact.github, "https://cv.radhikakd.com/"],
+        nationality: { "@type": "Country", name: "India" },
         worksFor: [{ "@id": evaradhId }, { "@id": schoolId }],
-        alumniOf: [
-          {
-            "@type": "CollegeOrUniversity",
-            name: "Queen Mary University of London",
-          },
-          {
-            "@type": "CollegeOrUniversity",
-            name: "MGM's Jawaharlal Nehru Engineering College",
-          },
-        ],
+        alumniOf: education.map((item) => ({
+          "@type": "CollegeOrUniversity",
+          name: item.school,
+        })),
+        hasCredential: education.map((item) => ({
+          "@type": "EducationalOccupationalCredential",
+          credentialCategory: "degree",
+          name: item.degree,
+          recognizedBy: { "@type": "CollegeOrUniversity", name: item.school },
+        })),
         knowsAbout: [
           "Artificial intelligence",
           "Machine learning",
           "Software development",
           "Robotics",
+          "School management software",
+          ...toolkit.flatMap((set) => set.items),
         ],
       },
       {
@@ -93,6 +106,27 @@ export function profileStructuredData() {
           addressLocality: "Parbhani",
           addressCountry: "IN",
         },
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": absoluteUrl("/work/school-platform#app"),
+        name: "CIS Compass",
+        applicationCategory: "EducationalApplication",
+        operatingSystem: "Android, iOS",
+        description:
+          "School management app with an AI assistant for teachers, in use at Chintamani International School.",
+        url: absoluteUrl("/work/school-platform"),
+        creator: { "@id": personId },
+        publisher: { "@id": evaradhId },
+      },
+      {
+        "@type": "FAQPage",
+        "@id": absoluteUrl("/#faq"),
+        mainEntity: faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
       },
       {
         "@type": "ItemList",

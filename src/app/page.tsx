@@ -7,6 +7,7 @@ import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
+import { Faq } from "@/components/sections/Faq";
 import { StructuredData } from "@/components/StructuredData";
 import { profileStructuredData } from "@/lib/seo";
 import { PortfolioMotion } from "@/components/PortfolioMotion";
@@ -31,6 +32,7 @@ export default function Home() {
         <Capabilities />
         <Experience />
         <About />
+        <Faq />
         <Contact />
       </main>
     </>

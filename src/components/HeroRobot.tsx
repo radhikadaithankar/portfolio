@@ -38,11 +38,13 @@ function deviceAllowsScene() {
     deviceMemory?: number;
     connection?: { saveData?: boolean };
   };
-  // Phones are welcome when they have the cores and memory for WebGL.
+  if (device.connection?.saveData) return false;
+  // Desktops always qualify; WebGL's own performance check guards weak GPUs.
+  // Privacy browsers such as Brave under-report cores, so only phones and
+  // tablets are filtered by hardware.
+  if (!window.matchMedia("(pointer: coarse)").matches) return true;
   return (
-    (device.hardwareConcurrency || 8) > 4 &&
-    (device.deviceMemory ?? 8) > 4 &&
-    !device.connection?.saveData
+    (device.hardwareConcurrency || 8) >= 4 && (device.deviceMemory ?? 8) >= 3
   );
 }
 

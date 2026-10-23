@@ -2964,3 +2964,102 @@ h3 em {
     translate: -50% -50%;
   }
 }
+
+/* Hero composition: name on the diagonal, the arm in the open space
+   between the two lines, so nothing overlaps on any desktop size. */
+@media (min-width: 851px) {
+  .v-hero {
+    --type-display: clamp(4.5rem, 1rem + 8.6vw, 11rem);
+  }
+  .v-robot {
+    top: 44%;
+    left: 66%;
+    width: min(46vw, 700px);
+    height: min(54vh, 560px);
+    translate: -50% -50%;
+  }
+  .v-ring {
+    top: 44%;
+    left: 66%;
+    width: min(46vh, 440px);
+    translate: -50% -50%;
+  }
+}
+/* The still drawing matches the 3D arm's size instead of filling the box. */
+.v-robot .robot-fallback {
+  inset: 12% 18%;
+  width: 64%;
+  height: 76%;
+}
+/* Content fades out under the floating nav instead of peeking around it. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 55;
+  height: 92px;
+  pointer-events: none;
+  background: linear-gradient(var(--mocha) 55%, #d4b89d00);
+}
+
+/* Quick answers */
+.v-faq {
+  padding-block: 40px 100px;
+}
+.v-faq-list {
+  margin-top: 40px;
+  border-radius: var(--radius-lg);
+  background: var(--latte);
+  padding: 8px 32px;
+}
+.v-faq details + details {
+  border-top: 1px solid var(--rule);
+}
+.v-faq summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  min-height: 72px;
+  cursor: pointer;
+  list-style: none;
+}
+.v-faq summary::-webkit-details-marker {
+  display: none;
+}
+.v-faq summary h3 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--type-subtitle);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+.v-faq summary span {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--mocha-soft);
+  color: var(--burgundy);
+  font-size: var(--type-icon);
+  transition: rotate var(--motion-fast) var(--motion-ease);
+}
+.v-faq details[open] summary span {
+  rotate: 45deg;
+  background: var(--burgundy);
+  color: var(--latte);
+}
+.v-faq details p {
+  max-width: 72ch;
+  margin: 0 0 26px;
+  font-size: var(--type-lead);
+  color: var(--muted);
+}
+@media (max-width: 700px) {
+  .v-faq-list {
+    padding: 4px 18px;
+  }
+}
