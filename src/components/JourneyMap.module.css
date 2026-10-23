@@ -30,12 +30,12 @@
   gap: 12px;
 }
 .atlasHeading > span:last-child {
-  font-size: var(--type-caption);
+  font-size: calc(var(--type-caption) * var(--fs, 1));
   color: var(--muted);
 }
 .atlasHeading > span:last-child span {
   margin-left: 8px;
-  font-size: var(--type-icon);
+  font-size: calc(var(--type-icon) * var(--fs, 1));
   color: var(--color-terracotta);
 }
 .map {
@@ -91,7 +91,7 @@
   left: 11%;
   top: 94%;
   font-family: var(--font-serif);
-  font-size: clamp(13px, 1.25vw, 18px);
+  font-size: calc(clamp(13px, 1.25vw, 18px) * var(--fs, 1));
   font-style: normal;
   line-height: 1.3;
   color: #816d6b;
@@ -119,7 +119,7 @@
   margin: auto;
   border: 1px solid #aa9a93;
   border-radius: 50%;
-  font-size: var(--type-label);
+  font-size: calc(var(--type-label) * var(--fs, 1));
   font-weight: 600;
   background: var(--color-ivory);
   box-shadow: 0 0 0 5px var(--color-ivory);
@@ -158,14 +158,14 @@
 .stopLabel strong {
   display: block;
   font-family: var(--font-serif);
-  font-size: var(--type-lead);
+  font-size: calc(var(--type-lead) * var(--fs, 1));
   font-weight: 500;
   line-height: 1.2;
 }
 .stopLabel small {
   display: block;
   margin-top: 5px;
-  font-size: var(--type-micro);
+  font-size: calc(var(--type-micro) * var(--fs, 1));
   color: var(--muted);
 }
 .activeStop .stopLabel strong {
@@ -179,7 +179,7 @@
   margin-top: 77px;
   padding-top: 18px;
   border-top: 1px solid var(--rule);
-  font-size: var(--type-caption);
+  font-size: calc(var(--type-caption) * var(--fs, 1));
   color: var(--muted);
 }
 .mapLegend > span:first-child {
@@ -208,11 +208,11 @@
 }
 .pageCount {
   font-family: var(--font-serif);
-  font-size: var(--type-subtitle);
+  font-size: calc(var(--type-subtitle) * var(--fs, 1));
 }
 .pageCount > span {
   font-family: var(--font-sans);
-  font-size: var(--type-caption);
+  font-size: calc(var(--type-caption) * var(--fs, 1));
   color: var(--muted);
   margin-left: 5px;
 }
@@ -259,7 +259,7 @@
   margin: 14px 0 8px;
 }
 .track[data-wide="true"] .chapter h3 {
-  font-size: var(--type-subtitle);
+  font-size: calc(var(--type-subtitle) * var(--fs, 1));
   max-width: none;
   margin-bottom: 12px;
 }
@@ -269,13 +269,13 @@
 }
 .track[data-wide="true"] .chapterNote {
   margin-top: 14px;
-  font-size: var(--type-lead);
+  font-size: calc(var(--type-lead) * var(--fs, 1));
 }
 .track[data-wide="true"] .chapterLink {
   margin-top: 6px;
 }
 .period {
-  font-size: var(--type-label);
+  font-size: calc(var(--type-label) * var(--fs, 1));
   letter-spacing: 0.04em;
   font-weight: 500;
   text-transform: uppercase;
@@ -285,7 +285,7 @@
 }
 .chapter h3 {
   font-family: var(--font-serif);
-  font-size: var(--type-title);
+  font-size: calc(var(--type-title) * var(--fs, 1));
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.025em;
@@ -293,14 +293,14 @@
   margin: 0 0 23px;
 }
 .chapterContent > p:not(.period):not(.chapterNote) {
-  font-size: var(--type-body);
+  font-size: calc(var(--type-body) * var(--fs, 1));
   line-height: var(--leading-body);
   margin-bottom: 14px;
   color: var(--muted);
 }
 .chapterContent > .chapterNote {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: calc(1.25rem * var(--fs, 1));
   line-height: 1.5;
   font-style: normal;
   border-left: 2px solid #7b1c3466;
@@ -312,7 +312,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  font-size: var(--type-ui);
+  font-size: calc(var(--type-ui) * var(--fs, 1));
   min-height: 44px;
   margin: 12px 0;
   border-bottom: 1px solid var(--rule);
@@ -324,7 +324,7 @@
 .chapterPostscript {
   display: block;
   color: var(--muted);
-  font-size: var(--type-caption);
+  font-size: calc(var(--type-caption) * var(--fs, 1));
   margin: 24px 0 19px;
 }
 .chapterNavigation {
@@ -343,7 +343,7 @@
   border: 0;
   background: transparent;
   color: var(--color-ink);
-  font-size: var(--type-ui);
+  font-size: calc(var(--type-ui) * var(--fs, 1));
   padding: 0;
   font-weight: 500;
 }
@@ -376,7 +376,7 @@
   align-items: center;
   cursor: pointer;
   min-height: 58px;
-  font-size: var(--type-ui);
+  font-size: calc(var(--type-ui) * var(--fs, 1));
   list-style: none;
   font-weight: 500;
 }
@@ -384,7 +384,7 @@
   display: none;
 }
 .readStory summary > span {
-  font-size: var(--type-icon);
+  font-size: calc(var(--type-icon) * var(--fs, 1));
   font-weight: 400;
   transition: rotate var(--motion-fast) var(--motion-ease);
 }
@@ -399,17 +399,17 @@
 }
 .fullStory h3 {
   font-family: var(--font-serif);
-  font-size: var(--type-title);
+  font-size: calc(var(--type-title) * var(--fs, 1));
   line-height: 1.2;
   margin: 12px 0 18px;
   letter-spacing: -0.025em;
   font-weight: 500;
 }
 .fullStory article > :global(.eyebrow) {
-  font-size: var(--type-label);
+  font-size: calc(var(--type-label) * var(--fs, 1));
 }
 .fullStory article > p:not(.eyebrow) {
-  font-size: var(--type-body);
+  font-size: calc(var(--type-body) * var(--fs, 1));
   line-height: var(--leading-body);
   color: var(--muted);
   margin-bottom: 12px;
@@ -449,7 +449,7 @@
     padding-inline: 24px;
   }
   .stopLabel small {
-    font-size: var(--type-micro);
+    font-size: calc(var(--type-micro) * var(--fs, 1));
   }
   .stopLabel {
     width: 105px;
@@ -490,11 +490,11 @@
     min-height: 0;
   }
   .chapter h3 {
-    font-size: var(--type-title);
+    font-size: calc(var(--type-title) * var(--fs, 1));
     max-width: 500px;
   }
   .chapterContent > p:not(.period):not(.chapterNote) {
-    font-size: var(--type-body);
+    font-size: calc(var(--type-body) * var(--fs, 1));
   }
   .fullStory {
     gap: 28px;
@@ -502,7 +502,7 @@
 }
 @media (max-width: 500px) {
   .atlasHeading > span:last-child {
-    font-size: var(--type-caption);
+    font-size: calc(var(--type-caption) * var(--fs, 1));
     max-width: 123px;
     text-align: right;
   }
@@ -524,10 +524,10 @@
     width: 86px;
   }
   .stopLabel strong {
-    font-size: var(--type-ui);
+    font-size: calc(var(--type-ui) * var(--fs, 1));
   }
   .stopLabel small {
-    font-size: var(--type-micro);
+    font-size: calc(var(--type-micro) * var(--fs, 1));
     margin-top: 3px;
   }
   .stop[data-stop="foundation"] .stopLabel {
@@ -547,23 +547,23 @@
   .pin {
     width: 31px;
     height: 31px;
-    font-size: var(--type-micro);
+    font-size: calc(var(--type-micro) * var(--fs, 1));
     box-shadow: 0 0 0 4px var(--color-ivory);
   }
   .mapAside {
     top: 88%;
     left: 4%;
-    font-size: var(--type-ui);
+    font-size: calc(var(--type-ui) * var(--fs, 1));
   }
   .mapLegend {
     margin-top: 28px;
-    font-size: var(--type-caption);
+    font-size: calc(var(--type-caption) * var(--fs, 1));
   }
   .chapterPanel {
     padding-inline: 20px;
   }
   .chapter h3 {
-    font-size: var(--type-title);
+    font-size: calc(var(--type-title) * var(--fs, 1));
   }
   .fullStory {
     grid-template-columns: 1fr;
