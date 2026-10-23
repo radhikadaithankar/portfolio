@@ -323,6 +323,15 @@ export const projects: Project[] = [
   },
 ];
 
+/** The shipped product and the two robotics builds carry the Work section. */
+export const featuredProjects = projects.filter(
+  (project) => project.collection === "Featured",
+);
+/** MNIST coursework; each still has its own /work page, linked from the Coursework card. */
+export const courseworkProjects = projects.filter(
+  (project) => project.collection === "Academic experiments",
+);
+
 // Public academic notebooks reviewed on 29 September 2026. These are
 // coursework experiments, not claims of production-ready implementations.
 export const notebooks = [

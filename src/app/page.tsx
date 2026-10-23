@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/sections/Hero";
-import { Capabilities } from "@/components/sections/Capabilities";
 import { Projects } from "@/components/sections/Projects";
-import { Experience } from "@/components/sections/Experience";
 import { About } from "@/components/sections/About";
+import { Experience } from "@/components/sections/Experience";
 import { Contact } from "@/components/sections/Contact";
-import { Faq } from "@/components/sections/Faq";
 import { StructuredData } from "@/components/StructuredData";
 import { profileStructuredData } from "@/lib/seo";
 import { PortfolioMotion } from "@/components/PortfolioMotion";
@@ -27,10 +25,8 @@ export default function Home() {
       <main id="main" tabIndex={-1}>
         <Hero />
         <Projects />
-        <Capabilities />
-        <Experience />
         <About />
-        <Faq />
+        <Experience />
         <Contact />
       </main>
     </>

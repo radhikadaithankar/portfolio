@@ -1712,84 +1712,6 @@ html[data-motion="reduce"] .project-tilt .project-visual-link::after {
   color: var(--latte);
 }
 
-/* Skill sphere */
-.skill-orb-stage {
-  position: relative;
-  height: 470px;
-  cursor: grab;
-  touch-action: pan-y;
-  user-select: none;
-  isolation: isolate;
-}
-.skill-orb-stage:active {
-  cursor: grabbing;
-}
-.skill-orb-core {
-  position: absolute;
-  inset: 50% auto auto 50%;
-  width: 350px;
-  height: 350px;
-  translate: -50% -50%;
-  border-radius: 50%;
-  border: 1px dashed #fff8e733;
-  background: radial-gradient(circle at 35% 30%, #fff8e722, transparent 70%);
-}
-.skill-orb-tag {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  padding: 3px 8px;
-  border: 1px solid color-mix(in srgb, var(--tone) 45%, transparent);
-  border-radius: 2px;
-  background: var(--latte);
-  color: var(--tone);
-  font-size: calc(var(--type-caption) * var(--fs, 1));
-  font-weight: 500;
-  white-space: nowrap;
-  will-change: transform, opacity;
-  transition: color var(--motion-fast) var(--motion-ease);
-}
-.skill-orb-tag[data-dim] {
-  color: #b9a39b;
-}
-.skill-orb-legend {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 16px;
-  font-size: calc(var(--type-caption) * var(--fs, 1));
-  color: var(--muted);
-}
-.skill-orb-legend > span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.skill-orb-legend > span::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--tone);
-  box-shadow: 0 0 0 2px #fff8e7;
-}
-.skill-orb-legend > span[data-active] {
-  color: var(--latte);
-}
-.skill-orb-legend small {
-  margin-left: auto;
-  font-size: calc(var(--type-caption) * var(--fs, 1));
-}
-@media (max-width: 1050px) {
-  .skill-orb-stage {
-    height: 380px;
-  }
-  .skill-orb-core {
-    width: 270px;
-    height: 270px;
-  }
-}
-
 /* Contact: a large closing statement */
 
 /* Refinements */
@@ -1851,56 +1773,6 @@ body::after {
 /* Hero: give the name and the arm their own space. */
 :root {
   --type-display: clamp(4rem, 1rem + 9vw, 9.75rem);
-}
-
-/* Proof numbers */
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin: 0 auto;
-  padding: 0;
-  list-style: none;
-}
-.stats li {
-  display: grid;
-  gap: 6px;
-  padding: 8px 28px 8px 0;
-}
-.stats li + li {
-  padding-left: 28px;
-  border-left: 1px solid var(--rule);
-}
-.stats strong {
-  font-family: var(--font-serif);
-  font-size: calc(clamp(3.5rem, 2rem + 5vw, 7rem) * var(--fs, 1));
-  font-weight: 400;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
-  color: var(--burgundy);
-  font-variant-numeric: tabular-nums;
-}
-.stat-label {
-  font-size: calc(var(--type-label) * var(--fs, 1));
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color-terracotta);
-}
-.stat-note {
-  max-width: 24ch;
-  font-size: calc(var(--type-small) * var(--fs, 1));
-  color: var(--muted);
-}
-@media (max-width: 850px) {
-  .stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 32px;
-  }
-  .stats li:nth-child(odd) {
-    padding-left: 0;
-    border-left: 0;
-  }
 }
 
 /* Work: artwork sits in a glass window over soft colour. */
@@ -2445,80 +2317,6 @@ h3 em {
   }
 }
 
-/* Capabilities bento */
-.v-capabilities {
-  padding-block: 60px 120px;
-}
-.v-bento {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 48px;
-}
-.v-tile {
-  padding: 28px;
-  border: 1px solid #2a0e1612;
-  border-radius: var(--radius-lg);
-  background: var(--latte);
-}
-.v-tile-orb {
-  grid-column: span 3;
-  grid-row: span 2;
-  background: var(--burgundy);
-  color: var(--latte);
-  --muted: #e6cfc6;
-  --rule: #fff8e72e;
-}
-.v-tile-orb .eyebrow {
-  color: #f0d6c6;
-}
-.v-tile-stats,
-.v-tile-education {
-  grid-column: span 3;
-}
-.v-tile-tools {
-  grid-column: span 2;
-}
-.v-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin: 18px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.v-stats li {
-  display: grid;
-  gap: 6px;
-}
-.v-stats strong {
-  font-family: var(--font-serif);
-  font-size: calc(clamp(3rem, 2rem + 3vw, 5.25rem) * var(--fs, 1));
-  font-weight: 700;
-  letter-spacing: -0.06em;
-  line-height: 0.9;
-  color: var(--burgundy);
-  font-variant-numeric: tabular-nums;
-}
-.v-tile .stat-label {
-  font-size: calc(var(--type-label) * var(--fs, 1));
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-.v-tile .stat-note {
-  font-size: calc(var(--type-small) * var(--fs, 1));
-  color: var(--muted);
-}
-.v-tile .education-list strong {
-  color: var(--ink);
-  font-family: var(--font-serif);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-}
-.v-tile .education-list li {
-  border-bottom-color: var(--rule);
-}
 .v-chips {
   display: flex;
   flex-wrap: wrap;
@@ -2534,47 +2332,6 @@ h3 em {
   font-size: calc(var(--type-caption) * var(--fs, 1));
   font-weight: 500;
 }
-.v-tile-orb .skill-orb-stage {
-  height: 440px;
-}
-@media (max-width: 1050px) {
-  .v-bento {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .v-tile-orb,
-  .v-tile-stats,
-  .v-tile-education {
-    grid-column: span 2;
-  }
-  .v-tile-tools {
-    grid-column: span 1;
-  }
-  .v-tile-tools:last-child {
-    grid-column: span 2;
-  }
-}
-@media (max-width: 700px) {
-  .v-bento {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .v-tile-orb,
-  .v-tile-stats,
-  .v-tile-education,
-  .v-tile-tools,
-  .v-tile-tools:last-child {
-    grid-column: auto;
-  }
-  .v-tile {
-    padding: 22px;
-  }
-  .v-stats {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  .v-tile-orb .skill-orb-stage {
-    height: 330px;
-  }
-}
-
 /* Experience: a plain grid of role cards, each sized to its content */
 .v-experience {
   padding-block: 40px 60px;
@@ -2680,6 +2437,51 @@ h3 em {
 .v-role-current .v-role-text {
   max-width: 64ch;
 }
+
+/* Toolkit and education sit under the roles as two plain tiles */
+.v-exp-extras {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+  margin-top: 20px;
+}
+.v-tile {
+  padding: 30px;
+  border: 1px solid #2a0e1612;
+  border-radius: var(--radius-lg);
+  background: var(--latte);
+}
+.v-toolkit {
+  display: grid;
+  gap: 18px;
+  margin: 18px 0 0;
+}
+.v-toolkit dt {
+  font-size: calc(var(--type-label) * var(--fs, 1));
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+}
+.v-toolkit dd {
+  margin: 0;
+}
+.v-toolkit .v-chips {
+  margin-top: 8px;
+}
+.v-tile .education-list {
+  margin-top: 6px;
+}
+.v-tile .education-list strong {
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+.v-tile .education-list li:last-child {
+  border-bottom: 0;
+}
 @media (max-width: 850px) {
   .v-exp-head {
     flex-direction: column;
@@ -2689,7 +2491,11 @@ h3 em {
     grid-template-columns: 1fr;
     margin-top: 32px;
   }
-  .v-role {
+  .v-exp-extras {
+    grid-template-columns: 1fr;
+  }
+  .v-role,
+  .v-tile {
     padding: 22px;
   }
 }
@@ -2879,50 +2685,6 @@ h3 em {
   translate: -50% -50%;
 }
 
-/* 8. The full toolkit, one click away from the sphere. */
-.v-toolkit {
-  margin-top: 18px;
-  border-top: 1px solid #fff8e72e;
-}
-.v-toolkit summary {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 48px;
-  cursor: pointer;
-  list-style: none;
-  font-size: calc(var(--type-small) * var(--fs, 1));
-  font-weight: 500;
-}
-.v-toolkit summary::-webkit-details-marker {
-  display: none;
-}
-.v-toolkit summary span {
-  font-size: calc(var(--type-icon) * var(--fs, 1));
-  transition: rotate var(--motion-fast) var(--motion-ease);
-}
-.v-toolkit[open] summary span {
-  rotate: 45deg;
-}
-.v-toolkit dl {
-  display: grid;
-  gap: 16px;
-  margin: 4px 0 8px;
-}
-.v-toolkit dt {
-  font-size: calc(var(--type-label) * var(--fs, 1));
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #f0d6c6;
-}
-.v-toolkit .v-chips {
-  margin-top: 8px;
-}
-.v-toolkit .v-chips li {
-  background: #fff8e71a;
-  color: var(--latte);
-}
 @media (max-width: 850px) {
   .v-ring,
   .v-robot {
@@ -2971,68 +2733,6 @@ body::before {
   height: 92px;
   pointer-events: none;
   background: linear-gradient(var(--mocha) 55%, #d4b89d00);
-}
-
-/* Quick answers */
-.v-faq {
-  padding-block: 40px 100px;
-}
-.v-faq-list {
-  margin-top: 40px;
-  border-radius: var(--radius-lg);
-  background: var(--latte);
-  padding: 8px 32px;
-}
-.v-faq details + details {
-  border-top: 1px solid var(--rule);
-}
-.v-faq summary {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-  min-height: 72px;
-  cursor: pointer;
-  list-style: none;
-}
-.v-faq summary::-webkit-details-marker {
-  display: none;
-}
-.v-faq summary h3 {
-  margin: 0;
-  font-family: var(--font-serif);
-  font-size: calc(var(--type-subtitle) * var(--fs, 1));
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
-}
-.v-faq summary span {
-  flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--mocha-soft);
-  color: var(--burgundy);
-  font-size: calc(var(--type-icon) * var(--fs, 1));
-  transition: rotate var(--motion-fast) var(--motion-ease);
-}
-.v-faq details[open] summary span {
-  rotate: 45deg;
-  background: var(--burgundy);
-  color: var(--latte);
-}
-.v-faq details p {
-  max-width: 72ch;
-  margin: 0 0 26px;
-  font-size: calc(var(--type-lead) * var(--fs, 1));
-  color: var(--muted);
-}
-@media (max-width: 700px) {
-  .v-faq-list {
-    padding: 4px 18px;
-  }
 }
 
 /* The arm sits centred between the two name lines. The lines start 13vh from

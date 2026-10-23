@@ -1,5 +1,8 @@
-import { projects } from "@/data/projects";
+import { featuredProjects } from "@/data/projects";
 import { identity } from "@/data/site";
+
+/** Featured project cards plus the single Coursework card. */
+const workCards = featuredProjects.length + 1;
 
 export function Nav({ subpage = false }: { subpage?: boolean }) {
   const root = subpage ? "/" : "";
@@ -15,10 +18,10 @@ export function Nav({ subpage = false }: { subpage?: boolean }) {
         </span>
       </a>
       <nav aria-label="Primary" className="main-nav">
-        <a href={`${root}#projects`} title={`View ${projects.length} projects`}>
+        <a href={`${root}#projects`} title="View my work">
           Work
           <span className="nav-count">
-            {String(projects.length).padStart(2, "0")}
+            {String(workCards).padStart(2, "0")}
           </span>
         </a>
         <a href={`${root}#experience`}>Experience</a>
