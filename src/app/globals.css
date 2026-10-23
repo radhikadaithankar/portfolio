@@ -3302,3 +3302,13 @@ h3 em,
     gap: 16px;
   }
 }
+@media (max-width: 850px) {
+  .v-hero-bar > span:empty {
+    display: none;
+  }
+}
+@media (max-width: 850px) {
+  .v-hero-bar {
+    margin-top: 28px;
+  }
+}

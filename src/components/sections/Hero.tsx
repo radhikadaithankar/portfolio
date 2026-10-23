@@ -1,6 +1,6 @@
 import { HeroRobot } from "../HeroRobot";
 import { LocalTime } from "../LocalTime";
-import { identity, positioning } from "@/data/site";
+import { identity } from "@/data/site";
 
 /** Letters rise in on load and lift under the pointer; one readable name stays. */
 function Letters({ text, offset = 0 }: { text: string; offset?: number }) {
@@ -53,7 +53,7 @@ export function Hero() {
       </div>
 
       <div className="v-hero-bar shell">
-        <p className="v-hero-tag">{positioning.statement}</p>
+        <span aria-hidden="true" />
         <div className="v-hero-cta">
           <a className="pill pill-light" href="#projects">
             See the work <span aria-hidden="true">↓</span>
