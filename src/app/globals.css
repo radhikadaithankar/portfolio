@@ -3063,3 +3063,25 @@ body::before {
     padding: 4px 18px;
   }
 }
+
+/* The arm sits centred between the two name lines. The lines start 13vh from
+   the top and end 17vh from the bottom, so the gap is centred at 48vh and is
+   70vh minus both line heights tall. */
+@media (min-width: 851px) {
+  .v-hero {
+    --gap: calc(70vh - var(--type-display) * 1.6 - 24px);
+  }
+  .v-robot {
+    top: 48%;
+    left: 50%;
+    width: min(46vw, 640px);
+    height: max(var(--gap), 240px);
+    translate: -50% -50%;
+  }
+  .v-ring {
+    top: 48%;
+    left: 50%;
+    width: min(max(var(--gap), 240px), 460px);
+    translate: -50% -50%;
+  }
+}
