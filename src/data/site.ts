@@ -21,7 +21,7 @@ export const contact = {
 export const positioning = {
   statement: "AI engineer building software that schools actually use.",
   supporting:
-    "I built CIS Compass, a school management app with an AI assistant for teachers, now in use at Chintamani International School. Before that: an MSc in Artificial Intelligence at Queen Mary University of London, then data science and analytics in London.",
+    "I turn everyday problems into working software, from a school app with an AI assistant for teachers to a robot arm that draws on its own. I trained in artificial intelligence at Queen Mary University of London, sharpened it with data work in London, and now build products through Evaradh.",
   tagline: "Ideas, made useful.",
   description:
     "Radhika Daithankar is an AI engineer and Evaradh founder who built CIS Compass, a school management app with teacher AI support, in use at Chintamani International School.",
@@ -57,7 +57,15 @@ export const toolkit = [
   },
   {
     group: "Data & analysis",
-    items: ["Python", "SQL", "NumPy", "Pandas", "Excel", "Tableau", "Matplotlib"],
+    items: [
+      "Python",
+      "SQL",
+      "NumPy",
+      "Pandas",
+      "Excel",
+      "Tableau",
+      "Matplotlib",
+    ],
   },
   {
     group: "Building",
@@ -98,8 +106,7 @@ export const roles: Role[] = [
     contribution:
       "Leading the school's technology initiatives and turning day-to-day operational needs into working products.",
     highlights: [
-      "Independently built the public school website and CIS Compass, the management app developed under Evaradh.",
-      "Created workflows for staff, teachers and parents, including attendance, student records, notifications and appointment booking.",
+      "Delivered the school's public website and its management app, with workflows for staff, teachers and parents covering attendance, student records, notifications and appointment booking.",
       "Identified operational problems and drove digital solutions into everyday use across the school.",
     ],
     tags: ["Leadership", "Product"],

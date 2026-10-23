@@ -7,16 +7,11 @@ import { company, contact, education, identity, school, toolkit } from "./site";
 export const faq = [
   {
     question: `Who is ${identity.fullName}?`,
-    answer: `${identity.fullName} is an AI engineer based in ${identity.location}. ${identity.firstName} founded ${company.name}, a technology product company, and is Managing Director at ${school.name} (${school.shortName}) in Parbhani, where ${identity.firstName} built the CIS Compass school management app. ${identity.firstName} holds an ${education[0].degree} from ${education[0].school}.`,
+    answer: `${identity.fullName} is an AI engineer based in ${identity.location}. ${identity.firstName} founded ${company.name}, a technology product company, and is Managing Director at ${school.name} (${school.shortName}) in Parbhani. ${identity.firstName} holds an ${education[0].degree} from ${education[0].school}.`,
   },
   {
     question: "What is CIS Compass?",
-    answer: `CIS Compass is a school management app with an AI assistant for teachers, built independently by ${identity.firstName} and developed under ${company.name}. It is in use at ${school.name}. Teachers, parents and operations staff each get their own view, covering attendance, fees, homework, notices, student records and appointment booking. The AI assistant helps teachers take attendance and post homework, adapts explanations to the class level, and gives students hints after they try a problem themselves.`,
-  },
-  {
-    question: "How is CIS Compass built?",
-    answer:
-      "The teacher and parent apps are written in Flutter for Android and iOS. A TypeScript, Node.js and Express API with Prisma and PostgreSQL serves them and a React admin dashboard. Firebase Cloud Messaging delivers notifications, and the AI assistant runs on Google's Gemini API.",
+    answer: `CIS Compass is the school management app ${identity.firstName} built for ${school.name}, with an AI assistant for teachers. Teachers, parents and staff each get their own view of attendance, homework, fees and notices. It is built with Flutter, a TypeScript and Node.js API on PostgreSQL, Firebase notifications and Google's Gemini API.`,
   },
   {
     question: `What is ${company.name}?`,

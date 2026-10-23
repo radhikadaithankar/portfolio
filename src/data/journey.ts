@@ -63,8 +63,8 @@ export const journey = [
     period: "Back in India",
     title: "The next problem was closer to home.",
     paragraphs: [
-      "Coming back to India brought me to Chintamani International School. I began with the everyday needs of teachers, parents and staff, then independently built the school's website and CIS Compass.",
-      "Now the app brings school workflows together with an AI assistant for teachers and learners. Working in education has also made me think about what children need beyond marks: confidence, creativity and the ability to keep learning.",
+      "Coming back to India brought me to Chintamani International School. I began with the everyday needs of teachers, parents and staff, then built the software to meet them.",
+      "Working in education has also made me think about what children need beyond marks: confidence, creativity and the ability to keep learning.",
     ],
     note: "A school became the place where I could put my ideas to work.",
     link: { href: "/work/school-platform", label: "See what I built for CIS" },
@@ -78,7 +78,7 @@ export const journey = [
     period: "Building now · Based in Pune",
     title: "Evolution, with my name in it.",
     paragraphs: [
-      "Evaradh means Evolution by Radhika. I founded it to build technology around problems I could see and understand. CIS Compass is its first product, already in use at Chintamani.",
+      "Evaradh means Evolution by Radhika. I founded it to build technology around problems I could see and understand, starting with the school I know best.",
       "I want to keep getting better as an AI engineer while building useful products. Running a company, leading at a school and writing software give me different ways to do that.",
     ],
     note: "The question I keep returning to: what could work better?",
