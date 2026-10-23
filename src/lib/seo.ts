@@ -7,7 +7,7 @@ import {
   school,
   toolkit,
 } from "@/data/site";
-import { homeFaq } from "@/data/faq";
+import { faq } from "@/data/faq";
 import { projects, type Project } from "@/data/projects";
 
 export const siteOrigin = new URL(
@@ -122,8 +122,7 @@ export function profileStructuredData() {
       {
         "@type": "FAQPage",
         "@id": absoluteUrl("/#faq"),
-        // Structured data must match the questions visible on the page.
-        mainEntity: homeFaq.map((item) => ({
+        mainEntity: faq.map((item) => ({
           "@type": "Question",
           name: item.question,
           acceptedAnswer: { "@type": "Answer", text: item.answer },

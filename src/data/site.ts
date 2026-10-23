@@ -20,6 +20,8 @@ export const contact = {
 // for hiring teams and a separate route for schools and Evaradh clients.
 export const positioning = {
   statement: "AI engineer building software that schools actually use.",
+  supporting:
+    "I built CIS Compass, a school management app with an AI assistant for teachers, now in use at Chintamani International School. Before that: an MSc in Artificial Intelligence at Queen Mary University of London, then data science and analytics in London.",
   tagline: "Ideas, made useful.",
   description:
     "Radhika Daithankar is an AI engineer and Evaradh founder who built CIS Compass, a school management app with teacher AI support, in use at Chintamani International School.",
@@ -93,10 +95,13 @@ export const roles: Role[] = [
     location: "Parbhani, India",
     period: "Nov 2025 – Present",
     current: true,
-    // The full account lives in project 01 and story chapters 04/05; keep this to one line.
     contribution:
-      "Leading the school's technology initiatives; independently built the public school website and CIS Compass.",
-    highlights: [],
+      "Leading the school's technology initiatives and turning day-to-day operational needs into working products.",
+    highlights: [
+      "Independently built the public school website and CIS Compass, the management app developed under Evaradh.",
+      "Created workflows for staff, teachers and parents, including attendance, student records, notifications and appointment booking.",
+      "Identified operational problems and drove digital solutions into everyday use across the school.",
+    ],
     tags: ["Leadership", "Product"],
   },
   {

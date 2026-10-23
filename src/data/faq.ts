@@ -42,15 +42,3 @@ export const faq = [
     answer: `Email ${contact.email}, view the CV at cv.radhikakd.com, or connect on LinkedIn. For school software or a custom build, contact ${company.name}.`,
   },
 ];
-
-/**
- * The home page shows only the two questions the rest of the page does not
- * already answer. The full list still feeds llms.txt.
- */
-const homeQuestions = [
-  `How can I contact or hire ${identity.firstName}?`,
-  `What technologies does ${identity.firstName} work with?`,
-];
-export const homeFaq = homeQuestions.map(
-  (question) => faq.find((item) => item.question === question)!,
-);

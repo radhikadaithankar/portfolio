@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/sections/Hero";
+import { Statement } from "@/components/sections/Statement";
 import { Capabilities } from "@/components/sections/Capabilities";
 import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
@@ -26,6 +27,7 @@ export default function Home() {
       <PortfolioMotion />
       <main id="main" tabIndex={-1}>
         <Hero />
+        <Statement />
         <Projects />
         <Capabilities />
         <Experience />

@@ -1,4 +1,4 @@
-import { homeFaq } from "@/data/faq";
+import { faq } from "@/data/faq";
 
 /** Visible answers; the same text feeds the FAQPage structured data. */
 export function Faq() {
@@ -12,7 +12,7 @@ export function Faq() {
           </h2>
         </div>
         <div className="v-faq-list">
-          {homeFaq.map((item, index) => (
+          {faq.map((item, index) => (
             <details key={item.question} open={index === 0}>
               <summary>
                 <h3>{item.question}</h3>

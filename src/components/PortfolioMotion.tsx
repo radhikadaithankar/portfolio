@@ -9,6 +9,7 @@ const revealTargets = [
   ".v-tile",
   ".story-intro",
   "#journey-start",
+  "[data-story-chapter]",
   ".story-afterword",
   ".v-contact-card",
 ].join(", ");
