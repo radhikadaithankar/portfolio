@@ -3312,3 +3312,23 @@ h3 em,
     margin-top: 28px;
   }
 }
+
+/* The arm keeps its earlier, larger size: sized from the previous name scale
+   rather than the gap left by the larger name. */
+@media (min-width: 851px) {
+  .v-hero {
+    --arm-size: calc(70vh - clamp(4.5rem, 1rem + 8.6vw, 11rem) * 1.6 - 24px);
+  }
+  .v-robot {
+    height: max(var(--arm-size), 260px);
+  }
+  .v-ring {
+    width: min(max(var(--arm-size), 260px), 480px);
+  }
+}
+@media (min-width: 851px) {
+  .v-robot .robot-hint {
+    top: -44px;
+    bottom: auto;
+  }
+}
