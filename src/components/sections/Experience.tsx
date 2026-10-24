@@ -45,6 +45,7 @@ export function Experience() {
       const box = trackElement!.getBoundingClientRect();
       const p = Math.min(1, Math.max(0, -box.top / travel));
       railElement!.style.setProperty("--x", `${(-p * travel).toFixed(1)}px`);
+      trackElement!.style.setProperty("--p", p.toFixed(3));
     }
     function schedule() {
       if (!frame) frame = requestAnimationFrame(sync);
@@ -134,6 +135,13 @@ export function Experience() {
               </li>
             ))}
           </ol>
+          {distance > 0 && (
+            <div className="shell v-exp-progress" aria-hidden="true">
+              <span>01</span>
+              <i />
+              <span>{String(roles.length).padStart(2, "0")}</span>
+            </div>
+          )}
         </div>
       </div>
     </section>

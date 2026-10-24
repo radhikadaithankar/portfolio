@@ -3420,3 +3420,175 @@ h3 em,
 .v-contact-email {
   font-size: calc(clamp(1.25rem, 0.9rem + 1.2vw, 2rem) * var(--fs, 1));
 }
+
+/* Intro: bigger type and motion on entry. */
+.v-statement {
+  position: relative;
+  overflow: hidden;
+  padding-block: 140px 120px;
+}
+.v-statement-title {
+  max-width: 16ch;
+  font-size: calc(clamp(3rem, 1.4rem + 4.8vw, 6.75rem) * var(--fs, 1));
+  line-height: 1.02;
+}
+.v-statement-body {
+  max-width: 54ch;
+  margin-top: 34px;
+  font-size: calc(clamp(1.25rem, 1.05rem + 0.55vw, 1.625rem) * var(--fs, 1));
+  line-height: 1.55;
+}
+.v-statement-facts {
+  position: relative;
+  margin-top: 64px;
+  padding-top: 26px;
+  border-top: 0;
+}
+.v-statement-facts::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--rule-strong);
+  opacity: 0.35;
+  transform-origin: left;
+}
+.v-statement-facts dt {
+  font-size: calc(0.8125rem * var(--fs, 1));
+}
+.v-statement-facts dd {
+  margin-top: 8px;
+  font-size: calc(clamp(1.125rem, 1rem + 0.4vw, 1.375rem) * var(--fs, 1));
+  font-weight: 500;
+}
+
+/* Words sit in masks so they can rise into place. */
+.v-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.v-word {
+  display: inline-block;
+  transition: transform 900ms var(--motion-ease);
+  transition-delay: calc(var(--d, 0) * 70ms);
+}
+/* The accent phrases share one slot and swap with a vertical roll. */
+.v-accent-slot {
+  display: inline-grid;
+  vertical-align: top;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+.v-accent {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  transform: translateY(105%);
+  opacity: 0;
+  transition:
+    transform 700ms var(--motion-ease),
+    opacity 500ms var(--motion-ease);
+}
+.v-accent[data-active] {
+  transform: none;
+  opacity: 1;
+}
+.v-accent:not([data-active]) {
+  transform: translateY(-105%);
+}
+.v-rise {
+  transition:
+    opacity 800ms var(--motion-ease),
+    transform 800ms var(--motion-ease);
+  transition-delay: calc(var(--d, 0) * 70ms);
+}
+.v-statement-facts::before {
+  transition: transform 1100ms var(--motion-ease) 450ms;
+}
+
+/* Hidden states apply only once motion is confirmed, so no-JS shows text. */
+html[data-motion="full"] .v-statement:not([data-in]) .v-word {
+  transform: translateY(110%);
+}
+html[data-motion="full"] .v-statement:not([data-in]) .v-rise {
+  opacity: 0;
+  transform: translateY(24px);
+}
+html[data-motion="full"]
+  .v-statement:not([data-in])
+  .v-statement-facts::before {
+  transform: scaleX(0);
+}
+html[data-motion="full"] .v-statement:not([data-in]) .v-accent[data-active] {
+  transform: translateY(105%);
+  opacity: 0;
+}
+
+/* A slow star fills the open space on the right. */
+.v-statement-star {
+  position: absolute;
+  top: 50%;
+  right: max(-40px, calc((100vw - 1500px) / 2));
+  z-index: -1;
+  translate: 0 -50%;
+  font-size: clamp(14rem, 10rem + 18vw, 34rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #5a122633;
+  animation: star-turn 60s linear infinite;
+  pointer-events: none;
+}
+@media (max-width: 850px) {
+  .v-statement {
+    padding-block: 80px 72px;
+  }
+  .v-statement-star {
+    top: 26%;
+    right: -30%;
+    font-size: 18rem;
+  }
+}
+html[data-motion="reduce"] .v-statement-star {
+  animation: none;
+}
+/* The notebooks card has no tag row, so give its button its own space. */
+.v-card-notes .v-card-actions {
+  margin-top: 32px;
+}
+
+/* Experience rail: the end spacer counts toward the scroll, so the last
+   card stops at the page margin; a bar shows progress through the roles. */
+.v-exp-track[data-sideways="true"] .v-exp-rail::after {
+  content: "";
+  flex: 0 0 max(1px, calc((100vw - 1280px) / 2 - 20px));
+}
+.v-exp-progress {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: calc(0.75rem * var(--fs, 1));
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.v-exp-progress i {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--rule);
+  overflow: hidden;
+}
+.v-exp-progress i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--burgundy);
+  transform-origin: left;
+  transform: scaleX(var(--p, 0));
+}

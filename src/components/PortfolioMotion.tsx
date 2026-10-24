@@ -15,7 +15,7 @@ const revealTargets = [
 ].join(", ");
 
 /** Italic heading words wipe in from the left. */
-const wipeTargets = "main h2 em";
+const wipeTargets = "main h2 em:not(.v-accent)";
 /** Groups whose children enter one after another. */
 const cascadeTargets = ".v-chips, .education-list";
 
