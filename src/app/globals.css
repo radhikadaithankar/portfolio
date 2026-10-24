@@ -3410,3 +3410,17 @@ h3 em,
     --name-size: clamp(3rem, 15vw, 6.5rem);
   }
 }
+
+/* Contact: a calmer scale for the band and the heading. */
+.v-contact-marquee .discipline-track > span > span {
+  font-size: calc(clamp(2rem, 1.2rem + 2.6vw, 4rem) * var(--fs, 1));
+  gap: 22px;
+  padding-right: 22px;
+}
+.v-contact-card h2 {
+  font-size: calc(clamp(2.25rem, 1.2rem + 3.2vw, 4.5rem) * var(--fs, 1));
+  line-height: 1;
+}
+.v-contact-email {
+  font-size: calc(clamp(1.25rem, 0.9rem + 1.2vw, 2rem) * var(--fs, 1));
+}
