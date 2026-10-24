@@ -10,32 +10,33 @@ export function About() {
       className="story-section shell"
       aria-labelledby="story-title"
     >
-      <div className="story-intro">
-        <div>
-          <p className="eyebrow">My story</p>
-          <h2 id="story-title">
-            Everything
-            <br />
-            <em>can evolve.</em>
-          </h2>
-        </div>
-        <div className="story-intro-copy">
-          <p>
-            I&apos;m Radhika Daithankar, an AI engineer, founder of Evaradh and
-            Managing Director at CIS. The route here had a few unexpected turns.
-          </p>
-          <p>
-            A computer science classroom. A move to London. Bakery and
-            restaurant shifts. A school back home. Each gave me a different
-            reason to build.
-          </p>
-          <a href="#journey-start" className="story-start-link">
-            Follow the thread <span aria-hidden="true">↘</span>
-          </a>
-        </div>
-      </div>
       <div id="journey-start" className="story-map-anchor">
-        <JourneyMap />
+        <JourneyMap
+          intro={
+            <div className="story-intro">
+              <div>
+                <p className="eyebrow">My story</p>
+                <h2 id="story-title">
+                  Everything{" "}
+                  <br />
+                  <em>can evolve.</em>
+                </h2>
+              </div>
+              <div className="story-intro-copy">
+                <p>
+                  I&apos;m Radhika Daithankar, an AI engineer, founder of
+                  Evaradh and Managing Director at CIS. The route here had a few
+                  unexpected turns.
+                </p>
+                <p>
+                  A computer science classroom. A move to London. Bakery and
+                  restaurant shifts. A school back home. Each gave me a
+                  different reason to build.
+                </p>
+              </div>
+            </div>
+          }
+        />
       </div>
       <div className="story-afterword">
         <div className="story-personal">

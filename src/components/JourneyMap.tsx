@@ -7,6 +7,7 @@ import {
   useState,
   type CSSProperties,
   type KeyboardEvent,
+  type ReactNode,
 } from "react";
 import Link from "next/link";
 import { journey } from "@/data/journey";
@@ -23,7 +24,7 @@ const routes = [
   "M 810 396 C 935 396 870 245 870 138",
 ];
 
-export function JourneyMap() {
+export function JourneyMap({ intro }: { intro?: ReactNode }) {
   const [active, setActive] = useState(0);
   const [scroll, setScroll] = useState<Scroll>(null);
   const stops = useRef<(HTMLButtonElement | null)[]>([]);
@@ -50,13 +51,18 @@ export function JourneyMap() {
     }
     function measure() {
       const header = document.querySelector<HTMLElement>(".site-header");
-      const top = (header?.getBoundingClientRect().bottom ?? 0) + 12;
+      const headerBottom = (header?.getBoundingClientRect().bottom ?? 0) + 28;
       // Stack the chapters before measuring so the height is the tallest one.
       if (wide.matches) trackElement!.dataset.wide = "true";
       else delete trackElement!.dataset.wide;
       const height = stageElement!.offsetHeight;
+      // Centre the stage in the space below the header when there is room.
+      const top = Math.max(
+        headerBottom,
+        (innerHeight - height) / 2 + headerBottom / 3,
+      );
       layout =
-        wide.matches && height <= innerHeight - top - 8
+        wide.matches && height <= innerHeight - headerBottom - 8
           ? {
               top,
               height,
@@ -140,6 +146,7 @@ export function JourneyMap() {
         }
       >
         <div ref={stage} className={styles.stage}>
+          {intro && <div className={styles.stageIntro}>{intro}</div>}
           <div className="story-scroll-progress" aria-hidden="true">
             <span />
           </div>

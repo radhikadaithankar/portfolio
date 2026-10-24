@@ -578,3 +578,18 @@
     transform: none !important;
   }
 }
+
+/* The story intro sits inside the stage so it stays on screen while pinned. */
+.stageIntro {
+  grid-column: 1 / -1;
+  padding-bottom: 28px;
+}
+.track[data-wide="true"] .stageIntro {
+  padding-bottom: 14px;
+}
+.track[data-wide="true"] .mapLegend {
+  display: none;
+}
+.track[data-wide="true"] .map {
+  margin-block: 22px 8px;
+}

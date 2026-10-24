@@ -46,7 +46,7 @@ export const journey = [
     paragraphs: [
       "Before YORI, I worked at GAIL's Bakery in London. I started as an assistant baker and became head baker in four months. At YORI, I later moved from waitress to team leader, then supervisor, and worked with sales, inventory and forecasting.",
       "There was a time when nothing seemed to be going well in my career. I lost faith in myself and questioned whether I was capable of doing anything. That was part of my London story, too.",
-      "Then I decided to stand up for myself. I built a data-analysis project at YORI to make my own work easier. I used Python, SQL and Excel to analyse sales and inventory, automate reporting and work on demand forecasting. The work listed under JSYSC Holdings on my CV began with a problem I knew from doing the job myself.",
+      "Then I decided to stand up for myself. I built a data-analysis project at YORI to make my own work easier. I used Python, SQL and Excel to analyse sales and inventory, automate reporting and work on demand forecasting. That project, built for myself, is what led to my Data Analyst job at JSYSC Holdings.",
     ],
     note: "I stood up for myself, and I built something.",
     link: {

@@ -138,7 +138,7 @@ export const roles: Role[] = [
     highlights: [
       "Analysed purchasing and inventory patterns with Python, SQL and Excel, and applied demand forecasting to support stock and staffing decisions.",
       "Automated data cleaning and reporting to reduce repetitive manual work and make business insights easier to use.",
-      "Started at YORI as a waitress, then progressed to team leader and supervisor.",
+      "Started at YORI as a waitress, then progressed to team leader and supervisor. The data-analysis project I built for myself there led to my Data Analyst role at JSYSC Holdings.",
     ],
     tags: ["SQL", "Forecasting"],
   },
