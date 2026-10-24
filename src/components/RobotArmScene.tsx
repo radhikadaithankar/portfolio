@@ -244,7 +244,7 @@ function Arm({ controlsRef }: { controlsRef: RefObject<Controls> }) {
         index === 1 ? offsets.shoulder : index === 3 ? offsets.elbow : 0;
       const idle =
         Math.sin(time.current + index * 0.6) *
-        (index === 0 ? 0.07 : 0.025) *
+        (index === 0 ? 0.012 : 0.02) *
         (drawing ? 0.2 : 1);
       joint.rotation[axis] = MathUtils.damp(
         joint.rotation[axis],
@@ -333,7 +333,7 @@ function Arm({ controlsRef }: { controlsRef: RefObject<Controls> }) {
     );
   }
   return (
-    <group position={[0, -1.15, 0]} rotation={[0, -0.2, 0]}>
+    <group position={[-0.255, -1.15, 0.136]} rotation={[0, -0.2, 0]}>
       <group ref={turntable}>
         <primitive ref={trailRef} object={trailObject} visible={false} />
         <ArmBody>{segment(0)}</ArmBody>

@@ -33,6 +33,9 @@ export function Statement() {
   const [inView, setInView] = useState(false);
   const [index, setIndex] = useState(0);
   const words = positioning.intro.lead.split(" ");
+  const bodyWords = positioning.supporting.split(" ");
+  // Headline and paragraph words share one 0-1 timeline as the section scrolls.
+  const total = words.length + bodyWords.length;
 
   useEffect(() => {
     const element = host.current;
@@ -49,6 +52,34 @@ export function Statement() {
     observer.observe(element);
     return () => observer.disconnect();
   }, []);
+
+  // Words start translucent and darken as the section scrolls up the screen.
+  useEffect(() => {
+    const element = host.current;
+    if (!element) return;
+    if (reduced) {
+      element.style.setProperty("--p", "1");
+      return;
+    }
+    let frame = 0;
+    function update() {
+      frame = 0;
+      const box = element!.getBoundingClientRect();
+      const p = (innerHeight * 0.95 - box.top) / (innerHeight * 0.6);
+      element!.style.setProperty("--p", Math.min(1, Math.max(0, p)).toFixed(3));
+    }
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [reduced]);
 
   useEffect(() => {
     if (!inView || reduced) return;
@@ -80,8 +111,8 @@ export function Statement() {
               <Fragment key={i}>
                 <span className="v-word-mask">
                   <span
-                    className="v-word"
-                    style={{ "--d": i } as CSSProperties}
+                    className="v-word v-lit"
+                    style={{ "--d": i, "--w": i / total } as CSSProperties}
                   >
                     {word}
                   </span>
@@ -105,7 +136,16 @@ export function Statement() {
           className="v-statement-body v-rise"
           style={{ "--d": 6 } as CSSProperties}
         >
-          {positioning.supporting}
+          {bodyWords.map((word, i) => (
+            <Fragment key={i}>
+              <span
+                className="v-lit"
+                style={{ "--w": (words.length + i) / total } as CSSProperties}
+              >
+                {word}
+              </span>{" "}
+            </Fragment>
+          ))}
         </p>
         <dl className="v-statement-facts">
           {facts.map((fact, i) => (
