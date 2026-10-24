@@ -1,28 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, IBM_Plex_Mono, Inter } from "next/font/google";
+import { Figtree } from "next/font/google";
 import "./globals.css";
 import { identity } from "@/data/site";
 import { siteOrigin, siteTitle, siteDescription, socialImage } from "@/lib/seo";
 import { motionStyles } from "@/lib/motion";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const figtree = Figtree({
+  variable: "--font-figtree",
   subsets: ["latin"],
   style: ["normal", "italic"],
-  axes: ["opsz"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -77,7 +63,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       style={motionStyles}
       suppressHydrationWarning
-      className={`${fraunces.variable} ${inter.variable} ${plexMono.variable} antialiased`}
+      className={`${figtree.variable} antialiased`}
     >
       <head>
         <script

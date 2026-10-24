@@ -3332,3 +3332,81 @@ h3 em,
     bottom: auto;
   }
 }
+
+/* ==========================================================================
+   Figtree everywhere: one family for headings, text and labels.
+   ========================================================================== */
+:root,
+.v-hero {
+  --font-serif: var(--font-figtree), system-ui, sans-serif;
+  --font-sans: var(--font-figtree), system-ui, sans-serif;
+  --font-mono: var(--font-figtree), system-ui, sans-serif;
+  --font-accent: var(--font-figtree), system-ui, sans-serif;
+}
+body {
+  font-family: var(--font-sans);
+}
+/* Headings: confident medium weight with tight tracking. */
+h1,
+h2,
+h3,
+.v-statement-title,
+.v-card h3,
+.v-role h3,
+.v-notebooks strong,
+.v-faq summary h3,
+.education-list strong,
+.v-contact-card h2,
+.v-contact-email,
+.v-contact-marquee .discipline-track > span > span,
+.case-header h1,
+.not-found h1 {
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+.v-name {
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 0.86;
+}
+.v-stats strong {
+  font-weight: 600;
+  letter-spacing: -0.05em;
+}
+/* Italic accents and the surname stay italic burgundy, now in Figtree. */
+h1 em,
+h2 em,
+h3 em,
+.v-name-bottom {
+  font-weight: 500;
+  font-style: italic;
+}
+.v-name-bottom {
+  font-weight: 600;
+}
+/* Labels: small caps in Figtree semibold. */
+.eyebrow,
+.stat-label,
+.v-toolkit dt,
+.v-statement-facts dt,
+.v-role-top,
+.v-hero-meta,
+.robot-hint,
+.v-ring,
+.brand {
+  font-weight: 600;
+}
+.brand {
+  letter-spacing: 0.18em;
+}
+/* Figtree runs wider than Fraunces; scale the name so it keeps its footprint. */
+@media (min-width: 851px) {
+  .v-hero {
+    --type-display: clamp(4.25rem, 0.8rem + 9.2vw, 12rem);
+  }
+}
+@media (max-width: 850px) {
+  .v-hero {
+    --name-size: clamp(3rem, 15vw, 6.5rem);
+  }
+}

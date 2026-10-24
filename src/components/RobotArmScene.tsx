@@ -228,11 +228,11 @@ function Arm({ controlsRef }: { controlsRef: RefObject<Controls> }) {
       const follow =
         following *
         (index === 0
-          ? pointer.current.x * 0.5
+          ? pointer.current.x * 0.14
           : index === 1
-            ? pointer.current.y * 0.14
+            ? pointer.current.y * 0.04
             : index === 3
-              ? -pointer.current.y * 0.16
+              ? -pointer.current.y * 0.05
               : 0);
       const routine =
         index === 1 ? offsets.shoulder : index === 3 ? offsets.elbow : 0;
@@ -327,7 +327,7 @@ function Arm({ controlsRef }: { controlsRef: RefObject<Controls> }) {
     );
   }
   return (
-    <group position={[-0.45, -1.15, 0]} rotation={[0, -0.2, 0]}>
+    <group position={[0, -1.15, 0]} rotation={[0, -0.2, 0]}>
       <group ref={turntable}>
         <primitive ref={trailRef} object={trailObject} visible={false} />
         <ArmBody>{segment(0)}</ArmBody>
@@ -420,7 +420,7 @@ export default function RobotArmScene({
         dpr={[1, window.matchMedia("(pointer: coarse)").matches ? 1.5 : 2]}
         frameloop={active ? "always" : "never"}
         gl={{ alpha: true, antialias: true, powerPreference: "low-power" }}
-        camera={{ position: [3.2, 1.8, 6], fov: 32 }}
+        camera={{ position: [3.2, 1.8, 6], fov: 24 }}
         onCreated={({ camera }) => {
           camera.lookAt(0, -0.1, 0);
         }}

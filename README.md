@@ -20,7 +20,7 @@ npm run start
 
 ## Content and structure
 
-The site uses 60% mocha, 30% latte and 10% burgundy, with Evaradh's typography: light Fraunces headings with italic accents, Inter text and IBM Plex Mono labels. Sections: a centred hero with the 3D arm in front of the name and a rotating text ring, a scroll-lit statement, stacking project cards, a capabilities bento with the 3D skills sphere, a sideways-scrolling experience timeline, the story map in a latte card, and a contact card.
+The site uses 60% mocha, 30% latte and 10% burgundy, with Figtree for all text, including italic burgundy accents. Sections: a centred hero with the 3D arm in front of the name and a rotating text ring, a scroll-lit statement, stacking project cards, a capabilities bento with the 3D skills sphere, a sideways-scrolling experience timeline, the story map in a latte card, and a contact card.
 
 - `src/data/site.ts`: identity, contact, experience and education.
 - `src/data/projects.ts`: project facts and individual page content.
