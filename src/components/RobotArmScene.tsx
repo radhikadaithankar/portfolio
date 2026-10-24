@@ -181,6 +181,12 @@ function Arm({ controlsRef }: { controlsRef: RefObject<Controls> }) {
     if (!control.dragging) {
       control.spin += control.velocity * dt;
       control.velocity = MathUtils.damp(control.velocity, 0, 2.2, dt);
+      // Once the fling slows, ease back to the home pose (nearest full turn)
+      // so the arm never stays facing away.
+      if (Math.abs(control.velocity) < 0.6) {
+        const home = Math.round(control.spin / (Math.PI * 2)) * Math.PI * 2;
+        control.spin = MathUtils.damp(control.spin, home, 2.4, dt);
+      }
     }
     if (turntable.current) turntable.current.rotation.y = control.spin;
 
@@ -371,6 +377,18 @@ export default function RobotArmScene({
     drawRequested: false,
   });
   const lastMove = useRef(0);
+
+  // A resize returns the arm to its home pose immediately.
+  useEffect(() => {
+    function reset() {
+      const control = controls.current;
+      control.dragging = false;
+      control.velocity = 0;
+      control.spin = 0;
+    }
+    window.addEventListener("resize", reset);
+    return () => window.removeEventListener("resize", reset);
+  }, []);
 
   function down(event: ReactPointerEvent<HTMLDivElement>) {
     if (event.button !== 0) return;

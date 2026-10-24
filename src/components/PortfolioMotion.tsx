@@ -243,13 +243,6 @@ export function PortfolioMotion() {
       const section = document.getElementById(id);
       if (section) spy.observe(section);
     });
-    // A soft light follows a precise pointer across the hero.
-    function glow(event: PointerEvent) {
-      if (!hero || !fine.matches) return;
-      hero.style.setProperty("--mx", `${(event.clientX / innerWidth) * 100}%`);
-      hero.style.setProperty("--my", `${(event.clientY / innerHeight) * 100}%`);
-    }
-    hero?.addEventListener("pointermove", glow);
     // Primary buttons lean a few pixels toward a precise pointer.
     const magnets = [
       ...document.querySelectorAll<HTMLElement>(".button, .nav-contact, .pill"),
@@ -273,9 +266,6 @@ export function PortfolioMotion() {
     return () => {
       spy.disconnect();
       links.forEach((link) => link.removeAttribute("aria-current"));
-      hero?.removeEventListener("pointermove", glow);
-      hero?.style.removeProperty("--mx");
-      hero?.style.removeProperty("--my");
       magnets.forEach((magnet) => {
         magnet.removeEventListener("pointermove", pull);
         magnet.removeEventListener("pointerleave", release);
