@@ -53,7 +53,9 @@ function drawingOffsets(progress: number) {
   const r = 0.55 + 0.45 * Math.cos(5 * s);
   const ease = Math.min(progress * 12, 1, (1 - progress) * 12);
   return {
-    shoulder: 0.3 * r * Math.sin(s) * ease,
+    // The arm is turned three-quarters, so base yaw adds the sideways width.
+    yaw: 0.45 * r * Math.sin(s) * ease,
+    shoulder: 0.12 * r * Math.sin(s) * ease,
     elbow: 0.34 * r * Math.cos(s) * ease,
   };
 }
@@ -208,7 +210,7 @@ function Arm({ controlsRef }: { controlsRef: RefObject<Controls> }) {
     const drawing = state.elapsed >= 0 && state.elapsed < drawSeconds;
     const offsets = drawing
       ? drawingOffsets(state.elapsed / drawSeconds)
-      : { shoulder: 0, elbow: 0 };
+      : { yaw: 0, shoulder: 0, elbow: 0 };
     if (state.elapsed >= 0) {
       state.elapsed += dt;
       if (state.elapsed >= drawSeconds) {
@@ -241,7 +243,13 @@ function Arm({ controlsRef }: { controlsRef: RefObject<Controls> }) {
               ? -pointer.current.y * 0.05
               : 0);
       const routine =
-        index === 1 ? offsets.shoulder : index === 3 ? offsets.elbow : 0;
+        index === 0
+          ? offsets.yaw
+          : index === 1
+            ? offsets.shoulder
+            : index === 3
+              ? offsets.elbow
+              : 0;
       const idle =
         Math.sin(time.current + index * 0.6) *
         (index === 0 ? 0.012 : 0.02) *
@@ -333,7 +341,7 @@ function Arm({ controlsRef }: { controlsRef: RefObject<Controls> }) {
     );
   }
   return (
-    <group position={[-0.255, -1.15, 0.136]} rotation={[0, -0.2, 0]}>
+    <group position={[-0.112, -1.15, 0.06]} rotation={[0, -0.6, 0]}>
       <group ref={turntable}>
         <primitive ref={trailRef} object={trailObject} visible={false} />
         <ArmBody>{segment(0)}</ArmBody>
