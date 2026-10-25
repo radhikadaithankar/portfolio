@@ -341,7 +341,7 @@ function Arm({ controlsRef }: { controlsRef: RefObject<Controls> }) {
     );
   }
   return (
-    <group position={[-0.112, -1.15, 0.06]} rotation={[0, -0.6, 0]}>
+    <group position={[-0.112, -0.96, 0.06]} rotation={[0, -0.6, 0]}>
       <group ref={turntable}>
         <primitive ref={trailRef} object={trailObject} visible={false} />
         <ArmBody>{segment(0)}</ArmBody>
@@ -446,7 +446,7 @@ export default function RobotArmScene({
         dpr={[1, window.matchMedia("(pointer: coarse)").matches ? 1.5 : 2]}
         frameloop={active ? "always" : "never"}
         gl={{ alpha: true, antialias: true, powerPreference: "low-power" }}
-        camera={{ position: [3.2, 1.8, 6], fov: 24 }}
+        camera={{ position: [3.2, 1.8, 6], fov: 27 }}
         onCreated={({ camera }) => {
           camera.lookAt(0, -0.1, 0);
         }}
@@ -466,10 +466,10 @@ export default function RobotArmScene({
         <Lifecycle onReady={onReady} onFailure={onFailure} />
         <Arm controlsRef={controls} />
         <ContactShadows
-          position={[0, -1.3, 0]}
-          opacity={0.3}
-          scale={6}
-          blur={2.5}
+          position={[-0.112, -1.11, 0.06]}
+          opacity={0.22}
+          scale={2}
+          blur={2}
           far={4}
           resolution={256}
           frames={1}

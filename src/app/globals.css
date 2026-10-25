@@ -3638,3 +3638,28 @@ html[data-motion="reduce"] .v-statement-star {
     opacity 180ms linear,
     transform 900ms var(--motion-ease) calc(var(--d, 0) * 70ms);
 }
+
+/* The ring scales with the arm so the arm always sits inside it. */
+@media (min-width: 851px) {
+  .v-ring {
+    width: min(max(var(--arm-size), 260px), 760px);
+  }
+}
+
+/* On precise-pointer screens the 3D arm always loads, so skip the smaller
+   still drawing (which made the arm look like it grew) and fade the arm in. */
+@media (hover: hover) and (pointer: fine) {
+  html:not([data-motion="reduce"])
+    .v-robot
+    .robot-board:not([data-scene-status="unavailable"])
+    .robot-fallback {
+    visibility: hidden;
+  }
+}
+.v-robot .robot-canvas {
+  opacity: 0;
+  transition: opacity 700ms var(--motion-ease);
+}
+.v-robot .robot-stage[data-ready="true"] .robot-canvas {
+  opacity: 1;
+}
