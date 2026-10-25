@@ -35,7 +35,7 @@ export function Statement() {
   const words = positioning.intro.lead.split(" ");
   const bodyWords = positioning.supporting.split(" ");
   // Headline and paragraph words share one 0-1 timeline as the section scrolls.
-  const total = words.length + bodyWords.length;
+  const total = words.length + 1 + bodyWords.length;
 
   useEffect(() => {
     const element = host.current;
@@ -65,7 +65,10 @@ export function Statement() {
     function update() {
       frame = 0;
       const box = element!.getBoundingClientRect();
-      const p = (innerHeight * 0.95 - box.top) / (innerHeight * 0.6);
+      // Lights while the section is on screen: starts once its top reaches the
+      // middle of the window and finishes as it scrolls up and away.
+      const p =
+        (innerHeight * 0.5 - box.top) / (box.height + innerHeight * 0.06);
       element!.style.setProperty("--p", Math.min(1, Math.max(0, p)).toFixed(3));
     }
     function schedule() {
@@ -119,7 +122,10 @@ export function Statement() {
                 </span>{" "}
               </Fragment>
             ))}
-            <span className="v-accent-slot">
+            <span
+              className="v-accent-slot v-lit"
+              style={{ "--w": words.length / total } as CSSProperties}
+            >
               {accents.map((phrase, i) => (
                 <em
                   key={phrase}
@@ -140,7 +146,9 @@ export function Statement() {
             <Fragment key={i}>
               <span
                 className="v-lit"
-                style={{ "--w": (words.length + i) / total } as CSSProperties}
+                style={
+                  { "--w": (words.length + 1 + i) / total } as CSSProperties
+                }
               >
                 {word}
               </span>{" "}
