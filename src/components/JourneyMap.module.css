@@ -593,3 +593,60 @@
 .track[data-wide="true"] .map {
   margin-block: 22px 8px;
 }
+
+/* Breathing room below the stage's top rule. */
+.stageIntro {
+  padding-top: 40px;
+}
+/* The last stop's label sits to the left of its pin, clear of the route. */
+.stop[data-stop="next"] .stopLabel {
+  top: 50%;
+  left: auto;
+  right: 52px;
+  transform: translateY(-50%);
+  width: 130px;
+  text-align: right;
+}
+/* Pinned: centre the map beside the chapter panel. */
+.track[data-wide="true"] .atlas {
+  align-self: center;
+}
+/* Shorter laptop screens: tighten the pinned stage so it still fits. */
+@media (max-height: 980px) {
+  .track[data-wide="true"] .stageIntro {
+    padding-top: 26px;
+    padding-bottom: 10px;
+  }
+  .track[data-wide="true"] .atlas {
+    padding-block: 14px 10px;
+  }
+  .track[data-wide="true"] .map {
+    margin-block: 14px 4px;
+  }
+  .track[data-wide="true"] .chapterPanel {
+    padding: 16px 26px 10px;
+  }
+  .track[data-wide="true"] .period {
+    margin: 10px 0 6px;
+  }
+  .track[data-wide="true"] .chapter h3 {
+    font-size: calc(clamp(1.125rem, 0.9rem + 0.6vw, 1.5rem) * var(--fs, 1));
+    margin-bottom: 8px;
+  }
+  .track[data-wide="true"] .chapterContent > p:not(.period):not(.chapterNote) {
+    font-size: calc(0.875rem * var(--fs, 1));
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
+  .track[data-wide="true"] .chapterNote {
+    margin-top: 10px;
+    font-size: calc(0.9375rem * var(--fs, 1));
+  }
+  .track[data-wide="true"] .chapterLink {
+    min-height: 36px;
+    margin: 4px 0 6px;
+  }
+  .track[data-wide="true"] .chapterNavigation {
+    padding-top: 10px;
+  }
+}

@@ -3663,3 +3663,16 @@ html[data-motion="reduce"] .v-statement-star {
 .v-robot .robot-stage[data-ready="true"] .robot-canvas {
   opacity: 1;
 }
+@media (max-height: 980px) {
+  [data-wide="true"] .story-intro h2 {
+    font-size: calc(clamp(2rem, 0.9rem + 2.2vw, 3.25rem) * var(--fs, 1));
+  }
+  [data-wide="true"] .story-intro-copy p {
+    font-size: calc(0.875rem * var(--fs, 1));
+    line-height: 1.5;
+  }
+}
+/* The map route and chapter dots show progress; the top bar is redundant here. */
+[data-wide="true"] .story-scroll-progress {
+  display: none;
+}
