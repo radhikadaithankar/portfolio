@@ -21,7 +21,7 @@ export const contact = {
 export const positioning = {
   statement: "AI engineer building software that schools actually use.",
   supporting:
-    "From a school app with an AI assistant for teachers to a robot arm that draws on its own. I trained in artificial intelligence at Queen Mary University of London, sharpened it with data work in London, and now build products through Evaradh.",
+    "From a school app teachers and parents use every day to a robot arm that draws on its own, I build things end to end: the model, the interface and the workflow around it. Now I do it through Evaradh, starting with problems I can see up close.",
   intro: { lead: "I turn everyday problems into", accent: "working software." },
   tagline: "Ideas, made useful.",
   description:

@@ -1,39 +1,31 @@
-import { company, contact, education, identity, school, toolkit } from "./site";
+import { company, contact, identity, school } from "./site";
 
 /**
- * Short, factual answers for search and answer engines. Every answer is built
- * from facts already published on this site; do not add unverified claims.
+ * Short, factual answers for search and answer engines. Each question covers
+ * something the rest of the homepage does not already say, and every answer
+ * is built from facts already published on this site; do not add unverified
+ * claims.
  */
 export const faq = [
   {
-    question: `Who is ${identity.fullName}?`,
-    answer: `${identity.fullName} is an AI engineer based in ${identity.location}. ${identity.firstName} founded ${company.name}, a technology product company, and is Managing Director at ${school.name} (${school.shortName}) in Parbhani. ${identity.firstName} holds an ${education[0].degree} from ${education[0].school}.`,
+    question: `What does ${identity.fullName} do?`,
+    answer: `${identity.firstName} is an AI engineer in ${identity.location} who builds products end to end, from machine learning models to the apps people use every day. ${identity.firstName} runs ${company.name}, a technology product company, and leads technology at ${school.name}.`,
   },
   {
-    question: "What is CIS Compass?",
-    answer: `CIS Compass is the school management app ${identity.firstName} built for ${school.name}, with an AI assistant for teachers. Teachers, parents and staff each get their own view of attendance, homework, fees and notices. It is built with Flutter, a TypeScript and Node.js API on PostgreSQL, Firebase notifications and Google's Gemini API.`,
+    question: "How does the AI assistant in CIS Compass help students?",
+    answer:
+      "It is designed to encourage learning rather than hand over answers. When a student asks for help with homework, it first asks them to try the problem themselves. If they are stuck, it asks to see their attempt and then offers a hint to help them continue. For teachers, it adapts explanations to the class they teach, so the same topic is explained differently for Class 2 and Class 10.",
   },
   {
-    question: `What is ${company.name}?`,
-    answer: `${company.name} is a technology product company founded by ${identity.fullName}. Its first product is ${company.firstProduct}. Schools interested in Compass or a custom build can get in touch through ${company.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}.`,
+    question: "Can my school use CIS Compass?",
+    answer: `CIS Compass is ${company.name}'s first product. Schools that want Compass, or a custom build for their own workflows, can get in touch through ${company.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}.`,
   },
   {
-    question: `What technologies does ${identity.firstName} work with?`,
-    answer: toolkit
-      .map((set) => `${set.group}: ${set.items.join(", ")}.`)
-      .join(" "),
+    question: `What roles is ${identity.firstName} open to?`,
+    answer: `AI and data roles, including machine learning, data science and AI product engineering. The quickest way to start a conversation is by email at ${contact.email}, and the full CV is at cv.radhikakd.com.`,
   },
   {
-    question: `Where did ${identity.firstName} study?`,
-    answer: education
-      .map(
-        (item) =>
-          `${item.degree} at ${item.school}, ${item.place} (${item.period.replace(/\s*—\s*/, " to ")}).`,
-      )
-      .join(" "),
-  },
-  {
-    question: `How can I contact or hire ${identity.firstName}?`,
-    answer: `Email ${contact.email}, view the CV at cv.radhikakd.com, or connect on LinkedIn. For school software or a custom build, contact ${company.name}.`,
+    question: `Where can I see ${identity.firstName}'s code?`,
+    answer: `On GitHub at ${contact.github.replace(/^https?:\/\//, "")}, including the public notebooks for the generative adversarial network, regression and Gaussian mixture projects.`,
   },
 ];

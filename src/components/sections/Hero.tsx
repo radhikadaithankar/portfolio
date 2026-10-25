@@ -19,8 +19,7 @@ function Letters({ text, offset = 0 }: { text: string; offset?: number }) {
   );
 }
 
-const ring =
-  "AI engineer ✳ Builder ✳ Founder of Evaradh ✳ MSc Artificial Intelligence ✳ ";
+const ring = "Ideas, made useful ✳ Models ✳ Machines ✳ Products ✳ ";
 
 export function Hero() {
   return (
@@ -34,7 +33,13 @@ export function Hero() {
           />
         </defs>
         <text>
-          <textPath href="#v-ring-path">{ring.repeat(2)}</textPath>
+          <textPath
+            href="#v-ring-path"
+            textLength="1100"
+            lengthAdjust="spacing"
+          >
+            {ring.repeat(3)}
+          </textPath>
         </text>
       </svg>
 
