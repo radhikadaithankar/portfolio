@@ -63,7 +63,8 @@ export const journey = [
     period: "Back in India",
     title: "The next problem was closer to home.",
     paragraphs: [
-      "Coming back to India brought me to Chintamani International School. I began with the everyday needs of teachers, parents and staff, then built the software to meet them.",
+      "I always knew I would end up in education. My family owns a school, so I decided to move back to India and started managing it: Chintamani International School.",
+      "Once I was running it day to day, I began to see problems that technology could handle easily, so I started automating them. Then I talked to our parents and teachers and found there were more problems still. That is how CIS Compass came into the picture.",
       "Working in education has also made me think about what children need beyond marks: confidence, creativity and the ability to keep learning.",
     ],
     note: "A school became the place where I could put my ideas to work.",
