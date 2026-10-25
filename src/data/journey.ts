@@ -79,7 +79,8 @@ export const journey = [
     period: "Building now · Based in Pune",
     title: "Evolution, with my name in it.",
     paragraphs: [
-      "Evaradh means Evolution by Radhika. I founded it to build technology around problems I could see and understand, starting with the school I know best.",
+      "While I was building CIS Compass, I realised these were probably problems many schools face, not just ours. I could share the product with other schools too.",
+      "I also knew I would keep creating products that actually help people through technology. So I decided to start Evaradh. The name means Evolution by Radhika.",
       "I want to keep getting better as an AI engineer while building useful products. Running a company, leading at a school and writing software give me different ways to do that.",
     ],
     note: "The question I keep returning to: what could work better?",
