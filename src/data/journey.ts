@@ -95,7 +95,7 @@ export const journey = [
     period: "Ideas in progress",
     title: "There is room for another chapter.",
     paragraphs: [
-      "I'm exploring teacher AI training and CIS Passport, a physical and digital record of a child's skills, experiences and achievements. Legal tools, agriculture and better digital banking experiences are also directions I've been thinking about.",
+      "Legal tools, agriculture and better digital banking experiences are some of the directions I've been thinking about.",
       "These are explorations, each at its own stage. I don't have every next step mapped out. I do know I want to keep building, learning and improving what I make.",
     ],
     note: "Everything can evolve. Including me.",
