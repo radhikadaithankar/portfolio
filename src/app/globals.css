@@ -3676,3 +3676,93 @@ html[data-motion="reduce"] .v-statement-star {
 [data-wide="true"] .story-scroll-progress {
   display: none;
 }
+
+/* Phones: same composition as desktop. "Radhika" sits above the arm,
+   "Daithankar" below it, with the ring framing the arm in between. */
+@media (max-width: 850px) {
+  .v-hero {
+    --name-size: clamp(3.25rem, 16.5vw, 6.75rem);
+    --arm-h: min(78vw, 360px);
+    --arm-top: calc(96px + var(--name-size) * 0.95);
+    position: relative;
+  }
+  .v-name {
+    position: relative;
+    z-index: 1;
+    padding-inline: 20px;
+    font-size: var(--name-size);
+    line-height: 0.95;
+  }
+  .v-name-top {
+    display: block;
+    text-align: left;
+  }
+  .v-name-bottom {
+    display: block;
+    margin-top: var(--arm-h);
+    text-align: right;
+  }
+  .v-robot {
+    position: absolute;
+    top: var(--arm-top);
+    left: 0;
+    right: 0;
+    width: auto;
+    height: var(--arm-h);
+    margin: 0;
+    translate: none;
+  }
+  .v-ring {
+    top: calc(var(--arm-top) + var(--arm-h) / 2);
+    left: 50%;
+    width: calc(var(--arm-h) * 0.92);
+    translate: -50% -50%;
+  }
+  .v-robot .robot-hint {
+    top: auto;
+    bottom: -4px;
+  }
+  .v-hero-bar {
+    margin-top: 26px;
+  }
+  /* Intro headline sized so the rotating phrase never runs off screen. */
+  .v-statement-title {
+    font-size: calc(clamp(2.25rem, 9.6vw, 3.25rem) * var(--fs, 1));
+  }
+}
+@media (max-width: 850px) {
+  .v-robot .robot-hint {
+    top: -8px;
+    bottom: auto;
+    font-size: calc(0.625rem * var(--fs, 1));
+  }
+}
+@media (max-width: 850px) {
+  .v-ring {
+    width: calc(var(--arm-h) * 0.84);
+  }
+}
+@media (max-width: 850px) {
+  .v-robot .hero-board {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+}
+@media (max-width: 850px) {
+  .v-robot .robot-stage {
+    translate: calc(var(--arm-h) * -0.068) 0;
+  }
+}
+@media (max-width: 850px) {
+  .v-hero {
+    --arm-top: calc(96px + var(--name-size) * 1.05);
+  }
+  .v-name-bottom {
+    margin-top: calc(var(--arm-h) + var(--name-size) * 0.1 + 30px);
+  }
+  .v-robot .robot-hint {
+    top: auto;
+    bottom: -30px;
+  }
+}

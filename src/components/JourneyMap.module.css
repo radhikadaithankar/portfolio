@@ -535,7 +535,7 @@
     transform: none;
     text-align: left;
   }
-  .stop[data-stop="next"] .stopLabel {
+  .track[data-wide="true"] .stop[data-stop="next"] .stopLabel {
     left: auto;
     right: 0;
     transform: none;
