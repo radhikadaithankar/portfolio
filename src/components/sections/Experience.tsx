@@ -50,7 +50,16 @@ export function Experience() {
     function schedule() {
       if (!frame) frame = requestAnimationFrame(sync);
     }
+    // Phones swipe the rail; the progress bar follows the swipe.
+    function swiped() {
+      if (travel) return;
+      const max = railElement!.scrollWidth - railElement!.clientWidth;
+      const p = max > 0 ? railElement!.scrollLeft / max : 0;
+      trackElement!.style.setProperty("--p", p.toFixed(3));
+    }
+    railElement.addEventListener("scroll", swiped, { passive: true });
     measure();
+    swiped();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", measure, { passive: true });
     wide.addEventListener("change", measure);
@@ -59,6 +68,7 @@ export function Experience() {
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", measure);
       wide.removeEventListener("change", measure);
+      railElement.removeEventListener("scroll", swiped);
     };
   }, [reduced]);
 
@@ -135,13 +145,11 @@ export function Experience() {
               </li>
             ))}
           </ol>
-          {distance > 0 && (
-            <div className="shell v-exp-progress" aria-hidden="true">
-              <span>01</span>
-              <i />
-              <span>{String(roles.length).padStart(2, "0")}</span>
-            </div>
-          )}
+          <div className="shell v-exp-progress" aria-hidden="true">
+            <span>01</span>
+            <i />
+            <span>{String(roles.length).padStart(2, "0")}</span>
+          </div>
         </div>
       </div>
     </section>

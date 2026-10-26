@@ -87,6 +87,11 @@ export function JourneyMap({ intro }: { intro?: ReactNode }) {
     };
   }, []);
 
+  // Touch: a sideways swipe on the chapter panel moves to the next or
+  // previous chapter (when the stage is not pinned to page scroll).
+  const swipe = useRef<{ x: number; y: number } | null>(null);
+  const [direction, setDirection] = useState<"next" | "prev">("next");
+
   const goTo = useCallback(
     (index: number) => {
       setActive(index);
@@ -253,7 +258,32 @@ export function JourneyMap({ intro }: { intro?: ReactNode }) {
             </div>
           </div>
 
-          <div className={styles.chapterPanel}>
+          <div
+            className={styles.chapterPanel}
+            data-direction={direction}
+            onTouchStart={(event) => {
+              if (scroll) return;
+              const touch = event.touches[0];
+              swipe.current = { x: touch.clientX, y: touch.clientY };
+            }}
+            onTouchEnd={(event) => {
+              const start = swipe.current;
+              swipe.current = null;
+              if (!start || scroll) return;
+              const touch = event.changedTouches[0];
+              const dx = touch.clientX - start.x;
+              const dy = touch.clientY - start.y;
+              if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.4)
+                return;
+              if (dx < 0 && active < journey.length - 1) {
+                setDirection("next");
+                goTo(active + 1);
+              } else if (dx > 0 && active > 0) {
+                setDirection("prev");
+                goTo(active - 1);
+              }
+            }}
+          >
             <div className={styles.chapterTop}>
               <span className="eyebrow">
                 Chapter {String(active + 1).padStart(2, "0")}
@@ -301,7 +331,10 @@ export function JourneyMap({ intro }: { intro?: ReactNode }) {
               <button
                 type="button"
                 disabled={active === 0}
-                onClick={() => goTo(active - 1)}
+                onClick={() => {
+                  setDirection("prev");
+                  goTo(active - 1);
+                }}
                 aria-controls="journey-chapter"
               >
                 <span aria-hidden="true">←</span> Previous
@@ -317,7 +350,10 @@ export function JourneyMap({ intro }: { intro?: ReactNode }) {
               <button
                 type="button"
                 disabled={active === journey.length - 1}
-                onClick={() => goTo(active + 1)}
+                onClick={() => {
+                  setDirection("next");
+                  goTo(active + 1);
+                }}
                 aria-controls="journey-chapter"
               >
                 Next <span aria-hidden="true">→</span>

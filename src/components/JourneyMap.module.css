@@ -650,3 +650,45 @@
     padding-top: 10px;
   }
 }
+
+/* Phones: chapters slide in from the side they were swiped from. */
+@media (max-width: 1050px) {
+  .chapterPanel {
+    touch-action: pan-y;
+  }
+  .chapterPanel[data-direction="next"] .chapterContent[data-active] {
+    animation: chapter-slide-next 420ms var(--motion-ease);
+  }
+  .chapterPanel[data-direction="prev"] .chapterContent[data-active] {
+    animation: chapter-slide-prev 420ms var(--motion-ease);
+  }
+  .chapterTop .pageCount {
+    order: 2;
+    margin-left: auto;
+  }
+  .chapterTop::after {
+    content: "Swipe ⟷";
+    order: 1;
+    margin-left: 14px;
+    margin-right: 0;
+    font-size: calc(0.6875rem * var(--fs, 1));
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+}
+@keyframes chapter-slide-next {
+  from {
+    opacity: 0;
+    transform: translateX(36px);
+  }
+}
+@keyframes chapter-slide-prev {
+  from {
+    opacity: 0;
+    transform: translateX(-36px);
+  }
+}
+:global(html[data-motion="reduce"]) .chapterContent[data-active] {
+  animation: none !important;
+}

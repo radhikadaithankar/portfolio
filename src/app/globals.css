@@ -3766,3 +3766,61 @@ html[data-motion="reduce"] .v-statement-star {
     bottom: -30px;
   }
 }
+
+/* Phones: project cards stack as they scroll, like desktop. */
+@media (max-width: 850px) {
+  .v-card {
+    position: sticky;
+    top: var(--stick, 76px);
+  }
+  .v-cards {
+    gap: 18px;
+  }
+  .v-card-inner {
+    transform-origin: 50% 0;
+    transform: scale(calc(1 - var(--t, 0) * 0.06));
+    filter: brightness(calc(1 - var(--t, 0) * 0.12));
+    box-shadow: 0 24px 50px -30px #2a0e1690;
+  }
+}
+html[data-motion="reduce"] .v-card {
+  position: static;
+}
+
+/* Phones and tablets: swipe the roles sideways, snapping card by card. */
+@media (max-width: 1050px) {
+  .v-exp-track:not([data-sideways="true"]) .v-exp-rail {
+    flex-direction: row;
+    align-items: stretch;
+    width: auto;
+    margin: 32px 0 0;
+    padding: 4px 20px 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 20px;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .v-exp-track:not([data-sideways="true"]) .v-exp-rail::-webkit-scrollbar {
+    display: none;
+  }
+  .v-exp-track:not([data-sideways="true"]) .v-role {
+    flex: 0 0 min(84vw, 420px);
+    scroll-snap-align: start;
+    animation: role-in linear both;
+    animation-timeline: view(inline);
+    animation-range: entry 0% cover 35%;
+  }
+  .v-exp-progress {
+    margin-top: 6px;
+  }
+}
+@keyframes role-in {
+  from {
+    opacity: 0.35;
+    scale: 0.92;
+  }
+}
+html[data-motion="reduce"] .v-role {
+  animation: none !important;
+}

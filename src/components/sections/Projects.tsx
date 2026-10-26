@@ -23,6 +23,17 @@ export function Projects() {
     if (!element || reduced) return;
     const cards = [...element.querySelectorAll<HTMLElement>(".v-card")];
     let frame = 0;
+    const narrow = window.matchMedia("(max-width: 850px)");
+    // Phones: each card sticks where it fully fits; taller cards stick only
+    // once their bottom is on screen, so nothing is covered before it is read.
+    function placeStickies() {
+      cards.forEach((card, index) => {
+        if (!narrow.matches) return card.style.removeProperty("--stick");
+        const height = card.offsetHeight;
+        const top = Math.min(76 + index * 10, innerHeight - height - 12);
+        card.style.setProperty("--stick", `${Math.round(top)}px`);
+      });
+    }
     function update() {
       frame = 0;
       cards.forEach((card, index) => {
@@ -37,14 +48,24 @@ export function Projects() {
     function schedule() {
       if (!frame) frame = requestAnimationFrame(update);
     }
+    function remeasure() {
+      placeStickies();
+      schedule();
+    }
+    placeStickies();
     update();
     window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule, { passive: true });
+    window.addEventListener("resize", remeasure, { passive: true });
+    narrow.addEventListener("change", remeasure);
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-      cards.forEach((card) => card.style.removeProperty("--t"));
+      window.removeEventListener("resize", remeasure);
+      narrow.removeEventListener("change", remeasure);
+      cards.forEach((card) => {
+        card.style.removeProperty("--t");
+        card.style.removeProperty("--stick");
+      });
     };
   }, [reduced]);
 
