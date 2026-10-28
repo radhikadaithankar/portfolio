@@ -3824,3 +3824,35 @@ html[data-motion="reduce"] .v-card {
 html[data-motion="reduce"] .v-role {
   animation: none !important;
 }
+
+/* Phones: show the RD monogram in the pill, beside compact links. */
+@media (max-width: 560px) {
+  .site-header,
+  .site-header:not(#x) {
+    justify-content: space-between;
+    padding: 5px 5px 5px 14px;
+  }
+  .brand {
+    display: inline-flex;
+    min-height: 36px;
+    font-size: calc(0.8125rem * var(--fs, 1));
+    letter-spacing: 0.08em;
+  }
+  .brand-full {
+    display: none;
+  }
+  .brand-short {
+    display: inline;
+  }
+  .main-nav a {
+    padding: 8px 6px;
+  }
+  .main-nav .nav-contact {
+    padding: 8px 10px;
+  }
+}
+@media (max-width: 380px) {
+  .main-nav a[href$="#experience"] {
+    display: none;
+  }
+}

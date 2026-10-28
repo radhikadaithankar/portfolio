@@ -27,6 +27,11 @@ const routes = [
 export function JourneyMap({ intro }: { intro?: ReactNode }) {
   const [active, setActive] = useState(0);
   const [scroll, setScroll] = useState<Scroll>(null);
+  // Narrow screens: the map sticks at the top while every chapter scrolls
+  // underneath it, and the active stop follows the chapter being read.
+  const [flow, setFlow] = useState(false);
+  const chapters = useRef<(HTMLDivElement | null)[]>([]);
+  const atlas = useRef<HTMLDivElement>(null);
   const stops = useRef<(HTMLButtonElement | null)[]>([]);
   const track = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
@@ -87,6 +92,41 @@ export function JourneyMap({ intro }: { intro?: ReactNode }) {
     };
   }, []);
 
+  useEffect(() => {
+    const narrow = window.matchMedia("(max-width: 1050px)");
+    let frame = 0;
+    function sync() {
+      frame = 0;
+      if (!narrow.matches) return;
+      const line =
+        (atlas.current?.getBoundingClientRect().bottom ?? 0) +
+        (innerHeight - (atlas.current?.getBoundingClientRect().bottom ?? 0)) *
+          0.35;
+      let index = 0;
+      chapters.current.forEach((element, i) => {
+        if (element && element.getBoundingClientRect().top <= line) index = i;
+      });
+      setActive(index);
+    }
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(sync);
+    }
+    function update() {
+      setFlow(narrow.matches);
+      schedule();
+    }
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    narrow.addEventListener("change", update);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      narrow.removeEventListener("change", update);
+    };
+  }, []);
+
   // Touch: a sideways swipe on the chapter panel moves to the next or
   // previous chapter (when the stage is not pinned to page scroll).
   const swipe = useRef<{ x: number; y: number } | null>(null);
@@ -96,6 +136,17 @@ export function JourneyMap({ intro }: { intro?: ReactNode }) {
     (index: number) => {
       setActive(index);
       const trackElement = track.current;
+      if (flow) {
+        const element = chapters.current[index];
+        const offset =
+          (atlas.current?.getBoundingClientRect().bottom ?? 0) + 16;
+        if (element)
+          window.scrollTo({
+            top: element.getBoundingClientRect().top + scrollY - offset,
+            behavior: prefersReducedMotion() ? "auto" : "smooth",
+          });
+        return;
+      }
       if (!scroll || !trackElement) return;
       const start =
         trackElement.getBoundingClientRect().top + scrollY - scroll.top;
@@ -104,7 +155,7 @@ export function JourneyMap({ intro }: { intro?: ReactNode }) {
         behavior: prefersReducedMotion() ? "auto" : "smooth",
       });
     },
-    [scroll],
+    [scroll, flow],
   );
 
   function navigateStops(
@@ -141,6 +192,7 @@ export function JourneyMap({ intro }: { intro?: ReactNode }) {
         ref={track}
         className={styles.track}
         data-scrolly={scroll ? "true" : undefined}
+        data-flow={flow ? "true" : undefined}
         style={
           scroll
             ? ({
@@ -155,7 +207,7 @@ export function JourneyMap({ intro }: { intro?: ReactNode }) {
           <div className="story-scroll-progress" aria-hidden="true">
             <span />
           </div>
-          <div className={styles.atlas}>
+          <div className={styles.atlas} ref={atlas}>
             <div className={styles.atlasHeading}>
               <span className="eyebrow">A personal atlas</span>
               <span>
@@ -301,9 +353,15 @@ export function JourneyMap({ intro }: { intro?: ReactNode }) {
               {journey.map((item, index) => (
                 <div
                   key={item.id}
+                  ref={(element) => {
+                    chapters.current[index] = element;
+                  }}
                   className={styles.chapterContent}
                   data-active={index === active || undefined}
                 >
+                  <p className={styles.chapterKicker}>
+                    Chapter {String(index + 1).padStart(2, "0")} · {item.place}
+                  </p>
                   <p className={styles.period}>{item.period}</p>
                   <h3
                     id={index === active ? "journey-chapter-title" : undefined}

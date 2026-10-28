@@ -73,9 +73,8 @@ export const projects: Project[] = [
     caseStudy: {
       oneLiner:
         "CIS Compass brings school operations and an AI assistant for teachers into one app, in use at Chintamani International School.",
-      // TODO(cis-problem): Describe the school's previous workflow and the specific
-      // problems teachers, parents or office staff faced before Compass.
-      problem: undefined,
+      problem:
+        "When I started managing my family's school, I saw problems technology could solve easily, so I began automating them. Talking with our parents and teachers showed there was much more: everyday tasks and communication that needed one place to live. CIS Compass grew out of those conversations.",
       aiAssistant: [
         {
           title: "An assistant for everyday teaching tasks",

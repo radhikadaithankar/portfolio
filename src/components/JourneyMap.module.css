@@ -692,3 +692,69 @@
 :global(html[data-motion="reduce"]) .chapterContent[data-active] {
   animation: none !important;
 }
+
+/* The kicker only shows when chapters are listed in flow. */
+.chapterKicker {
+  display: none;
+}
+
+/* Narrow screens: the map sticks under the header and the chapters scroll
+   beneath it; the active stop follows the chapter being read. */
+.track[data-flow="true"] .atlas {
+  position: sticky;
+  top: 84px;
+  z-index: 3;
+  padding: 8px 0 6px;
+  background: var(--latte, #fff8e7);
+  box-shadow: 0 14px 20px -18px #2a0e1660;
+}
+.track[data-flow="true"] .atlasHeading,
+.track[data-flow="true"] .mapLegend,
+.track[data-flow="true"] .mapAside {
+  display: none;
+}
+.track[data-flow="true"] .map {
+  margin: 4px -4px 2px;
+}
+.track[data-flow="true"] .chapterPanel {
+  background: transparent;
+  border: 0;
+  padding: 8px 0 0;
+}
+.track[data-flow="true"] .chapterTop,
+.track[data-flow="true"] .chapterNavigation,
+.track[data-flow="true"] .chapterTop::after {
+  display: none;
+}
+.track[data-flow="true"] .chapter {
+  display: block;
+  min-height: 0;
+}
+.track[data-flow="true"] .chapterContent,
+.track[data-flow="true"] .chapterContent:not([data-active]) {
+  display: block;
+  visibility: visible;
+  opacity: 0.45;
+  translate: none;
+  animation: none;
+  padding: 28px 0 32px;
+  border-top: 1px solid var(--rule);
+  transition: opacity 400ms var(--motion-ease);
+}
+.track[data-flow="true"] .chapterContent[data-active] {
+  opacity: 1;
+}
+.track[data-flow="true"] .chapterContent:first-child {
+  border-top: 0;
+}
+.track[data-flow="true"] .chapterKicker {
+  display: block;
+  font-size: calc(0.6875rem * var(--fs, 1));
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--burgundy, #5a1226);
+}
+.track[data-flow="true"] .period {
+  margin-top: 8px;
+}
