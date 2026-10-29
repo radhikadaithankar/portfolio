@@ -3112,7 +3112,7 @@ body::before {
 
 /* Type scale: everything outside the hero is 5% smaller. */
 :root {
-  --fs: 0.95;
+  --fs: 1;
 }
 .v-hero {
   --fs: 1;
@@ -3313,7 +3313,9 @@ h3 em,
    rather than the gap left by the larger name. */
 @media (min-width: 851px) {
   .v-hero {
-    --arm-size: calc(70vh - clamp(4.5rem, 1rem + 8.6vw, 11rem) * 1.6 - 24px);
+    --arm-size: calc(
+      (70vh - clamp(4.5rem, 1rem + 8.6vw, 11rem) * 1.6 - 24px) * 1.16
+    );
   }
   .v-robot {
     height: max(var(--arm-size), 260px);
@@ -3892,4 +3894,9 @@ html[data-motion="reduce"] .v-role {
   content: "Swipe →";
   margin-left: 8px;
   color: var(--burgundy);
+}
+@media (min-width: 851px) {
+  .v-ring {
+    width: min(max(calc(var(--arm-size) * 0.95), 250px), 720px);
+  }
 }
