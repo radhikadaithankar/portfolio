@@ -6,8 +6,9 @@ import { roles } from "@/data/site";
 import { useReducedMotion } from "@/lib/motion-preference";
 
 /**
- * On wide screens the timeline pins and slides sideways as the page scrolls
- * down. Narrow screens, and reduced motion, get a vertical list.
+ * The timeline pins and slides sideways as the page scrolls down, on phones
+ * too when the cards fit the screen. Otherwise, and with reduced motion, the
+ * roles stay swipeable.
  */
 export function Experience() {
   const track = useRef<HTMLDivElement>(null);
@@ -24,16 +25,19 @@ export function Experience() {
     let travel = 0;
     function measure() {
       // Lay the rail out in a row before measuring how far it must travel.
-      if (wide.matches && !reduced) trackElement!.dataset.sideways = "true";
+      // Phones use the same scroll-driven slide when the cards fit the screen.
+      if (!reduced) trackElement!.dataset.sideways = "true";
       else delete trackElement!.dataset.sideways;
-      travel =
-        wide.matches && !reduced
-          ? Math.max(0, railElement!.scrollWidth - railElement!.clientWidth)
-          : 0;
+      trackElement!.dataset.compact = wide.matches ? "" : "true";
+      travel = !reduced
+        ? Math.max(0, railElement!.scrollWidth - railElement!.clientWidth)
+        : 0;
       // Only pin when the heading and full cards fit the window.
       const head = trackElement!.querySelector<HTMLElement>(".v-exp-head");
       const needed =
-        (head?.offsetHeight ?? 0) + railElement!.offsetHeight + 36 + 72 + 24;
+        (head?.offsetHeight ?? 0) +
+        railElement!.offsetHeight +
+        (wide.matches ? 36 + 72 + 24 : 14 + 70 + 40);
       if (needed > innerHeight) travel = 0;
       if (!travel) delete trackElement!.dataset.sideways;
       setDistance(travel);

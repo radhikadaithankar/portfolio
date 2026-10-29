@@ -3856,3 +3856,40 @@ html[data-motion="reduce"] .v-role {
     display: none;
   }
 }
+
+/* Phones: the experience stage pins and slides sideways with vertical scroll. */
+.v-exp-track[data-compact="true"][data-sideways="true"] .v-exp-stage {
+  gap: 14px;
+  padding-top: 70px;
+  justify-content: flex-start;
+}
+.v-exp-track[data-compact="true"] .v-exp-head {
+  gap: 6px;
+}
+.v-exp-track[data-compact="true"][data-sideways="true"] .v-exp-head h2 {
+  margin-top: 6px;
+  font-size: calc(clamp(2rem, 9vw, 2.75rem) * var(--fs, 1));
+}
+.v-exp-track[data-compact="true"][data-sideways="true"] .v-section-lede {
+  display: none;
+}
+.v-exp-track[data-compact="true"][data-sideways="true"] .v-exp-rail {
+  gap: 12px;
+  padding-inline: 20px;
+}
+.v-exp-track[data-compact="true"][data-sideways="true"] .v-role {
+  flex: 0 0 min(84vw, 420px);
+  padding: 20px;
+}
+.v-exp-track[data-compact="true"][data-sideways="true"] .v-role h3 {
+  margin-top: 10px;
+}
+.v-exp-track[data-compact="true"][data-sideways="true"] .v-role-points {
+  font-size: calc(0.8125rem * var(--fs, 1));
+}
+/* When the roles can't pin (very short screens), say they swipe. */
+.v-exp-track:not([data-sideways="true"]) .v-exp-progress::after {
+  content: "Swipe →";
+  margin-left: 8px;
+  color: var(--burgundy);
+}
