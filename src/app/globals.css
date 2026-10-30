@@ -3900,3 +3900,18 @@ html[data-motion="reduce"] .v-role {
     width: min(max(calc(var(--arm-size) * 0.95), 250px), 720px);
   }
 }
+/* Phone recordings: a phone-shaped frame instead of the wide letterbox. */
+.project-media-portrait {
+  width: min(100%, 300px);
+  margin-inline: auto;
+}
+.project-media-portrait .project-media-frame {
+  aspect-ratio: 540 / 1174;
+  object-fit: cover;
+  border-radius: 34px;
+  border: 6px solid var(--color-ink, #241a16);
+  box-shadow: 0 24px 60px -24px rgb(36 26 22 / 0.45);
+}
+.project-media-portrait figcaption {
+  text-align: center;
+}

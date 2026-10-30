@@ -143,7 +143,9 @@ export function ProjectMedia({ media }: { media?: Media }) {
   if (!media?.src.trim() || !media.poster.trim() || !media.alt.trim())
     return null;
   return (
-    <figure className="project-media">
+    <figure
+      className={`project-media${media.portrait ? " project-media-portrait" : ""}`}
+    >
       {media.type === "video" ? (
         <ProjectVideo media={media} />
       ) : (

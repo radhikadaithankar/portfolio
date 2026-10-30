@@ -108,7 +108,9 @@ export function Projects() {
                       {project.resultLine}
                     </p>
                   )}
-                  <ProjectMedia media={project.media} />
+                  {!project.media?.portrait && (
+                    <ProjectMedia media={project.media} />
+                  )}
                   <ul className="project-tags">
                     {project.collection === "Academic experiments" && (
                       <li className="tag-accent">Academic</li>

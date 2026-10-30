@@ -4,6 +4,8 @@ export type ProjectMedia = {
   poster: string;
   alt: string;
   caption?: string;
+  /** A tall phone recording, shown in a phone-shaped frame. */
+  portrait?: boolean;
 };
 
 export type ProjectDetail = { title: string; text: string };
@@ -108,9 +110,17 @@ export const projects: Project[] = [
         teacherAiTraining: undefined,
       },
     },
-    // TODO(cis-walkthrough): Supply a video or GIF, a still poster, descriptive alt
-    // text and an optional caption. Do not publish private school or student data.
-    media: undefined,
+    // Recorded on 30 October 2026 in the iOS simulator against a local demo
+    // school with made-up teachers and students; no real school data.
+    media: {
+      type: "video",
+      portrait: true,
+      src: "/media/cis-compass-demo.mp4",
+      poster: "/media/cis-compass-demo-poster.jpg",
+      alt: "CIS Compass on an iPhone: a teacher's home screen with today's classes, the day's timetable, quick actions and the AI assistant greeting the teacher.",
+      caption:
+        "A teacher's day in CIS Compass, shown with a demo school and made-up names.",
+    },
     scope: [
       "Public school website",
       "Role-based management app",
