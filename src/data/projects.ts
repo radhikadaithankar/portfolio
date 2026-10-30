@@ -69,7 +69,8 @@ export const projects: Project[] = [
     approach:
       "I built both the public school website and CIS Compass, the school management app developed under Evaradh. The website introduces the school and gives families a route into admissions. The app brings attendance, fees, homework, notices and student records into one system, with separate experiences for parents, teachers and operations staff.",
     context: "Production · Evaradh / CIS, Parbhani",
-    resultLine: "In use at Chintamani International School, Parbhani.",
+    resultLine:
+      "In daily use at Chintamani International School: 290 students, 359 parents and 28 teachers.",
     caseStudy: {
       oneLiner:
         "CIS Compass brings school operations and an AI assistant for teachers into one app, in use at Chintamani International School.",
@@ -91,9 +92,10 @@ export const projects: Project[] = [
       ],
       results:
         "The school website and CIS Compass are both live. CIS Compass is Evaradh's first product, in use at Chintamani International School in Parbhani.",
-      // TODO(cis-results): Add a measured result only with its baseline, period and
-      // source. No user counts, time savings or accuracy figures are assumed.
-      measurableResult: undefined,
+      // Counted from the CIS Compass production database on 29 October 2026
+      // (read-only totals; no individual records).
+      measurableResult:
+        "From 20 July to 29 October 2026, teachers recorded 7,162 attendance marks across 59 school days, and the app sent 18,038 notifications to 359 parent accounts covering 290 students in 20 classes.",
       // TODO(cis-privacy): Confirm what data the assistant can access, access
       // controls, retention and the safeguards actually implemented.
       privacyAndSafety: undefined,
