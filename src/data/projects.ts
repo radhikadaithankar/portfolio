@@ -69,15 +69,21 @@ export const projects: Project[] = [
     question:
       "How do you bring daily school operations and parent communication into the same system?",
     approach:
-      "I built both the public school website and CIS Compass, the school management app developed under Evaradh. The website introduces the school and gives families a route into admissions. The app brings attendance, fees, homework, notices and student records into one system, with separate experiences for parents, teachers and operations staff.",
+      "I designed and built two things. The public website is where families considering the school first meet it, with a clear route into admissions. CIS Compass is the working system behind each day: teachers mark attendance and set homework from their phones, parents hear about both as soon as they are recorded, the office keeps fees and notices in one dashboard, and parent–teacher meetings are booked into slots that teachers publish. Parents, teachers and office staff each get their own view of the same records.",
     context: "Production · Evaradh / CIS, Parbhani",
     resultLine:
       "In daily use at Chintamani International School: 290 students, 359 parents and 28 teachers.",
     caseStudy: {
       oneLiner:
-        "CIS Compass brings school operations and an AI assistant for teachers into one app, in use at Chintamani International School.",
-      problem:
-        "When I started managing my family's school, I saw problems technology could solve easily, so I began automating them. Talking with our parents and teachers showed there was much more: everyday tasks and communication that needed one place to live. CIS Compass grew out of those conversations.",
+        "One app for the whole school day at Chintamani International School: attendance, homework, fees, notices and meetings for parents, teachers and office staff, with an AI assistant built in.",
+      // Paragraphs are separated by a blank line. The "before" picture was
+      // confirmed by Radhika on 30 October 2026.
+      problem: [
+        "At Chintamani, the school day ran on paper and phone calls. Attendance lived in registers, so a family often learned about an absence only later. Notices and homework went out through WhatsApp groups and printed circulars, where they were easy to miss or lose under other messages. Fees were recorded in registers and spreadsheets, and the office followed up on payments by phone.",
+        "A parent who wanted an update had two choices: ring the office or a teacher, or come to the school in person. Those visits were rarely planned, so they often arrived in the middle of a lesson, pulling a teacher out of class and interrupting the whole room.",
+        "Conversations with families and staff showed what this cost each side. Parents felt out of the loop on attendance, homework and progress unless they went looking for it. Teachers were spending too much of their day on registers, messages and paperwork, and too little of it teaching.",
+        "That set the brief: give every role one place for the information it needs, send updates to parents without them having to ask, take routine admin off teachers, and give meetings a booked slot instead of an unplanned visit.",
+      ].join("\n\n"),
       aiAssistant: [
         {
           title: "An assistant for everyday teaching tasks",
@@ -93,7 +99,7 @@ export const projects: Project[] = [
         },
       ],
       results:
-        "The school website and CIS Compass are both live. CIS Compass is Evaradh's first product, in use at Chintamani International School in Parbhani.",
+        "The website and CIS Compass are both live, and CIS Compass is the first product Evaradh has shipped. Registers, circulars and update calls now have a place in the app.",
       // Counted from the CIS Compass production database on 29 October 2026
       // (read-only totals; no individual records).
       measurableResult:
@@ -143,11 +149,11 @@ export const projects: Project[] = [
       },
       {
         title: "Keeping parents informed",
-        text: "I built real-time notifications triggered by student attendance submission, so parents can see when their child's attendance has been marked.",
+        text: "As soon as a teacher submits attendance, parents get a notification, so nobody has to call the school to find out whether their child arrived.",
       },
       {
         title: "Appointments with a time and place",
-        text: "I built a booking workflow where teachers publish their availability and parents reserve designated appointment slots.",
+        text: "Teachers publish when they are free and parents reserve one of those slots, so a conversation happens at an agreed time rather than interrupting a lesson.",
       },
       {
         title: "How it's built",

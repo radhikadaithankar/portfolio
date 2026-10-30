@@ -21,7 +21,9 @@ export function SchoolCaseStudy({ project }: { project: Project }) {
       {content.problem?.trim() && (
         <section>
           <h2>The problem</h2>
-          <p>{content.problem}</p>
+          {content.problem.split(/\n\s*\n/).map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </section>
       )}
       <section>
