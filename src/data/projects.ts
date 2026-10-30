@@ -17,7 +17,6 @@ export type SchoolCaseStudy = {
   results?: string;
   measurableResult?: string;
   privacyAndSafety?: string;
-  nextSteps?: { cisPassport?: string; teacherAiTraining?: string };
 };
 
 export type Project = {
@@ -104,17 +103,13 @@ export const projects: Project[] = [
       // (read-only totals; no individual records).
       measurableResult:
         "From 20 July to 29 October 2026, teachers recorded 7,162 attendance marks across 59 school days, and the app sent 18,038 notifications to 359 parent accounts covering 290 students in 20 classes.",
-      // TODO(cis-privacy): Confirm what data the assistant can access, access
-      // controls, retention and the safeguards actually implemented.
-      privacyAndSafety: undefined,
-      nextSteps: {
-        // TODO(cis-passport): Describe CIS Passport and confirm its planned scope
-        // and status. Do not imply that an unshipped feature is available.
-        cisPassport: undefined,
-        // TODO(teacher-ai-training): Describe the teacher AI training plan and
-        // confirm its status before publishing it.
-        teacherAiTraining: undefined,
-      },
+      // Checked against the CIS Compass code and its privacy policy on
+      // 31 October 2026 (ai.routes.ts, ai/audit.ts, ai/quota.ts, legalPages.ts).
+      privacyAndSafety: [
+        "Only signed-in teachers, parents and office staff can use the assistant, and it works inside each person's role: a request for information that role cannot see is refused. Parents only ever get answers about their own children, and the server checks that on every request rather than trusting the app.",
+        "The assistant drafts; people decide. When it prepares attendance, homework or a notice, the teacher sees the draft and nothing is saved or sent until they review it and tap Save or Post. A draft with a name it could not match cannot be saved at all.",
+        "Every action taken through the assistant is logged with who did it, their role and the outcome, and each school has a daily allowance of AI calls. To write a reply, the question and the records needed to answer it go to Google Gemini; report-card drafts identify students by number, not by name. Parents can delete their own account from the app, as the privacy policy describes.",
+      ].join("\n\n"),
     },
     // Recorded on 30 October 2026 in the iOS simulator against a local demo
     // school with made-up teachers and students; no real school data.

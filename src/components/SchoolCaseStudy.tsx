@@ -8,13 +8,6 @@ export function SchoolCaseStudy({ project }: { project: Project }) {
     content.aiAssistant?.filter(
       (detail) => detail.title.trim() && detail.text.trim(),
     ) ?? [];
-  const nextSteps = [
-    { title: "CIS Passport", text: content.nextSteps?.cisPassport },
-    {
-      title: "Teacher AI training",
-      text: content.nextSteps?.teacherAiTraining,
-    },
-  ].filter((step) => step.text?.trim());
 
   return (
     <>
@@ -64,17 +57,8 @@ export function SchoolCaseStudy({ project }: { project: Project }) {
       {content.privacyAndSafety?.trim() && (
         <section>
           <h2>Privacy and safety</h2>
-          <p>{content.privacyAndSafety}</p>
-        </section>
-      )}
-      {nextSteps.length > 0 && (
-        <section>
-          <h2>What&apos;s next</h2>
-          {nextSteps.map((step) => (
-            <div key={step.title}>
-              <h3>{step.title}</h3>
-              <p>{step.text}</p>
-            </div>
+          {content.privacyAndSafety.split(/\n\s*\n/).map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
           ))}
         </section>
       )}
