@@ -1745,11 +1745,12 @@ html[data-motion="reduce"] .project-tilt .project-visual-link::after {
   font-size: calc(var(--type-caption) * var(--fs, 1));
   font-weight: 500;
   white-space: nowrap;
-  will-change: transform, opacity;
+  will-change: transform, filter;
   transition: color var(--motion-fast) var(--motion-ease);
 }
 .skill-orb-tag[data-dim] {
-  color: #b9a39b;
+  /* The orb tile remaps --muted to a light tone, so use the dark value directly. */
+  color: #6b524c;
 }
 .skill-orb-legend {
   display: flex;

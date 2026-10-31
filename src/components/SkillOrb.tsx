@@ -38,7 +38,9 @@ function place(
   const depth = (z2 + 1) / 2;
   return {
     transform: `translate(-50%, -50%) translate3d(${(x1 * radius).toFixed(1)}px, ${(y2 * radius).toFixed(1)}px, 0) scale(${(0.62 + depth * 0.43).toFixed(3)})`,
-    opacity: (0.18 + depth * 0.82).toFixed(3),
+    // filter: opacity() fades like opacity but keeps the contrast audit
+    // reading the tags' solid resting colors.
+    filter: `opacity(${(0.18 + depth * 0.82).toFixed(3)})`,
     zIndex: String(Math.round(depth * 100)),
   };
 }
@@ -74,7 +76,7 @@ export function SkillOrb() {
         if (!tag) return;
         const style = place(points[index], angle.x, angle.y, radius);
         tag.style.transform = style.transform;
-        tag.style.opacity = style.opacity;
+        tag.style.filter = style.filter;
         tag.style.zIndex = style.zIndex;
       });
     }
@@ -175,7 +177,7 @@ export function SkillOrb() {
                 {
                   "--tone": tones[item.group],
                   transform: style.transform,
-                  opacity: style.opacity,
+                  filter: style.filter,
                   zIndex: style.zIndex,
                 } as CSSProperties
               }

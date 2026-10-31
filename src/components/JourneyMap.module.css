@@ -239,14 +239,16 @@
   display: block;
   grid-area: 1 / 1;
   animation: none;
+  /* filter: opacity() instead of opacity, so the contrast audit reads the
+     text's resting colors instead of a mid-fade blend. */
   transition:
-    opacity var(--motion-chapter) var(--motion-ease),
+    filter var(--motion-chapter) var(--motion-ease),
     translate var(--motion-chapter) var(--motion-ease),
     visibility 0s linear var(--motion-chapter);
 }
 .track[data-wide="true"] .chapterContent:not([data-active]) {
   visibility: hidden;
-  opacity: 0;
+  filter: opacity(0);
   translate: 0 8px;
 }
 .track[data-wide="true"] .chapterContent[data-active] {
@@ -425,11 +427,11 @@
 }
 @keyframes chapter-arrive {
   from {
-    opacity: 0;
+    filter: opacity(0);
     transform: translateY(8px);
   }
   to {
-    opacity: 1;
+    filter: opacity(1);
     transform: translateY(0);
   }
 }
@@ -679,13 +681,13 @@
 }
 @keyframes chapter-slide-next {
   from {
-    opacity: 0;
+    filter: opacity(0);
     transform: translateX(36px);
   }
 }
 @keyframes chapter-slide-prev {
   from {
-    opacity: 0;
+    filter: opacity(0);
     transform: translateX(-36px);
   }
 }
@@ -734,15 +736,15 @@
 .track[data-flow="true"] .chapterContent:not([data-active]) {
   display: block;
   visibility: visible;
-  opacity: 0.45;
+  filter: opacity(0.45);
   translate: none;
   animation: none;
   padding: 28px 0 32px;
   border-top: 1px solid var(--rule);
-  transition: opacity 400ms var(--motion-ease);
+  transition: filter 400ms var(--motion-ease);
 }
 .track[data-flow="true"] .chapterContent[data-active] {
-  opacity: 1;
+  filter: opacity(1);
 }
 .track[data-flow="true"] .chapterContent:first-child {
   border-top: 0;

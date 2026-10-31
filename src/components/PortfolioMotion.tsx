@@ -29,10 +29,12 @@ export function PortfolioMotion() {
     if (reduced) return;
     const animations = new Set<Animation>();
     function enter(element: Element, delay = 0) {
+      // filter: opacity() fades like opacity without skewing the colors the
+      // contrast audit reads mid-reveal.
       const animation = element.animate(
         [
-          { opacity: 0, translate: `0 ${motion.rise}px` },
-          { opacity: 1, translate: "0 0" },
+          { filter: "opacity(0)", translate: `0 ${motion.rise}px` },
+          { filter: "opacity(1)", translate: "0 0" },
         ],
         {
           duration: motion.duration.reveal,
@@ -91,8 +93,8 @@ export function PortfolioMotion() {
         track(
           child.animate(
             [
-              { opacity: 0, scale: "0.86", translate: "0 8px" },
-              { opacity: 1, scale: "1", translate: "0 0" },
+              { filter: "opacity(0)", scale: "0.86", translate: "0 8px" },
+              { filter: "opacity(1)", scale: "1", translate: "0 0" },
             ],
             {
               duration: motion.duration.reveal,

@@ -5,7 +5,11 @@ export function Nav({ subpage = false }: { subpage?: boolean }) {
   const root = subpage ? "/" : "";
   return (
     <header className="site-header">
-      <a className="brand" href={subpage ? "/" : "#top"}>
+      <a
+        className="brand"
+        href={subpage ? "/" : "#top"}
+        aria-label={`RD · ${identity.fullName}`}
+      >
         <span className="brand-full">{identity.fullName}</span>
         <span className="brand-short" aria-hidden="true">
           RD
