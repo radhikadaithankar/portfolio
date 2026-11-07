@@ -1,8 +1,8 @@
 import { HeroRobot } from "../HeroRobot";
 import { LocalTime } from "../LocalTime";
-import { identity } from "@/data/site";
+import { company, identity } from "@/data/site";
 
-/** Letters rise in on load and lift under the pointer; one readable name stays. */
+/** Each word fades up once on load; one readable name stays for screen readers. */
 function Letters({ text, offset = 0 }: { text: string; offset?: number }) {
   return (
     <span className="hero-letters" aria-hidden="true">
@@ -19,28 +19,11 @@ function Letters({ text, offset = 0 }: { text: string; offset?: number }) {
   );
 }
 
-const ring = "Ideas, made useful ✳ Models ✳ Machines ✳ Products ✳ ";
-
 export function Hero() {
   return (
     <section id="top" className="v-hero">
-      <div className="v-hero-glow" aria-hidden="true" />
       <svg className="v-ring" viewBox="0 0 400 400" aria-hidden="true">
-        <defs>
-          <path
-            id="v-ring-path"
-            d="M200,200 m-176,0 a176,176 0 1,1 352,0 a176,176 0 1,1 -352,0"
-          />
-        </defs>
-        <text>
-          <textPath
-            href="#v-ring-path"
-            textLength="1100"
-            lengthAdjust="spacing"
-          >
-            {ring.repeat(3)}
-          </textPath>
-        </text>
+        <circle cx="200" cy="200" r="176" />
       </svg>
 
       <h1 className="v-name">
@@ -58,7 +41,12 @@ export function Hero() {
       </div>
 
       <div className="v-hero-bar shell">
-        <span aria-hidden="true" />
+        <p className="v-hero-role">
+          {identity.discipline}
+          <span aria-hidden="true"> · </span>
+          <span className="sr-only">, </span>
+          Founder of {company.name}
+        </p>
         <div className="v-hero-cta">
           <a className="pill pill-light" href="#projects">
             See the work <span aria-hidden="true">↓</span>

@@ -13,17 +13,21 @@ import {
 import {
   Group,
   MathUtils,
+  PMREMGenerator,
   Vector3,
   type InterleavedBufferAttribute,
 } from "three";
 import { Line2 } from "three/examples/jsm/lines/Line2.js";
 import { LineGeometry } from "three/examples/jsm/lines/LineGeometry.js";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
+import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { motion } from "@/lib/motion";
 
-const enamel = "#f6e7d3";
-const beige = "#c9a98f";
-const accent = "#5a1226";
+// Industrial finish: graphite links, brushed-steel joints, one burgundy accent.
+const graphite = "#2a2526";
+const steel = "#b8b1ab";
+const shadowSteel = "#5d5654";
+const accent = "#6b1730";
 const lengths = [0.32, 1, 0.18, 1.03, 0.18, 0.35, 0.18];
 const pose = [0, 0.48, 0, -1.75, 0.25, -1, 0];
 const ink = "#7b1c34";
@@ -70,13 +74,12 @@ function LinkBody({
   return (
     <mesh position={[0, length / 2, 0]} castShadow>
       <cylinderGeometry
-        args={[slim ? 0.115 : 0.16, slim ? 0.13 : 0.19, length, 10]}
+        args={[slim ? 0.085 : 0.115, slim ? 0.1 : 0.14, length, 40]}
       />
       <meshStandardMaterial
-        color={enamel}
-        roughness={0.68}
-        metalness={0.08}
-        flatShading
+        color={graphite}
+        roughness={0.42}
+        metalness={0.55}
       />
     </mesh>
   );
@@ -87,9 +90,9 @@ function Joint({ index, children }: { index: number; children: ReactNode }) {
     <>
       <mesh rotation={[Math.PI / 2, 0, 0]} castShadow>
         <cylinderGeometry
-          args={[index > 4 ? 0.145 : 0.21, index > 4 ? 0.145 : 0.21, 0.22, 12]}
+          args={[index > 4 ? 0.12 : 0.165, index > 4 ? 0.12 : 0.165, 0.2, 48]}
         />
-        <meshStandardMaterial color={accent} roughness={0.7} />
+        <meshStandardMaterial color={steel} roughness={0.3} metalness={0.85} />
       </mesh>
       {[-1, 1].map((side) => (
         <mesh
@@ -98,14 +101,13 @@ function Joint({ index, children }: { index: number; children: ReactNode }) {
           rotation={[Math.PI / 2, 0, 0]}
         >
           <cylinderGeometry
-            args={[
-              index > 4 ? 0.095 : 0.145,
-              index > 4 ? 0.095 : 0.145,
-              0.04,
-              12,
-            ]}
+            args={[index > 4 ? 0.07 : 0.1, index > 4 ? 0.07 : 0.1, 0.03, 40]}
           />
-          <meshStandardMaterial color={beige} roughness={0.8} />
+          <meshStandardMaterial
+            color={shadowSteel}
+            roughness={0.45}
+            metalness={0.8}
+          />
         </mesh>
       ))}
       {children}
@@ -297,18 +299,30 @@ function Arm({ controlsRef }: { controlsRef: RefObject<Controls> }) {
       return (
         <group>
           <mesh position={[0, 0.04, 0]}>
-            <boxGeometry args={[0.3, 0.14, 0.19]} />
-            <meshStandardMaterial color={beige} roughness={0.7} />
+            <boxGeometry args={[0.26, 0.12, 0.16]} />
+            <meshStandardMaterial
+              color={accent}
+              roughness={0.38}
+              metalness={0.35}
+            />
           </mesh>
           {[-1, 1].map((side) => (
             <group key={side} position={[side * 0.135, 0.16, 0]}>
               <mesh>
-                <boxGeometry args={[0.055, 0.24, 0.085]} />
-                <meshStandardMaterial color={accent} roughness={0.7} />
+                <boxGeometry args={[0.045, 0.22, 0.07]} />
+                <meshStandardMaterial
+                  color={steel}
+                  roughness={0.3}
+                  metalness={0.85}
+                />
               </mesh>
-              <mesh position={[-side * 0.025, 0.12, 0]}>
-                <boxGeometry args={[0.1, 0.05, 0.085]} />
-                <meshStandardMaterial color={accent} roughness={0.7} />
+              <mesh position={[-side * 0.022, 0.11, 0]}>
+                <boxGeometry args={[0.085, 0.04, 0.07]} />
+                <meshStandardMaterial
+                  color={steel}
+                  roughness={0.3}
+                  metalness={0.85}
+                />
               </mesh>
             </group>
           ))}
@@ -353,13 +367,17 @@ function Arm({ controlsRef }: { controlsRef: RefObject<Controls> }) {
 function ArmBody({ children }: { children: ReactNode }) {
   return (
     <>
-      <mesh position={[0, -0.07, 0]} receiveShadow>
-        <cylinderGeometry args={[0.48, 0.54, 0.15, 12]} />
-        <meshStandardMaterial color={beige} roughness={0.85} />
+      <mesh position={[0, -0.08, 0]} receiveShadow>
+        <cylinderGeometry args={[0.44, 0.46, 0.12, 64]} />
+        <meshStandardMaterial
+          color={graphite}
+          roughness={0.5}
+          metalness={0.5}
+        />
       </mesh>
-      <mesh position={[0, 0.04, 0]}>
-        <cylinderGeometry args={[0.29, 0.38, 0.13, 12]} />
-        <meshStandardMaterial color={enamel} roughness={0.7} />
+      <mesh position={[0, 0.03, 0]}>
+        <cylinderGeometry args={[0.26, 0.32, 0.12, 64]} />
+        <meshStandardMaterial color={steel} roughness={0.32} metalness={0.85} />
       </mesh>
       <group position={[0, 0.15, 0]}>{children}</group>
     </>
@@ -451,33 +469,54 @@ export default function RobotArmScene({
           camera.lookAt(0, -0.1, 0);
         }}
       >
-        <ambientLight intensity={0.8} />
-        <hemisphereLight args={["#fff4df", "#c9a98f", 1.6]} />
+        <ambientLight intensity={0.25} />
+        <hemisphereLight args={["#fff6ea", "#8a6f62", 0.7]} />
         <directionalLight
           position={[-3, 5, 4]}
-          intensity={2.4}
-          color="#fff3dc"
+          intensity={2.2}
+          color="#fff6ea"
         />
         <directionalLight
-          position={[4, 1, -2]}
-          intensity={1.1}
-          color="#fff3dc"
+          position={[4, 2, -3]}
+          intensity={1.4}
+          color="#ffe9d6"
         />
+        <StudioReflections />
         <Lifecycle onReady={onReady} onFailure={onFailure} />
         <Arm controlsRef={controls} />
         <ContactShadows
           position={[-0.112, -1.11, 0.06]}
-          opacity={0.22}
-          scale={2}
-          blur={2}
-          far={4}
+          opacity={0.38}
+          scale={3.2}
+          blur={1.3}
+          far={1.4}
           resolution={256}
           frames={1}
-          color="#3a1420"
+          color="#1d1414"
         />
       </Canvas>
     </div>
   );
+}
+
+/** Soft studio reflections for the metal, generated locally (no HDR download). */
+function StudioReflections() {
+  const gl = useThree((state) => state.gl);
+  const scene = useThree((state) => state.scene);
+  useEffect(() => {
+    const generator = new PMREMGenerator(gl);
+    const room = new RoomEnvironment();
+    const target = generator.fromScene(room, 0.04);
+    scene.environment = target.texture;
+    scene.environmentIntensity = 0.55;
+    return () => {
+      scene.environment = null;
+      target.dispose();
+      room.dispose();
+      generator.dispose();
+    };
+  }, [gl, scene]);
+  return null;
 }
 
 function Lifecycle({

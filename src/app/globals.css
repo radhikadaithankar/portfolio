@@ -3916,3 +3916,109 @@ html[data-motion="reduce"] .v-role {
 .project-media-portrait figcaption {
   text-align: center;
 }
+
+/* Professional hero: a still hairline instead of the spinning text ring, no
+   glow, the name fading up word by word, and a plain role line. */
+.v-hero-glow {
+  display: none;
+}
+.v-ring {
+  animation: none;
+}
+.v-ring circle {
+  fill: none;
+  stroke: var(--burgundy);
+  stroke-opacity: 0.2;
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.v-name .hero-letter {
+  animation: name-in 0.9s var(--motion-ease) backwards;
+  animation-delay: 80ms;
+  transition: none;
+}
+.v-name-bottom .hero-letter {
+  animation-delay: 220ms;
+}
+@keyframes name-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.12em);
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .v-name .hero-letter:hover {
+    translate: none;
+  }
+  .v-name-top .hero-letter:hover {
+    color: inherit;
+  }
+  .v-name-bottom .hero-letter:hover {
+    color: inherit;
+  }
+}
+.v-hero-role {
+  margin: 0;
+  align-self: end;
+  font-family: var(--font-mono);
+  font-size: calc(0.6875rem * var(--fs, 1));
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.v-hero-role span[aria-hidden] {
+  color: var(--burgundy);
+}
+
+/* The still arm: full stage height, centred, matching the 3D camera framing.
+   It shows on every device until the live arm is ready, then crossfades. */
+.robot-fallback,
+.v-robot .robot-fallback {
+  inset: 0 auto;
+  left: 50%;
+  width: auto;
+  height: 100%;
+  max-width: none;
+  translate: -50% 0;
+  object-fit: contain;
+  pointer-events: none;
+  transition: opacity 700ms var(--motion-ease);
+}
+html:not([data-motion="reduce"])
+  .v-robot
+  .robot-board:not([data-scene-status="unavailable"])
+  .robot-fallback {
+  visibility: visible;
+}
+.robot-stage[data-ready="true"] .robot-fallback {
+  opacity: 0;
+}
+
+/* Phones: links never wrap; Experience is reached by scrolling on most
+   phone widths, so it leaves the pill below 460px. */
+@media (max-width: 560px) {
+  .main-nav a {
+    white-space: nowrap;
+  }
+}
+@media (max-width: 460px) {
+  .main-nav a[href$="#experience"] {
+    display: none;
+  }
+}
+
+/* The interaction hint is a quiet caption, not a pill. */
+.v-robot .robot-hint {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  opacity: 0.8;
+}
+/* The industrial arm is balanced on its own; no sideways nudge on phones. */
+@media (max-width: 850px) {
+  .v-robot .robot-stage {
+    translate: none;
+  }
+}
