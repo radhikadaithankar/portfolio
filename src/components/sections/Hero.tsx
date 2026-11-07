@@ -1,4 +1,4 @@
-import { HeroRobot } from "../HeroRobot";
+import { HeroField } from "../HeroField";
 import { LocalTime } from "../LocalTime";
 import { company, identity } from "@/data/site";
 
@@ -25,6 +25,7 @@ export function Hero() {
       <svg className="v-ring" viewBox="0 0 400 400" aria-hidden="true">
         <circle cx="200" cy="200" r="176" />
       </svg>
+      <HeroField />
 
       <h1 className="v-name">
         <span className="sr-only">{identity.fullName}</span>
@@ -35,10 +36,6 @@ export function Hero() {
           <Letters text={identity.lastName} offset={7} />
         </span>
       </h1>
-
-      <div className="v-robot">
-        <HeroRobot />
-      </div>
 
       <div className="v-hero-bar shell">
         <p className="v-hero-role">
