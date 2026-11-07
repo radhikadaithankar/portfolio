@@ -502,8 +502,10 @@ export default function RobotArmScene({
 /** Soft studio reflections for the metal, generated locally (no HDR download). */
 function StudioReflections() {
   const gl = useThree((state) => state.gl);
-  const scene = useThree((state) => state.scene);
+  // Read the scene when the effect runs rather than holding the hook's value.
+  const getState = useThree((state) => state.get);
   useEffect(() => {
+    const { scene } = getState();
     const generator = new PMREMGenerator(gl);
     const room = new RoomEnvironment();
     const target = generator.fromScene(room, 0.04);
@@ -515,7 +517,7 @@ function StudioReflections() {
       room.dispose();
       generator.dispose();
     };
-  }, [gl, scene]);
+  }, [gl, getState]);
   return null;
 }
 
