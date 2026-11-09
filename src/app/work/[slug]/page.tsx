@@ -23,9 +23,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = projects.find((item) => item.slug === slug);
   if (!project) return { title: "Project not found" };
-  const description = [project.summary, project.resultLine]
-    .filter(Boolean)
-    .join(" ");
+  // Search results cut descriptions at about 160 characters.
+  const full = [project.summary, project.resultLine].filter(Boolean).join(" ");
+  const description = full.length <= 165 ? full : project.summary;
   return {
     title: `${project.shortTitle} | Radhika Daithankar`,
     description,

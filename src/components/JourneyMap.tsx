@@ -138,8 +138,13 @@ export function JourneyMap({ intro }: { intro?: ReactNode }) {
       const trackElement = track.current;
       if (flow) {
         const element = chapters.current[index];
+        // Measure the sticky map where it will rest after scrolling, not where
+        // it is now; otherwise the chapter can land below the active line.
+        const map = atlas.current;
         const offset =
-          (atlas.current?.getBoundingClientRect().bottom ?? 0) + 16;
+          (map
+            ? (parseFloat(getComputedStyle(map).top) || 0) + map.offsetHeight
+            : 0) + 16;
         if (element)
           window.scrollTo({
             top: element.getBoundingClientRect().top + scrollY - offset,
