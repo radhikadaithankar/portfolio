@@ -189,3 +189,28 @@ h2, h3 { font-weight: 500; letter-spacing: -.03em; }
   .project-entry p, .role li { orphans: 2; widows: 2; }
   .skills-grid { grid-template-columns: 1fr 1fr 1fr !important; }
 }
+
+/* Gaps fixed (Nov 2026). Section numbers share one width so labels align. */
+.section-nav span { display: inline-block; min-width: 1.9em; font-variant-numeric: tabular-nums; }
+.sidebar .section-nav a { gap: 14px; }
+/* A sidebar taller than the window scrolls until its foot shows, then sticks
+   (site.js sets --sidebar-top), so the section links are always reachable. */
+@media (min-width: 1001px) { .sidebar { top: var(--sidebar-top, 24px); } }
+.resume-footer p { line-height: 1.2; }
+
+/* Tablets: one column, with the at-a-glance card laid out across the width. */
+@media (min-width: 761px) and (max-width: 1000px) {
+  .resume-layout { display: block; padding-top: 40px; }
+  .sidebar { position: static; margin-bottom: 28px; }
+  .glance { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); grid-template-areas: "eyebrow eyebrow" "facts label" "facts skills" "facts actions"; column-gap: 40px; align-items: start; padding: 28px 30px; }
+  .glance > .eyebrow { grid-area: eyebrow; }
+  .glance-facts { grid-area: facts; }
+  .glance-label { grid-area: label; margin-top: 18px; }
+  .glance-skills { grid-area: skills; }
+  .glance-actions { grid-area: actions; grid-template-columns: 1fr 1fr; align-items: center; gap: 16px; }
+  .sidebar .section-nav { grid-template-columns: repeat(4, auto); justify-content: space-between; margin-top: 14px; padding: 4px 30px 14px; border-bottom: 1px solid var(--rule); }
+  .sidebar .section-nav a { font-size: 15px; padding-block: 8px; }
+}
+
+/* Phones: the skills list reads better in one column below 440px. */
+@media (max-width: 440px) { .skills-grid { grid-template-columns: 1fr; gap: 18px; } }
