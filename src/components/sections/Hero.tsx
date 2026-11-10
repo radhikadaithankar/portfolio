@@ -1,4 +1,3 @@
-import { HeroField } from "../HeroField";
 import { LocalTime } from "../LocalTime";
 import { company, identity } from "@/data/site";
 
@@ -22,11 +21,6 @@ function Letters({ text, offset = 0 }: { text: string; offset?: number }) {
 export function Hero() {
   return (
     <section id="top" className="v-hero">
-      <svg className="v-ring" viewBox="0 0 400 400" aria-hidden="true">
-        <circle cx="200" cy="200" r="176" />
-      </svg>
-      <HeroField />
-
       <h1 className="v-name">
         <span className="sr-only">{identity.fullName}</span>
         <span className="v-name-top">

@@ -4023,29 +4023,67 @@ html:not([data-motion="reduce"])
   }
 }
 
-/* Hero point-cloud sphere: fills the hero behind the names, centred in the
-   hairline circle by script. Pointer events are read from the hero itself. */
-.v-field {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 900ms var(--motion-ease);
-}
-.v-field[data-ready="true"] {
-  opacity: 1;
-}
-@media (pointer: coarse) {
-  .v-hero {
-    touch-action: pan-y;
-  }
-}
 /* Phones: without the robot hint, the surname sits closer to the circle. */
 @media (max-width: 850px) {
   .v-name-bottom {
     margin-top: calc(var(--arm-h) + var(--name-size) * 0.1);
+  }
+}
+
+/* Centred hero: the name alone in the middle of the screen, the role line,
+   actions and location along the bottom. */
+@media (min-width: 851px) {
+  .v-hero {
+    --type-display: clamp(4.5rem, 1rem + 11vw, 14rem);
+  }
+}
+.v-hero .v-name {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4vw 8vh;
+  text-align: center;
+}
+.v-hero .v-name-top,
+.v-hero .v-name-bottom {
+  position: static;
+  inset: auto;
+  margin: 0;
+  text-align: center;
+}
+@media (max-width: 850px) {
+  .v-hero {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    padding: 96px 0 28px;
+  }
+  .v-hero .v-name {
+    position: relative;
+    inset: auto;
+    flex: 1;
+    padding: 0 20px 4vh;
+  }
+  .v-hero .v-name-bottom {
+    margin-top: 0;
+  }
+  .v-hero .v-hero-bar {
+    margin-top: 0;
+  }
+}
+@media (max-width: 850px) {
+  .v-hero {
+    --name-size: clamp(3.25rem, 19vw, 9.5rem);
+  }
+  .v-hero .v-hero-bar {
+    justify-items: center;
+    text-align: center;
+  }
+  .v-hero .v-hero-cta,
+  .v-hero .v-hero-meta {
+    justify-self: center;
   }
 }
