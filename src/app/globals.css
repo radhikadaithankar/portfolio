@@ -4061,14 +4061,20 @@ html:not([data-motion="reduce"])
   }
 }
 
-/* Desktop: the two name lines sit together in the middle of the screen,
-   "Radhika" still starting further left and "Daithankar" ending further right. */
+/* Desktop: a large name in the middle of the screen. "Radhika" starts at the
+   left edge of the menu bar and "Daithankar" ends at its right edge, so the two
+   lines overlap in the middle. The small margins line the letter shapes, not
+   their boxes, up with those edges. */
 @media (min-width: 851px) {
+  .v-hero {
+    --type-display: min(15vw, 190px, 27vh);
+  }
   .v-hero .v-name {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 max(3.5vw, (100vw - 1180px) / 2) 5vh;
+    padding: 0 max(3.5vw, (100vw - 1180px) / 2) 4vh;
+    line-height: 0.9;
   }
   .v-hero .v-name-top,
   .v-hero .v-name-bottom {
@@ -4076,8 +4082,10 @@ html:not([data-motion="reduce"])
   }
   .v-hero .v-name-top {
     align-self: flex-start;
+    margin-left: -0.079em;
   }
   .v-hero .v-name-bottom {
     align-self: flex-end;
+    margin-right: 0.074em;
   }
 }
