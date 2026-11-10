@@ -4030,30 +4030,8 @@ html:not([data-motion="reduce"])
   }
 }
 
-/* Centred hero: the name alone in the middle of the screen, the role line,
-   actions and location along the bottom. */
-@media (min-width: 851px) {
-  .v-hero {
-    --type-display: clamp(4.5rem, 1rem + 11vw, 14rem);
-  }
-}
-.v-hero .v-name {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 4vw 8vh;
-  text-align: center;
-}
-.v-hero .v-name-top,
-.v-hero .v-name-bottom {
-  position: static;
-  inset: auto;
-  margin: 0;
-  text-align: center;
-}
+/* Hero name without a centrepiece: "Radhika" left, "Daithankar" right. On
+   phones the two lines stay together in the middle of the screen height. */
 @media (max-width: 850px) {
   .v-hero {
     display: flex;
@@ -4065,25 +4043,20 @@ html:not([data-motion="reduce"])
     position: relative;
     inset: auto;
     flex: 1;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 0 20px 4vh;
+  }
+  .v-hero .v-name-top {
+    text-align: left;
   }
   .v-hero .v-name-bottom {
     margin-top: 0;
+    text-align: right;
   }
   .v-hero .v-hero-bar {
     margin-top: 0;
-  }
-}
-@media (max-width: 850px) {
-  .v-hero {
-    --name-size: clamp(3.25rem, 19vw, 9.5rem);
-  }
-  .v-hero .v-hero-bar {
-    justify-items: center;
-    text-align: center;
-  }
-  .v-hero .v-hero-cta,
-  .v-hero .v-hero-meta {
-    justify-self: center;
   }
 }
