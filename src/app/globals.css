@@ -4060,3 +4060,24 @@ html:not([data-motion="reduce"])
     margin-top: 0;
   }
 }
+
+/* Desktop: the two name lines sit together in the middle of the screen,
+   "Radhika" still starting further left and "Daithankar" ending further right. */
+@media (min-width: 851px) {
+  .v-hero .v-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 max(3.5vw, (100vw - 1180px) / 2) 5vh;
+  }
+  .v-hero .v-name-top,
+  .v-hero .v-name-bottom {
+    position: static;
+  }
+  .v-hero .v-name-top {
+    align-self: flex-start;
+  }
+  .v-hero .v-name-bottom {
+    align-self: flex-end;
+  }
+}
