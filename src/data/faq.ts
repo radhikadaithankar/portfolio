@@ -12,13 +12,13 @@ export const faq = [
     answer: `${identity.firstName} is an AI engineer in ${identity.location} who builds products end to end, from machine learning models to the apps people use every day. ${identity.firstName} runs ${company.name}, a technology product company, and leads technology at ${school.name}.`,
   },
   {
-    question: "How does the AI assistant in CIS Compass help students?",
+    question: "How does the AI assistant in Eve Compass help students?",
     answer:
       "It is designed to encourage learning rather than hand over answers. When a student asks for help with homework, it first asks them to try the problem themselves. If they are stuck, it asks to see their attempt and then offers a hint to help them continue. For teachers, it adapts explanations to the class they teach, so the same topic is explained differently for Class 2 and Class 10.",
   },
   {
-    question: "Can my school use CIS Compass?",
-    answer: `CIS Compass is ${company.name}'s first product. Schools that want Compass, or a custom build for their own workflows, can get in touch through ${company.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}.`,
+    question: "Can my school use Eve Compass?",
+    answer: `Eve Compass is ${company.name}'s first product. Schools that want Compass, or a custom build for their own workflows, can get in touch through ${company.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}.`,
   },
   {
     question: `What roles is ${identity.firstName} open to?`,

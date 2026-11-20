@@ -56,19 +56,19 @@ export const projects: Project[] = [
   {
     slug: "school-platform",
     number: "01",
-    title: "CIS Compass",
-    shortTitle: "CIS Compass",
+    title: "Eve Compass",
+    shortTitle: "Eve Compass",
     collection: "Featured",
     category: "Product",
     discipline: "School operations · Parent engagement",
     summary:
-      "The school website and CIS Compass, Evaradh's school management app, with AI support for teacher tasks and class-level explanations.",
+      "The school website and Eve Compass, Evaradh's school management app, with AI support for teacher tasks and class-level explanations.",
     contribution:
-      "I independently built the school website and CIS Compass, including the role-based workflows, attendance, parent notifications and appointment booking.",
+      "I independently built the school website and Eve Compass, including the role-based workflows, attendance, parent notifications and appointment booking.",
     question:
       "How do you bring daily school operations and parent communication into the same system?",
     approach:
-      "I designed and built two things. The public website is where families considering the school first meet it, with a clear route into admissions. CIS Compass is the working system behind each day: teachers mark attendance and set homework from their phones, parents hear about both as soon as they are recorded, the office keeps fees and notices in one dashboard, and parent–teacher meetings are booked into slots that teachers publish. Parents, teachers and office staff each get their own view of the same records.",
+      "I designed and built two things. The public website is where families considering the school first meet it, with a clear route into admissions. Eve Compass is the working system behind each day: teachers mark attendance and set homework from their phones, parents hear about both as soon as they are recorded, the office keeps fees and notices in one dashboard, and parent–teacher meetings are booked into slots that teachers publish. Parents, teachers and office staff each get their own view of the same records.",
     context: "Production · Evaradh / CIS, Parbhani",
     resultLine:
       "In daily use at Chintamani International School: 290 students, 359 parents and 28 teachers.",
@@ -86,7 +86,7 @@ export const projects: Project[] = [
       aiAssistant: [
         {
           title: "An assistant for everyday teaching tasks",
-          text: "The AI assistant helps teachers take attendance and post homework within CIS Compass, bringing those tasks into the same conversation as their teaching questions.",
+          text: "The AI assistant helps teachers take attendance and post homework within Eve Compass, bringing those tasks into the same conversation as their teaching questions.",
         },
         {
           title: "Explanations that match the class",
@@ -98,12 +98,12 @@ export const projects: Project[] = [
         },
       ],
       results:
-        "The website and CIS Compass are both live, and CIS Compass is the first product Evaradh has shipped. Registers, circulars and update calls now have a place in the app.",
-      // Counted from the CIS Compass production database on 29 October 2026
+        "The website and Eve Compass are both live, and Eve Compass is the first product Evaradh has shipped. Registers, circulars and update calls now have a place in the app.",
+      // Counted from the Eve Compass production database on 29 October 2026
       // (read-only totals; no individual records).
       measurableResult:
         "From 20 July to 29 October 2026, teachers recorded 7,162 attendance marks across 59 school days, and the app sent 18,038 notifications to 359 parent accounts covering 290 students in 20 classes.",
-      // Checked against the CIS Compass code and its privacy policy on
+      // Checked against the Eve Compass code and its privacy policy on
       // 31 October 2026 (ai.routes.ts, ai/audit.ts, ai/quota.ts, legalPages.ts).
       privacyAndSafety: [
         "Only signed-in teachers, parents and office staff can use the assistant, and it works inside each person's role: a request for information that role cannot see is refused. Parents only ever get answers about their own children, and the server checks that on every request rather than trusting the app.",
@@ -116,11 +116,11 @@ export const projects: Project[] = [
     media: {
       type: "video",
       portrait: true,
-      src: "/media/cis-compass-demo.mp4",
-      poster: "/media/cis-compass-demo-poster.jpg",
-      alt: "CIS Compass on an iPhone: a teacher's home screen with today's classes, the day's timetable, quick actions and the AI assistant greeting the teacher.",
+      src: "/media/eve-compass-demo.mp4",
+      poster: "/media/eve-compass-demo-poster.jpg",
+      alt: "Eve Compass on an iPhone: a teacher's home screen with today's classes, the day's timetable, quick actions and the AI assistant greeting the teacher.",
       caption:
-        "A teacher's day in CIS Compass, shown with a demo school and made-up names.",
+        "A teacher's day in Eve Compass, shown with a demo school and made-up names.",
     },
     scope: [
       "Public school website",
@@ -131,7 +131,7 @@ export const projects: Project[] = [
     ],
     delivery: {
       title: "In use at Chintamani",
-      text: "The school website and CIS Compass are both live. Together, they cover how families first learn about the school and how staff and parents manage the school day. CIS Compass is Evaradh's first product, in use at Chintamani International School in Parbhani.",
+      text: "The school website and Eve Compass are both live. Together, they cover how families first learn about the school and how staff and parents manage the school day. Eve Compass is Evaradh's first product, in use at Chintamani International School in Parbhani.",
     },
     details: [
       {

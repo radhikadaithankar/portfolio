@@ -51,7 +51,7 @@ export function SchoolWorkflow() {
   return (
     <section className="workflow">
       <div className="workflow-header">
-        <p className="eyebrow">CIS Compass / School management</p>
+        <p className="eyebrow">Eve Compass / School management</p>
         <span>Interactive workflow overview</span>
       </div>
       <div

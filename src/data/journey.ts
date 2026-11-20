@@ -64,7 +64,7 @@ export const journey = [
     title: "The next problem was closer to home.",
     paragraphs: [
       "I always knew I would end up in education. My family owns a school, so I decided to move back to India and started managing it: Chintamani International School.",
-      "Once I was running it day to day, I began to see problems that technology could handle easily, so I started automating them. Then I talked to our parents and teachers and found there were more problems still. That is how CIS Compass came into the picture.",
+      "Once I was running it day to day, I began to see problems that technology could handle easily, so I started automating them. Then I talked to our parents and teachers and found there were more problems still. That is how Eve Compass came into the picture.",
       "Working in education has also made me think about what children need beyond marks: confidence, creativity and the ability to keep learning.",
     ],
     note: "A school became the place where I could put my ideas to work.",
@@ -79,7 +79,7 @@ export const journey = [
     period: "Building now · Based in Pune",
     title: "Evolution, with my name in it.",
     paragraphs: [
-      "While I was building CIS Compass, I realised these were probably problems many schools face, not just ours. I could share the product with other schools too.",
+      "While I was building Eve Compass, I realised these were probably problems many schools face, not just ours. I could share the product with other schools too.",
       "I also knew I would keep creating products that actually help people through technology. So I decided to start Evaradh. The name means Evolution by Radhika.",
       "I want to keep getting better as an AI engineer while building useful products. Running a company, leading at a school and writing software give me different ways to do that.",
     ],

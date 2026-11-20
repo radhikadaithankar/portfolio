@@ -29,7 +29,7 @@ export function SchoolShowcase({ priority = false }: { priority?: boolean }) {
         <CISAppScreens priority={priority} />
       </div>
       <figcaption>
-        <span>CIS Compass · Teacher & parent app</span>
+        <span>Eve Compass · Teacher & parent app</span>
         <span>Public product previews from Evaradh · Illustrative data</span>
       </figcaption>
     </figure>

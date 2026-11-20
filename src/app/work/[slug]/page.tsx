@@ -83,7 +83,7 @@ export default async function ProjectPage({ params }: Props) {
               <ProjectVisual kind={project.visual} />
               <figcaption>
                 {project.visual === "school"
-                  ? "Public CIS Compass app previews from Evaradh, showing illustrative data."
+                  ? "Eve Compass on an iPhone, signed in to a demo school with made-up names."
                   : "Explanatory illustration of the project’s approach."}
               </figcaption>
             </figure>
@@ -177,8 +177,8 @@ export default async function ProjectPage({ params }: Props) {
               <figure className="case-visual">
                 <ProjectVisual kind={project.visual} />
                 <figcaption>
-                  Public CIS Compass app previews from Evaradh, showing
-                  illustrative data.
+                  Eve Compass on an iPhone, signed in to a demo school with
+                  made-up names.
                 </figcaption>
               </figure>
               <ProjectMedia media={project.media} />

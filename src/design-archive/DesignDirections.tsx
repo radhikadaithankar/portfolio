@@ -111,7 +111,7 @@ export function DesignDirections({ initial }: { initial: Direction }) {
                 <p className={styles.kicker}>
                   01 / Evaradh · School operations
                 </p>
-                <h2>CIS Compass</h2>
+                <h2>Eve Compass</h2>
                 <p>
                   Teachers, parents and school operations.
                   <br />
@@ -152,16 +152,16 @@ export function DesignDirections({ initial }: { initial: Direction }) {
               <div id="direction-work" className={styles.productStage}>
                 <div className={styles.stageTop}>
                   <span>Featured product</span>
-                  <span>01 / CIS Compass</span>
+                  <span>01 / Eve Compass</span>
                 </div>
                 <CISAppScreens priority />
                 <div className={styles.stageBottom}>
                   <div>
                     <h2>A school, connected.</h2>
-                    <p>CIS Compass / Built under Evaradh</p>
+                    <p>Eve Compass / Built under Evaradh</p>
                   </div>
                   <Link
-                    aria-label="Explore the CIS Compass project"
+                    aria-label="Explore the Eve Compass project"
                     href="/work/school-platform"
                   >
                     ↗
@@ -200,11 +200,11 @@ export function DesignDirections({ initial }: { initial: Direction }) {
                 <div>
                   <p className={styles.kicker}>01 / Featured work</p>
                   <h2>
-                    CIS Compass <span>↗</span>
+                    Eve Compass <span>↗</span>
                   </h2>
                 </div>
                 <Link
-                  aria-label="Explore CIS Compass"
+                  aria-label="Explore Eve Compass"
                   href="/work/school-platform"
                 >
                   <CISAppScreens priority />

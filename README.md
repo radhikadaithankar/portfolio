@@ -52,7 +52,7 @@ For a walkthrough, put the clip and a still poster in `public/` and set `media` 
 
 ## Project evidence
 
-Radhika confirmed building both the public Chintamani website and the school management app. Evaradh's public website identifies this app as CIS Compass, its first product, in use at Chintamani. The portfolio includes the company's founder story and direct links to https://evaradh.com/. The featured images capture the teacher and parent app previews published at https://evaradh.com/#work on 28 September 2026. They contain illustrative data, not private student records. The public digital-school page supplies the workflow categories. The app preview images use `next/image`.
+Radhika confirmed building both the public Chintamani website and the school management app. Evaradh's public website identified this app as CIS Compass (now renamed Eve Compass), its first product, in use at Chintamani. The portfolio includes the company's founder story and direct links to https://evaradh.com/. The featured images capture the teacher and parent app previews published at https://evaradh.com/#work on 28 September 2026. They contain illustrative data, not private student records. The public digital-school page supplies the workflow categories. The app preview images use `next/image`.
 
 The app previews use illustrative data. Technical diagrams are not model outputs. Outcome metrics, private app access and technical-project repositories have not been assumed.
 

@@ -25,7 +25,7 @@ export const positioning = {
   intro: { lead: "I turn everyday problems into", accent: "working software." },
   tagline: "Ideas, made useful.",
   description:
-    "Radhika Daithankar is an AI engineer and Evaradh founder who built CIS Compass, a school management app with teacher AI support, in use at Chintamani International School.",
+    "Radhika Daithankar is an AI engineer and Evaradh founder who built Eve Compass, a school management app with teacher AI support, in use at Chintamani International School.",
 };
 
 export const education = [
@@ -173,7 +173,7 @@ export const company = {
   name: "Evaradh",
   url: "https://evaradh.com/",
   description: "A technology product company",
-  firstProduct: "CIS Compass",
+  firstProduct: "Eve Compass",
 };
 
 export const school = {

@@ -110,7 +110,7 @@ export function profileStructuredData() {
       {
         "@type": "SoftwareApplication",
         "@id": absoluteUrl("/work/school-platform#app"),
-        name: "CIS Compass",
+        name: "Eve Compass",
         applicationCategory: "EducationalApplication",
         operatingSystem: "Android, iOS",
         description:

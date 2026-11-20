@@ -55,7 +55,7 @@ function SchoolVisual({ compact }: { compact: boolean }) {
   return (
     <div className={`school-art ${compact ? "school-compact" : ""}`}>
       <CISAppScreens priority={compact} />
-      <span className="visual-note">CIS Compass · Public app previews</span>
+      <span className="visual-note">Eve Compass · Demo school</span>
     </div>
   );
 }

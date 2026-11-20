@@ -11,9 +11,9 @@ const disciplines = [
     number: "01",
     title: "Software in everyday use",
     description:
-      "A school website and CIS Compass. Built for the people running a school.",
+      "A school website and Eve Compass. Built for the people running a school.",
     href: "/work/school-platform",
-    link: "Explore CIS Compass",
+    link: "Explore Eve Compass",
   },
   {
     label: "AI & ML",

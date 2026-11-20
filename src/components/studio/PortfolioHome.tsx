@@ -56,7 +56,7 @@ export function PortfolioHome() {
                 One platform. <br />A view for each role.
               </h2>
               <p>
-                I built the school&apos;s website and CIS Compass, with separate
+                I built the school&apos;s website and Eve Compass, with separate
                 experiences for teachers, parents and school staff.
               </p>
             </div>
@@ -67,7 +67,7 @@ export function PortfolioHome() {
                 In use at Chintamani.
               </h2>
               <p>
-                CIS Compass is in use at Chintamani International School,
+                Eve Compass is in use at Chintamani International School,
                 Parbhani. Published app previews are available on Evaradh.
               </p>
               <a
@@ -138,7 +138,7 @@ export function PortfolioHome() {
                 Evaradh
               </a>
               . I build software, explore machine learning and work on the
-              problems in front of me. CIS Compass grew out of my work at
+              problems in front of me. Eve Compass grew out of my work at
               Chintamani International School.
             </p>
             <a

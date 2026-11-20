@@ -12,16 +12,16 @@ const views = [
     title: "The classroom, at a glance.",
     description:
       "Class overview, attendance and homework in one daily workspace.",
-    image: "/images/cis-teacher-preview.png",
-    alt: "Public CIS Compass teacher app preview showing the class overview and daily briefing",
+    image: "/images/eve-teacher-home.webp",
+    alt: "Eve Compass teacher home showing the class happening now and today's briefing",
   },
   {
     label: "Parent",
     title: "Stay connected to the school day.",
     description:
       "Attendance, homework and fee information together in the parent app.",
-    image: "/images/cis-parent-preview.png",
-    alt: "Public CIS Compass parent app preview showing attendance, homework and fees",
+    image: "/images/eve-parent-home.webp",
+    alt: "Eve Compass parent home showing attendance, homework and fees",
   },
 ];
 
@@ -67,7 +67,7 @@ export function CompassPreview() {
         </div>
         <div className={styles.productStage} data-view={active}>
           <div className={styles.stageHeader}>
-            <span>CIS Compass / App experience</span>
+            <span>Eve Compass / App experience</span>
             <div
               role="tablist"
               aria-label="Explore app roles"
@@ -96,7 +96,7 @@ export function CompassPreview() {
           <div
             className={styles.phones}
             role="group"
-            aria-label="Public CIS Compass app previews"
+            aria-label="Public Eve Compass app previews"
           >
             {views.map((view, index) => (
               <figure
